@@ -3,6 +3,8 @@
 import unittest
 from os.path import dirname
 
+from colour_runner.runner import ColourTextTestRunner
+
 from tests import calculator
 
 
@@ -10,7 +12,8 @@ def main():
     loader = unittest.TestLoader()
 
     suite = loader.discover(dirname(calculator.__file__), pattern='*.py')
-    result = unittest.TextTestRunner(verbosity=10).run(unittest.TestSuite(suite))
+    runner = ColourTextTestRunner(verbosity=10)
+    result = runner.run(unittest.TestSuite(suite))
 
     exit(len(result.errors + result.failures))
 
