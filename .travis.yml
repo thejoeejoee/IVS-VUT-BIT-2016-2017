@@ -11,10 +11,14 @@ python:
 install:
   - pip install -r requirements.txt
   - if [[ $TRAVIS_PYTHON_VERSION == 3.4 ]]; then pip install typing; fi
+  - pip install codecov
 
 # command to run tests
 script:
-  - src/test.py
+  - coverage run src/test.py
+
+after_success:
+  - codecov
 
 matrix:
   allow_failures:
