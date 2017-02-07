@@ -1,4 +1,5 @@
 # coding=utf-8
-from .solver import Solver
+from calculator.core.solver.solver import Solver
+
 
 __all__ = ('Solver', )
