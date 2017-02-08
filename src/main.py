@@ -4,9 +4,9 @@
 
 import sys
 
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QGuiApplication
 
 if __name__ == "__main__":
-    app  = QApplication(sys.argv)
+    app = QGuiApplication(sys.argv)
 
     sys.exit(app.exec())
