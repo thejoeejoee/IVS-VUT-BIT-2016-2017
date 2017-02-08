@@ -1,2 +1,4 @@
 # coding=utf-8
-# TODO package for code to build GUI
+from .calculator_window import CalculatorWindow
+
+__all__ = ("CalculatorWindow", )

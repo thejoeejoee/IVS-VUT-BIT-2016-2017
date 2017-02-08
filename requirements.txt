@@ -1,3 +1,4 @@
 colour-runner
 doxypypy
 PyQt5
+termcolor
