@@ -1,7 +1,7 @@
 # coding=utf-8
 from unittest import TestCase
 
-from calculator.core.parser.parser import Parser
+from calculator.core.parser import Parser
 
 
 class ParserTest(TestCase):
