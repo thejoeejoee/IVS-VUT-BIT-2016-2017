@@ -11,6 +11,7 @@ def method_single_dispatch(func):
     dispatcher = singledispatch(func)
 
     def wrapper(*args, **kw):
+        # index 1, because 0 is instance itself
         return dispatcher.dispatch(args[1].__class__)(*args, **kw)
 
     wrapper.register = dispatcher.register

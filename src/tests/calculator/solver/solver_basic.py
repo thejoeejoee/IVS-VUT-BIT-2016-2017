@@ -4,7 +4,7 @@ from unittest import TestCase
 from calculator.core.solver import Solver
 
 
-class SolverTest(TestCase):
+class SolverBasicTest(TestCase):
     def setUp(self):
         self.solver = Solver()
 
