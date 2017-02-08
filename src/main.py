@@ -4,15 +4,10 @@
 
 import sys
 
-from PyQt5.QtGui import QGuiApplication
-
-from calculator.ui import CalculatorWindow
+from calculator.ui.app import CalculatorApp
 
 
 if __name__ == "__main__":
-    app = QGuiApplication(sys.argv)
+    app = CalculatorApp(sys.argv)
 
-    view = CalculatorWindow()
-    view.show()
-
-    sys.exit(app.exec())
+    sys.exit(app.run())
