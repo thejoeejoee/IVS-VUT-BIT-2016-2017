@@ -20,6 +20,11 @@ script:
 after_success:
   - codecov
 
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
 matrix:
   allow_failures:
     - python: '3.5-dev'
