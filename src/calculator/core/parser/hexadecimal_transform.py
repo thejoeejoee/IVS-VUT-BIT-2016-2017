@@ -1,5 +1,8 @@
 # coding=utf-8
-from ast import NodeTransformer, copy_location
+import re
+from _ast import Num
+from ast import NodeTransformer, expr
+from typing import Optional
 
 
 class HexadecimalTransform(NodeTransformer):
@@ -7,7 +10,10 @@ class HexadecimalTransform(NodeTransformer):
     Transforms all hexadecimal convertible Name nodes to directly Num node value.
 
     """
-    def visit_Name(self, node):
+
+    HEXADECIMAL_REGEX = re.compile('^(0x|0X)?[A-F0-9]+$')
+
+    def visit_Name(self, node: expr) -> Optional[expr]:
         """
         Subscript(
             value=Name(id='data', ctx=Load()),
@@ -17,5 +23,6 @@ class HexadecimalTransform(NodeTransformer):
         :param node:
         :return:
         """
-        # TODO: if node.id van be convert to int, use the Num Node
+        if self.HEXADECIMAL_REGEX.fullmatch(node.id):
+            return Num(n=int(x=node.id, base=16))
         return node

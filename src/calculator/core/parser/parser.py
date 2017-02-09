@@ -13,7 +13,7 @@ class Parser(object):
 
     """
     DEFAULT_TRANSFORMS = (
-        HexadecimalTransform(),
+        HexadecimalTransform,
     )
 
     def __init__(self, transforms: Optional[Iterable] = ()):
@@ -35,7 +35,7 @@ class Parser(object):
 
         return tree
 
-    def transforms(self, transforms: Sized):
+    def set_transforms(self, transforms: Sized):
         """
         Sets node transforms for process AST before returning.
         New value could be iterable of:
@@ -49,17 +49,17 @@ class Parser(object):
         self._transforms = tuple(filter(
             None,
             ((
-                 transform().visit
+                 transform().visit  # given as class, so instantiated and get the .visit
                  if isinstance(transform, type) and issubclass(transform, ast.NodeTransformer)
-                 else transform.visit
+                 else transform.visit  # given and transform object, directly get the .visit
                  if isinstance(transform, ast.NodeTransformer)
-                 else transform
+                 else transform  # directly callable
                  if callable(transform)
-                 else None  # filtered by filter(None, ...)
+                 else None  # otherwise filtered by filter(None, ...)
              ) for transform in transforms
              )
         ))
         # TODO: Assertion or TypeError?
         assert len(self._transforms) == len(transforms), 'Unknown transform(s) given.'
 
-    transforms = property(fset=transforms)
+    transforms = property(fset=set_transforms)
