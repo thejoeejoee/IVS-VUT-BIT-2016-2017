@@ -4,9 +4,14 @@
 
 import sys
 
-from PyQt5.QtWidgets import QApplication
+from calculator.ui.app import CalculatorApp
+
+sys._excepthook = sys.excepthook
+def exception_hook(exctype, value, traceback):
+    sys._excepthook(exctype, value, traceback)
+sys.excepthook = exception_hook
 
 if __name__ == "__main__":
-    app  = QApplication(sys.argv)
+    app = CalculatorApp(sys.argv)
 
-    sys.exit(app.exec())
+    sys.exit(app.run())
