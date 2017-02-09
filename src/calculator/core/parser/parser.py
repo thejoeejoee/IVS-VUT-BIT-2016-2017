@@ -1,6 +1,7 @@
 # coding=utf-8
 import ast
-from _ast import AST
+
+from calculator.exceptions import ParserSyntaxError
 
 
 class Parser(object):
@@ -10,9 +11,12 @@ class Parser(object):
 
     """
 
-    def parse(self, expression: str) -> AST:
-        tree = ast.parse(
-            source=expression,
-            mode='eval'
-        )
+    def parse(self, expression: str) -> ast.AST:
+        try:
+            tree = ast.parse(
+                source=expression,
+                mode='eval'
+            )
+        except SyntaxError as e:
+            raise ParserSyntaxError() from e
         return tree

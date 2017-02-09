@@ -21,6 +21,8 @@ class Solver(object):
 
     def compute(self, expression: str) -> Union[int, float]:
         # TODO: is only Union[int, float]? definitely group it into some configuration
+
+        # TODO: create Preprocessor class and add it here or directly to Parser
         tree = self._parser.parse(expression=expression)
         return self._resolve(tree.body)
 
