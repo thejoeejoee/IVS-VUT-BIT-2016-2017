@@ -1,7 +1,7 @@
 # coding=utf-8
 import ast
 from _ast import AST
-from collections import Iterable
+from typing import Iterable, Sized, Optional
 
 from calculator.core.parser.hexadecimal_transform import HexadecimalTransform
 
@@ -16,8 +16,8 @@ class Parser(object):
         HexadecimalTransform(),
     )
 
-    def __init__(self, transforms=()):
-        super(Parser, self).__init__()
+    def __init__(self, transforms: Optional[Iterable] = ()):
+        super().__init__()
 
         self._transforms = ()
         if transforms is None:
@@ -35,7 +35,7 @@ class Parser(object):
 
         return tree
 
-    def transforms(self, transforms):
+    def transforms(self, transforms: Sized):
         """
         Sets node transforms for process AST before returning.
         New value could be iterable of:
