@@ -17,7 +17,9 @@ class Solver(object):
     }
 
     def __init__(self):
-        self._parser = Parser()
+        self._parser = Parser(
+            transforms=Parser.DEFAULT_TRANSFORMS
+        )
 
     def compute(self, expression: str) -> Union[int, float]:
         # TODO: is only Union[int, float]? definitely group it into some configuration
