@@ -8,5 +8,23 @@ class SolverAdvancedTest(TestCase):
     def setUp(self):
         self.solver = Solver()
 
-    # TODO advanced tests for Solver, mixed operations with brackets
+    def test_factorial(self):
+        self.assertEqual(
+            self.solver.compute('7!'),
+            5040,
+            'Simple factorial.'
+        )
 
+    def test_zero_factorial(self):
+        self.assertEqual(
+            self.solver.compute('0!'),
+            1,
+            'Factorial from zero.'
+        )
+
+    def test_fraction_factorial(self):
+        self.assertAlmostEqual(
+            self.solver.compute('0,5!'),
+            0.88622692545275801364908374167057,
+            'Factorial from fraction'
+        )
