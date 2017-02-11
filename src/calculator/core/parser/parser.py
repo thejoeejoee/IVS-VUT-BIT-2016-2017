@@ -12,6 +12,8 @@ class Parser(object):
     # TODO describe tweaks of parser
 
     """
+
+    # TODO solve problem with hexadecimals literals like '4A'
     DEFAULT_TRANSFORMS = (
         HexadecimalTransform,
     )
