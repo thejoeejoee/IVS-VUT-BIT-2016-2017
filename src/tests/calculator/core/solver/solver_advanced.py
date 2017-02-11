@@ -24,7 +24,14 @@ class SolverAdvancedTest(TestCase):
 
     def test_fraction_factorial(self):
         self.assertAlmostEqual(
-            self.solver.compute('0,5!'),
+            self.solver.compute('0.5!'),
             0.88622692545275801364908374167057,
             'Factorial from fraction'
+        )
+
+    def test_expression_with_multiple_nested_brackets(self):
+        self.assertAlmostEqual(
+            self.solver.compute('(2 + 1) * ((20 + 1) * 3)'),
+            (2 + 1) * ((20 + 1) * 3),
+            'Expression with multiple nested brackets.'
         )

@@ -1,8 +1,8 @@
 # coding=utf-8
-import operator
-from _ast import BinOp, Add, Num, expr
+from _ast import BinOp, Add, Num, expr, Sub, Div, Mult
 from typing import Union
 
+from calculator.core.math.math import Math
 from calculator.core.parser import Parser
 from calculator.utils import method_single_dispatch
 
@@ -11,9 +11,11 @@ class Solver(object):
     """
     Class, that solves mathematical expressions given as string.
     """
-    # TODO: mapping to Math class functions
-    operations_table = {
-        Add: operator.add
+    bin_operations_table = {
+        Add: Math.add,
+        Sub: Math.subtract,
+        Div: Math.divide,
+        Mult: Math.multiple,
     }
 
     def __init__(self):
@@ -44,7 +46,7 @@ class Solver(object):
         """
         left, op, right = bin_op.left, bin_op.op, bin_op.right
 
-        operation = self.operations_table.get(type(op))
+        operation = self.bin_operations_table.get(type(op))
         if not callable(operation):
             raise NotImplementedError(op)
         return operation(self._resolve(left), self._resolve(right))
