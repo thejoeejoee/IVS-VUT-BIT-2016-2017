@@ -1,10 +1,8 @@
 # coding=utf-8
 import ast
-from _ast import AST
 from typing import Iterable, Sized, Optional
 
 from calculator.core.parser.hexadecimal_transform import HexadecimalTransform
-
 from calculator.exceptions import ParserSyntaxError
 
 

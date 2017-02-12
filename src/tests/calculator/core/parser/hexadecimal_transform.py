@@ -5,7 +5,7 @@ from unittest import TestCase
 from calculator.core.parser.hexadecimal_transform import HexadecimalTransform
 
 
-class TestHexadecimalTransform(TestCase):
+class HexadecimalTransformTest(TestCase):
     def setUp(self):
         self.transform = HexadecimalTransform()
 
