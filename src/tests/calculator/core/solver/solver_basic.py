@@ -63,3 +63,17 @@ class SolverBasicTest(TestCase):
             1,
             'Integer division with inner expression.'
         )
+
+    def test_subtract_bracketed_expression(self):
+        self.assertEqual(
+            self.solver.compute('-(2 + 5)'),
+            -7,
+            'Minus whole bracketed expression.'
+        )
+
+    def test_add_bracketed_expression(self):
+        self.assertEqual(
+            self.solver.compute('+(2 + 5)'),
+            7,
+            'Plus whole bracketed expression.'
+        )
