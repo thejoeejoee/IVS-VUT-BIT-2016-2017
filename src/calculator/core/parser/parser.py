@@ -1,6 +1,6 @@
 # coding=utf-8
 import ast
-from typing import Iterable, Sized, Optional
+from typing import Iterable, Sized, Optional, Union, Callable
 
 from calculator.core.parser.hexadecimal_transform import HexadecimalTransform
 from calculator.exceptions import ParserSyntaxError
@@ -12,13 +12,20 @@ class Parser(object):
     # TODO describe tweaks of parser
 
     """
-
     # TODO solve problem with hexadecimals literals like '4A'
     DEFAULT_TRANSFORMS = (
         HexadecimalTransform,
     )
 
-    def __init__(self, transforms: Optional[Iterable] = ()):
+    _transforms = ()
+
+    def __init__(
+            self,
+            transforms: Optional[Iterable[Union[Callable, ast.NodeTransformer, type]]] = ()
+    ) -> None:
+        """
+        :param transforms: optional iterable
+        """
         super().__init__()
 
         self._transforms = ()
@@ -28,6 +35,13 @@ class Parser(object):
             self.transforms = transforms
 
     def parse(self, expression: str) -> ast.AST:
+        """
+        Parse given expression to AST.
+        Before processing by AST module, expression is normalized, processed by preprocessors.
+        Parsed tree is given to all transforms.
+        :param expression: math expression as string
+        :return: Tree as AST module objects - processable by Solver classs
+        """
         try:
             tree = ast.parse(
                 source=expression,
@@ -44,10 +58,10 @@ class Parser(object):
         """
         Sets node transforms for process AST before returning.
         New value could be iterable of:
-        1. NodeTransformer subclasses, will be instantiated and used with .visit method
-        2. NodeTransformer instances, will by used the .visit method
-        3. callable object, directly the item will be used
-        4. otherwise AssertionError raised
+            - NodeTransformer subclasses, will be instantiated and used with .visit method
+            - NodeTransformer instances, will by used the .visit method
+            - callable object, directly the item will be used
+            - otherwise AssertionError raised
         :param transforms: Iterable of items described above
         """
         assert isinstance(transforms, Iterable)
