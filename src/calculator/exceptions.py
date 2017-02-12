@@ -3,3 +3,7 @@
 
 class ParserSyntaxError(SyntaxError):
     pass
+
+
+class MathError(ValueError):
+    pass

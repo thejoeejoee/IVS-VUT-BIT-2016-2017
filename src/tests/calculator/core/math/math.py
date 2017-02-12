@@ -2,6 +2,7 @@
 from unittest import TestCase
 
 from calculator.core.math.math import Math
+from calculator.exceptions import MathError
 
 
 class MathTest(TestCase):
@@ -35,5 +36,5 @@ class MathTest(TestCase):
             0.2,
             'Simple divide.'
         )
-        with self.assertRaises(ZeroDivisionError):
+        with self.assertRaises(MathError):
             self.math.divide(2, 0)

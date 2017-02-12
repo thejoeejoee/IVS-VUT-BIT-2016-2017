@@ -1,6 +1,8 @@
 # coding=utf-8
 import operator
 
+from calculator.exceptions import MathError
+
 
 class Math(object):
     """
@@ -10,4 +12,10 @@ class Math(object):
     add = operator.add
     subtract = operator.sub
     multiple = operator.mul
-    divide = operator.truediv
+
+    @staticmethod
+    def divide(a, b):
+        try:
+            return operator.truediv(a, b)
+        except ZeroDivisionError as e:
+            raise MathError from e
