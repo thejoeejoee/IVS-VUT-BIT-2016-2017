@@ -15,6 +15,25 @@ class SolverAdvancedTest(TestCase):
             'Simple factorial.'
         )
 
+    def test_factorial_in_operation(self):
+        self.assertEqual(
+            self.solver.compute('7! + 5'),
+            5045,
+            'Factorial in operation.'
+        )
+        self.assertEqual(
+            self.solver.compute('5 + 7!'),
+            5045,
+            'Factorial in operation.'
+        )
+
+    def test_factorial_of_whole_bracket(self):
+        self.assertEqual(
+            self.solver.compute('3 + (2 + 1)! + 5'),
+            14,
+            'Factorial of whole bracket.'
+        )
+
     def test_zero_factorial(self):
         self.assertEqual(
             self.solver.compute('0!'),

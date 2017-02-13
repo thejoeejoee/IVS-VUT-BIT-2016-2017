@@ -2,7 +2,8 @@
 import ast
 from typing import Iterable, Sized, Optional, Union, Callable
 
-from calculator.core.parser.hexadecimal_transform import HexadecimalTransform
+from calculator.core.parser.preprocessor import FactorialPreprocessor
+from calculator.core.parser.transform import HexadecimalTransform
 from calculator.exceptions import ParserSyntaxError
 
 
@@ -16,12 +17,17 @@ class Parser(object):
     DEFAULT_TRANSFORMS = (
         HexadecimalTransform,
     )
+    DEFAULT_PREPROCESSORS = (
+        FactorialPreprocessor,
+    )
 
     _transforms = ()
+    _preprocessors = ()
 
     def __init__(
             self,
-            transforms: Optional[Iterable[Union[Callable, ast.NodeTransformer, type]]] = ()
+            transforms: Optional[Iterable[Union[Callable, ast.NodeTransformer, type]]] = None,
+            preprocessors: Optional[Iterable[Union[Callable, type]]] = None,
     ) -> None:
         """
         :param transforms: optional iterable
@@ -29,10 +35,15 @@ class Parser(object):
         super().__init__()
 
         self._transforms = ()
+        self._preprocessors = ()
         if transforms is None:
             self.transforms = self.DEFAULT_TRANSFORMS
         else:
             self.transforms = transforms
+        if preprocessors is None:
+            self.preprocessors = self.DEFAULT_PREPROCESSORS
+        else:
+            self.preprocessors = preprocessors
 
     def parse(self, expression: str) -> ast.AST:
         """
@@ -42,6 +53,8 @@ class Parser(object):
         :param expression: math expression as string
         :return: Tree as AST module objects - processable by Solver classs
         """
+        for preprocessor in self._preprocessors:
+            expression = preprocessor(expression)
         try:
             tree = ast.parse(
                 source=expression,
@@ -54,7 +67,7 @@ class Parser(object):
             tree = transform(tree)
         return tree
 
-    def set_transforms(self, transforms: Sized):
+    def set_transforms(self, transforms: Sized) -> None:
         """
         Sets node transforms for process AST before returning.
         New value could be iterable of:
@@ -82,3 +95,26 @@ class Parser(object):
         assert len(self._transforms) == len(transforms), 'Unknown transform(s) given.'
 
     transforms = property(fset=set_transforms)
+
+    def set_preprocessors(self, preprocessors: Sized) -> None:
+        """
+        Sets expression preprocessors, whose are used before AST parsing.
+        :param preprocessors: Iterable of callable or type for preprocessors.
+        """
+        assert isinstance(preprocessors, Iterable)
+        self._preprocessors = tuple(filter(
+            None,
+            ((
+                 preprocessor()
+                 if isinstance(preprocessor, type)
+                 else preprocessor
+                 if callable(preprocessor)
+                 else None
+             ) for preprocessor in preprocessors
+             )
+        ))
+
+        # TODO: Assertion or TypeError?
+        assert len(self._preprocessors) == len(preprocessors), 'Unknown preprocessor(s) given.'
+
+    preprocessors = property(fset=set_preprocessors)
