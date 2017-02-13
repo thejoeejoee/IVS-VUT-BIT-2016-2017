@@ -1,8 +1,12 @@
 import QtQuick 2.7
+import QtQuick.Controls 1.4
 
-Rectangle {
+ApplicationWindow {
+    id: root
+
     width: 640
     height: 480
-    border.color: "red"
-    border.width: 1
+    flags: Qt.FramelessWindowHint
+
+    Component.onCompleted: root.show()
 }
