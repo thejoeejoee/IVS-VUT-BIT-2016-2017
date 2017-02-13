@@ -5,7 +5,7 @@
 	 viewBox="0 0 367.5 174.2" enable-background="new 0 0 367.5 174.2" xml:space="preserve">
 <g id="input">
 	<rect x="20.3" y="105.3" fill="#F2F2F2" width="210" height="68.8"/>
-	<text transform="matrix(1 0 0 1 39.7504 116.7377)" fill="#A09F9F" font-family="'ABeeZee-Regular'" font-size="8.8677">Zadejte vstup...</text>
+	<text transform="matrix(1 0 0 1 45.2504 116.7345)" fill="#A09F9F" font-family="'ABeeZee-Regular'" font-size="8.8677">Zadejte vstup...</text>
 	<rect x="230.3" y="105.3" fill="#ED1A46" width="24.8" height="68.7"/>
 	<rect x="238" y="137.4" fill="#FFFFFF" width="9.5" height="1.5"/>
 	<rect x="238" y="142.2" fill="#FFFFFF" width="9.5" height="1.5"/>
@@ -30,7 +30,7 @@
 </g>
 <g id="display">
 	<rect y="15" fill="#F7F7F7" width="254.4" height="90.6"/>
-	<text transform="matrix(1 0 0 1 127.2083 64.9693)" fill="#303030" font-family="'Roboto-Medium'" font-size="25.0526">645,74553</text>
+	<text transform="matrix(1 0 0 1 127.2083 64.9693)" fill="#303030" font-family="'Roboto-Medium'" font-size="25.0526">645,74540</text>
 </g>
 <g id="extension">
 	<rect x="106.8" y="89.5" display="none" fill="#303030" width="21.6" height="159.9"/>
@@ -50,6 +50,22 @@
 	</g>
 	<rect x="0" y="164.4" fill="#2B2B2B" width="20" height="9.9"/>
 	<text transform="matrix(1 0 0 1 7.792 170.8096)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">pi</text>
+	<rect x="20.3" y="105.3" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 25.0182 111.7653)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">pow</text>
+	<rect x="20.3" y="115.1" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 25.2579 121.5651)" fill="#EE1D3E" font-family="'Roboto-Light'" font-size="5.6672">root</text>
+	<rect x="20.3" y="125" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 25.4542 131.4343)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">fact</text>
+	<rect x="20.3" y="134.8" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 24.6754 141.2351)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">rand</text>
+	<rect x="20.3" y="144.6" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 26.5182 151.1047)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">log</text>
+	<rect x="20.3" y="154.4" fill="#2B2B2B" width="20" height="9.9"/>
+	<g>
+		<text transform="matrix(1 0 0 1 28.858 160.905)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">e</text>
+	</g>
+	<rect x="20.3" y="164.3" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 28.0968 170.7741)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">pi</text>
 </g>
 <g id="soustavy">
 	<text transform="matrix(1 0 0 1 5.6667 89.7132)" fill="#EF4323" font-family="'Roboto-Light'" font-size="4.7546">BIN     1010 1010101...</text>
@@ -122,6 +138,9 @@
 		<circle fill="#FFFFFF" cx="338" cy="80.5" r="0.5"/>
 		<circle fill="#FFFFFF" cx="338" cy="82.9" r="0.5"/>
 		<circle fill="#FFFFFF" cx="338" cy="85.3" r="0.5"/>
+	</g>
+	<g>
+		<text transform="matrix(1 0 0 1 7.7774 27.7656)" font-family="'Roboto-Light'" font-size="9.1532">3*(343)+44</text>
 	</g>
 </g>
 </svg>
