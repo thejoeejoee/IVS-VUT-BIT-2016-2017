@@ -14,7 +14,7 @@ except ImportError:
 
 
 
-def load_tests(loader: unittest.TestLoader, suite: unittest.TestSuite, pattern='*.py'):
+def load_tests(*args):
     loader = unittest.TestLoader()
     suite = loader.discover(dirname(calculator.__file__), pattern='*.py')
     return unittest.TestSuite(suite)
