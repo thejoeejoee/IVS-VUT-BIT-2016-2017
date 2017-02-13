@@ -48,6 +48,7 @@ class Solver(object):
         operation = self.bin_operations_table.get(type(op))
         if not callable(operation):
             raise NotImplementedError(op)
+
         return operation(self._resolve(left), self._resolve(right))
 
     @_resolve.register(Num)
