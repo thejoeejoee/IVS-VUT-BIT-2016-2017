@@ -3,6 +3,8 @@
 
 # TODO: wip
 class FactorialPreprocessor(object):
+    FACTORIAL_FUNCTION_NAME = 'fact'
+
     def __call__(self, expression: str):
         if '!' not in expression:
             return expression
