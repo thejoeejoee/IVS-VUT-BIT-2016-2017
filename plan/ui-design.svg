@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 367.5 174.2" enable-background="new 0 0 367.5 174.2" xml:space="preserve">
+<g id="input">
+	<rect x="35.5" y="105.3" fill="#F2F2F2" width="194.8" height="68.8"/>
+	<text transform="matrix(1 0 0 1 39.7504 116.7377)" fill="#A09F9F" font-family="'ABeeZee-Regular'" font-size="8.8677">Zadejte vstup...</text>
+	<rect x="230.3" y="105.3" fill="#ED1A46" width="24.8" height="68.7"/>
+	<rect x="238" y="137.4" fill="#FFFFFF" width="9.5" height="1.5"/>
+	<rect x="238" y="142.2" fill="#FFFFFF" width="9.5" height="1.5"/>
+</g>
+<g id="frame">
+	<rect x="0" y="0" fill="#303030" width="367.2" height="15"/>
+	<g id="close_button">
+		<rect x="352.6" y="0" fill="#C82027" width="15" height="15"/>
+	</g>
+	<text transform="matrix(1 0 0 1 12 11.4077)" fill="#F7F7F7" font-family="'Roboto-Light'" font-size="10.1433">Barbie Calculator</text>
+</g>
+<g id="display">
+	<rect y="15" fill="#F7F7F7" width="254.4" height="90.6"/>
+	<text transform="matrix(1 0 0 1 127.2083 64.9693)" fill="#303030" font-family="'Roboto-Medium'" font-size="25.0526">645,74553</text>
+</g>
+<g id="extension">
+	<rect x="106.8" y="89.5" display="none" fill="#303030" width="21.6" height="159.9"/>
+	<rect x="0" y="105.3" fill="#2B2B2B" width="35.3" height="17.4"/>
+	<text transform="matrix(1 0 0 1 8.3161 116.7377)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="10">pow</text>
+	<rect x="0" y="122.6" fill="#2B2B2B" width="35.3" height="17.4"/>
+	<text transform="matrix(1 0 0 1 8.7385 134.0294)" fill="#EE1D3E" font-family="'Roboto-Light'" font-size="10">root</text>
+	<rect x="0" y="140" fill="#2B2B2B" width="35.3" height="17.4"/>
+	<text transform="matrix(1 0 0 1 9.0852 151.446)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="10">fact</text>
+	<rect x="0" y="157.3" fill="#2B2B2B" width="35.3" height="17.4"/>
+	<text transform="matrix(1 0 0 1 7.7107 168.7378)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="10">rand</text>
+</g>
+<g id="soustavy">
+	<text transform="matrix(1 0 0 1 5.6667 89.7132)" fill="#EF4323" font-family="'Roboto-Light'" font-size="4.7546">BIN     1010 1010101...</text>
+	<text transform="matrix(1 0 0 1 5.6667 84.4681)" font-family="'Roboto-Light'" font-size="4.7546">DEC    103</text>
+	<text transform="matrix(1 0 0 1 5.6667 99.7229)" font-family="'Roboto-Light'" font-size="4.7546">OCT    403</text>
+	<text transform="matrix(1 0 0 1 5.6667 94.7102)" font-family="'Roboto-Light'" font-size="4.7546">HEX    4FA</text>
+	<polygon fill="#9B9A9A" points="54.3,89.7 57.2,88 54.3,86.3 	"/>
+</g>
+<g id="history">
+	<rect x="255.2" y="14.9" fill="#2B2B2B" width="112.4" height="159.3"/>
+	<rect x="255.2" y="15" fill="#C1C1C0" width="112.4" height="27.1"/>
+	<g>
+		<text transform="matrix(1 0 0 1 259.7916 37.8025)" font-family="'Roboto-Light'" font-size="15.219">Ans</text>
+	</g>
+	<text transform="matrix(1 0 0 1 259.7907 22.5027)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="6.102">3*(343)+44</text>
+	<g>
+		<text transform="matrix(1 0 0 1 326.9158 35.2347)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="17.8331">54,4</text>
+	</g>
+	<rect x="255.2" y="42.1" fill="#2B2B2B" width="108.5" height="27.2"/>
+	<text transform="matrix(1 0 0 1 259.7916 64.9692)" fill="#ED1A46" font-family="'Roboto-Light'" font-size="15.219">DF</text>
+	<text transform="matrix(1 0 0 1 259.7907 49.6694)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="6.102">3*(343)+44</text>
+	<g>
+		<text transform="matrix(1 0 0 1 326.9158 62.4013)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="17.8331">54,4</text>
+	</g>
+	<rect x="255.1" y="68.6" fill="#2B2B2B" width="108.5" height="27.2"/>
+	<text transform="matrix(1 0 0 1 259.7656 91.4692)" fill="#ED1A46" font-family="'Roboto-Light'" font-size="15.219">XY</text>
+	<text transform="matrix(1 0 0 1 259.7646 76.1694)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="6.102">3*(343)+44</text>
+	<g>
+		<text transform="matrix(1 0 0 1 326.8897 88.9013)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="17.8331">54,4</text>
+	</g>
+	<rect x="255.1" y="49.4" fill="#B7B7B7" width="1" height="80.1"/>
+	<rect x="363.6" y="42.1" fill="#3D3D3D" width="4" height="27.2"/>
+	<circle fill="#FFFFFF" cx="365.6" cy="53.3" r="0.5"/>
+	<circle fill="#FFFFFF" cx="365.6" cy="55.7" r="0.5"/>
+	<circle fill="#FFFFFF" cx="365.6" cy="58.1" r="0.5"/>
+	<g>
+		<rect x="363.7" y="69.3" fill="#3D3D3D" width="4" height="27.2"/>
+		<circle fill="#FFFFFF" cx="365.7" cy="80.5" r="0.5"/>
+		<circle fill="#FFFFFF" cx="365.7" cy="82.9" r="0.5"/>
+		<circle fill="#FFFFFF" cx="365.7" cy="85.3" r="0.5"/>
+	</g>
+</g>
+</svg>
