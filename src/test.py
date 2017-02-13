@@ -14,13 +14,15 @@ except ImportError:
 from tests import calculator
 
 
-def main():
+def load_tests(loader: unittest.TestLoader, suite: unittest.TestSuite, pattern='*.py'):
     loader = unittest.TestLoader()
-
     suite = loader.discover(dirname(calculator.__file__), pattern='*.py')
-    runner = TestRunner(verbosity=10)
-    result = runner.run(unittest.TestSuite(suite))
+    return unittest.TestSuite(suite)
 
+
+def main():
+    runner = TestRunner(verbosity=10)
+    result = runner.run(load_tests())
     exit(len(result.errors + result.failures))
 
 

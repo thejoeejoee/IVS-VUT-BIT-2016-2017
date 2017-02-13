@@ -51,7 +51,7 @@ class Parser(object):
         Before processing by AST module, expression is normalized, processed by preprocessors.
         Parsed tree is given to all transforms.
         :param expression: math expression as string
-        :return: Tree as AST module objects - processable by Solver classs
+        :return: Tree as AST module objects - processable by Solver class
         """
         for preprocessor in self._preprocessors:
             expression = preprocessor(expression)
