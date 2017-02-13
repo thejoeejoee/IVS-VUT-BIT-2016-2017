@@ -13,12 +13,13 @@ class Parser(object):
     # TODO describe tweaks of parser
 
     """
+
+    DEFAULT_PREPROCESSORS = (
+        FactorialPreprocessor,
+    )
     # TODO solve problem with hexadecimals literals like '4A'
     DEFAULT_TRANSFORMS = (
         HexadecimalTransform,
-    )
-    DEFAULT_PREPROCESSORS = (
-        FactorialPreprocessor,
     )
 
     _transforms = ()

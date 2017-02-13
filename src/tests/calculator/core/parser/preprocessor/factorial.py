@@ -57,8 +57,16 @@ class FactorialPreprocessorTest(TestCase):
             'Test for complex nested factorial.'
         )
 
+    def test_factorized_function(self):
+        self.skipTest('Factorial of function call of factorized parameter is not actually supported.')
+        self.assertEqual(
+            self._format_factorial(self._format_factorial('5', 'abs(', ')')),
+            self.preprocessor('abs(5!)!'),
+            'Test for factorized of result from function call.'
+        )
+
     @staticmethod
-    def _format_factorial(expr='', pre='', post=''):
+    def _format_factorial(expr: str = '', pre: str = '', post: str = '') -> str:
         return '{}{}({}){}'.format(
             pre,
             FactorialPreprocessor.FACTORIAL_FUNCTION_NAME,

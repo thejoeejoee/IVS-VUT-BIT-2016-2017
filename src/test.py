@@ -3,6 +3,8 @@
 import unittest
 from os.path import dirname
 
+from tests import calculator
+
 try:
     from colour_runner.runner import ColourTextTestRunner as TestRunner
     # ColourTextTestRunner needs installed curses, which may be problem on Windows based systems
@@ -10,8 +12,6 @@ except ImportError:
     # fallback to default text test runner
     from unittest import TextTestRunner as TestRunner
 
-
-from tests import calculator
 
 
 def load_tests(loader: unittest.TestLoader, suite: unittest.TestSuite, pattern='*.py'):
