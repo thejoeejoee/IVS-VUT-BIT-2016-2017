@@ -4,7 +4,7 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 367.5 174.2" enable-background="new 0 0 367.5 174.2" xml:space="preserve">
 <g id="input">
-	<rect x="35.5" y="105.3" fill="#F2F2F2" width="194.8" height="68.8"/>
+	<rect x="20.3" y="105.3" fill="#F2F2F2" width="210" height="68.8"/>
 	<text transform="matrix(1 0 0 1 39.7504 116.7377)" fill="#A09F9F" font-family="'ABeeZee-Regular'" font-size="8.8677">Zadejte vstup...</text>
 	<rect x="230.3" y="105.3" fill="#ED1A46" width="24.8" height="68.7"/>
 	<rect x="238" y="137.4" fill="#FFFFFF" width="9.5" height="1.5"/>
@@ -14,6 +14,17 @@
 	<rect x="0" y="0" fill="#303030" width="367.2" height="15"/>
 	<g id="close_button">
 		<rect x="352.6" y="0" fill="#C82027" width="15" height="15"/>
+		<g>
+			<path fill="#FFFFFF" d="M6.6,7.8l-2.4,3.1h3.9v0.5H3.5V11L6,7.7L3.5,4.8V4.3h4.6v0.5H4.3l0,0l2.3,2.8V7.8z"/>
+		</g>
+		<polygon fill="#FFFFFF" points="8.1,4.8 7.8,4.8 8.1,5.2 		"/>
+		<polygon fill="#FFFFFF" points="8.1,10.9 7.8,10.9 8.1,10.6 		"/>
+		<rect x="4" y="6.6" fill="#C82027" width="3.6" height="0.6"/>
+		<rect x="4" y="8.4" fill="#C82027" width="3.6" height="0.6"/>
+		
+			<rect x="359.9" y="1.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 100.1846 256.7964)" fill="#E1E1E1" width="0.4" height="11.7"/>
+		
+			<rect x="359.9" y="1.6" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 609.4047 267.3529)" fill="#E1E1E1" width="0.4" height="11.7"/>
 	</g>
 	<text transform="matrix(1 0 0 1 12 11.4077)" fill="#F7F7F7" font-family="'Roboto-Light'" font-size="10.1433">Barbie Calculator</text>
 </g>
@@ -23,14 +34,22 @@
 </g>
 <g id="extension">
 	<rect x="106.8" y="89.5" display="none" fill="#303030" width="21.6" height="159.9"/>
-	<rect x="0" y="105.3" fill="#2B2B2B" width="35.3" height="17.4"/>
-	<text transform="matrix(1 0 0 1 8.3161 116.7377)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="10">pow</text>
-	<rect x="0" y="122.6" fill="#2B2B2B" width="35.3" height="17.4"/>
-	<text transform="matrix(1 0 0 1 8.7385 134.0294)" fill="#EE1D3E" font-family="'Roboto-Light'" font-size="10">root</text>
-	<rect x="0" y="140" fill="#2B2B2B" width="35.3" height="17.4"/>
-	<text transform="matrix(1 0 0 1 9.0852 151.446)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="10">fact</text>
-	<rect x="0" y="157.3" fill="#2B2B2B" width="35.3" height="17.4"/>
-	<text transform="matrix(1 0 0 1 7.7107 168.7378)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="10">rand</text>
+	<rect x="0" y="105.3" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 4.7134 111.8008)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">pow</text>
+	<rect x="0" y="115.1" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 4.9531 121.6006)" fill="#EE1D3E" font-family="'Roboto-Light'" font-size="5.6672">root</text>
+	<rect x="0" y="125" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 5.1494 131.4697)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">fact</text>
+	<rect x="0" y="134.8" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 4.3706 141.2705)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">rand</text>
+	<rect x="0" y="144.7" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 6.2134 151.1401)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">log</text>
+	<rect x="0" y="154.5" fill="#2B2B2B" width="20" height="9.9"/>
+	<g>
+		<text transform="matrix(1 0 0 1 8.5532 160.9404)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">e</text>
+	</g>
+	<rect x="0" y="164.4" fill="#2B2B2B" width="20" height="9.9"/>
+	<text transform="matrix(1 0 0 1 7.792 170.8096)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="5.6672">pi</text>
 </g>
 <g id="soustavy">
 	<text transform="matrix(1 0 0 1 5.6667 89.7132)" fill="#EF4323" font-family="'Roboto-Light'" font-size="4.7546">BIN     1010 1010101...</text>
@@ -59,18 +78,50 @@
 	<text transform="matrix(1 0 0 1 259.7656 91.4692)" fill="#ED1A46" font-family="'Roboto-Light'" font-size="15.219">XY</text>
 	<text transform="matrix(1 0 0 1 259.7646 76.1694)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="6.102">3*(343)+44</text>
 	<g>
-		<text transform="matrix(1 0 0 1 326.8897 88.9013)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="17.8331">54,4</text>
+		<text transform="matrix(1 0 0 1 306.8897 88.9013)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="17.8331">5454,4</text>
 	</g>
-	<rect x="255.1" y="49.4" fill="#B7B7B7" width="1" height="80.1"/>
 	<rect x="363.6" y="42.1" fill="#3D3D3D" width="4" height="27.2"/>
 	<circle fill="#FFFFFF" cx="365.6" cy="53.3" r="0.5"/>
 	<circle fill="#FFFFFF" cx="365.6" cy="55.7" r="0.5"/>
 	<circle fill="#FFFFFF" cx="365.6" cy="58.1" r="0.5"/>
+	<rect x="255.1" y="96.5" fill="#2B2B2B" width="108.5" height="27.2"/>
+	<text transform="matrix(1 0 0 1 259.7239 119.3025)" fill="#ED1A46" font-family="'Roboto-Light'" font-size="15.219">FOO</text>
+	<text transform="matrix(1 0 0 1 259.723 104.0027)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="6.102">3*(343)+44</text>
 	<g>
-		<rect x="363.7" y="69.3" fill="#3D3D3D" width="4" height="27.2"/>
-		<circle fill="#FFFFFF" cx="365.7" cy="80.5" r="0.5"/>
-		<circle fill="#FFFFFF" cx="365.7" cy="82.9" r="0.5"/>
-		<circle fill="#FFFFFF" cx="365.7" cy="85.3" r="0.5"/>
+		<text transform="matrix(1 0 0 1 326.8481 116.7347)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="17.8331">54,4</text>
+	</g>
+	<g>
+		<rect x="363.7" y="96.5" fill="#3D3D3D" width="4" height="27.2"/>
+		<circle fill="#FFFFFF" cx="365.7" cy="107.6" r="0.5"/>
+		<circle fill="#FFFFFF" cx="365.7" cy="110.1" r="0.5"/>
+		<circle fill="#FFFFFF" cx="365.7" cy="112.5" r="0.5"/>
+	</g>
+	<rect x="255.1" y="49.4" fill="#B7B7B7" width="1" height="80.1"/>
+	<rect x="359.5" y="69.3" fill="#D81F27" width="8.3" height="27.2"/>
+	<path fill="#3D3D3D" d="M397.2,63.8"/>
+	<g>
+		<path fill="#FFFFFF" d="M362.4,85.8c-0.2,0-0.2,0-0.2-0.1c0-0.1,0-3.5,0-3.5h-0.4c0,0,0,3.4,0,3.6s0.2,0.5,0.5,0.5
+			c0.3,0,1.6,0,1.6,0v-0.4C363.8,85.8,362.5,85.8,362.4,85.8z"/>
+		<path fill="#FFFFFF" d="M365.8,82.2c0,0,0,3.4,0,3.6s-0.2,0.5-0.5,0.5s-1.6,0-1.6,0v-0.4c0,0,1.2,0,1.4,0c0.2,0,0.2,0,0.2-0.1
+			s0-3.5,0-3.5H365.8z"/>
+		<path fill="#FFFFFF" d="M366,81.8c0,0,0-0.2,0-0.3s0-0.2-0.2-0.2s-2.1,0-2.1,0s-1.9,0-2.1,0c-0.1,0-0.2,0.2-0.2,0.2s0,0.3,0,0.3
+			h-0.2v0.5h2.5h2.5v-0.5H366z"/>
+		<path fill="#FFFFFF" d="M364.3,80.4c-0.3,0-0.5,0-0.5,0s-0.2,0-0.5,0s-0.6,0.4-0.6,0.7c0,0.1,0,0.1,0,0.1h0.5c0,0,0,0,0-0.2
+			c0-0.1,0.1-0.2,0.2-0.2c0.2,0,0.4,0,0.4,0s0.2,0,0.4,0c0.1,0,0.2,0.2,0.2,0.2c0,0.2,0,0.2,0,0.2h0.5c0,0,0,0,0-0.1
+			C364.9,80.8,364.6,80.4,364.3,80.4z"/>
+		<rect x="363.5" y="82.7" fill="#FFFFFF" width="0.5" height="2.7"/>
+		<rect x="364.5" y="82.7" fill="#FFFFFF" width="0.5" height="2.7"/>
+		<rect x="362.6" y="82.7" fill="#FFFFFF" width="0.5" height="2.7"/>
+	</g>
+	<rect x="340" y="69.3" fill="#3D3D3D" width="19.5" height="27.2"/>
+	<rect x="340.8" y="69.3" fill="#2D2D2D" width="18.7" height="13.4"/>
+	<text transform="matrix(1 0 0 1 345.1789 93.0273)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="10">=1</text>
+	<text transform="matrix(1 0 0 1 345.0348 79.2131)" fill="#FFFFFF" font-family="'Roboto-Light'" font-size="10">=0</text>
+	<g>
+		<rect x="336" y="69.3" fill="#3D3D3D" width="4" height="27.2"/>
+		<circle fill="#FFFFFF" cx="338" cy="80.5" r="0.5"/>
+		<circle fill="#FFFFFF" cx="338" cy="82.9" r="0.5"/>
+		<circle fill="#FFFFFF" cx="338" cy="85.3" r="0.5"/>
 	</g>
 </g>
 </svg>
