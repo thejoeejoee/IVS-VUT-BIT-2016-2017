@@ -4,7 +4,7 @@ from typing import Iterable, Sized, Optional, Union, Callable
 
 from calculator.core.parser.preprocessor import FactorialPreprocessor
 from calculator.core.parser.transform import HexadecimalTransform, ComplexRestrictTransform
-from calculator.exceptions import ParserSyntaxError
+from calculator.exceptions import ParserSyntaxError, SyntaxRestrictError
 
 
 class Parser(object):
@@ -56,17 +56,18 @@ class Parser(object):
         try:
             for preprocessor in self._preprocessors:
                 expression = preprocessor(expression)
+        except SyntaxRestrictError as e:
+            raise ParserSyntaxError('Restricted syntax') from e
 
+        try:
             tree = ast.parse(
                 source=expression,
                 mode='eval'
             )
-
             for transform in self._transforms:
                 tree = transform(tree)
-
         except SyntaxError as e:
-            raise ParserSyntaxError() from e
+            raise ParserSyntaxError('Invalid expression syntax') from e
         return tree
 
     def set_transforms(self, transforms: Sized) -> None:

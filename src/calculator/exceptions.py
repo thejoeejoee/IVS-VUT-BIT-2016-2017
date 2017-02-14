@@ -2,8 +2,18 @@
 
 
 class ParserSyntaxError(SyntaxError):
-    pass
+    """
+    Raised from Parser to signalize syntax error (invalid operands, brackets, numbers).
+    """
+
+
+class SyntaxRestrictError(SyntaxError):
+    """
+    Raised as syntax restrict from Parser like complex numbers etc.
+    """
 
 
 class MathError(ValueError):
-    pass
+    """
+    Standard Math error - division by null etc.
+    """

@@ -1,8 +1,9 @@
 # coding=utf-8
-import re
 from _ast import Num
 from ast import NodeTransformer, expr
 from typing import Optional
+
+from calculator.exceptions import SyntaxRestrictError
 
 
 class ComplexRestrictTransform(NodeTransformer):
@@ -16,6 +17,5 @@ class ComplexRestrictTransform(NodeTransformer):
         :return: Num node, if variable id can be converted to Num
         """
         if isinstance(num.n, complex):
-            # TODO some restrict exception?
-            raise SyntaxError('Complex number is not supported.')
+            raise SyntaxRestrictError('Complex number is not supported.')
         return num
