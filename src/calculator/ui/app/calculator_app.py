@@ -1,9 +1,13 @@
 # coding=utf-8
+from PyQt5.QtCore import QObject
+
 import resources
-from typing import List
+from typing import List, Optional
+
+from calculator.ui.qmlwrapper.core import Sides
 
 from PyQt5.QtCore import QUrl
-from PyQt5.QtQml import QQmlApplicationEngine
+from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType
 from PyQt5.QtWidgets import QApplication
 
 
@@ -13,7 +17,7 @@ class CalculatorApp(QApplication):
 
     @staticmethod
     def registerTypes():
-        pass
+        qmlRegisterSingletonType(Sides, "Sides", 1, 0, "Sides", Sides.singletonProvider)
 
     def run(self) -> int:
         CalculatorApp.registerTypes()
