@@ -4,5 +4,8 @@
         <file>calculator/ui/easteregg/animations/ParticleGenerator.qml</file>
         <file>calculator/ui/easteregg/animations/RainbowTail.qml</file>
         <file>calculator/ui/qml/window/Frame.qml</file>
+        <file>calculator/ui/easteregg/logic/collision/BoxCollider.qml</file>
+        <file>calculator/ui/easteregg/logic/collision/CollisionSystem.qml</file>
+        <file>calculator/ui/easteregg/logic/extendedmath.js</file>
     </qresource>
 </RCC>
