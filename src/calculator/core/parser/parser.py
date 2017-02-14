@@ -1,6 +1,6 @@
 # coding=utf-8
 import ast
-from typing import Iterable, Sized, Optional, Union, Callable, Type
+from typing import Iterable, Sized, Optional, Union, Callable
 
 from calculator.core.parser.preprocessor import FactorialPreprocessor
 from calculator.core.parser.preprocessor.absolute_value import AbsoluteValuePreprocessor
@@ -28,7 +28,7 @@ class Parser(object):
 
     def __init__(
             self,
-            transforms: Optional[Iterable[Union[Callable, ast.NodeTransformer, Type[ast.NodeTransformer]]]] = None,
+            transforms: Optional[Iterable[Union[Callable, ast.NodeTransformer, type]]] = None,
             preprocessors: Optional[Iterable[Union[Callable, type]]] = None,
     ) -> None:
         """
