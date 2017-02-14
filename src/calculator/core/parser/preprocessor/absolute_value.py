@@ -1,5 +1,5 @@
 # coding=utf-8
-import string
+import re
 
 
 class AbsoluteValuePreprocessor(object):
@@ -11,93 +11,27 @@ class AbsoluteValuePreprocessor(object):
     ABSOLUTE_VALUE_SIGN = '|'
     ABSOLUTE_VALUE_FUNCTION_NAME = 'abs'
 
+    _OPENING_SIGN_REGEX = re.compile(r'''
+        (?: # non capturing group
+            ^ # is begin of expression
+            | # or
+            [+-/*(,] # before is one of operators
+        )
+        \s* # followed by any occurrences of white chars
+        (?P<abs_sign>\|) # and matched | char
+    ''', re.VERBOSE)
+
     def __call__(self, expression: str) -> str:
         if self.ABSOLUTE_VALUE_SIGN not in expression:
             return expression
 
-        # TODO: remove dependency on spaces!!!
-        expression = self.abs(expression.replace(' ', ''))
-        return expression
+        tokens = list(expression)
 
-    def abs(self, expression):
+        match = self._OPENING_SIGN_REGEX.search(''.join(tokens))
+        while match:
+            # opening | found, replace by abs(
+            tokens[match.start('abs_sign'):match.end('abs_sign')] = '{}('.format(self.ABSOLUTE_VALUE_FUNCTION_NAME)
+            match = self._OPENING_SIGN_REGEX.search(''.join(tokens))
 
-        """ Promenne definuji;ci zakladni retezce pro praci a 'pocet', ve kterem je ulozen pocet '|' """
-        pocet = expression.count('|')
-        operatory = "+-*/"
-        promenne = string.ascii_lowercase
-        cisla = string.digits
-
-        """ Osetreni zda neni lichy pocet zavorek """
-        if (pocet % 2):
-            return "ERROR"
-        else:
-            """ Zakladni promenne pro praci """
-            counter = 0  # pocet pruchodu cyklem for
-            abs_vystup = ''  # vysledny retezec
-            pocet_svislitka = 0  # pocet '|' znaku
-            je_cislo = 0  # prakticky bool => nabyva hodnoty 1/0 viz cyklus while
-            je_operator_za = 0  # stejne jako 'pocet_operatory'
-            je_operator_pred = 0
-
-            for znak in expression:
-                """ Pomocne indexovaci hodnoty pro 'lepsi' orientaci """
-                index_1 = counter - 1
-                index1 = counter + 1
-                index2 = counter + 2
-                index = counter
-
-                """ Aby se osetril zasah mimo pole jsou indexy od urcite pozice stejne jako 'counter' """
-                if counter == (len(expression) - 1):
-                    index1 = counter
-                if counter == (len(expression) - 2):
-                    index2 = counter
-
-                """ Na zaklade prochazeni vstupniho retezce po nejblizsi '|' se urci zda je to zacatek a nebo konec absolutni hodnoty """
-                while index < (len(expression) - 1) and expression[index] != "|":
-                    if (index == counter) and (expression[index] in operatory):
-                        je_operator_pred = 1
-                    elif expression[index] in cisla:
-                        je_cislo = 1
-                    elif expression[index] in operatory:
-                        je_operator_za = 1
-                    index += 1
-
-                if znak == '|':
-                    """ Asi to jde zjednodusit ale ted na to nemam :D """
-                    pocet_svislitka += 1
-                    if pocet_svislitka > (pocet / 2):
-                        if (expression[index_1]) in operatory:
-                            if je_operator_pred and je_cislo and not je_operator_za:
-                                abs_vystup += ')'
-                            else:
-                                abs_vystup += 'abs('
-                        else:
-                            abs_vystup += ')'
-                    else:
-                        if expression[index1] in operatory:
-                            if expression[index2] in ("|" + cisla + promenne):
-                                if je_operator_pred and je_cislo and not je_operator_za and (counter > 0):
-                                    abs_vystup += ')'
-                                else:
-                                    abs_vystup += 'abs('
-                            else:
-                                abs_vystup += ')'
-                        elif expression[index1] not in (cisla + promenne + "+-|"):
-                            return expression
-                        else:
-                            abs_vystup += 'abs('
-                    je_operator_pred = je_operator_za = je_cislo = 0
-                elif znak in operatory:
-                    abs_vystup += znak
-                elif znak in promenne:
-                    abs_vystup += znak
-                elif znak in cisla:
-                    abs_vystup += znak
-                    je_operator_za = 0
-                else:
-                    return expression
-                counter += 1
-            if abs_vystup.count('(') == abs_vystup.count(')'):
-                return abs_vystup
-            else:
-                return expression
+        # replace all remaining | by closing )
+        return ''.join(tokens).replace(self.ABSOLUTE_VALUE_SIGN, ')')
