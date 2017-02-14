@@ -54,3 +54,17 @@ class SolverAdvancedTest(TestCase):
             (2 + 1) * ((20 + 1) * 3),
             'Expression with multiple nested brackets.'
         )
+
+    def test_factorial_of_absolute_value(self):
+        self.assertAlmostEqual(
+            self.solver.compute('|1 + 2|!'),
+            6,
+            'Expression factorial of absolute value.'
+        )
+
+    def test_absolute_value_of_factorial(self):
+        self.assertAlmostEqual(
+            self.solver.compute('-|3!|'),
+            -6,
+            'Expression of absolute value from factorial.'
+        )
