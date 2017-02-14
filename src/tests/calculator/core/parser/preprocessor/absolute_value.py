@@ -65,4 +65,5 @@ class AbsoluteValuePreprocessorTest(TestCase):
             AbsoluteValuePreprocessor.ABSOLUTE_VALUE_FUNCTION_NAME,
             expr,
             post
-        )
+        ).replace(' ', '')
+        # TODO: remove dependency on spaces!!!

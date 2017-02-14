@@ -1,4 +1,5 @@
 # coding=utf-8
+import string
 
 
 class AbsoluteValuePreprocessor(object):
@@ -14,87 +15,89 @@ class AbsoluteValuePreprocessor(object):
         if self.ABSOLUTE_VALUE_SIGN not in expression:
             return expression
 
-        expression = self.abs(expression)
+        # TODO: remove dependency on spaces!!!
+        expression = self.abs(expression.replace(' ', ''))
         return expression
-    def abs(self, string):
 
-        """ Promenne definujici zakladni retezce pro praci a 'pocet', ve kterem je ulozen pocet '|' """
-        pocet = string.count('|')
+    def abs(self, expression):
+
+        """ Promenne definuji;ci zakladni retezce pro praci a 'pocet', ve kterem je ulozen pocet '|' """
+        pocet = expression.count('|')
         operatory = "+-*/"
-        promenne = "abcdefx"
-        cisla = "0123456789"
+        promenne = string.ascii_lowercase
+        cisla = string.digits
 
         """ Osetreni zda neni lichy pocet zavorek """
-        if(pocet%2):
+        if (pocet % 2):
             return "ERROR"
         else:
             """ Zakladni promenne pro praci """
-            counter = 0             #pocet pruchodu cyklem for
-            abs_vystup = ''         #vysledny retezec
-            pocet_svislitka = 0     #pocet '|' znaku
-            je_cislo = 0            #prakticky bool => nabyva hodnoty 1/0 viz cyklus while
-            je_operator_za = 0         #stejne jako 'pocet_operatory'
+            counter = 0  # pocet pruchodu cyklem for
+            abs_vystup = ''  # vysledny retezec
+            pocet_svislitka = 0  # pocet '|' znaku
+            je_cislo = 0  # prakticky bool => nabyva hodnoty 1/0 viz cyklus while
+            je_operator_za = 0  # stejne jako 'pocet_operatory'
             je_operator_pred = 0
 
-            for znak in string:
+            for znak in expression:
                 """ Pomocne indexovaci hodnoty pro 'lepsi' orientaci """
-                index_1 = counter-1
-                index1 = counter+1
-                index2 = counter+2
+                index_1 = counter - 1
+                index1 = counter + 1
+                index2 = counter + 2
                 index = counter
 
                 """ Aby se osetril zasah mimo pole jsou indexy od urcite pozice stejne jako 'counter' """
-                if(counter == (len(string)-1)):
+                if counter == (len(expression) - 1):
                     index1 = counter
-                if(counter == (len(string)-2)):
+                if counter == (len(expression) - 2):
                     index2 = counter
 
                 """ Na zaklade prochazeni vstupniho retezce po nejblizsi '|' se urci zda je to zacatek a nebo konec absolutni hodnoty """
-                while(index < (len(string)-1) and string[index] != "|"):
-                    if((index == counter) and (string[index] in operatory)):
+                while index < (len(expression) - 1) and expression[index] != "|":
+                    if (index == counter) and (expression[index] in operatory):
                         je_operator_pred = 1
-                    elif (string[index] in cisla):
+                    elif expression[index] in cisla:
                         je_cislo = 1
-                    elif (string[index] in operatory):
+                    elif expression[index] in operatory:
                         je_operator_za = 1
                     index += 1
 
-                if(znak == '|'):
+                if znak == '|':
                     """ Asi to jde zjednodusit ale ted na to nemam :D """
                     pocet_svislitka += 1
-                    if(pocet_svislitka > (pocet / 2)):
-                        if ((string[index_1]) in operatory):
-                            if (je_operator_pred and je_cislo and not je_operator_za):
+                    if pocet_svislitka > (pocet / 2):
+                        if (expression[index_1]) in operatory:
+                            if je_operator_pred and je_cislo and not je_operator_za:
                                 abs_vystup += ')'
                             else:
                                 abs_vystup += 'abs('
                         else:
                             abs_vystup += ')'
                     else:
-                        if (string[index1] in operatory):
-                            if (string[index2] in ("|" + cisla + promenne)):
-                                if(je_operator_pred and je_cislo and not je_operator_za and (counter > 0)):
+                        if expression[index1] in operatory:
+                            if expression[index2] in ("|" + cisla + promenne):
+                                if je_operator_pred and je_cislo and not je_operator_za and (counter > 0):
                                     abs_vystup += ')'
                                 else:
                                     abs_vystup += 'abs('
                             else:
                                 abs_vystup += ')'
-                        elif (string[index1] not in (cisla + promenne + "+-|")):
-                            return "ERROR"
+                        elif expression[index1] not in (cisla + promenne + "+-|"):
+                            return expression
                         else:
                             abs_vystup += 'abs('
                     je_operator_pred = je_operator_za = je_cislo = 0
-                elif(znak in operatory):
+                elif znak in operatory:
                     abs_vystup += znak
-                elif(znak in promenne):
+                elif znak in promenne:
                     abs_vystup += znak
-                elif(znak in cisla):
+                elif znak in cisla:
                     abs_vystup += znak
                     je_operator_za = 0
                 else:
-                    return "ERROR"
+                    return expression
                 counter += 1
-            if(abs_vystup.count('(') == abs_vystup.count(')')):
+            if abs_vystup.count('(') == abs_vystup.count(')'):
                 return abs_vystup
             else:
-                return "ERROR"
+                return expression
