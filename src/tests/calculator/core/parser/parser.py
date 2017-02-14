@@ -31,3 +31,7 @@ class ParserTest(TestCase):
     def test_duplicated_dot_in_number_literal(self):
         with self.assertRaises(ParserSyntaxError, msg='Invalid number with doubled dot in number.'):
             self.parser.parse('0..1')
+
+    def test_complex_numbers(self):
+        with self.assertRaises(ParserSyntaxError, msg='Invalid number with imaginary unit.'):
+            self.parser.parse('1+8j')

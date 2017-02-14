@@ -3,15 +3,13 @@ import ast
 from typing import Iterable, Sized, Optional, Union, Callable
 
 from calculator.core.parser.preprocessor import FactorialPreprocessor
-from calculator.core.parser.transform import HexadecimalTransform
+from calculator.core.parser.transform import HexadecimalTransform, ComplexRestrictTransform
 from calculator.exceptions import ParserSyntaxError
 
 
 class Parser(object):
     """
-    Class, that takes mathematical (python) expression and parses it to Abstract Python Tree with some tweaks:
-    # TODO describe tweaks of parser
-
+    Class, that takes mathematical (python) expression and parses it to Abstract Python Tree with some tweaks.
     """
 
     DEFAULT_PREPROCESSORS = (
@@ -20,6 +18,7 @@ class Parser(object):
     # TODO solve problem with hexadecimals literals like '4A'
     DEFAULT_TRANSFORMS = (
         HexadecimalTransform,
+        ComplexRestrictTransform
     )
 
     _transforms = ()
@@ -54,18 +53,20 @@ class Parser(object):
         :param expression: math expression as string
         :return: Tree as AST module objects - processable by Solver class
         """
-        for preprocessor in self._preprocessors:
-            expression = preprocessor(expression)
         try:
+            for preprocessor in self._preprocessors:
+                expression = preprocessor(expression)
+
             tree = ast.parse(
                 source=expression,
                 mode='eval'
             )
+
+            for transform in self._transforms:
+                tree = transform(tree)
+
         except SyntaxError as e:
             raise ParserSyntaxError() from e
-
-        for transform in self._transforms:
-            tree = transform(tree)
         return tree
 
     def set_transforms(self, transforms: Sized) -> None:
