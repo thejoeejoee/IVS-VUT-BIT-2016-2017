@@ -1,4 +1,5 @@
 # coding=utf-8
+import resources
 from typing import List
 
 from PyQt5.QtCore import QUrl
@@ -18,6 +19,6 @@ class CalculatorApp(QApplication):
         CalculatorApp.registerTypes()
 
         engine = QQmlApplicationEngine()
-        engine.load(QUrl("./calculator/ui/qml/main.qml"))
+        engine.load(QUrl("qrc:/calculator/ui/qml/main.qml"))
 
         return self.exec()
