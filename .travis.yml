@@ -10,7 +10,6 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-  - if [[ $TRAVIS_PYTHON_VERSION == 3.4 ]]; then pip install typing; fi
   - pip install codecov
 
 # command to run tests
