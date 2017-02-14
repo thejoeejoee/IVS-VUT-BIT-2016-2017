@@ -1,8 +1,9 @@
 # coding=utf-8
 import ast
-from typing import Iterable, Sized, Optional, Union, Callable
+from typing import Iterable, Sized, Optional, Union, Callable, Type
 
 from calculator.core.parser.preprocessor import FactorialPreprocessor
+from calculator.core.parser.preprocessor.absolute_value import AbsoluteValuePreprocessor
 from calculator.core.parser.transform import HexadecimalTransform, ComplexRestrictTransform
 from calculator.exceptions import ParserSyntaxError, SyntaxRestrictError
 
@@ -13,6 +14,7 @@ class Parser(object):
     """
 
     DEFAULT_PREPROCESSORS = (
+        AbsoluteValuePreprocessor,
         FactorialPreprocessor,
     )
     # TODO solve problem with hexadecimals literals like '4A'
@@ -26,7 +28,7 @@ class Parser(object):
 
     def __init__(
             self,
-            transforms: Optional[Iterable[Union[Callable, ast.NodeTransformer, type]]] = None,
+            transforms: Optional[Iterable[Union[Callable, ast.NodeTransformer, Type[ast.NodeTransformer]]]] = None,
             preprocessors: Optional[Iterable[Union[Callable, type]]] = None,
     ) -> None:
         """
