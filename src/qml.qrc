@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>calculator/ui/qml/main.qml</file>
         <file>calculator/ui/easteregg/animations/ParticleGenerator.qml</file>
+        <file>calculator/ui/easteregg/animations/RainbowTail.qml</file>
     </qresource>
 </RCC>
