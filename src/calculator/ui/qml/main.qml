@@ -5,8 +5,7 @@ ApplicationWindow {
     width: 640
     height: 480
     flags: Qt.FramelessWindowHint
-
-    Component.onCompleted: show()
+    visible: true
 
     Item {
         id: root
