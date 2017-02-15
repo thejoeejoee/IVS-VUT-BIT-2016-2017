@@ -1,5 +1,5 @@
 # coding=utf-8
-from _ast import Num
+from ast import Num
 from unittest import TestCase
 
 from calculator.core.parser.transform.complex_restrict import ComplexRestrictTransform

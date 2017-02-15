@@ -1,5 +1,5 @@
 # coding=utf-8
-from _ast import BinOp, Add, Num, expr, Sub, Div, Mult
+from ast import BinOp, Add, Num, expr, Sub, Div, Mult
 from typing import Union
 
 from calculator.core.math.math import Math

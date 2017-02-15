@@ -1,6 +1,5 @@
 # coding=utf-8
-from _ast import Num
-from ast import NodeTransformer, expr
+from ast import NodeTransformer, expr, Num
 from typing import Optional
 
 from calculator.exceptions import SyntaxRestrictError
