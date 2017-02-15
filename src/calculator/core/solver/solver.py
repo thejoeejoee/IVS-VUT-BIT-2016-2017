@@ -1,5 +1,5 @@
 # coding=utf-8
-from ast import BinOp, Add, Num, expr, Sub, Div, Mult
+from ast import BinOp, Add, Num, expr, Sub, Div, Mult, Call
 from typing import Union
 
 from calculator.core.math.math import Math
@@ -16,6 +16,17 @@ class Solver(object):
         Sub: Math.subtract,
         Div: Math.divide,
         Mult: Math.multiple,
+    }
+
+    function_calls_table = {
+        'fact': Math.fact,
+        'abs': Math.abs,
+        'log': Math.log,
+        'ln': Math.log,
+        'pow': Math.pow,
+        'sqrt': Math.root,
+        'root': Math.root,
+        'rand': Math.rand,
     }
 
     def __init__(self):
@@ -59,3 +70,16 @@ class Solver(object):
         :return: standard python number values
         """
         return num.n
+
+    @_resolve.register(Call)
+    def _(self, call: Call) -> Union[int, float]:
+        """
+        Calls function with resolved parameters and returns result
+        :param call: Call node
+        :return: result of the called function
+        """
+        function = self.function_calls_table.get(call.func.id)
+        if callable(function):
+            return function(*map(self._resolve, call.args))
+        else:
+            raise NotImplementedError(call.func.id)
