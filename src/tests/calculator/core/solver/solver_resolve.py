@@ -1,5 +1,5 @@
 # coding=utf-8
-from ast import Num, BinOp
+from ast import Num, BinOp, AST
 from unittest import TestCase
 
 from calculator.core.solver import Solver
@@ -37,3 +37,16 @@ class SolverResolveTest(TestCase):
         )
         self.assertIsNotNone(left, 'Left operand should be given.')
         self.assertIsNotNone(right, 'Right operand should be given.')
+
+    def test_unknown_bin_operation(self):
+        self.solver.bin_operations_table = {}
+
+        with self.assertRaises(NotImplementedError, msg='Not implemented error for unknown bin operation.'):
+            self.solver._resolve(BinOp(left=None, op=42, right=None))
+
+    def test_unknown_node(self):
+        class UnknownNode(AST):
+            pass
+
+        with self.assertRaises(NotImplementedError, msg='Not implemented error for unknown ast node.'):
+            self.solver._resolve(UnknownNode())

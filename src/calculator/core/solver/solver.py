@@ -1,5 +1,5 @@
 # coding=utf-8
-from ast import BinOp, Add, Num, expr, Sub, Div, Mult, Call
+from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST
 from typing import Union
 
 from calculator.core.math.math import Math
@@ -39,7 +39,7 @@ class Solver(object):
         return self._resolve(tree.body)
 
     @method_single_dispatch
-    def _resolve(self, node: expr):
+    def _resolve(self, node: AST):
         """
         Default endpoint for unresolved types of nodes.
         :param node: expression object

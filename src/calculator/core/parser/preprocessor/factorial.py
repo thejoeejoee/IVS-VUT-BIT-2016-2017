@@ -1,7 +1,7 @@
 # coding=utf-8
 
 import re
-from typing import Tuple
+from typing import Tuple, List
 
 
 class FactorialPreprocessor(object):
@@ -35,7 +35,7 @@ class FactorialPreprocessor(object):
         return ''.join(tokens)
 
     @classmethod
-    def _get_replacement_literal_by_function_call(cls, tokens: list) -> Tuple[str, int]:
+    def _get_replacement_literal_by_function_call(cls, tokens: List[str]) -> Tuple[str, int]:
         """
         Gets matched tokens and generates the correct replacement with length of str to remove from original.
         From ')5 + 9(' generates fact(9 + 5).
