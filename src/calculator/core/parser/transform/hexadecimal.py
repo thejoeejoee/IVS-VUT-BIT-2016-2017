@@ -1,7 +1,6 @@
 # coding=utf-8
 import re
-from _ast import Num
-from ast import NodeTransformer, expr
+from ast import NodeTransformer, expr, Num
 from typing import Optional
 
 
