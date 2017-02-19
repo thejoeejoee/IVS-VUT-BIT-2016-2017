@@ -31,16 +31,6 @@ Rectangle {
         anchors.top: parent.top
     }
 
-    Loader {
-        id: buttons
-
-        sourceComponent: component.buttons
-        height: parent.height
-
-        anchors.right: parent.right
-        anchors.top: parent.top
-    }
-
     MouseArea {
         property point startPos
         property bool movingEnabled: false
@@ -60,5 +50,15 @@ Rectangle {
             component.window.x += mouse.x - startPos.x
             component.window.y += mouse.y - startPos.y
         }
+    }
+
+    Loader {
+        id: buttons
+
+        sourceComponent: component.buttons
+        height: parent.height
+
+        anchors.right: parent.right
+        anchors.top: parent.top
     }
 }
