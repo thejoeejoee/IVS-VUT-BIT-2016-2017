@@ -3,5 +3,6 @@
         <file>calculator/ui/qml/main.qml</file>
         <file>calculator/ui/qml/window/Frame.qml</file>
         <file>calculator/ui/qml/window/CustomWindow.qml</file>
+        <file>calculator/ui/qml/controls/Clickable.qml</file>
     </qresource>
 </RCC>
