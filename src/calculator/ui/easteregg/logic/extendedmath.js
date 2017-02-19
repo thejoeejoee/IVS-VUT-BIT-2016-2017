@@ -1,5 +1,11 @@
 .pragma library
 
+function sgn(number) {
+    if(number === 0)
+        return 0
+    return Math.abs(number) / number
+}
+
 function numberInInterval(number, start, end) {
     if(number >= start && number <= end)
         return true

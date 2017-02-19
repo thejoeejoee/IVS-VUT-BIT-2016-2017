@@ -7,5 +7,6 @@
         <file>calculator/ui/easteregg/logic/collision/BoxCollider.qml</file>
         <file>calculator/ui/easteregg/logic/collision/CollisionSystem.qml</file>
         <file>calculator/ui/easteregg/logic/extendedmath.js</file>
+        <file>calculator/ui/easteregg/nyan/NyanCat.qml</file>
     </qresource>
 </RCC>
