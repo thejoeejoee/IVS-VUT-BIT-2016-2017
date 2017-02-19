@@ -23,7 +23,7 @@ ApplicationWindow {
         id: frame
 
         width: window.width
-        height: 24
+        height: 30
         color: "#2F2F2F"
         window: window
 
