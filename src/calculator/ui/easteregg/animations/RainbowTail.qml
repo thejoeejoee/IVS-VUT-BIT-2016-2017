@@ -2,33 +2,76 @@ import QtQuick 2.0
 import QtQuick.Particles 2.0
 
 Item {
+    id: rainbowTail
+
+    property real generationAngle: 0
+    property size particleSize: Qt.size(10, 10)
+    property Item rootItem
+    property Item containerItem
+
     clip: false
 
     ParticleSystem {
         id: rainbowParticleSystem
+        parent: root
     }
 
     Column {
-        anchors.top: parent.top
-        anchors.left: parent.left
-
         Repeater {
+            id: repeater
+
             model: ["#ED1E24", "#F68F1E", "#F9ED24", "#34B44A", "#2F7CC0", "#765DA7"]
-            delegate: ParticleGenerator {
-                width: 15
-                height: width
+            delegate: Item {
+                id: substitute
 
-                groupName: modelData
-                particleParent: root
-                particleSystem: rainbowParticleSystem
+                width: height
+                height: (rainbowTail.height / 6)
 
-                emitter.lifeSpan: 750
-                emitter.emitRate: 40
+                Component.onCompleted: singleColorGenerator.setPos()
 
-                particle: Rectangle {
-                    color: modelData
-                    width: 15
-                    height: width
+                ParticleGenerator {
+                    id: singleColorGenerator
+
+                    width: height
+                    height: (rainbowTail.height / 6)
+
+                    parent: rainbowTail.containerItem
+
+                    rotation: rainbowTail.rotation
+                    groupName: modelData
+                    particleParent: root
+                    particleSystem: rainbowParticleSystem
+
+                    emitter.lifeSpan: 350
+                    emitter.emitRate: 50
+                    emitter.velocity: AngleDirection {
+                        angle: rainbowTail.generationAngle
+                        magnitude: 100
+                    }
+                    emitter.acceleration: AngleDirection {
+                        angle: rainbowTail.generationAngle
+                        magnitude: 100
+                    }
+
+
+                    particle: Rectangle {
+                        color: modelData
+                        width: rainbowTail.particleSize.width
+                        height: rainbowTail.particleSize.height
+                    }
+
+                    Component.onCompleted: {
+                        rainbowTail.rotationChanged.connect(singleColorGenerator.setPos)
+                        singleColorGenerator.setPos()
+                    }
+
+                    function setPos() {
+                        var newPos = rainbowTail.containerItem.mapFromItem(substitute, 0, 0)
+
+                        singleColorGenerator.x = newPos.x
+                        singleColorGenerator.y = newPos.y
+                    }
+
                 }
             }
         }

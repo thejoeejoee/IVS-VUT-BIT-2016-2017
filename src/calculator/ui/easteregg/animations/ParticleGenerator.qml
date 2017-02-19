@@ -13,6 +13,7 @@ Item {
         width: component.width
         height: width
         color: "black"
+        rotation: emitter.rotation
     }
 
     ParticleGroup {
@@ -33,16 +34,6 @@ Item {
         endSize: 32
 
         anchors.fill: component
-
-        velocity: AngleDirection {
-            angle: 180
-            magnitude: 300
-        }
-
-        acceleration: AngleDirection {
-            angle: 180
-            magnitude: 300
-        }
     }
 
     ItemParticle {
