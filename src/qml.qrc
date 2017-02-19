@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>calculator/ui/qml/main.qml</file>
         <file>calculator/ui/qml/window/Frame.qml</file>
+        <file>calculator/ui/qml/window/CustomWindow.qml</file>
     </qresource>
 </RCC>
