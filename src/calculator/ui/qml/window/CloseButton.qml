@@ -12,7 +12,7 @@ Controls.Clickable {
         anchors.fill: parent
 
         Image {
-            source: "qrc:/calculator/ui/resources/images/cross.svg"
+            source: "qrc:/assets/images/cross.svg"
 
             scale: 0.65
             antialiasing: true
