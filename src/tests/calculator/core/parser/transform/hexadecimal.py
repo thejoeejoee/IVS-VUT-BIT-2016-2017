@@ -1,11 +1,11 @@
 # coding=utf-8
-from _ast import Name, Num
+from ast import Name, Num
 from unittest import TestCase
 
-from calculator.core.parser.hexadecimal_transform import HexadecimalTransform
+from calculator.core.parser.transform.hexadecimal import HexadecimalTransform
 
 
-class TestHexadecimalTransform(TestCase):
+class HexadecimalTransformTest(TestCase):
     def setUp(self):
         self.transform = HexadecimalTransform()
 

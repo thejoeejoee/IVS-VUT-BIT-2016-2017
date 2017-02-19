@@ -1,12 +1,11 @@
 # coding=utf-8
-from PyQt5.QtCore import QObject
-
-import resources
-from typing import List, Optional
+# noinspection PyUnresolvedReferences
+import calculator.ui.resources
+from typing import List
 
 from calculator.ui.qmlwrapper.core import Sides
 
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QObject
 from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType
 from PyQt5.QtWidgets import QApplication
 
@@ -23,6 +22,6 @@ class CalculatorApp(QApplication):
         CalculatorApp.registerTypes()
 
         engine = QQmlApplicationEngine()
-        engine.load(QUrl("qrc:/calculator/ui/qml/main.qml"))
+        engine.load(QUrl("qrc:/qml/main.qml"))
 
         return self.exec()

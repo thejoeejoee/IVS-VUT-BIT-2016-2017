@@ -3,6 +3,8 @@
 import unittest
 from os.path import dirname
 
+from tests import calculator
+
 try:
     from colour_runner.runner import ColourTextTestRunner as TestRunner
     # ColourTextTestRunner needs installed curses, which may be problem on Windows based systems
@@ -11,16 +13,16 @@ except ImportError:
     from unittest import TextTestRunner as TestRunner
 
 
-from tests import calculator
+
+def load_tests(*args):
+    loader = unittest.TestLoader()
+    suite = loader.discover(dirname(calculator.__file__), pattern='*.py')
+    return unittest.TestSuite(suite)
 
 
 def main():
-    loader = unittest.TestLoader()
-
-    suite = loader.discover(dirname(calculator.__file__), pattern='*.py')
     runner = TestRunner(verbosity=10)
-    result = runner.run(unittest.TestSuite(suite))
-
+    result = runner.run(load_tests())
     exit(len(result.errors + result.failures))
 
 
