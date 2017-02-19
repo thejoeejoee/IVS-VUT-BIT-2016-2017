@@ -38,5 +38,10 @@ ApplicationWindow {
                 anchors.verticalCenter: parent.verticalCenter
             }
         }
+
+        buttons: CloseButton {
+            width: height
+            target: window
+        }
     }
 }
