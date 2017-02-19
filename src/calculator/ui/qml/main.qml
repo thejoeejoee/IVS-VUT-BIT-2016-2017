@@ -1,8 +1,9 @@
 import QtQuick 2.7
+import QtQuick.Controls 1.4
+import "window" as Window
 
-Rectangle {
+Window.CustomWindow {
+    id: mainWindow
     width: 640
     height: 480
-    border.color: "red"
-    border.width: 1
 }
