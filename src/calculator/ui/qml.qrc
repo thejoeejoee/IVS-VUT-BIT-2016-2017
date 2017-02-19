@@ -7,5 +7,7 @@
         <file>qml/controls/Clickable.qml</file>
         <file>qml/window/CloseButton.qml</file>
         <file>assets/images/cross.svg</file>
+        <file>qml/variables/VariableItem.qml</file>
+        <file>qml/view/StackPanel.qml</file>
     </qresource>
 </RCC>
