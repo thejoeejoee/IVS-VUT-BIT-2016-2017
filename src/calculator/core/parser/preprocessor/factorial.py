@@ -5,6 +5,12 @@ from typing import Tuple, List
 
 
 class FactorialPreprocessor(object):
+    """
+    Preprocessor, that converts factorial sign to function call:
+    5! -> fact(5)
+    (5 + 2)! -> fact(5 + 2)
+    (5! + 2)! -> fact(fact(5) + 2)
+    """
     FACTORIAL_FUNCTION_NAME = 'fact'
     FACTORIAL_SIGN = '!'
 
@@ -21,6 +27,11 @@ class FactorialPreprocessor(object):
     )
 
     def __call__(self, expression: str) -> str:
+        """
+        Performs the conversion.
+        :param expression: math expression as string
+        :return: processed expression as string
+        """
         if self.FACTORIAL_SIGN not in expression:
             return expression
 
@@ -46,14 +57,11 @@ class FactorialPreprocessor(object):
         inner_expression = cls._MATH_EXPRESSION_REGEX.match(''.join(tokens))
         assert inner_expression, 'Regex should match the input tokens.'
         matched_group = inner_expression.group()
+        add_brackets = not matched_group.startswith(')') or not matched_group.endswith('(')
 
-        if matched_group.startswith(')') and matched_group.endswith('('):
-            return '{func_name}{expression}'.format(
-                func_name=cls.FACTORIAL_FUNCTION_NAME,
-                expression=''.join(map(str, reversed(matched_group)))
-            ), len(matched_group)
-
-        return '{func_name}({expression})'.format(
-            func_name=cls.FACTORIAL_FUNCTION_NAME,
-            expression=''.join(map(str, reversed(matched_group)))
-        ), len(matched_group)
+        return ''.join((
+            cls.FACTORIAL_FUNCTION_NAME,
+            '(' * add_brackets,
+            ''.join(map(str, reversed(matched_group))),
+            ')' * add_brackets
+        )), len(matched_group)
