@@ -26,7 +26,7 @@ class Solver(object):
         FactorialPreprocessor.FACTORIAL_FUNCTION_NAME: Math.fact,
         AbsoluteValuePreprocessor.ABSOLUTE_VALUE_FUNCTION_NAME: Math.abs,
         'log': Math.log,
-        'ln': Math.log,
+        'ln': Math.ln,
         'pow': Math.pow,
         'sqrt': Math.root,
         'root': Math.root,

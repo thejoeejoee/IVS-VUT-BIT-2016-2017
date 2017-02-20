@@ -2,8 +2,8 @@
 import ast
 from typing import Iterable, Sized, Optional, Union, Callable
 
-from calculator.core.parser.preprocessor import FactorialPreprocessor
 from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor
+from calculator.core.parser.preprocessor import FactorialPreprocessor
 from calculator.core.parser.transform import HexadecimalTransform, ComplexRestrictTransform
 from calculator.exceptions import ParserSyntaxError, SyntaxRestrictError
 

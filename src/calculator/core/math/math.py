@@ -1,9 +1,9 @@
 # coding=utf-8
-import operator
 import math
+import operator
+import random
 
 from calculator.exceptions import MathError
-from random import random
 
 
 class Math(object):
@@ -15,7 +15,6 @@ class Math(object):
     subtract = operator.sub
     multiple = operator.mul
     abs = math.fabs
-    log = math.log  # TODO choosing more accurate functions
     pow = math.pow
 
     @staticmethod
@@ -31,6 +30,10 @@ class Math(object):
             return math.factorial(n)
         except ValueError as e:
             raise MathError from e
+
+    @classmethod
+    def log(cls, x, base=10):
+        return cls.ln(x, base)
 
     @staticmethod
     def root(x, y=2):
@@ -48,4 +51,12 @@ class Math(object):
         Return random floating point number in range <0.0, 1.0)
         :return: random float number in range <0.0, 1.0)
         """
-        return random()
+        return random.random()
+
+    @staticmethod
+    def ln(x, base=math.e):
+        # TODO choosing more accurate functions
+        try:
+            return math.log(x, base)
+        except ValueError as e:
+            raise MathError from e
