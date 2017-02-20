@@ -6,8 +6,13 @@
         <file>qml/window/SizeGrip.qml</file>
         <file>qml/controls/Clickable.qml</file>
         <file>qml/window/CloseButton.qml</file>
+        <file>assets/fonts/ABeeZee-Regular.otf</file>
+        <file>assets/fonts/Roboto-Light.ttf</file>
+        <file>assets/fonts/Roboto-Medium.ttf</file>
         <file>assets/images/cross.svg</file>
         <file>qml/variables/VariableItem.qml</file>
         <file>qml/view/StackPanel.qml</file>
+        <file>assets/images/dots.svg</file>
+        <file>assets/images/trash.svg</file>
     </qresource>
 </RCC>
