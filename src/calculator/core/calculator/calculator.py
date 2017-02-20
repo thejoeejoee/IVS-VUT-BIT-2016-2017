@@ -18,11 +18,13 @@ class Calculator(object):
     def __init__(self):
         super().__init__()
 
-        self.variables = OrderedDefaultDict(
+        self._variables = OrderedDefaultDict(
             default_factory=lambda: (0, 0),  # TODO: return (default result, default source expression)
         )  # type: Dict[str, Variable]
 
         self._solver = Solver()
+
+    variables = property(lambda self: self._variables)
 
     def process(self, expression: str) -> Tuple[NumericResult, Dict[str, Variable]]:
         """
@@ -37,4 +39,4 @@ class Calculator(object):
         else:
             pass  # TODO from known variables resolve via self.solver result of given expression and set to Ans
 
-        return 0, self.variables
+        return 0, self._variables

@@ -84,3 +84,23 @@ class CalculatorTest(TestCase):
     def test_invalid_assign(self):
         with self.assertRaises(SyntaxError, msg='No syntax support for tuple assign.'):
             self.calculator.process('a, b = 8, 8')
+
+        with self.assertRaises(None, msg='Self assign is not supported.'):
+            self.calculator.process('c = c')
+
+        self.calculator.process('d = 5')
+        self.calculator.process('e = d')
+        with self.assertRaises(None, msg='Circular reference in variables definition is not supported.'):
+            self.calculator.process('d = e')
+
+        self.assertDictEqual(
+            self.calculator.variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: (
+                    Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE())
+                ),
+                'd': (5, '5'),
+                'e': (5, 'd')
+            },
+            'After circular invalid assign, variables should stay without changes.'
+        )
