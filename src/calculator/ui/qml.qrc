@@ -10,6 +10,8 @@
         <file>qml/controls/VariableSetButton.qml</file>
         <file>qml/item/VariableItem.qml</file>
         <file>qml/loaders/FontsLoader.qml</file>
+        <file>qml/menu/VariableOptions.qml</file>
+        <file>qml/visualization/VariableDisplay.qml</file>
         <file>assets/fonts/ABeeZee-Regular.otf</file>
         <file>assets/fonts/Roboto-Light.ttf</file>
         <file>assets/fonts/Roboto-Medium.ttf</file>
