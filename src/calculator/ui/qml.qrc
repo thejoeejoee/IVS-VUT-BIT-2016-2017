@@ -8,6 +8,7 @@
         <file>qml/controls/Clickable.qml</file>
         <file>qml/window/CloseButton.qml</file>
         <file>qml/item/VariableItem.qml</file>
+        <file>qml/loaders/FontsLoader.qml</file>
         <file>assets/fonts/ABeeZee-Regular.otf</file>
         <file>assets/fonts/Roboto-Light.ttf</file>
         <file>assets/fonts/Roboto-Medium.ttf</file>
