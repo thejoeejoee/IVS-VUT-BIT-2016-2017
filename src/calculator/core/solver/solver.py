@@ -32,11 +32,15 @@ class Solver(object):
     def __init__(self):
         self._parser = Parser()
 
-    def compute(self, expression: str) -> Union[int, float]:
+    parser = property(lambda self: self._parser)
+
+    def compute(self, node_or_expression: Union[str, AST]) -> Union[int, float]:
         # TODO: is only Union[int, float]? definitely group it into some configuration
 
-        tree = self._parser.parse(expression=expression)
-        return self._resolve(tree.body)
+        if not isinstance(node_or_expression, AST):
+            node_or_expression = self._parser.parse(expression=node_or_expression).value
+
+        return self._resolve(node_or_expression)
 
     @method_single_dispatch
     def _resolve(self, node: AST):
