@@ -18,5 +18,6 @@
         <file>assets/images/cross.svg</file>
         <file>assets/images/dots.svg</file>
         <file>assets/images/trash.svg</file>
+        <file>qml/managers/VariablesManager.qml</file>
     </qresource>
 </RCC>
