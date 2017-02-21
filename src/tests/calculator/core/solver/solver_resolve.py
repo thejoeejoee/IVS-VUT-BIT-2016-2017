@@ -97,3 +97,10 @@ class SolverResolveTest(TestCase):
             'Args given to mocked function should be same as given to _resolve.'
         )
         self.assertTrue(called, 'Function should to be called.')
+
+    def test_resolve_unknown_node(self):
+        class Unknown(AST):
+            pass
+
+        with self.assertRaises(NotImplementedError, msg='Not implemented error for unknown ast node.'):
+            self.solver._resolve(Unknown())
