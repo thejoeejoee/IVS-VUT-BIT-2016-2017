@@ -26,6 +26,7 @@ Window.CustomWindow {
             Component.onCompleted: game.run()
             onGameOver: console.log(msg)
         }
+    }
 
     Loaders.FontsLoader {}
 
