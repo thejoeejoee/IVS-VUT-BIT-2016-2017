@@ -13,7 +13,7 @@ Item {
 
     ParticleSystem {
         id: rainbowParticleSystem
-        parent: root
+        parent: rainbowTail.rootItem
     }
 
     Column {
@@ -39,7 +39,7 @@ Item {
 
                     rotation: rainbowTail.rotation
                     groupName: modelData
-                    particleParent: root
+                    particleParent: rainbowTail.rootItem
                     particleSystem: rainbowParticleSystem
 
                     emitter.lifeSpan: 350
