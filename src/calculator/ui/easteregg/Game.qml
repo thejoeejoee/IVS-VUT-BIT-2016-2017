@@ -94,7 +94,7 @@ ApplicationWindow {
         width: playerSize.width
         height: playerSize.height
 
-        Component.onCompleted: collisionSystem.registerPair(player, nyan)
+        Component.onCompleted: collisionSystem.registerPair(nyan, player)
     }
 
     MouseArea {
@@ -113,7 +113,7 @@ ApplicationWindow {
 
         anchors.right: parent.right
 
-        Component.onCompleted: collisionSystem.registerPair(ai, nyan)
+        Component.onCompleted: collisionSystem.registerPair(nyan, ai)
     }
 
     function startGame() {
