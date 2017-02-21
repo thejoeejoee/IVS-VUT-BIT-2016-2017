@@ -4,6 +4,7 @@
         <file>qml/window/Frame.qml</file>
         <file>qml/window/CustomWindow.qml</file>
         <file>qml/window/SizeGrip.qml</file>
+        <file>easteregg/entities/Wall.qml</file>
         <file>qml/controls/Clickable.qml</file>
         <file>qml/window/CloseButton.qml</file>
         <file>assets/images/cross.svg</file>
