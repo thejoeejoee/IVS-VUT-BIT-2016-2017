@@ -2,6 +2,7 @@
 from unittest.case import TestCase
 
 from calculator.core.calculator import Calculator
+from calculator.exceptions import VariableError
 
 
 class CalculatorTest(TestCase):
@@ -85,12 +86,12 @@ class CalculatorTest(TestCase):
         with self.assertRaises(SyntaxError, msg='No syntax support for tuple assign.'):
             self.calculator.process('a, b = 8, 8')
 
-        with self.assertRaises(None, msg='Self assign is not supported.'):
+        with self.assertRaises(VariableError, msg='Self assign is not supported.'):
             self.calculator.process('c = c')
 
         self.calculator.process('d = 5')
         self.calculator.process('e = d')
-        with self.assertRaises(None, msg='Circular reference in variables definition is not supported.'):
+        with self.assertRaises(VariableError, msg='Circular reference in variables definition is not supported.'):
             self.calculator.process('d = e')
 
         self.assertDictEqual(
