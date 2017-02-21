@@ -1,7 +1,7 @@
 # coding=utf-8
 import re
-from ast import NodeTransformer, expr, Num
-from typing import Optional
+from ast import NodeTransformer, expr, Num, Name
+from typing import Optional, Union
 
 
 class HexadecimalTransform(NodeTransformer):
@@ -11,7 +11,7 @@ class HexadecimalTransform(NodeTransformer):
 
     HEXADECIMAL_REGEX = re.compile('^(0x|0X)?[A-F0-9]+$')
 
-    def visit_Name(self, node: expr) -> Optional[expr]:
+    def visit_Name(self, node: Name) -> Union[Name, Num]:
         """
         :param node: Name node of found variable in processed AST
         :return: Num node, if variable id can be converted to Num

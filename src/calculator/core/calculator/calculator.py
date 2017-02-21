@@ -3,7 +3,7 @@ from ast import Assign
 from typing import Dict, Tuple
 
 from calculator.core.solver.solver import Solver
-from calculator.typing import NumericResult, Variable
+from calculator.typing import NumericValue, Variable
 from calculator.utils import OrderedDefaultDict
 
 
@@ -26,7 +26,7 @@ class Calculator(object):
 
     variables = property(lambda self: self._variables)
 
-    def process(self, expression: str) -> Tuple[NumericResult, Dict[str, Variable]]:
+    def process(self, expression: str) -> Tuple[NumericValue, Dict[str, Variable]]:
         """
         Process mathematical expression with variables support, returning actual result and variables mapping.
         :param expression:

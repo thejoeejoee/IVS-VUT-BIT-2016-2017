@@ -1,6 +1,6 @@
 # coding=utf-8
-import ast
-from typing import Iterable, Sized, Optional, Union, Callable
+from ast import AST, NodeTransformer, parse
+from typing import Iterable, Sized, Optional, Union, Callable, Tuple
 
 from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor
 from calculator.core.parser.preprocessor import FactorialPreprocessor
@@ -28,7 +28,7 @@ class Parser(object):
 
     def __init__(
             self,
-            transforms: Optional[Iterable[Union[Callable, ast.NodeTransformer, type]]] = None,
+            transforms: Optional[Iterable[Union[Callable, NodeTransformer, type]]] = None,
             preprocessors: Optional[Iterable[Union[Callable, type]]] = None,
     ) -> None:
         """
@@ -47,7 +47,7 @@ class Parser(object):
         else:
             self.preprocessors = preprocessors
 
-    def parse(self, expression: str) -> ast.AST:
+    def parse(self, expression: str) -> AST:
         """
         Parse given expression to AST.
         Before processing by AST module, expression is normalized, processed by preprocessors.
@@ -62,7 +62,7 @@ class Parser(object):
             raise ParserSyntaxError('Restricted syntax') from e
 
         try:
-            root = ast.parse(
+            root = parse(
                 source=expression
             ).body[0]
             for transform in self._transforms:
@@ -86,15 +86,15 @@ class Parser(object):
             None,
             ((
                  transform().visit  # given as class, so instantiated and get the .visit
-                 if isinstance(transform, type) and issubclass(transform, ast.NodeTransformer)
+                 if isinstance(transform, type) and issubclass(transform, NodeTransformer)
                  else transform.visit  # given and transform object, directly get the .visit
-                 if isinstance(transform, ast.NodeTransformer)
+                 if isinstance(transform, NodeTransformer)
                  else transform  # directly callable
                  if callable(transform)
                  else None  # otherwise filtered by filter(None, ...)
              ) for transform in transforms
              )
-        ))
+        ))  # type: Tuple[Callable[[AST], AST]]
         # TODO: Assertion or TypeError?
         assert len(self._transforms) == len(transforms), 'Unknown transform(s) given.'
 
@@ -116,7 +116,7 @@ class Parser(object):
                  else None
              ) for preprocessor in preprocessors
              )
-        ))
+        ))  # type: Tuple[Callable[str], str]
 
         # TODO: Assertion or TypeError?
         assert len(self._preprocessors) == len(preprocessors), 'Unknown preprocessor(s) given.'

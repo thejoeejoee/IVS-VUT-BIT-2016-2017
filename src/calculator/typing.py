@@ -1,9 +1,13 @@
 # coding=utf-8
-from typing import Union, Tuple
+from typing import Union, Tuple, Callable
 
-NumericResult = Union[int, float]  # possible types of result of mathematical expression
+NumericValue = Union[int, float]  # possible types of result of mathematical expression
 
 Variable = Tuple[
-    NumericResult,  # actual value
+    NumericValue,  # actual value
     str  # raw source expression
 ]
+
+NumericFunction = Callable[..., NumericValue]
+
+BinaryNumericFunction = Callable[[NumericValue, NumericValue], NumericValue]
