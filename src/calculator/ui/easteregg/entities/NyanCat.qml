@@ -57,6 +57,13 @@ Collision.BoxCollider {
         sourceSize.height: 700
     }
 
+    function frameMove() {
+        var step = 7
+
+        nyanCat.x += nyanCat.vector.x * step
+        nyanCat.y += nyanCat.vector.y * step
+    }
+
     function rotateNyanCat() {
         var v = Qt.point(internal.vector.x, internal.vector.y)
 
