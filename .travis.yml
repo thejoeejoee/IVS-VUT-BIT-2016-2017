@@ -1,0 +1,32 @@
+language: python
+python:
+  - "3.5"
+  - "3.5-dev" # 3.5 development branch
+  - "3.6"
+  - "3.6-dev" # 3.6 development branch
+  - "3.7-dev" # 3.7 development branch
+  - "nightly" # currently points to 3.7-dev
+
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+  - pip install codecov
+
+# command to run tests
+script:
+  - coverage run src/test.py
+
+after_success:
+  - codecov
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+matrix:
+  allow_failures:
+    - python: '3.5-dev'
+    - python: '3.6-dev'
+    - python: '3.7-dev'
+    - python: 'nightly'
