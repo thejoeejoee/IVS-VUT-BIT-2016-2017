@@ -8,6 +8,8 @@ Item {
     property color textColor
     property color identifierTextColor
 
+    clip: true
+
     VariablesManager {
         id: manager
 
