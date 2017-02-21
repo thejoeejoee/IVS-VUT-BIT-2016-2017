@@ -19,7 +19,7 @@ Collision.BoxCollider {
     Component.onCompleted: rotateNyanCat()
 
     QtObject {
-        id: data
+        id: internal
 
         property int previousCollisionSide: -1
         property point vector: Qt.point(Math.cos(Math.PI / 3), -Math.sin(Math.PI / 3))
@@ -31,7 +31,7 @@ Collision.BoxCollider {
         width: height / 6
         height: nyanCat.height
 
-        generationAngle: rotation + ((data.vector.x < 0) ?0 :180)
+        generationAngle: rotation + ((internal.vector.x < 0) ?0 :180)
         rotation: nyanCat.angle
         particleSize: Qt.size(10, 10)
 
@@ -58,7 +58,7 @@ Collision.BoxCollider {
     }
 
     function rotateNyanCat() {
-        var v = Qt.point(data.vector.x, data.vector.y)
+        var v = Qt.point(internal.vector.x, internal.vector.y)
 
         nyanCat.angle = (v.x === 0) ?90 :(Math.atan(v.y / v.x) / Math.PI * 180)
     }
@@ -69,7 +69,7 @@ Collision.BoxCollider {
             return
         data.previousCollisionSide = collisionSide
 
-        var newVector = Qt.point(data.vector.y, data.vector.x)
+        var newVector = Qt.point(internal.vector.y, internal.vector.x)
 
         // determine unchanging direction to modify vector
         if(collisionSide == Sides.Right || collisionSide == Sides.Left){
@@ -78,11 +78,11 @@ Collision.BoxCollider {
         }
 
         if(collisionSide == Sides.Bottom || collisionSide == Sides.Top) {
-            newVector.y = Math.abs(newVector.y) * (-EMath.sgn(data.vector.y))
-            newVector.x = Math.abs(newVector.x) * EMath.sgn(data.vector.x)
+            newVector.y = Math.abs(newVector.y) * (-EMath.sgn(internal.vector.y))
+            newVector.x = Math.abs(newVector.x) * EMath.sgn(internal.vector.x)
         }
 
-        data.vector = newVector
+        internal.vector = newVector
         rotateNyanCat()
     }
 }
