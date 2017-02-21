@@ -2,7 +2,7 @@
 from enum import IntEnum
 from typing import Optional
 
-from PyQt5.QtCore import QObject, Q_ENUMS
+from PyQt5.QtCore import QObject, Q_ENUMS, pyqtSlot
 from PyQt5.QtQml import QQmlEngine, QJSEngine
 
 
@@ -15,6 +15,7 @@ class Sides(QObject):
 
     Q_ENUMS(SidesEnum)
 
+    @pyqtSlot(int)
     def oppositeSide(self, side: SidesEnum):
         if side in (Sides.SidesEnum.Top, Sides.SidesEnum.Right):
             return Sides.SidesEnum(side + 2)
