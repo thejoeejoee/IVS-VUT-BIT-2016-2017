@@ -1,3 +1,7 @@
 comment:
   behavior: new
   require_changes: yes
+
+ignore:
+  - "src/tests/**/*"
+  - "src/test.py"
