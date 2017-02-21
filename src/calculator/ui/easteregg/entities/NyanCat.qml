@@ -41,6 +41,22 @@ Collision.BoxCollider {
         anchors.centerIn: parent
     }
 
+    Image {
+        z: 4
+        parent: rootItem
+        fillMode: Image.PreserveAspectFit
+        source: "qrc:/assets/images/nyan.svg"
+
+        rotation: nyanCat.angle
+        height: nyanCat.height * 1.2
+        mirror: (nyanCat.vector.x < 0)
+
+        anchors.centerIn: nyanCat
+
+        sourceSize.width: 700
+        sourceSize.height: 700
+    }
+
     function rotateNyanCat() {
         var v = Qt.point(data.vector.x, data.vector.y)
 

@@ -7,5 +7,6 @@
         <file>qml/controls/Clickable.qml</file>
         <file>qml/window/CloseButton.qml</file>
         <file>assets/images/cross.svg</file>
+        <file>assets/images/nyan.svg</file>
     </qresource>
 </RCC>
