@@ -8,16 +8,29 @@ Item {
     signal deleteRequest()
 
     readonly property alias menuWidth: dots.width
+    readonly property alias animationRunning: xAnimation.running
 
-    Behavior on x {
-        NumberAnimation { duration: 400; easing.type: Easing.InOutQuad }
+    state: "hidden"
+
+    states: [
+        State {
+            name: "showed"
+            PropertyChanges { target: component; anchors.leftMargin: -component.width }
+        },
+        State {
+            name: "hidden"
+            PropertyChanges { target: component; anchors.leftMargin: -dots.width }
+        }
+    ]
+
+    transitions: Transition {
+        NumberAnimation { id: xAnimation; property: "anchors.leftMargin"; duration: 400; easing.type: Easing.InOutQuad }
     }
 
     QtObject {
         id: internal
 
-        property int normalX
-        readonly property bool menuVisible: component.x == (internal.normalX - component.width + menuWidth)
+        readonly property bool menuVisible: (component.anchors.leftMargin != -dots.width)
         readonly property bool menuContainMouse: (dots.hovered || zeroSetter.hovered ||
                                          oneSetter.hovered || removeButton.hovered ||
                                          mouseAreaOverlay.containsMouse)
@@ -123,12 +136,6 @@ Item {
         hoverEnabled: true
     }
 
-
-    Connections {
-        target: component
-        Component.onCompleted: internal.normalX = component.x
-    }
-
     Connections {
         target: removeButton
         onClicked: component.deleteRequest()
@@ -149,9 +156,9 @@ Item {
 
         onMenuContainMouseChanged: {
             if(internal.menuContainMouse)
-                component.x = internal.normalX - component.width + dots.width
+                component.state = "showed"
             else
-                component.x = internal.normalX
+                component.state = "hidden"
         }
     }
 }

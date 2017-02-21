@@ -31,9 +31,10 @@ Rectangle {
 
         height: parent.height
         width: parent.width / 3.2
-        x: parent.width  - menuWidth
 
         anchors.top: parent.top
+        anchors.left: parent.right
+        anchors.leftMargin: -optionsMenu.menuWidth
     }
 
     Connections {
