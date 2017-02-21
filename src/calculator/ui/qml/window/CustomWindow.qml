@@ -43,4 +43,13 @@ ApplicationWindow {
             target: window
         }
     }
+
+    SizeGrip {
+        target: window
+        width: 8
+        height: width
+
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+    }
 }
