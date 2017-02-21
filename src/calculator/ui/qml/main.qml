@@ -1,6 +1,9 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
 import "window" as Window
+import Sides 1.0
+
+import "../easteregg"
 import "loaders" as Loaders
 
 // TODO delete
@@ -12,6 +15,17 @@ Window.CustomWindow {
 
     width: 1101
     height: width * (522 / 1101)
+    
+    flags: Qt.FramelessWindowHint
+    visible: true
+
+    Item{
+        Game {
+            id: game
+
+            Component.onCompleted: game.run()
+            onGameOver: console.log(msg)
+        }
 
     Loaders.FontsLoader {}
 
