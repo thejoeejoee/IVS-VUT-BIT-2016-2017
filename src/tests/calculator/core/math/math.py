@@ -80,3 +80,21 @@ class MathTest(TestCase):
             self.math.log(0)
         with self.assertRaises(MathError, msg='Invalid value for logarithm.'):
             self.math.log(-5)
+
+    def test_fact(self):
+        self.assertEqual(
+            self.math.fact(3),
+            6,
+            'Factorial of 3'
+        )
+        with self.assertRaises(MathError, msg='Invalid factorial of -5.'):
+            self.math.fact(-5)
+
+    def test_root(self):
+        self.assertEqual(
+            self.math.root(16, 4),
+            2,
+            'Fourth root from 16 is 4.'
+        )
+        with self.assertRaises(MathError, msg='Invalid root of -8.'):
+            self.math.root(-8)
