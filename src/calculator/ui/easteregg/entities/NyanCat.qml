@@ -21,7 +21,7 @@ Collision.BoxCollider {
     QtObject {
         id: internal
 
-        property int previousCollisionSide: -1
+        property var previousCollisionObj: null
         property point vector: Qt.point(Math.cos(Math.PI / 3), -Math.sin(Math.PI / 3))
     }
 
@@ -65,9 +65,10 @@ Collision.BoxCollider {
 
     function handleCollision(obj, collisionSide) {
         // if object if in another object, then handle collision only once
-        if(data.previousCollisionSide == collisionSide)
+        if(internal.previousCollisionObj == obj)
             return
-        data.previousCollisionSide = collisionSide
+        nyanCat.collidedWithWall(obj, collisionSide)
+        internal.previousCollisionObj = obj
 
         var newVector = Qt.point(internal.vector.y, internal.vector.x)
 
