@@ -38,8 +38,8 @@ QtObject {
         var result = system.checkCollision(bc1, bc2)
 
         if(result != -1) {
-            bc1.collided(bc1, result)
-            bc2.collided(bc2, Sides.oppositeSide(result))
+            bc1.collided(bc2, result)
+            bc2.collided(bc1, Sides.oppositeSide(result))
         }
     }
 
