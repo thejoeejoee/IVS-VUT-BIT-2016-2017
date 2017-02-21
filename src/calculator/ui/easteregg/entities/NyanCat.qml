@@ -8,11 +8,12 @@ import "../logic/extendedmath.js" as EMath
 Collision.BoxCollider {
     id: nyanCat
 
-    property alias vector: data.vector
+    signal collidedWithWall(var obj, int side)
+
+    property alias vector: internal.vector
+    property alias rootItem: tail.rootItem
     property real angle: 0
 
-    border.color: "orange"
-    border.width: 1
     color: "transparent"
 
     onCollided: handleCollision(obj, side)
