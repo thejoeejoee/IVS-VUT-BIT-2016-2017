@@ -14,10 +14,23 @@
         <file>easteregg/entities/Player.qml</file>
         <file>easteregg/visualization/Score.qml</file>
         <file>easteregg/entities/Wall.qml</file>
+        <file>qml/containers/Stack.qml</file>
         <file>qml/controls/Clickable.qml</file>
         <file>qml/window/CloseButton.qml</file>
+        <file>qml/controls/VariableSetButton.qml</file>
+        <file>qml/item/VariableItem.qml</file>
+        <file>qml/loaders/FontsLoader.qml</file>
+        <file>qml/menu/VariableOptions.qml</file>
+        <file>qml/visualization/VariableDisplay.qml</file>
+        <file>assets/fonts/ABeeZee-Regular.otf</file>
+        <file>assets/fonts/Roboto-Light.ttf</file>
+        <file>assets/fonts/Roboto-Medium.ttf</file>
         <file>assets/images/cross.svg</file>
         <file>easteregg/entities/WallSystem.qml</file>
         <file>assets/images/nyan.svg</file>
+        <file>assets/images/dots.svg</file>
+        <file>assets/images/trash.svg</file>
+        <file>qml/containers/VariablesPanel.qml</file>
+        <file>qml/managers/VariablesManager.qml</file>
     </qresource>
 </RCC>
