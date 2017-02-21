@@ -56,9 +56,9 @@ Rectangle {
         id: buttons
 
         sourceComponent: component.buttons
-        height: parent.height
 
         anchors.right: parent.right
         anchors.top: parent.top
+        anchors.bottom: parent.bottom
     }
 }

@@ -12,9 +12,8 @@ ApplicationWindow {
     Item {
         id: container
 
-        width: parent.width
-        height: parent.height - frame.height
-
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
         anchors.left: parent.left
         anchors.top: frame.bottom
     }
@@ -22,11 +21,11 @@ ApplicationWindow {
     Frame {
         id: frame
 
-        width: window.width
         height: 30
         color: "#2F2F2F"
         window: window
 
+        anchors.right: parent.right
         anchors.top: parent.top
         anchors.left: parent.left
 
