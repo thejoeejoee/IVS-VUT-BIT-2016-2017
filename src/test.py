@@ -13,7 +13,6 @@ except ImportError:
     from unittest import TextTestRunner as TestRunner
 
 
-
 def load_tests(*args):
     loader = unittest.TestLoader()
     suite = loader.discover(dirname(calculator.__file__), pattern='*.py')
