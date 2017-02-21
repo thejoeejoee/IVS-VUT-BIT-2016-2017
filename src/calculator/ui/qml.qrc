@@ -1,9 +1,18 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
+        <file>easteregg/animations/ParticleGenerator.qml</file>
+        <file>easteregg/animations/RainbowTail.qml</file>
         <file>qml/window/Frame.qml</file>
         <file>qml/window/CustomWindow.qml</file>
         <file>qml/window/SizeGrip.qml</file>
+        <file>easteregg/logic/collision/BoxCollider.qml</file>
+        <file>easteregg/logic/collision/CollisionSystem.qml</file>
+        <file>easteregg/logic/extendedmath.js</file>
+        <file>easteregg/entities/NyanCat.qml</file>
+        <file>easteregg/Game.qml</file>
+        <file>easteregg/entities/Player.qml</file>
+        <file>easteregg/visualization/Score.qml</file>
         <file>easteregg/entities/Wall.qml</file>
         <file>qml/controls/Clickable.qml</file>
         <file>qml/window/CloseButton.qml</file>
