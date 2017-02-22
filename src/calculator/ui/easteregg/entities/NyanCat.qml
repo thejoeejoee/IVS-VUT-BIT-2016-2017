@@ -5,13 +5,24 @@ import "../logic/collision" as Collision
 import "../animations" as Animations
 import "../logic/extendedmath.js" as EMath
 
+/**
+  Ball entity used in easter egg pong game
+  */
 Collision.BoxCollider {
     id: nyanCat
 
+    /**
+      Emits collision with wall
+      @param obj Object which collided with NyanCat
+      @param collisionSide Side of collision relative to NyanCat
+      */
     signal collidedWithWall(var obj, int side)
 
+    /// Expose vector
     property alias vector: internal.vector
+    /// Expose root item to bring nyan image forward
     property alias rootItem: tail.rootItem
+    /// Angle of NyanCat
     property real angle: 0
 
     color: "transparent"
@@ -22,7 +33,9 @@ Collision.BoxCollider {
     QtObject {
         id: internal
 
+        /// Object which previously collided with NyanCat
         property var previousCollisionObj: null
+        /// Defines direction and velocity of nyan cat
         property point vector: Qt.point(Math.cos(Math.PI / 3), -Math.sin(Math.PI / 3))
     }
 
@@ -58,6 +71,9 @@ Collision.BoxCollider {
         sourceSize.height: 700
     }
 
+    /**
+      Step move of NyanCat
+      */
     function frameMove() {
         var step = 7
 
@@ -65,12 +81,20 @@ Collision.BoxCollider {
         nyanCat.y += nyanCat.vector.y * step
     }
 
+    /**
+      Calculate and set rotation of NyanCat
+      */
     function rotateNyanCat() {
         var v = Qt.point(internal.vector.x, internal.vector.y)
 
         nyanCat.angle = (v.x === 0) ?90 :(Math.atan(v.y / v.x) / Math.PI * 180)
     }
 
+    /**
+      Set new vector of NyanCat and emit collision
+      @param obj Object which collided with NyanCat
+      @param collisionSide Side of collision relative to NyanCat
+      */
     function handleCollision(obj, collisionSide) {
         // if object if in another object, then handle collision only once
         if(internal.previousCollisionObj == obj)
