@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
+import ExpSyntaxHighlighter 1.0
 import "window" as Window
 import Sides 1.0
 
@@ -15,7 +16,7 @@ Window.CustomWindow {
 
     width: 1101
     height: width * (522 / 1101)
-    
+
     flags: Qt.FramelessWindowHint
     visible: true
 
@@ -26,6 +27,20 @@ Window.CustomWindow {
             Component.onCompleted: game.run()
             onGameOver: console.log(msg)
         }
+    }
+
+    Item {
+        ExpSyntaxHighlighter {
+            id: esh
+            target: te
+        }
+    }
+
+    TextEdit {
+        id: te
+        width: 100
+        height: 100
+        color: "blue"
     }
 
     Loaders.FontsLoader {}
