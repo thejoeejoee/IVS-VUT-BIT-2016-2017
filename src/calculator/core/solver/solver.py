@@ -6,6 +6,7 @@ from calculator.core.math.math import Math
 from calculator.core.parser import Parser
 from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor
 from calculator.core.parser.preprocessor import FactorialPreprocessor
+from calculator.settings import BuiltinFunction
 from calculator.utils import method_single_dispatch
 
 NumericResult = Union[float, int]
@@ -13,7 +14,7 @@ NumericResult = Union[float, int]
 
 class Solver(object):
     """
-    Class, that solves mathematical expressions given as string.
+    Class, that solves mathematical expressions given as string or already parsed into AST.
     """
     binary_operations = {
         Add: Math.add,
@@ -23,14 +24,14 @@ class Solver(object):
     }
 
     builtin_functions = {
-        FactorialPreprocessor.FACTORIAL_FUNCTION_NAME: Math.fact,
-        AbsoluteValuePreprocessor.ABSOLUTE_VALUE_FUNCTION_NAME: Math.abs,
-        'log': Math.log,
-        'ln': Math.ln,
-        'pow': Math.pow,
-        'sqrt': Math.root,
-        'root': Math.root,
-        'rand': Math.rand,
+        BuiltinFunction.FACT: Math.fact,
+        BuiltinFunction.ABS: Math.abs,
+        BuiltinFunction.LOG: Math.log,
+        BuiltinFunction.LN: Math.ln,
+        BuiltinFunction.POW: Math.pow,
+        BuiltinFunction.ROOT: Math.root,
+        BuiltinFunction.SQRT: Math.root,
+        BuiltinFunction.RAND: Math.rand,
     }
 
     def __init__(self):

@@ -2,6 +2,7 @@
 from unittest import TestCase
 
 from calculator.core.parser.preprocessor.absolute_value import AbsoluteValuePreprocessor
+from calculator.settings import BuiltinFunction
 
 
 class AbsoluteValuePreprocessorTest(TestCase):
@@ -59,14 +60,14 @@ class AbsoluteValuePreprocessorTest(TestCase):
         )
 
     def test_wrong_brackets_composition(self):
-            with self.assertRaises(SyntaxError, msg="Wrong brackets composition."):
-                self.preprocessor('(|5)+4|')
+        with self.assertRaises(SyntaxError, msg="Wrong brackets composition."):
+            self.preprocessor('(|5)+4|')
 
     @staticmethod
     def _format_absolute_value(expr: str = '', pre: str = '', post: str = '') -> str:
         return '{}{}({}){}'.format(
             pre,
-            AbsoluteValuePreprocessor.ABSOLUTE_VALUE_FUNCTION_NAME,
+            BuiltinFunction.ABS,
             expr,
             post
         )
