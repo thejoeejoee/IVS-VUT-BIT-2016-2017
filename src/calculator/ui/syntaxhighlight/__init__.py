@@ -1,5 +1,5 @@
 # coding=utf-8
+from .syntax_highlighter import SyntaxHighlighter, HighlightRule
+from .exp_syntax_highlighter import ExpSyntaxHighlighter
 
-from .syntax_highlighter import SyntaxHighLighter, HighlightRule
-
-__all_ = ("SyntaxHighLighter", "HighlightRule")
+__all_ = ("SyntaxHighlighter", "HighlightRule", "ExpSyntaxHighlighter")

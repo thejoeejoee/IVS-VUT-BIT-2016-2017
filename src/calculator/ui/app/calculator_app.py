@@ -2,6 +2,7 @@
 # noinspection PyUnresolvedReferences
 import calculator.ui.resources
 from typing import List
+from calculator.ui.syntaxhighlight import ExpSyntaxHighlighter
 
 from PyQt5.QtCore import QUrl
 from PyQt5.QtQml import QQmlApplicationEngine
