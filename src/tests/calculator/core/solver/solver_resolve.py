@@ -29,7 +29,7 @@ class SolverResolveTest(TestCase):
 
         operation = 'operation'
 
-        self.solver.bin_operations_table = {
+        self.solver.binary_operations = {
             type(operation): op
         }
         self.assertEqual(
@@ -41,7 +41,7 @@ class SolverResolveTest(TestCase):
         self.assertIsNotNone(right, 'Right operand should be given.')
 
     def test_unknown_bin_operation(self):
-        self.solver.bin_operations_table = {}
+        self.solver.binary_operations = {}
 
         with self.assertRaises(NotImplementedError, msg='Not implemented error for unknown bin operation.'):
             self.solver._resolve(BinOp(left=None, op=42, right=None))
@@ -75,7 +75,7 @@ class SolverResolveTest(TestCase):
             called_args = args
             return id(function)
 
-        self.solver.function_calls_table = {
+        self.solver.builtin_functions = {
             function.__name__: function
         }
         args_to_call = tuple(Num(n=randint(5, 50)) for _ in range(randint(1, 10)))
@@ -97,3 +97,10 @@ class SolverResolveTest(TestCase):
             'Args given to mocked function should be same as given to _resolve.'
         )
         self.assertTrue(called, 'Function should to be called.')
+
+    def test_resolve_unknown_node(self):
+        class Unknown(AST):
+            pass
+
+        with self.assertRaises(NotImplementedError, msg='Not implemented error for unknown ast node.'):
+            self.solver._resolve(Unknown())

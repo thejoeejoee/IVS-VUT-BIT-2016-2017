@@ -57,7 +57,7 @@ class SolverAdvancedTest(TestCase):
 
     def test_absolute_value_of_factorial(self):
         self.assertAlmostEqual(
-            self.solver.compute('-|3!|'),
-            -6,
+            self.solver.compute('-|3! - 1!|'),
+            -5,
             'Expression of absolute value from factorial.'
         )

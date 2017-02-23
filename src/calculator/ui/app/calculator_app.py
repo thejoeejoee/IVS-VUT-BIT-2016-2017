@@ -2,9 +2,12 @@
 # noinspection PyUnresolvedReferences
 import calculator.ui.resources
 from typing import List
+from calculator.ui.syntaxhighlight import ExpSyntaxHighlighter
 
-from PyQt5.QtCore import QUrl
-from PyQt5.QtQml import QQmlApplicationEngine
+from calculator.ui.qmlwrapper.core import Sides
+
+from PyQt5.QtCore import QUrl, QObject
+from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType, qmlRegisterType
 from PyQt5.QtWidgets import QApplication
 
 
@@ -14,7 +17,9 @@ class CalculatorApp(QApplication):
 
     @staticmethod
     def registerTypes():
-        pass
+        qmlRegisterSingletonType(Sides, "Sides", 1, 0, "Sides", Sides.singletonProvider)
+        qmlRegisterType(ExpSyntaxHighlighter, "ExpSyntaxHighlighter", 1, 0, "ExpSyntaxHighlighter")
+
 
     def run(self) -> int:
         CalculatorApp.registerTypes()
