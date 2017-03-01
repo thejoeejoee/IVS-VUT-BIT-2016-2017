@@ -11,13 +11,15 @@ import "loaders" as Loaders
 import "containers"
 import "visualization"
 
-Window.CustomWindow {
+ApplicationWindow {
     id: mainWindow
 
     width: 1101
-    height: width * (522 / 1101)
+    minimumHeight: width * (522 / 1101)
+    maximumHeight: minimumHeight
 
-    flags: Qt.FramelessWindowHint
+    //flags: Qt.FramelessWindowHint
+    title: tr("Barbie Calculator")
     visible: true
 
     Item{
