@@ -1,7 +1,10 @@
 # coding=utf-8
+import sys
+from fileinput import FileInput, input
+from typing import List
 from typing import Sequence
 
-from calculator.core.math.math import Math
+from calculator.core.math import Math
 from calculator.typing import NumericResult
 
 
@@ -29,12 +32,31 @@ def standard_deviation(values: Sequence[NumericResult]) -> float:
     assert values_count >= 2, 'Standard deviation is defined for least 2 items.'
     computed_mean = mean(values=values)
     return Math.root(
-        Math.divide(
-            1,
-            values_count - 1
-        ) * sum(
-            (value - computed_mean) ** 2
-            for value
-            in values
+        Math.multiple(
+            Math.divide(
+                1,
+                Math.subtract(values_count, 1)
+            ), sum(
+                Math.pow(Math.subtract(value, computed_mean), 2)
+                for value
+                in values
+            )
         )
     )
+
+
+def main(file_input: FileInput) -> None:
+    values = list()  # type: List[NumericResult]
+    for line in file_input:
+        if not line:
+            continue
+        try:
+            values.append(float(line))
+        except ValueError:
+            print("Unknown line: '{}'".format(line), file=sys.stderr)
+
+    print(standard_deviation(values=values))
+
+
+if __name__ == '__main__':
+    main(input())
