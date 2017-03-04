@@ -32,5 +32,6 @@
         <file>assets/images/trash.svg</file>
         <file>qml/containers/VariablesPanel.qml</file>
         <file>qml/managers/VariablesManager.qml</file>
+        <file>qml/controls/TextButton.qml</file>
     </qresource>
 </RCC>

@@ -13,8 +13,7 @@ Controls.Clickable {
     onEntered: { button.state='Hovering'}
     onExited: { button.state=''}
 
-    height: parent.height
-    width: parent.width
+    anchors.fill: parent
     onEnabledChanged: state = ""
 
     Rectangle {
