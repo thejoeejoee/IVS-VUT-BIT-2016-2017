@@ -5,13 +5,13 @@ Item {
     id: funcPanel
     property variant items: ["root()","cos()","sin()","pow()","pi","e","log()","abs()"]
     Grid{
-        height: funcPanel.height/8
-        width: 50
+        height: funcPanel.height/7
+        width: parent.width
         columns: 1
-        rows: 8
+        rows: 7
         spacing: 0
         Repeater{
-            model: 8
+            model: 7
             Control.TextButton{
                 buttonText: funcPanel.items[index]
                 textColor: "red"

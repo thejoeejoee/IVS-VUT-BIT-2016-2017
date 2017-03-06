@@ -1,8 +1,9 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
-import ExpSyntaxHighlighter 1.0
+//import ExpSyntaxHighlighter 1.0
 import "window" as Window
 import Sides 1.0
+import "controls" as Control
 
 import "../easteregg"
 import "loaders" as Loaders
@@ -31,12 +32,12 @@ ApplicationWindow {
         }
     }
 
-    Item {
-        ExpSyntaxHighlighter {
-            id: esh
-            target: te
-        }
-    }
+//    Item {
+//        ExpSyntaxHighlighter {
+//            id: esh
+//            target: te
+//        }
+//    }
 
     TextEdit {
         id: te
@@ -77,4 +78,18 @@ ApplicationWindow {
         anchors.top: ans.bottom
         anchors.right: parent.right
     }
+    Rectangle{
+        id: bar
+        height: parent.height/3
+        width: parent.width - v.width
+        anchors.left: parent.left
+        anchors.bottom:parent.bottom
+        color:"black"
+        FunctionsPanel{
+            height: parent.height
+            width: parent.width/12
+            anchors.left: parent.left
+        }
+    }
+
 }
