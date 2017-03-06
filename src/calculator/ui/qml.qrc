@@ -33,5 +33,6 @@
         <file>qml/containers/VariablesPanel.qml</file>
         <file>qml/managers/VariablesManager.qml</file>
         <file>qml/controls/TextButton.qml</file>
+        <file>qml/containers/FunctionsPanel.qml</file>
     </qresource>
 </RCC>

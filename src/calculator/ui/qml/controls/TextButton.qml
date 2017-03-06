@@ -13,21 +13,23 @@ Controls.Clickable {
     onEntered: { button.state='Hovering'}
     onExited: { button.state=''}
 
-    anchors.fill: parent
+    height: parent.height
+    width: parent.width
     onEnabledChanged: state = ""
 
     Rectangle {
         id: rectangleButton
         anchors.fill: parent
         color: button.color
-    }
+        border.color: "black"
 
-    Text {
-        id: innerText
-        anchors.centerIn: rectangleButton
-        color: textColor
-        font.pixelSize: button.height * 0.43
-        font.family: "Roboto Light"
+        Text {
+            font.pixelSize: button.height * 0.55
+            font.family: "Roboto Light"
+            id: innerText
+            anchors.centerIn: parent
+            color: textColor
+        }
     }
 
     states: State {
