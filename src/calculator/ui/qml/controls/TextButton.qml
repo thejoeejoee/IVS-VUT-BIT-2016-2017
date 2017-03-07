@@ -2,51 +2,35 @@ import QtQuick 2.0
 import "../controls" as Controls
 
 Controls.Clickable {
-    id: button
+    id: component
+
     property alias buttonText: innerText.text;
     property color color: "black"
-    property color hoverColor: "grey"
     property color textColor: "black"
     property color hoverTextColor: "white"
 
     hoverEnabled: true
-    onEntered: { button.state='Hovering'}
-    onExited: { button.state=''}
-
-    height: parent.height
-    width: parent.width
-    onEnabledChanged: state = ""
+    onEntered: innerText.color = hoverTextColor
+    onExited: innerText.color = textColor
 
     Rectangle {
-        id: rectangleButton
+        color: component.color
         anchors.fill: parent
-        color: button.color
-        border.color: "black"
+    }
 
-        Text {
-            font.pixelSize: button.height * 0.55
-            font.family: "Roboto Light"
-            id: innerText
-            anchors.centerIn: parent
-            color: textColor
+    Text {
+        id: innerText
+
+        color: textColor
+
+        font.family: "Roboto Light"
+        font.pixelSize: component.height * 0.55
+
+        anchors.centerIn: parent
+
+        Behavior on color {
+            ColorAnimation { duration: 300 }
         }
     }
 
-    states: State {
-        name: "Hovering"
-        PropertyChanges {
-            target: rectangleButton
-            color: hoverColor
-        }
-        PropertyChanges {
-            target: innerText
-            color: hoverTextColor
-        }
-    }
-
-    transitions: Transition {
-        from: ""; to: "Hovering"
-        reversible: true
-        ColorAnimation { duration: 200 }
-    }
 }
