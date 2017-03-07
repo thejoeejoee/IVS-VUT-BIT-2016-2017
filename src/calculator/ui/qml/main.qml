@@ -20,17 +20,17 @@ ApplicationWindow {
     maximumHeight: minimumHeight
 
     //flags: Qt.FramelessWindowHint
-    title: tr("Barbie Calculator")
+    title: qsTr("Barbie Calculator")
     visible: true
 
-    Item{
+    /*Item{
         Game {
             id: game
 
             Component.onCompleted: game.run()
             onGameOver: console.log(msg)
         }
-    }
+    }*/
 
 //    Item {
 //        ExpSyntaxHighlighter {
@@ -78,17 +78,27 @@ ApplicationWindow {
         anchors.top: ans.bottom
         anchors.right: parent.right
     }
+
     Rectangle{
-        id: bar
-        height: parent.height/3
+        height: parent.height * 0.45
         width: parent.width - v.width
+
         anchors.left: parent.left
         anchors.bottom:parent.bottom
-        color:"black"
+
+        color:"orange"
+
         FunctionsPanel{
-            height: parent.height
-            width: parent.width/12
+            items: ["pow", "root", "fact", "rand", "log", "e", "pi"]
+
+            width: 70
+            columns: 1
+
             anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+
+            onClicked: console.log(func)
         }
     }
 
