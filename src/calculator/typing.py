@@ -6,7 +6,7 @@ NumericValue = Union[int, float]  # possible types of result of mathematical exp
 Variable = Tuple[
     NumericValue,  # actual value
     str,  # raw source expression
-    Set  # dependencies
+    Set[str]  # dependencies
 ]
 
 NumericFunction = Callable[..., NumericValue]

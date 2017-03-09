@@ -65,9 +65,9 @@ class Calculator(object):
         """
         if variable in dependencies:
             return True
-        else:
-            for dependency in dependencies:
-                if dependency in self._variables:  # if it's known variable, check it's dependencies
-                    if self._has_circular_dependence(variable, self._variables.get(dependency)[2]):
-                        return True
-            return False
+
+        for dependency in dependencies:
+            if dependency in self._variables:  # if it's known variable, check it's dependencies
+                if self._has_circular_dependence(variable, self._variables.get(dependency)[2]):
+                    return True
+        return False

@@ -35,7 +35,7 @@ class Solver(object):
     }  # type: Dict[str, NumericFunction]
 
     _variables = []  # type: Dict[str, Variable]
-    _used_variables = set()  # type: Set
+    _used_variables = set()  # type: Set[str]
 
     def __init__(self):
         super(Solver, self).__init__()
@@ -127,9 +127,10 @@ class Solver(object):
         :return: standard python number value
         """
         # TODO restriction for reserved variable names
-        value = self._variables.get(name.id)
+        # If variable does not exists, OrderedDefaultDict creates it with default values
+        value, src_expr, dependencies = self._variables.get(name.id)
         self._used_variables.add(name.id)
-        return value[0]
+        return value
 
     def get_variable_dict(self) -> Dict[str, Variable]:
         """
