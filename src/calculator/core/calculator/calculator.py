@@ -50,8 +50,9 @@ class Calculator(object):
                 raise VariableError()
 
             self._variables[root_node.targets[0].id] = value, expression.split('=', 1)[1].strip(), dependencies
+            # TODO: get new variables from solver
         else:
-            pass  # TODO from known variables resolve via self.solver result of given expression and set to Ans
+            pass  # TODO: from known variables resolve via self.solver result of given expression and set to Ans
 
         return 0, self._variables
 
@@ -66,8 +67,7 @@ class Calculator(object):
             return True
         else:
             for dependency in dependencies:
-                if dependency in self._variables:
-                    var = self._variables.get(dependency)
-                    if self._has_circular_dependence(variable, var[2]):
+                if dependency in self._variables:  # if it's known variable, check it's dependencies
+                    if self._has_circular_dependence(variable, self._variables.get(dependency)[2]):
                         return True
             return False
