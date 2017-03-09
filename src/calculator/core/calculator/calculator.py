@@ -1,6 +1,6 @@
 # coding=utf-8
 from ast import Assign, Name
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Set
 
 from calculator.core.solver.solver import Solver
 from calculator.typing import NumericValue, Variable
@@ -20,10 +20,12 @@ class Calculator(object):
         super().__init__()
 
         self._variables = OrderedDefaultDict(
-            default_factory=lambda: (0, 0),  # TODO: return (default result, default source expression)
+            default_factory=lambda: (0, '0', set()),  # TODO: return (default result, default source expression)
         )  # type: Dict[str, Variable]
 
         self._solver = Solver()
+
+        self._variables[self.ANSWER_VARIABLE_NAME] = 0, '0', set()
 
     variables = property(lambda self: self._variables)
 
@@ -36,13 +38,36 @@ class Calculator(object):
         root_node = self._solver.parser.parse(expression=expression)
         if isinstance(root_node, Assign):
             # TODO: resolve assign and create new variable from source expression
-            # TODO: syntax restrict for assign like a, b = 1, 2
-            if len(root_node.targets) is not 1 or not isinstance(root_node.targets[0], Name):
+            if len(root_node.targets) != 1 or not isinstance(root_node.targets[0], Name):
+                raise SyntaxError()
+
+            value = self._solver.compute(root_node.value, self._variables)
+
+            dependencies = self._solver.get_used_variables()
+
+            # test recursive assign
+            if self._has_circular_dependence(root_node.targets[0].id, dependencies):
                 raise VariableError()
 
-            value = self._solver.compute(root_node.value)
-            self._variables[root_node.targets[0].id] = value
+            self._variables[root_node.targets[0].id] = value, expression.split('=', 1)[1].strip(), dependencies
         else:
             pass  # TODO from known variables resolve via self.solver result of given expression and set to Ans
 
         return 0, self._variables
+
+    def _has_circular_dependence(self, variable: str, dependencies: Set) -> bool:
+        """
+        Recursively tests if variable a has a circular dependence in given dependencies
+        :param variable: variable identifier
+        :param dependencies: set of dependencies to look in
+        :return: True if circular dependency was found, otherwise False
+        """
+        if variable in dependencies:
+            return True
+        else:
+            for dependency in dependencies:
+                if dependency in self._variables:
+                    var = self._variables.get(dependency)
+                    if self._has_circular_dependence(variable, var[2]):
+                        return True
+            return False

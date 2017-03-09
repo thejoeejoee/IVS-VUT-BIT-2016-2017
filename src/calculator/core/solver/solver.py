@@ -1,7 +1,6 @@
 # coding=utf-8
-from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub
-from typing import Callable, Dict, Union
-from typing import Type
+from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name
+from typing import Dict, Union, List, Type, Set
 
 from calculator.core.math import Math
 from calculator.core.parser import Parser
@@ -9,6 +8,7 @@ from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor, Facto
 from calculator.typing import BinaryNumericFunction
 from calculator.typing import NumericFunction
 from calculator.typing import NumericValue
+from calculator.typing import Variable
 from calculator.utils import method_single_dispatch
 
 
@@ -34,18 +34,24 @@ class Solver(object):
         'rand': Math.rand,
     }  # type: Dict[str, NumericFunction]
 
+    _variables = []  # type: Dict[str, Variable]
+    _used_variables = set()  # type: Set
+
     def __init__(self):
         super(Solver, self).__init__()
         self._parser = Parser()
 
     parser = property(lambda self: self._parser)
 
-    def compute(self, node_or_expression: Union[str, AST]) -> NumericValue:
+    def compute(self, node_or_expression: Union[str, AST], variables: Dict[str, NumericValue]=[]) -> NumericValue:
         """
         Computes result of math expression given as string or AST tree into numeric result.
         :param node_or_expression:
+        :param variables: known variables
         :return:
         """
+        self._variables = variables.copy()
+        self._used_variables.clear()
         if not isinstance(node_or_expression, AST):
             node_or_expression = self._parser.parse(expression=node_or_expression).value
 
@@ -112,3 +118,29 @@ class Solver(object):
         :return: standard python number values
         """
         return num.n
+
+    @_resolve.register(Name)
+    def _(self, name: Name) -> NumericValue:
+        """
+        Returns value of the variable or creates new with default value
+        :param name: Name Node
+        :return: standard python number value
+        """
+        # TODO restriction for reserved variable names
+        value = self._variables.get(name.id)
+        self._used_variables.add(name.id)
+        return value[0]
+
+    def get_variable_dict(self) -> Dict[str, Variable]:
+        """
+        Returns known and new variables
+        :return: Dict[str, Variable]
+        """
+        return self._variables
+
+    def get_used_variables(self) -> Set:
+        """
+        Return copy of set of variable names used in last compute() call
+        :return: Set
+        """
+        return self._used_variables.copy()

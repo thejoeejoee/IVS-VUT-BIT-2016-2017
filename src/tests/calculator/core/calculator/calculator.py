@@ -12,8 +12,8 @@ class CalculatorTest(TestCase):
     def test_default_ans(self):
         self.assertTupleEqual(
             self.calculator.variables.get(Calculator.ANSWER_VARIABLE_NAME),
-            (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE())),
-            'Default answer is 0 from source "0".'
+            (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE()), set()),
+            'Default answer is 0 from source "0" with no dependencies.'
         )
 
     def test_simple_calculation(self):
@@ -30,7 +30,7 @@ class CalculatorTest(TestCase):
         )
 
     def test_variable_assign(self):
-        answer_result, answer_expression = self.calculator.variables.get(Calculator.ANSWER_VARIABLE_NAME)
+        answer_result, answer_expression, answer_dependencies = self.calculator.variables.get(Calculator.ANSWER_VARIABLE_NAME)
         result, variables = self.calculator.process('a = 42')
         self.assertIsNone(
             result,
@@ -46,7 +46,7 @@ class CalculatorTest(TestCase):
         )
 
     def test_new_variables_from_expression(self):
-        answer_result, answer_expression = self.calculator.variables.get(Calculator.ANSWER_VARIABLE_NAME)
+        answer_result, answer_expression, answer_dependencies = self.calculator.variables.get(Calculator.ANSWER_VARIABLE_NAME)
         result, variables = self.calculator.process('a = b + c')
         self.assertIsNone(
             result,
@@ -98,10 +98,10 @@ class CalculatorTest(TestCase):
             self.calculator.variables,
             {
                 Calculator.ANSWER_VARIABLE_NAME: (
-                    Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE())
+                    Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE()), set()
                 ),
-                'd': (5, '5'),
-                'e': (5, 'd')
+                'd': (5, '5', set()),
+                'e': (5, 'd', set('d'))
             },
             'After circular invalid assign, variables should stay without changes.'
         )
