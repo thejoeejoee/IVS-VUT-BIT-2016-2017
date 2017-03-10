@@ -25,7 +25,7 @@ class CalculatorTest(TestCase):
         )
         self.assertDictEqual(
             variables,
-            {Calculator.ANSWER_VARIABLE_NAME: (result, '1 + 2')},
+            {Calculator.ANSWER_VARIABLE_NAME: (result, '1 + 2', set())},
             'Answer variable in variables mapping.'
         )
 
@@ -39,8 +39,8 @@ class CalculatorTest(TestCase):
         self.assertDictEqual(
             variables,
             {
-                Calculator.ANSWER_VARIABLE_NAME: (answer_result, answer_expression),
-                'a': (42, '42')
+                Calculator.ANSWER_VARIABLE_NAME: (answer_result, answer_expression, answer_dependencies),
+                'a': (42, '42', set())
             },
             'Between variables should be added a new variable after assign (and Ans should stay same).'
         )
@@ -55,10 +55,10 @@ class CalculatorTest(TestCase):
         self.assertDictEqual(
             variables,
             {
-                Calculator.ANSWER_VARIABLE_NAME: (answer_result, answer_expression),
-                'a': (Calculator.DEFAULT_VARIABLE_TYPE(), 'b + c'),
-                'b': (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE())),
-                'c': (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE()))
+                Calculator.ANSWER_VARIABLE_NAME: (answer_result, answer_expression, set()),
+                'a': (Calculator.DEFAULT_VARIABLE_TYPE(), 'b + c', {'b', 'c'}),
+                'b': (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE()), set()),
+                'c': (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE()), set())
             },
             'New variable from another two variables.'
         )
@@ -75,9 +75,9 @@ class CalculatorTest(TestCase):
         self.assertDictEqual(
             variables,
             {
-                Calculator.ANSWER_VARIABLE_NAME: (10, 'b / a'),
-                'a': (8, '8'),
-                'b': (80, '(2 + a) * a')
+                Calculator.ANSWER_VARIABLE_NAME: (10, 'b / a', {'a', 'b'}),
+                'a': (8, '8', set()),
+                'b': (80, '(2 + a) * a', {'a'})
             },
             'Generated variables list after three operations with calculator.'
         )
