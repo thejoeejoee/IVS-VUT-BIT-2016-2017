@@ -63,7 +63,10 @@ class Calculator(object):
 
             for key, var in self._variables.items():
                 if variable_name in var[2]:  # if var depends on changed variable
-                    self.process(key + " = " + var[1])  # recursively update dependent variable
+                    if key == self.ANSWER_VARIABLE_NAME:
+                        self.process(var[1])
+                    else:
+                        self.process(key + " = " + var[1])  # recursively update dependent variable
         else:
             result = self._solver.compute(expression, self.variables)
             self._variables.update(self._solver.variables)

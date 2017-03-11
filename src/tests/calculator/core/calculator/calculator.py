@@ -129,3 +129,21 @@ class CalculatorTest(TestCase):
             },
             'Generated variables list after two operations with calculator.'
         )
+
+    def test_ans_in_expr(self):
+        self.calculator.process('5*5')
+        result, variables = self.calculator.process('9 + Ans')
+
+        self.assertEqual(
+            result,
+            34,
+            'Result of expression with Ans'
+        )
+
+        self.assertDictEqual(
+            variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: (34, '9 + Ans', {'Ans'})
+            },
+            'Ans source expression and dependency'
+        )
