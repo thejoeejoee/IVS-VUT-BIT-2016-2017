@@ -1,6 +1,6 @@
 # coding=utf-8
 from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name
-from typing import Dict, Union, List, Type, Set, Optional
+from typing import Dict, Union, Type, Set, Optional
 
 from calculator.core.math import Math
 from calculator.core.parser import Parser
@@ -44,7 +44,11 @@ class Solver(object):
     parser = property(lambda self: self._parser)
     variables = property(lambda self: self._variables)
 
-    def compute(self, node_or_expression: Union[str, AST], variables: Optional[Dict[str, NumericValue]]=None) -> NumericValue:
+    def compute(
+            self,
+            node_or_expression: Union[str, AST],
+            variables: Optional[Dict[str, Variable]] = None
+    ) -> NumericValue:
         """
         Computes result of math expression given as string or AST tree into numeric result.
         :param node_or_expression:
@@ -130,9 +134,9 @@ class Solver(object):
         """
         # TODO restriction for reserved variable names
         # If variable does not exists, OrderedDefaultDict creates it with default values
-        value, src_expr, dependencies = self._variables.get(name.id)
+        variable_value, _, _ = self._variables.get(name.id)
         self._used_variables.add(name.id)
-        return value
+        return variable_value
 
     def get_used_variables(self) -> Optional[Set[str]]:
         """

@@ -18,16 +18,20 @@ class Calculator(object):
 
     def __init__(self):
         super().__init__()
-
-        self._variables = OrderedDefaultDict(
-            default_factory=lambda: (0, '0', set()),  # TODO: return (default result, default source expression)
-        )  # type: Dict[str, Variable]
-
         self._solver = Solver()
 
-        self._variables[self.ANSWER_VARIABLE_NAME] = 0, '0', set()
+        self._variables = OrderedDefaultDict(
+            default_factory=lambda: (
+                self.DEFAULT_VARIABLE_TYPE(),
+                str(self.DEFAULT_VARIABLE_TYPE()),
+                set(),
+            ),
+        )  # type: Dict[str, Variable]
 
-    variables = property(lambda self: self._variables)
+        # manually create default answer variable
+        _ = self._variables[self.ANSWER_VARIABLE_NAME]
+
+    variables = property(lambda self: self._variables)  # type: Dict[str, Variable]
 
     def process(self, expression: str) -> Tuple[Optional[NumericValue], Dict[str, Variable]]:
         """
@@ -42,7 +46,7 @@ class Calculator(object):
             if len(root_node.targets) != 1 or not isinstance(root_node.targets[0], Name):
                 raise SyntaxError('Assign to multiple variables or to indexed variable is not supported.')
 
-            value = self._solver.compute(root_node.value, self._variables)
+            value = self._solver.compute(root_node.value, self.variables)
 
             dependencies = self._solver.get_used_variables()
 
@@ -59,7 +63,7 @@ class Calculator(object):
 
             # TODO: update variables that depend on changed variable, only if it existed before
         else:
-            result = self._solver.compute(expression, self._variables)
+            result = self._solver.compute(expression, self.variables)
             self._variables.update(self._solver.variables)
             self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
 
