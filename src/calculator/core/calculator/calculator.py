@@ -38,6 +38,7 @@ class Calculator(object):
         root_node = self._solver.parser.parse(expression=expression)
         result = None
         if isinstance(root_node, Assign):
+            # TODO: restriction for reserved variable names
             if len(root_node.targets) != 1 or not isinstance(root_node.targets[0], Name):
                 raise SyntaxError()
 

@@ -140,7 +140,7 @@ class Solver(object):
         """
         return self._variables
 
-    def get_used_variables(self) -> Set[str]:
+    def get_used_variables(self) -> Optional[Set[str]]:
         """
         Return set of variable names used in last compute() call
         :return: Set[str] or None if compute() hasn't been called yet
