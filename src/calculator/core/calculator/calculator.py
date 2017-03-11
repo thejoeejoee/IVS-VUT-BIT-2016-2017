@@ -36,8 +36,8 @@ class Calculator(object):
         :return:
         """
         root_node = self._solver.parser.parse(expression=expression)
+        result = None
         if isinstance(root_node, Assign):
-            # TODO: resolve assign and create new variable from source expression
             if len(root_node.targets) != 1 or not isinstance(root_node.targets[0], Name):
                 raise SyntaxError()
 
@@ -50,11 +50,15 @@ class Calculator(object):
                 raise VariableError()
 
             self._variables[root_node.targets[0].id] = value, expression.split('=', 1)[1].strip(), dependencies
-            # TODO: get new variables from solver
-        else:
-            pass  # TODO: from known variables resolve via self.solver result of given expression and set to Ans
+            self._variables.update(self._solver.get_variable_dict())
 
-        return 0, self._variables
+            # TODO: update variables that depend on changed variable, only if it existed before
+        else:
+            result = self._solver.compute(expression, self._variables)
+            self._variables.update(self._solver.get_variable_dict())
+            self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
+
+        return result, self._variables
 
     def _has_circular_dependence(self, variable: str, dependencies: Set) -> bool:
         """

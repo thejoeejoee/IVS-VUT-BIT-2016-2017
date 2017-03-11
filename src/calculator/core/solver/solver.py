@@ -1,6 +1,6 @@
 # coding=utf-8
 from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name
-from typing import Dict, Union, List, Type, Set
+from typing import Dict, Union, List, Type, Set, Optional
 
 from calculator.core.math import Math
 from calculator.core.parser import Parser
@@ -43,15 +43,15 @@ class Solver(object):
 
     parser = property(lambda self: self._parser)
 
-    def compute(self, node_or_expression: Union[str, AST], variables: Dict[str, NumericValue]=None) -> NumericValue:
+    def compute(self, node_or_expression: Union[str, AST], variables: Optional[Dict[str, NumericValue]]=None) -> NumericValue:
         """
         Computes result of math expression given as string or AST tree into numeric result.
         :param node_or_expression:
         :param variables: known variables
         :return:
         """
-        variables = variables or {}
-        self._variables = variables.copy()  # If assign is invalid, we don't want to change variables in Calculator
+        # If assign is invalid, we don't want to change variables in Calculator
+        self._variables = variables.copy() if variables else {}
         self._used_variables = set()
         if not isinstance(node_or_expression, AST):
             node_or_expression = self._parser.parse(expression=node_or_expression).value
