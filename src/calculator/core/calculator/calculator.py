@@ -1,6 +1,6 @@
 # coding=utf-8
 from ast import Assign, Name
-from typing import Dict, Tuple, Set
+from typing import Dict, Tuple, Set, Optional
 
 from calculator.core.solver.solver import Solver
 from calculator.typing import NumericValue, Variable
@@ -29,7 +29,7 @@ class Calculator(object):
 
     variables = property(lambda self: self._variables)
 
-    def process(self, expression: str) -> Tuple[NumericValue, Dict[str, Variable]]:
+    def process(self, expression: str) -> Tuple[Optional[NumericValue], Dict[str, Variable]]:
         """
         Process mathematical expression with variables support, returning actual result and variables mapping.
         :param expression:
@@ -40,17 +40,20 @@ class Calculator(object):
         if isinstance(root_node, Assign):
             # TODO: restriction for reserved variable names
             if len(root_node.targets) != 1 or not isinstance(root_node.targets[0], Name):
-                raise SyntaxError()
+                raise SyntaxError('Assign to multiple variables or to indexed variable is not supported.')
 
             value = self._solver.compute(root_node.value, self._variables)
 
             dependencies = self._solver.get_used_variables()
 
             # test recursive assign
-            if self._has_circular_dependence(root_node.targets[0].id, dependencies):
-                raise VariableError()
+            variable_name = root_node.targets[0].id
+            if self._has_circular_dependence(variable_name, dependencies):
+                raise VariableError("Assignment to a variable '{variable_name}' would create a circular dependency.".format(
+                    variable_name=variable_name
+                ))
 
-            self._variables[root_node.targets[0].id] = value, expression.split('=', 1)[1].strip(), dependencies
+            self._variables[variable_name] = value, expression.split('=', 1)[1].strip(), dependencies
             self._variables.update(self._solver.get_variable_dict())
 
             # TODO: update variables that depend on changed variable, only if it existed before
@@ -61,7 +64,7 @@ class Calculator(object):
 
         return result, self._variables
 
-    def _has_circular_dependence(self, variable: str, dependencies: Set) -> bool:
+    def _has_circular_dependence(self, variable: str, dependencies: Set[str]) -> bool:
         """
         Recursively tests if variable a has a circular dependence in given dependencies
         :param variable: variable identifier
