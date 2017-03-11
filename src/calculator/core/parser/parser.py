@@ -4,7 +4,7 @@ from typing import Iterable, Sized, Optional, Union, Callable, Tuple
 
 from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor
 from calculator.core.parser.preprocessor import FactorialPreprocessor
-from calculator.core.parser.transform import HexadecimalTransform, ComplexRestrictTransform
+from calculator.core.parser.transform import ComplexRestrictTransform
 from calculator.exceptions import ParserSyntaxError, SyntaxRestrictError
 
 
@@ -19,8 +19,7 @@ class Parser(object):
     )
     # TODO solve problem with hexadecimals literals like '4A'
     DEFAULT_TRANSFORMS = (
-        HexadecimalTransform,
-        ComplexRestrictTransform
+        ComplexRestrictTransform,
     )
 
     _transforms = ()
