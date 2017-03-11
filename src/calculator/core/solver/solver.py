@@ -34,8 +34,8 @@ class Solver(object):
         'rand': Math.rand,
     }  # type: Dict[str, NumericFunction]
 
-    _variables = []  # type: Dict[str, Variable]
-    _used_variables = set()  # type: Set[str]
+    _variables = None # type: Dict[str, Variable]
+    _used_variables = None  # type: Set[str]
 
     def __init__(self):
         super(Solver, self).__init__()
@@ -43,15 +43,16 @@ class Solver(object):
 
     parser = property(lambda self: self._parser)
 
-    def compute(self, node_or_expression: Union[str, AST], variables: Dict[str, NumericValue]=[]) -> NumericValue:
+    def compute(self, node_or_expression: Union[str, AST], variables: Dict[str, NumericValue]=None) -> NumericValue:
         """
         Computes result of math expression given as string or AST tree into numeric result.
         :param node_or_expression:
         :param variables: known variables
         :return:
         """
-        self._variables = variables.copy()
-        self._used_variables.clear()
+        variables = variables or {}
+        self._variables = variables.copy()  # If assign is invalid, we don't want to change variables in Calculator
+        self._used_variables = set()
         if not isinstance(node_or_expression, AST):
             node_or_expression = self._parser.parse(expression=node_or_expression).value
 
@@ -139,9 +140,9 @@ class Solver(object):
         """
         return self._variables
 
-    def get_used_variables(self) -> Set:
+    def get_used_variables(self) -> Set[str]:
         """
-        Return copy of set of variable names used in last compute() call
-        :return: Set
+        Return set of variable names used in last compute() call
+        :return: Set[str] or None if compute() hasn't been called yet
         """
-        return self._used_variables.copy()
+        return self._used_variables
