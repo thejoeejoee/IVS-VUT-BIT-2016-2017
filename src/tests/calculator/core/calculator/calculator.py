@@ -105,3 +105,22 @@ class CalculatorTest(TestCase):
             },
             'After circular invalid assign, variables should stay without changes.'
         )
+
+    def test_variable_updating(self):
+        self.calculator.process('a = b + 42')
+        result, variables = self.calculator.process('b = 2 * 21')
+
+        self.assertIsNone(
+            result,
+            'Result of assign should be None.'
+        )
+
+        self.assertDictEqual(
+            variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: (0, '0', set()),
+                'a': (84, 'b + 42', {'b'}),
+                'b': (42, '2 * 21', set())
+            },
+            'Generated variables list after two operations with calculator.'
+        )
