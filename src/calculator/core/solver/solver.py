@@ -42,6 +42,7 @@ class Solver(object):
         self._parser = Parser()
 
     parser = property(lambda self: self._parser)
+    variables = property(lambda self: self._variables)
 
     def compute(self, node_or_expression: Union[str, AST], variables: Optional[Dict[str, NumericValue]]=None) -> NumericValue:
         """
@@ -132,13 +133,6 @@ class Solver(object):
         value, src_expr, dependencies = self._variables.get(name.id)
         self._used_variables.add(name.id)
         return value
-
-    def get_variable_dict(self) -> Dict[str, Variable]:
-        """
-        Returns known and new variables
-        :return: Dict[str, Variable]
-        """
-        return self._variables
 
     def get_used_variables(self) -> Optional[Set[str]]:
         """

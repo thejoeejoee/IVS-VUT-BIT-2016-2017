@@ -3,9 +3,9 @@ from ast import Assign, Name
 from typing import Dict, Tuple, Set, Optional
 
 from calculator.core.solver.solver import Solver
+from calculator.exceptions import VariableError
 from calculator.typing import NumericValue, Variable
 from calculator.utils import OrderedDefaultDict
-from calculator.exceptions import VariableError
 
 
 class Calculator(object):
@@ -49,17 +49,18 @@ class Calculator(object):
             # test recursive assign
             variable_name = root_node.targets[0].id
             if self._has_circular_dependence(variable_name, dependencies):
-                raise VariableError("Assignment to a variable '{variable_name}' would create a circular dependency.".format(
-                    variable_name=variable_name
-                ))
+                raise VariableError(
+                    "Assignment to a variable '{variable_name}' would create a circular dependency.".format(
+                        variable_name=variable_name
+                    ))
 
             self._variables[variable_name] = value, expression.split('=', 1)[1].strip(), dependencies
-            self._variables.update(self._solver.get_variable_dict())
+            self._variables.update(self._solver.variables)
 
             # TODO: update variables that depend on changed variable, only if it existed before
         else:
             result = self._solver.compute(expression, self._variables)
-            self._variables.update(self._solver.get_variable_dict())
+            self._variables.update(self._solver.variables)
             self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
 
         return result, self._variables
