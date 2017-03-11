@@ -58,10 +58,12 @@ class Calculator(object):
                         variable_name=variable_name
                     ))
 
-            self._variables[variable_name] = value, expression.split('=', 1)[1].strip(), dependencies
-            self._variables.update(self._solver.variables)
+            self._variables.update(self._solver.variables)  # get new variables from Solver
+            self._variables[variable_name] = value, expression.split('=', 1)[1].strip(), dependencies  # create new var.
 
-            # TODO: update variables that depend on changed variable, only if it existed before
+            for key, var in self._variables.items():
+                if variable_name in var[2]:  # if var depends on changed variable
+                    self.process(key + " = " + var[1])  # recursively update dependent variable
         else:
             result = self._solver.compute(expression, self.variables)
             self._variables.update(self._solver.variables)

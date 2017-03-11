@@ -34,7 +34,7 @@ class Solver(object):
         'rand': Math.rand,
     }  # type: Dict[str, NumericFunction]
 
-    _variables = None # type: Dict[str, Variable]
+    _variables = None  # type: Dict[str, Variable]
     _used_variables = None  # type: Set[str]
 
     def __init__(self):
