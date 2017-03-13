@@ -1,5 +1,5 @@
 # coding=utf-8
-from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name
+from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name, Pow
 from typing import Dict, Union, Type, Set, Optional
 
 from calculator.core.math import Math
@@ -21,6 +21,7 @@ class Solver(object):
         Sub: Math.subtract,
         Div: Math.divide,
         Mult: Math.multiple,
+        Pow: Math.pow
     }  # type: Dict[Type[AST], BinaryNumericFunction]
 
     builtin_functions = {

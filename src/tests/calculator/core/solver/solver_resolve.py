@@ -25,7 +25,7 @@ class SolverResolveTest(TestCase):
             nonlocal left, right
             left = left_operand
             right = right_operand
-            return left_operand * right_operand
+            return left_operand, right_operand
 
         operation = 'operation'
 
@@ -34,7 +34,7 @@ class SolverResolveTest(TestCase):
         }
         self.assertEqual(
             self.solver._resolve(BinOp(left=Num(n=42), op=operation, right=Num(n=98))),
-            42 * 98,
+            (42, 98),
             'Bin operation should call the defined operation.'
         )
         self.assertIsNotNone(left, 'Left operand should be given.')
@@ -45,6 +45,13 @@ class SolverResolveTest(TestCase):
 
         with self.assertRaises(NotImplementedError, msg='Not implemented error for unknown bin operation.'):
             self.solver._resolve(BinOp(left=None, op=42, right=None))
+
+    def test_default_bin_operations(self):
+        for node_type, operation in self.solver.binary_operations.items():
+            self.assertEqual(
+                self.solver.compute(BinOp(left=Num(n=8), op=node_type(), right=Num(n=10))),
+                operation(8, 10)
+            )
 
     def test_unknown_node(self):
         class UnknownNode(AST):

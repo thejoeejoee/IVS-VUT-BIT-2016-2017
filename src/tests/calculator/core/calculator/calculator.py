@@ -147,3 +147,19 @@ class CalculatorTest(TestCase):
             },
             'Ans source expression and dependency'
         )
+
+        result, variables = self.calculator.process('9 + Ans')
+
+        self.assertEqual(
+            result,
+            43,
+            'Result of second expression with Ans'
+        )
+
+        self.assertDictEqual(
+            variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: (43, '9 + Ans', {'Ans'})
+            },
+            'Ans source expression and dependency after second compute with Ans'
+        )
