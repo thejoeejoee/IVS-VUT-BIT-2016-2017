@@ -3,6 +3,8 @@ import QtQuick 2.0
 import QtQuick.Controls.Styles 1.4
 
 QtObject {
+    id: styles
+
     property QtObject functionPanel: QtObject {
         property color backgroundColor: "#2A2A2A"
         property color textColor: "white"
@@ -57,8 +59,20 @@ QtObject {
         })
     }
 
-    /*property QtObject codeEditor: QtObject {
-        property color lineNumbersTextColor: "gray"
-        property color lineNumbersColor: "#f2f2f2"
-    }*/
+    property QtObject variablesPanel: QtObject {
+        property color backgroundColor: "#2A2A2A"
+        property color textColor: "white"
+        property color identifierColor: "#ED1946"
+        property color scrollBarColor: "#B7B7B7"
+        property font font: Qt.font({
+            family: "Roboto Light"
+        })
+    }
+
+    property QtObject ans: QtObject {
+        property color backgroundColor: "#C1C0C0"
+        property color textColor: "white"
+        property color identifierColor: "black"
+        property font font: styles.variablesPanel.font
+    }
 }

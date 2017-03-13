@@ -3,12 +3,11 @@ import QtQuick.Controls 1.4
 //import ExpSyntaxHighlighter 1.0
 import Sides 1.0
 import StyleSettings 1.0
-import "controls" as Control
 
+import "controls" as Control
 import "../easteregg"
 import "loaders" as Loaders
 
-// TODO delete
 import "containers"
 import "visualization"
 
@@ -41,37 +40,46 @@ ApplicationWindow {
 
     Loaders.FontsLoader {}
 
+    // TODO responsivity
     VariableDisplay {
         id: ans
 
-        color: "#C1C0C0"
-        identifierTextColor: "black"
-        textColor: "white"
+        color: StyleSettings.ans.backgroundColor
+        textColor: StyleSettings.ans.textColor
+        identifierTextColor: StyleSettings.ans.identifierColor
 
         variableIdentifier: "Ans"
         variableExpression: variableValue
         variableValue: 0
 
-        width: v.width
+        width: variablePanel.width
         height: 29 * 3
+
+        font.family: StyleSettings.ans.font.family
 
         anchors.right: parent.right
     }
 
+    // TODO resposivity
     VariablesPanel {
-        id: v
+        id: variablePanel
+
+        backgroundColor: StyleSettings.variablesPanel.backgroundColor
+        textColor: StyleSettings.variablesPanel.textColor
+        identifierTextColor: StyleSettings.variablesPanel.identifierColor
+        scrollBarColor: StyleSettings.variablesPanel.scrollBarColor
+
+        font.family: StyleSettings.variablesPanel.font.family
+
         width: 340
         height: parent.height
-
-        textColor: "white"
-        identifierTextColor: "#ED1946"
-
         itemHeight: 29 * 3
 
         anchors.top: ans.bottom
         anchors.right: parent.right
     }
 
+    // TODO responsivity
     FunctionsPanel {
         id: functionPanel
 
@@ -103,6 +111,15 @@ ApplicationWindow {
         anchors.left: functionPanel.right
         anchors.top: functionPanel.top
         anchors.bottom: parent.bottom
-        anchors.right: v.left
+        anchors.right: variablePanel.left
+    }
+
+    Rectangle {
+        color: "white"
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: variablePanel.left
+        anchors.bottom: functionPanel.top
     }
 }
