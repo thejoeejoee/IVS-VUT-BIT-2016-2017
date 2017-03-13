@@ -47,32 +47,44 @@ class Calculator(object):
                 raise SyntaxError('Assign to multiple variables or to indexed variable is not supported.')
 
             value = self._solver.compute(root_node.value, self.variables)
-
-            dependencies = self._solver.get_used_variables()
+            used_variables = self._solver.get_used_variables()
 
             # test recursive assign
             variable_name = root_node.targets[0].id
-            if self._has_circular_dependence(variable_name, dependencies):
+            if self._has_circular_dependence(variable_name, used_variables):
                 raise VariableError(
                     "Assignment to a variable '{variable_name}' would create a circular dependency.".format(
                         variable_name=variable_name
                     ))
 
-            self._variables.update(self._solver.variables)  # get new variables from Solver
-            self._variables[variable_name] = value, expression.split('=', 1)[1].strip(), dependencies  # create new var.
-
-            for key, var in self._variables.items():
-                if variable_name in var[2]:  # if var depends on changed variable
-                    if key == self.ANSWER_VARIABLE_NAME:
-                        self.process(var[1])
-                    else:
-                        self.process(key + " = " + var[1])  # recursively update dependent variable
+            # create new var
+            self._variables[variable_name] = value, self._get_source_expression_from_assign(expression), used_variables
+            # and refresh all depending
+            self._refresh_variable_with_dependencies(variable=variable_name)
         else:
             result = self._solver.compute(expression, self.variables)
             self._variables.update(self._solver.variables)
             self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
 
         return result, self._variables
+
+    def _refresh_variable_with_dependencies(self, variable: str) -> None:
+        """
+        Refresh given variable with all depending variables recursive.
+        :param variable: variable name
+        :return: nothing to return
+        """
+        _, source_expression, dependencies = self.variables[variable]
+        # recompute the value from variables
+        computed_value = self._solver.compute(source_expression, self.variables)
+        # update by new created variables from Solver
+        self._variables.update(self._solver.variables)
+        # set new value
+        self.variables[variable] = computed_value, source_expression, dependencies
+
+        for depending_variable in self._get_depending_variables(variable):
+            # and refresh all depending vars
+            self._refresh_variable_with_dependencies(depending_variable)
 
     def _has_circular_dependence(self, variable: str, dependencies: Set[str]) -> bool:
         """
@@ -85,7 +97,25 @@ class Calculator(object):
             return True
 
         for dependency in dependencies:
-            if dependency in self._variables:  # if it's known variable, check it's dependencies
-                if self._has_circular_dependence(variable, self._variables.get(dependency)[2]):
-                    return True
+            if dependency not in self._variables:  # if it's known variable, check it's dependencies
+                continue
+            if self._has_circular_dependence(variable, self._variables.get(dependency)[2]):
+                return True
         return False
+
+    def _get_depending_variables(self, variable: str) -> Set[str]:
+        """
+        Returns set of variables, that are actually depending on given variable - in one and only one level.
+        :param variable:
+        :return:
+        """
+        return {name for name, definition in self.variables.items() if variable in definition[2]}
+
+    @staticmethod
+    def _get_source_expression_from_assign(expression: str) -> str:
+        """
+        Parse source expression from given assign.
+        :param expression: assign as string expression (a = b * 4)
+        :return: source expression (b * 4)
+        """
+        return expression.split('=', 1)[-1].strip()

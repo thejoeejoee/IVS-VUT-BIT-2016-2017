@@ -135,8 +135,9 @@ class Solver(object):
         """
         # TODO restriction for reserved variable names
         # If variable does not exists, OrderedDefaultDict creates it with default values
-        variable_value, _, _ = self._variables.get(name.id)
-        self._used_variables.add(name.id)
+        variable_name = name.id
+        variable_value, _, _ = self._variables.get(variable_name)
+        self._used_variables.add(variable_name)
         return variable_value
 
     def get_used_variables(self) -> Optional[Set[str]]:
