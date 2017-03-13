@@ -3,7 +3,7 @@ from random import randint
 from statistics import mean as stats_mean, stdev
 from unittest.case import TestCase
 
-from calculator.core.standard_deviation import mean as my_mean, standard_deviation
+from standard_deviation import mean as my_mean, standard_deviation
 
 
 class StandardDeviationTest(TestCase):

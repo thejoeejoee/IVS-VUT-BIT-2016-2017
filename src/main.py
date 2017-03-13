@@ -4,7 +4,7 @@
 import sys
 from fileinput import input
 
-from calculator.core.standard_deviation import main as sd_main
+from standard_deviation import main as sd_main
 
 sys._excepthook = sys.excepthook
 def exception_hook(exctype, value, traceback):
