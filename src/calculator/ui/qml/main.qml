@@ -1,7 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
 //import ExpSyntaxHighlighter 1.0
-import "window" as Window
 import Sides 1.0
 import StyleSettings 1.0
 import "controls" as Control

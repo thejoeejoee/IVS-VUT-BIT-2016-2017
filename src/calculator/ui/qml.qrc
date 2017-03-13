@@ -3,9 +3,6 @@
         <file>qml/main.qml</file>
         <file>easteregg/animations/ParticleGenerator.qml</file>
         <file>easteregg/animations/RainbowTail.qml</file>
-        <file>qml/window/Frame.qml</file>
-        <file>qml/window/CustomWindow.qml</file>
-        <file>qml/window/SizeGrip.qml</file>
         <file>easteregg/logic/collision/BoxCollider.qml</file>
         <file>easteregg/logic/collision/CollisionSystem.qml</file>
         <file>easteregg/logic/extendedmath.js</file>
@@ -16,7 +13,6 @@
         <file>easteregg/entities/Wall.qml</file>
         <file>qml/containers/Stack.qml</file>
         <file>qml/controls/Clickable.qml</file>
-        <file>qml/window/CloseButton.qml</file>
         <file>qml/controls/VariableSetButton.qml</file>
         <file>qml/item/VariableItem.qml</file>
         <file>qml/loaders/FontsLoader.qml</file>
