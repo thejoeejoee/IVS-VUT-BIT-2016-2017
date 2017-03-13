@@ -1,6 +1,6 @@
 colour-runner
 doxypypy
-PyQt5
+PyQt5==5.7.1
 termcolor
 doxyqml
 
