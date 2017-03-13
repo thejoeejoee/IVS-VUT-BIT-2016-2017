@@ -95,8 +95,10 @@ ApplicationWindow {
         id: expInput
 
         focus: true
+        style: StyleSettings.expressionInput.style
+        placeholderTextColor: StyleSettings.expressionInput.placeholderTextColor
 
-        font.family: "ABeeZee"
+        font.family: StyleSettings.expressionInput.font
         font.pixelSize: height / 7
 
         anchors.left: functionPanel.right

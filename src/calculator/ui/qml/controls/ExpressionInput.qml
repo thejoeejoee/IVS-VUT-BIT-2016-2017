@@ -1,12 +1,31 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
 TextArea {
     id: expInput
 
-    textColor: "#9F9F9F"
-    focus: true
+    property alias placeholderTextColor: placeholderText.color
 
-    font.family: "ABeeZee"
-    font.pixelSize: height / 7
+    focus: true
+    textMargin: 15
+    antialiasing: true
+    frameVisible: false
+
+    Text {
+        id: placeholderText
+
+        text: qsTr("Enter expression...")
+        font: expInput.font
+        opacity: (expInput.text) ?0 :0.8
+
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: expInput.textMargin
+        anchors.topMargin: expInput.textMargin
+
+        Behavior on opacity {
+            NumberAnimation { duration: 200 }
+        }
+    }
 }
