@@ -39,13 +39,6 @@ ApplicationWindow {
 //        }
 //    }
 
-    TextEdit {
-        id: te
-        width: 100
-        height: 100
-        color: "blue"
-    }
-
     Loaders.FontsLoader {}
 
     VariableDisplay {
@@ -79,27 +72,32 @@ ApplicationWindow {
         anchors.right: parent.right
     }
 
-    Rectangle{
+    FunctionsPanel {
+        id: functionPanel
+
+        items: ["pow", "root", "fact", "rand", "log", "e", "pi"]
+        columns: 1
+
         height: parent.height * 0.45
-        width: parent.width - v.width
+        width: 70
 
         anchors.left: parent.left
-        anchors.bottom:parent.bottom
+        anchors.bottom: parent.bottom
 
-        color:"orange"
-
-        FunctionsPanel{
-            items: ["pow", "root", "fact", "rand", "log", "e", "pi"]
-
-            width: 70
-            columns: 1
-
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-
-            onClicked: console.log(func)
-        }
+        onClicked: console.log(func)
     }
 
+    Control.ExpressionInput {
+        id: expInput
+
+        focus: true
+
+        font.family: "ABeeZee"
+        font.pixelSize: height / 7
+
+        anchors.left: functionPanel.right
+        anchors.top: functionPanel.top
+        anchors.bottom: parent.bottom
+        anchors.right: v.left
+    }
 }
