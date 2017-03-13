@@ -57,12 +57,16 @@ class Calculator(object):
                         variable_name=variable_name
                     ))
 
+            # update by new created variables from Solver
+            self._variables.update(self._solver.variables)
             # create new var
-            self._variables[variable_name] = value, self._get_source_expression_from_assign(expression), used_variables
+            self._variables[variable_name] = value, expression, used_variables
             # and refresh all depending
             self._refresh_variable_with_dependencies(variable=variable_name)
         else:
+            # simple expression
             result = self._solver.compute(expression, self.variables)
+            # update new vars used by solver resolved from expression
             self._variables.update(self._solver.variables)
             self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
 
@@ -72,13 +76,11 @@ class Calculator(object):
         """
         Refresh given variable with all depending variables recursive.
         :param variable: variable name
-        :return: nothing to return
+        :return: nothing important to return
         """
         _, source_expression, dependencies = self.variables[variable]
         # recompute the value from variables
         computed_value = self._solver.compute(source_expression, self.variables)
-        # update by new created variables from Solver
-        self._variables.update(self._solver.variables)
         # set new value
         self.variables[variable] = computed_value, source_expression, dependencies
 
@@ -97,9 +99,11 @@ class Calculator(object):
             return True
 
         for dependency in dependencies:
-            if dependency not in self._variables:  # if it's known variable, check it's dependencies
+            if dependency not in self._variables:  # skip not known variables
                 continue
-            if self._has_circular_dependence(variable, self._variables.get(dependency)[2]):
+            # else recursive check dependent variables
+            _, _, current_variable_dependencies = self._variables.get(dependency)
+            if self._has_circular_dependence(variable, current_variable_dependencies):
                 return True
         return False
 
@@ -117,12 +121,3 @@ class Calculator(object):
         :return: set of depending vars
         """
         return {name for name, definition in self.variables.items() if variable in definition[2]}
-
-    @staticmethod
-    def _get_source_expression_from_assign(expression: str) -> str:
-        """
-        Parse source expression from given assign.
-        :param expression: assign as string expression (a = b * 4)
-        :return: source expression (b * 4)
-        """
-        return expression.split('=', 1)[-1].strip()

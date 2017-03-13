@@ -12,6 +12,9 @@ class CalculatorTest(TestCase):
         set()
     )
 
+    def assertDictEqual(self, d1, d2, msg=None):
+        return super().assertDictEqual(dict(d1), dict(d2), msg)
+
     def setUp(self):
         self.calculator = Calculator()
 
@@ -45,7 +48,7 @@ class CalculatorTest(TestCase):
             variables,
             {
                 Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
-                'a': (42, '42', set())
+                'a': (42, 'a = 42', set())
             },
             'Between variables should be added a new variable after assign (and Ans should stay same).'
         )
@@ -60,7 +63,7 @@ class CalculatorTest(TestCase):
             variables,
             {
                 Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
-                'a': (Calculator.DEFAULT_VARIABLE_TYPE(), 'b + c', {'b', 'c'}),
+                'a': (Calculator.DEFAULT_VARIABLE_TYPE(), 'a = b + c', {'b', 'c'}),
                 'b': self._default_variable_definition,
                 'c': self._default_variable_definition
             },
@@ -80,8 +83,8 @@ class CalculatorTest(TestCase):
             variables,
             {
                 Calculator.ANSWER_VARIABLE_NAME: (10, 'b / a', {'a', 'b'}),
-                'a': (8, '8', set()),
-                'b': (80, '(2 + a) * a', {'a'})
+                'a': (8, 'a = 8', set()),
+                'b': (80, 'b = (2 + a) * a', {'a'})
             },
             'Generated variables list after three operations with calculator.'
         )
@@ -105,8 +108,8 @@ class CalculatorTest(TestCase):
             self.calculator.variables,
             {
                 Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
-                'd': (5, '5', set()),
-                'e': (5, 'd', set('d'))
+                'd': (5, 'd = 5', set()),
+                'e': (5, 'e = d', set('d'))
             },
             'After circular invalid assign, variables should stay without changes.'
         )
@@ -124,8 +127,8 @@ class CalculatorTest(TestCase):
             variables,
             {
                 Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
-                'a': (84, 'b + 42', {'b'}),
-                'b': (42, '2 * 21', set())
+                'a': (84, 'a = b + 42', {'b'}),
+                'b': (42, 'b = 2 * 21', set())
             },
             'Generated variables list after two operations with calculator.'
         )
