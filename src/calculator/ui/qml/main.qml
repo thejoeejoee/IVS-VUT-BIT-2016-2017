@@ -78,6 +78,9 @@ ApplicationWindow {
 
         items: ["pow", "root", "fact", "rand", "log", "e", "pi"]
         columns: 1
+        backgroundColor: StyleSettings.functionPanel.backgroundColor
+        textColor: StyleSettings.functionPanel.textColor
+        hoverTextColor: StyleSettings.functionPanel.hoverTextColor
 
         height: parent.height * 0.45
         width: 70

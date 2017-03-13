@@ -8,6 +8,9 @@ Item {
 
     property var items
     property alias columns: grid.columns
+    property color backgroundColor
+    property color textColor
+    property color hoverTextColor
 
     Grid {
         id: grid
@@ -18,9 +21,9 @@ Item {
             model: component.items
             delegate: Control.TextButton{
                 buttonText: modelData
-                textColor: "white"
-                color: "grey"
-                hoverTextColor: "red"
+                textColor: component.textColor
+                color: component.backgroundColor
+                hoverTextColor: component.hoverTextColor
 
                 width: component.width / grid.columns
                 height: component.height / grid.rows
