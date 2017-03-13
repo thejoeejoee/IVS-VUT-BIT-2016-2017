@@ -106,8 +106,15 @@ class Calculator(object):
     def _get_depending_variables(self, variable: str) -> Set[str]:
         """
         Returns set of variables, that are actually depending on given variable - in one and only one level.
-        :param variable:
-        :return:
+        For example:
+        a <= b, c
+        f <= d, c
+        c <= z, k
+
+        _get_depending_variables(c) == {a, f}
+
+        :param variable: variable name to get known depending vars on it
+        :return: set of depending vars
         """
         return {name for name, definition in self.variables.items() if variable in definition[2]}
 
