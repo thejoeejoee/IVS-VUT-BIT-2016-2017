@@ -35,5 +35,6 @@
         <file>qml/controls/TextButton.qml</file>
         <file>qml/containers/FunctionsPanel.qml</file>
         <file>qml/controls/ExpressionInput.qml</file>
+        <file>assets/styles/UIStyles.qml</file>
     </qresource>
 </RCC>
