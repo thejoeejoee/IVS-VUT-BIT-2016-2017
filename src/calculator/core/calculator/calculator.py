@@ -3,7 +3,7 @@ from ast import Assign, Name
 from typing import Dict, Tuple, Set, Optional
 
 from calculator.core.solver.solver import Solver
-from calculator.exceptions import VariableError
+from calculator.exceptions import VariableError, VariableRemoveRestrictError
 from calculator.typing import NumericValue, Variable
 from calculator.utils import OrderedDefaultDict
 
@@ -71,6 +71,21 @@ class Calculator(object):
             self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
 
         return result, self._variables.copy()
+
+    def remove_variable(self, variable: str) -> None:
+        """
+        Removes variable from calculator, if there are any depending vars, VariableRemoveRestrictError is raised.
+        :param variable: variable name
+        :return: nothing to return
+        """
+        if variable not in self.variables:
+            raise VariableError("Unknown variable '{}' to remove.".format(variable))
+
+        dependencies = self._get_depending_variables(variable=variable)
+        if dependencies:
+            raise VariableRemoveRestrictError(dependencies=dependencies)
+
+        del self._variables[variable]
 
     def _refresh_variable_with_dependencies(self, variable: str) -> None:
         """

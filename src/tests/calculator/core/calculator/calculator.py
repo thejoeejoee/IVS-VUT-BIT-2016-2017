@@ -2,7 +2,7 @@
 from unittest.case import TestCase
 
 from calculator.core.calculator import Calculator
-from calculator.exceptions import VariableError
+from calculator.exceptions import VariableError, VariableRemoveRestrictError
 
 
 class CalculatorTest(TestCase):
@@ -166,3 +166,30 @@ class CalculatorTest(TestCase):
             },
             'Ans source expression and dependency after second compute with Ans'
         )
+
+    def test_remove_variable(self):
+        self.calculator.process('a = 5')
+        self.calculator.remove_variable('a')
+        self.assertDictEqual(
+            self.calculator.variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition
+            },
+            'Removed a not in variables.'
+        )
+
+        self.calculator.process('b = c + 42')
+        with self.assertRaises(VariableRemoveRestrictError, msg='Error when removing depending variable.'):
+            self.calculator.remove_variable('c')
+        self.assertDictEqual(
+            self.calculator.variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
+                'b': (42, 'b = c + 42', {'c'}),
+                'c': self._default_variable_definition
+            },
+            'Variables after invalid remove.'
+        )
+
+        with self.assertRaises(VariableError, msg='Remove of unknown variable.'):
+            self.calculator.remove_variable('x')

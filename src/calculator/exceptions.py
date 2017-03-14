@@ -23,3 +23,13 @@ class VariableError(Exception):
     """
     Exception for signalizing of invalid definition for calculator variable.
     """
+
+
+class VariableRemoveRestrictError(VariableError):
+    """
+    Raised from Calculator, if there are any depending variables to variable to remove.
+    """
+
+    def __init__(self, dependencies, *args, **kwargs):
+        self._dependencies = dependencies
+        super().__init__(*args, **kwargs)
