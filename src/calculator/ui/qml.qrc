@@ -34,5 +34,7 @@
         <file>assets/styles/UIStyles.qml</file>
         <file>assets/images/arrow_down.svg</file>
         <file>qml/visualization/ResultDisplay.qml</file>
+        <file>qml/controls/CalculateButton.qml</file>
+        <file>assets/images/equal.svg</file>
     </qresource>
 </RCC>

@@ -122,4 +122,16 @@ ApplicationWindow {
         anchors.right: variablePanel.left
         anchors.bottom: functionPanel.top
     }
+
+    Control.CalculateButton {
+        id: calculateButton
+
+        width: parent.width / 14
+
+        color: StyleSettings.calculateButton.backgroundColor
+
+        anchors.top: expInput.top
+        anchors.bottom: parent.bottom
+        anchors.right: variablePanel.left
+    }
 }

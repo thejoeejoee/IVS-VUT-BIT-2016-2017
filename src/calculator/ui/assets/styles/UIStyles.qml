@@ -84,4 +84,7 @@ QtObject {
         })
     }
 
+    property QtObject calculateButton: QtObject {
+        property color backgroundColor: "#ED1946"
+    }
 }
