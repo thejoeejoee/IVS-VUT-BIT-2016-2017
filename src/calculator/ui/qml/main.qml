@@ -111,11 +111,15 @@ ApplicationWindow {
         anchors.left: functionPanel.right
         anchors.top: functionPanel.top
         anchors.bottom: parent.bottom
-        anchors.right: variablePanel.left
+        anchors.right: calculateButton.left
     }
 
-    Rectangle {
-        color: "white"
+    ResultDisplay {
+        id: resultDisplay
+
+        color: StyleSettings.resultDisplay.backgroundColor
+        textColor: StyleSettings.resultDisplay.textColor
+        font.family: StyleSettings.resultDisplay.font.family
 
         anchors.top: parent.top
         anchors.left: parent.left
