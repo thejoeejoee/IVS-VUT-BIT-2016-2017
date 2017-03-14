@@ -34,7 +34,11 @@ class UIAdapter(QObject):
                     key: dict(value=value, expression=expression)
                     for key, (value, expression, _)
                     in variables.items()
-                    }
+                },
+                "variablesDiff": {
+                    "new": list(new_variables),
+                    "modified": modified_variable
+                }
             }))
 
             self.variables = variables
