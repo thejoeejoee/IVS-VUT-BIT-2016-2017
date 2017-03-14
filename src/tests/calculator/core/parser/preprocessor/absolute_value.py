@@ -2,6 +2,7 @@
 from unittest import TestCase
 
 from calculator.core.parser.preprocessor.absolute_value import AbsoluteValuePreprocessor
+from calculator.settings import BuiltinFunction
 
 
 class AbsoluteValuePreprocessorTest(TestCase):
@@ -67,7 +68,7 @@ class AbsoluteValuePreprocessorTest(TestCase):
     def _format_absolute_value(expr: str = '', pre: str = '', post: str = '') -> str:
         return '{}{}({}){}'.format(
             pre,
-            AbsoluteValuePreprocessor.ABSOLUTE_VALUE_FUNCTION_NAME,
+            BuiltinFunction.ABS,
             expr,
             post
         )

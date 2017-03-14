@@ -1,11 +1,25 @@
 # coding=utf-8
-# noinspection PyUnresolvedReferences
-import calculator.ui.resources
+
+
+import platform
 from typing import List
 
 from PyQt5.QtCore import QUrl
-from PyQt5.QtQml import QQmlApplicationEngine
+from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType, qmlRegisterType
 from PyQt5.QtWidgets import QApplication
+
+from calculator.ui.qmlwrapper.core import Sides
+from calculator.ui.syntaxhighlight import ExpSyntaxHighlighter
+
+if platform.system() == "Linux":  # Needed for platform.linux_distribution, which is not available on Windows and OSX
+    # For Ubuntu: https://bugs.launchpad.net/ubuntu/+source/python-qt4/+bug/941826
+    platform_identifier = platform.platform()
+    if 'Ubuntu' in platform_identifier or 'Debian' in platform_identifier:  # Just in case it also happens on Debian, so it can be added
+        # noinspection PyUnresolvedReferences
+        from OpenGL import GL
+
+# noinspection PyUnresolvedReferences
+import calculator.ui.resources
 
 
 class CalculatorApp(QApplication):
@@ -14,7 +28,8 @@ class CalculatorApp(QApplication):
 
     @staticmethod
     def registerTypes():
-        pass
+        qmlRegisterSingletonType(Sides, "Sides", 1, 0, "Sides", Sides.singletonProvider)
+        qmlRegisterType(ExpSyntaxHighlighter, "ExpSyntaxHighlighter", 1, 0, "ExpSyntaxHighlighter")
 
     def run(self) -> int:
         CalculatorApp.registerTypes()

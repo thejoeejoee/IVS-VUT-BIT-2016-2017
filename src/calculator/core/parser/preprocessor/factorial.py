@@ -3,6 +3,8 @@
 import re
 from typing import Tuple, List
 
+from calculator.settings import BuiltinFunction
+
 
 class FactorialPreprocessor(object):
     """
@@ -11,7 +13,6 @@ class FactorialPreprocessor(object):
     (5 + 2)! -> fact(5 + 2)
     (5! + 2)! -> fact(fact(5) + 2)
     """
-    FACTORIAL_FUNCTION_NAME = 'fact'
     FACTORIAL_SIGN = '!'
 
     # position is reverted, because factorial is matched from !, which is at the end of wanted expression
@@ -60,7 +61,7 @@ class FactorialPreprocessor(object):
         add_brackets = not matched_group.startswith(')') or not matched_group.endswith('(')
 
         return ''.join((
-            cls.FACTORIAL_FUNCTION_NAME,
+            BuiltinFunction.FACT,
             '(' * add_brackets,
             ''.join(map(str, reversed(matched_group))),
             ')' * add_brackets

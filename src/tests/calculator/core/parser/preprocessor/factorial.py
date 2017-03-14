@@ -2,6 +2,7 @@
 from unittest import TestCase
 
 from calculator.core.parser.preprocessor.factorial import FactorialPreprocessor
+from calculator.settings import BuiltinFunction
 
 
 class FactorialPreprocessorTest(TestCase):
@@ -69,7 +70,7 @@ class FactorialPreprocessorTest(TestCase):
     def _format_factorial(expr: str = '', pre: str = '', post: str = '') -> str:
         return '{}{}({}){}'.format(
             pre,
-            FactorialPreprocessor.FACTORIAL_FUNCTION_NAME,
+            BuiltinFunction.FACT,
             expr,
             post
         )

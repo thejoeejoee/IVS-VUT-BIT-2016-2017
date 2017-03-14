@@ -7,21 +7,21 @@
 Grafická kalkulačka jako školní projekt do předmětu IVS na fakultě FIT VUT.
 
 
-Prostředí
+Platforms
 ---------
 
 Ubuntu 64bit
 
-Autoři
+Authors
 ------
 
-<Název týmu>
+/dej/uran/dom
 - xkolar71 Josef Kolář
 - xnguye16 Son Hai Nguyen
 - xomach00 Martin Omacht
 - xnavra61 Robert Navrátil
 
-Licence
+License
 -------
 
 Tento program je licenován pod licencí GNU GPL Version 3.

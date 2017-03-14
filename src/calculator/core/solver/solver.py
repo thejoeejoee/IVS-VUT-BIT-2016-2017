@@ -9,6 +9,7 @@ from calculator.typing import BinaryNumericFunction
 from calculator.typing import NumericFunction
 from calculator.typing import NumericValue
 from calculator.typing import Variable
+from calculator.settings import BuiltinFunction
 from calculator.utils import method_single_dispatch
 
 
@@ -25,14 +26,14 @@ class Solver(object):
     }  # type: Dict[Type[AST], BinaryNumericFunction]
 
     builtin_functions = {
-        FactorialPreprocessor.FACTORIAL_FUNCTION_NAME: Math.fact,
-        AbsoluteValuePreprocessor.ABSOLUTE_VALUE_FUNCTION_NAME: Math.abs,
-        'log': Math.log,
-        'ln': Math.ln,
-        'pow': Math.pow,
-        'sqrt': Math.root,
-        'root': Math.root,
-        'rand': Math.rand,
+        BuiltinFunction.FACT: Math.fact,
+        BuiltinFunction.ABS: Math.abs,
+        BuiltinFunction.LOG: Math.log,
+        BuiltinFunction.LN: Math.ln,
+        BuiltinFunction.POW: Math.pow,
+        BuiltinFunction.ROOT: Math.root,
+        BuiltinFunction.SQRT: Math.root,
+        BuiltinFunction.RAND: Math.rand,
     }  # type: Dict[str, NumericFunction]
 
     _variables = None  # type: Dict[str, Variable]

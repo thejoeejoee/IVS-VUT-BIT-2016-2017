@@ -8,6 +8,7 @@ Rectangle {
     property string variableIdentifier: ""
     property string variableExpression: ""
     property real variableValue: 0
+    property font font
 
     QtObject {
         id: internal
@@ -28,7 +29,7 @@ Rectangle {
             text: component.variableIdentifier
             color: component.identifierTextColor
 
-            font.family: "Roboto Light"
+            font.family: component.font.family
             font.pixelSize: parent.height * 0.58
 
             anchors.bottom: parent.bottom
@@ -40,7 +41,7 @@ Rectangle {
             text: component.variableExpression
             color: component.textColor
 
-            font.family: "Roboto Light"
+            font.family: component.font.family
             font.pixelSize: parent.height * 0.25
 
             anchors.left: parent.left
@@ -53,7 +54,7 @@ Rectangle {
         text: component.variableValue
         color: component.textColor
 
-        font.family: "Roboto Light"
+        font.family: component.font.family
         font.pixelSize: parent.height * 0.7
 
         anchors.right: parent.right

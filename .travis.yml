@@ -30,3 +30,5 @@ matrix:
     - python: '3.6-dev'
     - python: '3.7-dev'
     - python: 'nightly'
+
+cache: pip

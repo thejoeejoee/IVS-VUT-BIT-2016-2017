@@ -7,6 +7,9 @@ Item {
     property real itemHeight: 0
     property color textColor
     property color identifierTextColor
+    property alias backgroundColor: background.color
+    property alias scrollBarColor: scrollBar.color
+    property font font
 
     clip: true
 
@@ -22,6 +25,7 @@ Item {
         onNewItem: {
             object.textColor = Qt.binding(function() { return component.textColor })
             object.identifierTextColor = Qt.binding(function() { return component.identifierTextColor })
+            object.font.family = Qt.binding(function() { return component.font.family })
 
             object.width = Qt.binding(function() { return component.width })
             object.height = Qt.binding(function() { return component.itemHeight })
@@ -29,8 +33,8 @@ Item {
     }
 
     Rectangle {
+        id: background
         anchors.fill: flick
-        color: "#2A2A2A"
     }
 
     Flickable{
@@ -50,7 +54,8 @@ Item {
 
     // ----- SCROLLBAR -----
     Rectangle {
-        color: "#B7B7B7"
+        id: scrollBar
+
         opacity: (flick.visibleArea.heightRatio === 1) ?0 :1
 
         y: flick.visibleArea.yPosition * component.height
