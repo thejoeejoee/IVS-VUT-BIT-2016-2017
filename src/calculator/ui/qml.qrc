@@ -33,5 +33,6 @@
         <file>qml/controls/ExpressionInput.qml</file>
         <file>assets/styles/UIStyles.qml</file>
         <file>assets/images/arrow_down.svg</file>
+        <file>qml/visualization/ResultDisplay.qml</file>
     </qresource>
 </RCC>

@@ -75,4 +75,13 @@ QtObject {
         property color identifierColor: "black"
         property font font: styles.variablesPanel.font
     }
+
+    property QtObject resultDisplay: QtObject {
+        property color backgroundColor: "white"
+        property color textColor: "#2F2F2F"
+        property font font: Qt.font({
+            family: "Roboto Medium"
+        })
+    }
+
 }
