@@ -5,10 +5,10 @@ from typing import List
 from typing import Sequence
 
 from calculator.core.math import Math
-from calculator.typing import NumericResult
+from calculator.typing import NumericValue
 
 
-def mean(values: Sequence[NumericResult]) -> float:
+def mean(values: Sequence[NumericValue]) -> float:
     """
     Computes mean of given collection.
     :param values: collection of numeric values
@@ -21,7 +21,7 @@ def mean(values: Sequence[NumericResult]) -> float:
     )
 
 
-def standard_deviation(values: Sequence[NumericResult]) -> float:
+def standard_deviation(values: Sequence[NumericValue]) -> float:
     """
     Computes corrected sample standard deviation by
     https://wikimedia.org/api/rest_v1/media/math/render/svg/1bffdcb1ecd0b326bb7ad67397b073af9c15fa6e

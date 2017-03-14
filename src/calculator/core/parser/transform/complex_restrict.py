@@ -10,7 +10,7 @@ class ComplexRestrictTransform(NodeTransformer):
     Restrict for all occurrences of complex numbers in AST tree.
     """
 
-    def visit_Num(self, num: Num) -> Optional[expr]:
+    def visit_Num(self, num: Num) -> Num:
         """
         :param num: Name node of found number in processed AST
         :return: Num node, if variable id can be converted to Num

@@ -13,7 +13,13 @@ class SyntaxRestrictError(SyntaxError):
     """
 
 
-class MathError(ValueError):
+class MathError(ArithmeticError):
     """
     Standard Math error - division by null etc.
+    """
+
+
+class VariableError(Exception):
+    """
+    Exception for signalizing of invalid definition for calculator variable.
     """

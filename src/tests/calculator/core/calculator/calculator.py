@@ -2,17 +2,27 @@
 from unittest.case import TestCase
 
 from calculator.core.calculator import Calculator
+from calculator.exceptions import VariableError
 
 
 class CalculatorTest(TestCase):
+    _default_variable_definition = (
+        Calculator.DEFAULT_VARIABLE_TYPE(),
+        str(Calculator.DEFAULT_VARIABLE_TYPE()),
+        set()
+    )
+
+    def assertDictEqual(self, d1, d2, msg=None):
+        return super().assertDictEqual(dict(d1), dict(d2), msg)
+
     def setUp(self):
         self.calculator = Calculator()
 
     def test_default_ans(self):
         self.assertTupleEqual(
             self.calculator.variables.get(Calculator.ANSWER_VARIABLE_NAME),
-            (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE())),
-            'Default answer is 0 from source "0".'
+            self._default_variable_definition,
+            'Default answer is 0 from source "0" with no dependencies.'
         )
 
     def test_simple_calculation(self):
@@ -24,12 +34,11 @@ class CalculatorTest(TestCase):
         )
         self.assertDictEqual(
             variables,
-            {Calculator.ANSWER_VARIABLE_NAME: (result, '1 + 2')},
+            {Calculator.ANSWER_VARIABLE_NAME: (result, '1 + 2', set())},
             'Answer variable in variables mapping.'
         )
 
     def test_variable_assign(self):
-        answer_result, answer_expression = self.calculator.variables.get(Calculator.ANSWER_VARIABLE_NAME)
         result, variables = self.calculator.process('a = 42')
         self.assertIsNone(
             result,
@@ -38,14 +47,13 @@ class CalculatorTest(TestCase):
         self.assertDictEqual(
             variables,
             {
-                Calculator.ANSWER_VARIABLE_NAME: (answer_result, answer_expression),
-                'a': (42, '42')
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
+                'a': (42, 'a = 42', set())
             },
             'Between variables should be added a new variable after assign (and Ans should stay same).'
         )
 
     def test_new_variables_from_expression(self):
-        answer_result, answer_expression = self.calculator.variables.get(Calculator.ANSWER_VARIABLE_NAME)
         result, variables = self.calculator.process('a = b + c')
         self.assertIsNone(
             result,
@@ -54,10 +62,10 @@ class CalculatorTest(TestCase):
         self.assertDictEqual(
             variables,
             {
-                Calculator.ANSWER_VARIABLE_NAME: (answer_result, answer_expression),
-                'a': (Calculator.DEFAULT_VARIABLE_TYPE(), 'b + c'),
-                'b': (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE())),
-                'c': (Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE()))
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
+                'a': (Calculator.DEFAULT_VARIABLE_TYPE(), 'a = b + c', {'b', 'c'}),
+                'b': self._default_variable_definition,
+                'c': self._default_variable_definition
             },
             'New variable from another two variables.'
         )
@@ -74,33 +82,87 @@ class CalculatorTest(TestCase):
         self.assertDictEqual(
             variables,
             {
-                Calculator.ANSWER_VARIABLE_NAME: (10, 'b / a'),
-                'a': (8, '8'),
-                'b': (80, '(2 + a) * a')
+                Calculator.ANSWER_VARIABLE_NAME: (10, 'b / a', {'a', 'b'}),
+                'a': (8, 'a = 8', set()),
+                'b': (80, 'b = (2 + a) * a', {'a'})
             },
             'Generated variables list after three operations with calculator.'
         )
 
     def test_invalid_assign(self):
-        with self.assertRaises(SyntaxError, msg='No syntax support for tuple assign.'):
+        with self.assertRaises(SyntaxError, msg='No syntax support for multiple assign.'):
             self.calculator.process('a, b = 8, 8')
 
-        with self.assertRaises(None, msg='Self assign is not supported.'):
+        with self.assertRaises(SyntaxError, msg='No syntax support for index assign.'):
+            self.calculator.process('f[4] = 5')
+
+        with self.assertRaises(VariableError, msg='Self assign is not supported.'):
             self.calculator.process('c = c')
 
         self.calculator.process('d = 5')
         self.calculator.process('e = d')
-        with self.assertRaises(None, msg='Circular reference in variables definition is not supported.'):
+        with self.assertRaises(VariableError, msg='Circular reference in variables definition is not supported.'):
             self.calculator.process('d = e')
 
         self.assertDictEqual(
             self.calculator.variables,
             {
-                Calculator.ANSWER_VARIABLE_NAME: (
-                    Calculator.DEFAULT_VARIABLE_TYPE(), str(Calculator.DEFAULT_VARIABLE_TYPE())
-                ),
-                'd': (5, '5'),
-                'e': (5, 'd')
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
+                'd': (5, 'd = 5', set()),
+                'e': (5, 'e = d', set('d'))
             },
             'After circular invalid assign, variables should stay without changes.'
+        )
+
+    def test_variable_updating(self):
+        self.calculator.process('a = b + 42')
+        result, variables = self.calculator.process('b = 2 * 21')
+
+        self.assertIsNone(
+            result,
+            'Result of assign should be None.'
+        )
+
+        self.assertDictEqual(
+            variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
+                'a': (84, 'a = b + 42', {'b'}),
+                'b': (42, 'b = 2 * 21', set())
+            },
+            'Generated variables list after two operations with calculator.'
+        )
+
+    def test_ans_in_expr(self):
+        self.calculator.process('5*5')
+        result, variables = self.calculator.process('9 + Ans')
+
+        self.assertEqual(
+            result,
+            34,
+            'Result of expression with Ans'
+        )
+
+        self.assertDictEqual(
+            variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: (34, '9 + Ans', {'Ans'})
+            },
+            'Ans source expression and dependency'
+        )
+
+        result, variables = self.calculator.process('9 + Ans')
+
+        self.assertEqual(
+            result,
+            43,
+            'Result of second expression with Ans'
+        )
+
+        self.assertDictEqual(
+            variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: (43, '9 + Ans', {'Ans'})
+            },
+            'Ans source expression and dependency after second compute with Ans'
         )

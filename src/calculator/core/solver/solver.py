@@ -1,15 +1,16 @@
 # coding=utf-8
-from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub
-from typing import Union
+from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name, Pow
+from typing import Dict, Union, Type, Set, Optional
 
-from calculator.core.math.math import Math
+from calculator.core.math import Math
 from calculator.core.parser import Parser
-from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor
-from calculator.core.parser.preprocessor import FactorialPreprocessor
+from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor, FactorialPreprocessor
+from calculator.typing import BinaryNumericFunction
+from calculator.typing import NumericFunction
+from calculator.typing import NumericValue
+from calculator.typing import Variable
 from calculator.settings import BuiltinFunction
 from calculator.utils import method_single_dispatch
-
-NumericResult = Union[float, int]
 
 
 class Solver(object):
@@ -21,7 +22,8 @@ class Solver(object):
         Sub: Math.subtract,
         Div: Math.divide,
         Mult: Math.multiple,
-    }
+        Pow: Math.pow
+    }  # type: Dict[Type[AST], BinaryNumericFunction]
 
     builtin_functions = {
         BuiltinFunction.FACT: Math.fact,
@@ -32,24 +34,39 @@ class Solver(object):
         BuiltinFunction.ROOT: Math.root,
         BuiltinFunction.SQRT: Math.root,
         BuiltinFunction.RAND: Math.rand,
-    }
+    }  # type: Dict[str, NumericFunction]
+
+    _variables = None  # type: Dict[str, Variable]
+    _used_variables = None  # type: Set[str]
 
     def __init__(self):
         super(Solver, self).__init__()
         self._parser = Parser()
 
     parser = property(lambda self: self._parser)
+    variables = property(lambda self: self._variables)
 
-    def compute(self, node_or_expression: Union[str, AST]) -> NumericResult:
-        # TODO: is only Union[int, float]? definitely group it into some configuration
-
+    def compute(
+            self,
+            node_or_expression: Union[str, AST],
+            variables: Optional[Dict[str, Variable]] = None
+    ) -> NumericValue:
+        """
+        Computes result of math expression given as string or AST tree into numeric result.
+        :param node_or_expression:
+        :param variables: known variables
+        :return:
+        """
+        # If assign is invalid, we don't want to change variables in Calculator
+        self._variables = variables.copy() if variables else {}
+        self._used_variables = set()
         if not isinstance(node_or_expression, AST):
             node_or_expression = self._parser.parse(expression=node_or_expression).value
 
         return self._resolve(node_or_expression)
 
     @method_single_dispatch
-    def _resolve(self, node: AST):
+    def _resolve(self, node: AST) -> NumericValue:
         """
         Default endpoint for unresolved types of nodes.
         :param node: expression object
@@ -58,7 +75,7 @@ class Solver(object):
         raise NotImplementedError(node)
 
     @_resolve.register(BinOp)
-    def _(self, bin_op: BinOp) -> NumericResult:
+    def _(self, bin_op: BinOp) -> NumericValue:
         """
         Endpoint for binary operations (in most cases mathematics)
         :param bin_op: BinOp instance (left and right operands with operation)
@@ -73,7 +90,7 @@ class Solver(object):
         return operation(self._resolve(left), self._resolve(right))
 
     @_resolve.register(UnaryOp)
-    def _(self, unary_op: UnaryOp) -> NumericResult:
+    def _(self, unary_op: UnaryOp) -> NumericValue:
         """
         Endpoint for unary operations.
         :param unary_op: UnaryOp instance (operation and operand)
@@ -87,7 +104,7 @@ class Solver(object):
             return + self._resolve(operand)
 
     @_resolve.register(Call)
-    def _(self, call: Call) -> NumericResult:
+    def _(self, call: Call) -> NumericValue:
         """
         Calls function with resolved parameters and returns result
         :param call: Call node
@@ -102,10 +119,31 @@ class Solver(object):
         return function(*map(self._resolve, call.args))
 
     @_resolve.register(Num)
-    def _(self, num: Num) -> NumericResult:
+    def _(self, num: Num) -> NumericValue:
         """
         Returns resolved numeric value.
         :param num: Num Node
         :return: standard python number values
         """
         return num.n
+
+    @_resolve.register(Name)
+    def _(self, name: Name) -> NumericValue:
+        """
+        Returns value of the variable or creates new with default value
+        :param name: Name Node
+        :return: standard python number value
+        """
+        # TODO restriction for reserved variable names
+        # If variable does not exists, OrderedDefaultDict creates it with default values
+        variable_name = name.id
+        variable_value, _, _ = self._variables.get(variable_name)
+        self._used_variables.add(variable_name)
+        return variable_value
+
+    def get_used_variables(self) -> Optional[Set[str]]:
+        """
+        Return set of variable names used in last compute() call
+        :return: Set[str] or None if compute() hasn't been called yet
+        """
+        return self._used_variables
