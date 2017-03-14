@@ -37,7 +37,7 @@ class UIAdapter(QObject):
                 },
                 "variablesDiff": {
                     "new": list(new_variables),
-                    "modified": modified_variable
+                    "modified": list(modified_variable)
                 }
             }))
 
