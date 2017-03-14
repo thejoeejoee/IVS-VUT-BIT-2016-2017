@@ -40,7 +40,6 @@ ApplicationWindow {
 
     Loaders.FontsLoader {}
 
-    // TODO responsivity
     VariableDisplay {
         id: ans
 
@@ -52,15 +51,14 @@ ApplicationWindow {
         variableExpression: variableValue
         variableValue: 0
 
-        width: variablePanel.width
-        height: 29 * 3
+        width: parent.width / 3.2
+        height: parent.height / 6
 
         font.family: StyleSettings.ans.font.family
 
         anchors.right: parent.right
     }
 
-    // TODO resposivity
     VariablesPanel {
         id: variablePanel
 
@@ -71,15 +69,14 @@ ApplicationWindow {
 
         font.family: StyleSettings.variablesPanel.font.family
 
-        width: 340
+        width: ans.width
         height: parent.height
-        itemHeight: 29 * 3
+        itemHeight: ans.height
 
         anchors.top: ans.bottom
         anchors.right: parent.right
     }
 
-    // TODO responsivity
     FunctionsPanel {
         id: functionPanel
 
@@ -90,7 +87,7 @@ ApplicationWindow {
         hoverTextColor: StyleSettings.functionPanel.hoverTextColor
 
         height: parent.height * 0.45
-        width: 70
+        width: parent.width / 15.7
 
         anchors.left: parent.left
         anchors.bottom: parent.bottom
