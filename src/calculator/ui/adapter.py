@@ -30,7 +30,11 @@ class UIAdapter(QObject):
 
             self.processed.emit(QVariant({
                 "result": result,
-                "variables": variables
+                "variables": {
+                    key: dict(value=value, expression=expression)
+                    for key, (value, expression, _)
+                    in variables.items()
+                    }
             }))
 
             self.variables = variables
