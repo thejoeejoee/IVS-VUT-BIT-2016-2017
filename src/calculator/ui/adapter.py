@@ -25,8 +25,8 @@ class UIAdapter(QObject):
         try:
             result, variables = self._calculator.process(expression)
 
-            created_variables = set(self.variables.keys()) - set(variables.keys())
-            changed_variables = {key for key, value in self.variables.items() if value != variables.get(key)}
+            new_variables = set(self.variables.keys()) - set(variables.keys())
+            modified_variable = {key for key, value in self.variables.items() if value != variables.get(key)}
 
             self.processed.emit(QVariant({
                 "result": result,
