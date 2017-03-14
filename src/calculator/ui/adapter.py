@@ -1,5 +1,4 @@
 # coding=utf-8
-from typing import Optional, Dict
 
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 from PyQt5.QtCore import QVariant
@@ -7,7 +6,7 @@ from PyQt5.QtQml import QJSEngine
 from PyQt5.QtQml import QQmlEngine
 
 from calculator.core.calculator import Calculator
-from calculator.exceptions import MathError
+from calculator.exceptions import MathError, VariableError
 
 
 class UIAdapter(QObject):
@@ -16,6 +15,7 @@ class UIAdapter(QObject):
     """
 
     processed = pyqtSignal(QVariant)
+    variables = dict()
 
     def _set_calculator(self, calculator: Calculator) -> None:
         self._calculator = calculator
@@ -23,17 +23,23 @@ class UIAdapter(QObject):
     @pyqtSlot(str)
     def process(self, expression: str):
         try:
-            result = self._calculator.process(expression)
+            result, variables = self._calculator.process(expression)
+
+            created_variables = set(self.variables.keys()) - set(variables.keys())
+            changed_variables = {key for key, value in self.variables.items() if value != variables.get(key)}
 
             self.processed.emit(QVariant({
-                "result": result[0],
-                "variables": result[1]
+                "result": result,
+                "variables": variables
             }))
 
+            self.variables = variables
         except SyntaxError as e:
             pass  # TODO: syntax error of given expression
         except MathError as e:
             pass  # TODO: generic math error
+        except VariableError as e:
+            pass  # TODO: problem with vars
 
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:

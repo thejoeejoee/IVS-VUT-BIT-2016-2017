@@ -70,7 +70,7 @@ class Calculator(object):
             self._variables.update(self._solver.variables)
             self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
 
-        return result, self._variables
+        return result, self._variables.copy()
 
     def _refresh_variable_with_dependencies(self, variable: str) -> None:
         """
