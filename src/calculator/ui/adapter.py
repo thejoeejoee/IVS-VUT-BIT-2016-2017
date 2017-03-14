@@ -15,20 +15,21 @@ class UIAdapter(QObject):
     """
 
     processed = pyqtSignal(QVariant)
-    variables = dict()
+    _variables = dict()
 
     def _set_calculator(self, calculator: Calculator) -> None:
         self._calculator = calculator
+        self._variables = self._calculator.variables.copy()
 
     @pyqtSlot(str)
     def process(self, expression: str):
         try:
             result, variables = self._calculator.process(expression)
 
-            new_variables = (set(variables.keys()) - set(self.variables.keys())) - {
+            new_variables = (set(variables.keys()) - set(self._variables.keys())) - {
                 Calculator.ANSWER_VARIABLE_NAME
             }
-            modified_variable = {key for key, value in self.variables.items() if value != variables.get(key)}
+            modified_variable = {key for key, value in self._variables.items() if value != variables.get(key)}
 
             self.processed.emit(QVariant({
                 "result": result,
@@ -43,7 +44,7 @@ class UIAdapter(QObject):
                 }
             }))
 
-            self.variables = variables
+            self._variables = variables
         except SyntaxError as e:
             pass  # TODO: syntax error of given expression
         except MathError as e:

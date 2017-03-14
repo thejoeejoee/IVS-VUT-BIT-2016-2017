@@ -46,7 +46,7 @@ def standard_deviation(values: Sequence[NumericValue]) -> float:
 
 
 def main(file_input: FileInput) -> None:
-    values = list()  # type: List[NumericResult]
+    values = list()  # type: List[NumericValue]
     for line in file_input:
         if not line:
             continue
