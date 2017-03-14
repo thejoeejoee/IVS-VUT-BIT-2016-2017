@@ -8,6 +8,7 @@ from PyQt5.QtCore import QUrl
 from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType, qmlRegisterType
 from PyQt5.QtWidgets import QApplication
 
+from calculator.ui.adapter import UIAdapter
 from calculator.ui.qmlwrapper.core import Sides
 from calculator.ui.syntaxhighlight import ExpSyntaxHighlighter
 
@@ -30,6 +31,7 @@ class CalculatorApp(QApplication):
     def registerTypes():
         qmlRegisterSingletonType(QUrl("qrc:/assets/styles/UIStyles.qml"), "StyleSettings", 1, 0, "StyleSettings")
         qmlRegisterSingletonType(Sides, "Sides", 1, 0, "Sides", Sides.singletonProvider)
+        qmlRegisterSingletonType(UIAdapter, "Calculator", 1, 0, "Calculator", UIAdapter.singletonProvider)
         qmlRegisterType(ExpSyntaxHighlighter, "ExpSyntaxHighlighter", 1, 0, "ExpSyntaxHighlighter")
 
     def run(self) -> int:

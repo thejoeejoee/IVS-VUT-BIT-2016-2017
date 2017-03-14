@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 1.4
 //import ExpSyntaxHighlighter 1.0
 import Sides 1.0
+import Calculator 1.0
 import StyleSettings 1.0
 
 import "controls" as Control
@@ -134,5 +135,18 @@ ApplicationWindow {
         anchors.top: expInput.top
         anchors.bottom: parent.bottom
         anchors.right: variablePanel.left
+
+        onClicked: {
+            Calculator.process(expInput.text)
+        }
+    }
+
+    Component.onCompleted: {
+        Calculator.processed.connect(handleResult)
+    }
+
+    function handleResult(data) {
+        console.log(data)
+        resultDisplay.result = data["result"]
     }
 }
