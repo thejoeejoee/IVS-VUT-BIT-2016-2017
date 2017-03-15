@@ -4,6 +4,7 @@ import QtQuick.Controls 1.4
 import ExpSyntaxHighlighter 1.0
 import Sides 1.0
 import Calculator 1.0
+import Expansion 1.0
 import StyleSettings 1.0
 
 import "controls" as Control
@@ -92,11 +93,7 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
 
-        onClicked: {
-            var expansion = Calculator.expressionsExpansion[func]
-            expInput.text += expansion
-            expInput.cursorPosition = expInput.text.length
-        }
+        onClicked: expandExpression(func)
     }
 
     Control.ExpressionInput {
@@ -148,6 +145,17 @@ ApplicationWindow {
 
     Component.onCompleted: {
         Calculator.processed.connect(handleResult)
+    }
+
+    function expandExpression(expansionKey) {
+        var expansion = Calculator.expressionsExpansion[expansionKey]
+        var selectedText = expInput.selectedText
+        var selectedStart = expInput.selectionStart
+        var selectedEnd = expInput.selectionEnd
+
+        expInput.remove(selectedStart, selectedEnd)
+        expInput.insert(selectedStart, expansion + selectedText + ")")
+        expInput.cursorPosition = expInput.text.length
     }
 
     function handleResult(data) {

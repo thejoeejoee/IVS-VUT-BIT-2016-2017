@@ -11,6 +11,8 @@ from PyQt5.QtWidgets import QApplication
 from calculator.ui.adapter import UIAdapter
 from calculator.ui.types.core import Sides
 from calculator.ui.types.syntaxhighlight import ExpSyntaxHighlighter
+from calculator.ui.types.qmlwrapper.utils import TypeRegister
+from calculator.settings import Expansion
 
 if platform.system() == "Linux":  # Needed for platform.linux_distribution, which is not available on Windows and OSX
     # For Ubuntu: https://bugs.launchpad.net/ubuntu/+source/python-qt4/+bug/941826
@@ -31,8 +33,9 @@ class CalculatorApp(QApplication):
     def registerTypes():
         qmlRegisterSingletonType(QUrl("qrc:/assets/styles/UIStyles.qml"), "StyleSettings", 1, 0, "StyleSettings")
         qmlRegisterSingletonType(Sides, "Sides", 1, 0, "Sides", Sides.singletonProvider)
+        qmlRegisterSingletonType(Expansion, "Expansion", 1, 0, "Expansion", Expansion.singletonProvider)
         qmlRegisterSingletonType(UIAdapter, "Calculator", 1, 0, "Calculator", UIAdapter.singletonProvider)
-        qmlRegisterType(ExpSyntaxHighlighter, "ExpSyntaxHighlighter", 1, 0, "ExpSyntaxHighlighter")
+        TypeRegister.register_type(ExpSyntaxHighlighter)
 
     def run(self) -> int:
         CalculatorApp.registerTypes()

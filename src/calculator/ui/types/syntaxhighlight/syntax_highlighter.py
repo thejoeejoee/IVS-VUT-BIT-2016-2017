@@ -66,6 +66,7 @@ class SyntaxHighlighter(QSyntaxHighlighter):
                 match = match_pattern.match(p_str, cursor)
 
                 if isinstance(rule.text_format, Iterable):
+                    assert len(rule.text_format) == match.lastCapturedIndex(), "Patterns count does not match colors count."
                     for i in range(1, match.lastCapturedIndex() + 1):
                         self._setFormat(match.capturedStart(i), match.capturedLength(i), rule.text_format[i - 1])
                         cursor = match.capturedStart(i) + match.capturedLength(i)
