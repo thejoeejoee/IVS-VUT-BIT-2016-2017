@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import "../managers"
+import "../visualization"
 
 Item {
     id: component
@@ -11,8 +12,14 @@ Item {
     property real itemHeight: 0
     property color textColor
     property color identifierTextColor
+    property color color: backgroundColor
     property alias backgroundColor: background.color
     property alias scrollBarColor: scrollBar.color
+
+    property alias ansColor: ansItem.color
+    property alias ansTextColor: ansItem.textColor
+    property alias ansIdentifierTextColor: ansItem.identifierTextColor
+
     property font font
 
     clip: true
@@ -28,6 +35,7 @@ Item {
         onDeleteItem: component.deleteVariableRequest(identifier)
 
         onNewItem: {
+            object.color = Qt.binding(function() { return component.color })
             object.textColor = Qt.binding(function() { return component.textColor })
             object.identifierTextColor = Qt.binding(function() { return component.identifierTextColor })
             object.font.family = Qt.binding(function() { return component.font.family })
@@ -42,6 +50,24 @@ Item {
         anchors.fill: flick
     }
 
+    VariableDisplay {
+        id: ansItem
+
+        variableIdentifier: "Ans"
+        variableExpression: variableValue
+        variableValue: 0
+
+        height: component.itemHeight
+
+        font.family: component.font.family
+
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.left: parent.left
+
+        Component.onCompleted: manager.registerVariable(ansItem)
+    }
+
     Flickable{
         id: flick
 
@@ -50,7 +76,10 @@ Item {
         contentWidth: container.width
         contentHeight: container.height
 
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: ansItem.bottom
+        anchors.bottom: parent.bottom
 
         Stack {
             id: container

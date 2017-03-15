@@ -42,25 +42,6 @@ ApplicationWindow {
 
     Loaders.FontsLoader {}
 
-    VariableDisplay {
-        id: ans
-
-        color: StyleSettings.ans.backgroundColor
-        textColor: StyleSettings.ans.textColor
-        identifierTextColor: StyleSettings.ans.identifierColor
-
-        variableIdentifier: "Ans"
-        variableExpression: variableValue
-        variableValue: 0
-
-        width: parent.width / 3.2
-        height: parent.height / 6
-
-        font.family: StyleSettings.ans.font.family
-
-        anchors.right: parent.right
-    }
-
     VariablesPanel {
         id: variablePanel
 
@@ -69,13 +50,17 @@ ApplicationWindow {
         identifierTextColor: StyleSettings.variablesPanel.identifierColor
         scrollBarColor: StyleSettings.variablesPanel.scrollBarColor
 
+        ansTextColor: StyleSettings.ans.textColor
+        ansIdentifierTextColor: StyleSettings.ans.identifierColor
+        ansColor: StyleSettings.ans.backgroundColor
+
         font.family: StyleSettings.variablesPanel.font.family
 
-        width: ans.width
+        width: parent.width / 3.2
         height: parent.height
-        itemHeight: ans.height
+        itemHeight: parent.height / 6
 
-        anchors.top: ans.bottom
+        anchors.top: parent.top
         anchors.right: parent.right
 
         onDeleteVariableRequest: Calculator.removeVariable(identifier)
@@ -162,7 +147,6 @@ ApplicationWindow {
 
         for(key in newVariables) {
             identifier = newVariables[key]
-
             variablePanel.createVariable(identifier, variables[identifier].expression, variables[identifier].value)
         }
 
@@ -170,13 +154,7 @@ ApplicationWindow {
         console.log("New", newVariables)
         for(key in modifiedVariables) {
             identifier = modifiedVariables[key]
-            // TODO change
-            if(identifier == "Ans") {
-                ans.variableExpression = variables[identifier].expression
-                ans.variableValue = variables[identifier].value
-            }
-            else
-                variablePanel.modifyVariable(identifier, variables[identifier].expression, variables[identifier].value)
+            variablePanel.modifyVariable(identifier, variables[identifier].expression, variables[identifier].value)
         }
     }
 

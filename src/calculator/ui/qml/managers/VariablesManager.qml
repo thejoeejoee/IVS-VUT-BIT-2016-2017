@@ -11,6 +11,10 @@ QtObject {
     property Item componentsParent
     property var _variableItems: []
 
+    function registerVariable(variableItem) {
+        manager._variableItems.push(variableItem)
+    }
+
     function addVariable(identifier, expression, value) {
         var object = manager.itemComponent.createObject(manager.componentsParent, {
                                     "variableIdentifier": identifier,
@@ -20,7 +24,7 @@ QtObject {
 
         object.valueSetRequest.connect(manager.handleSetRequest)
         object.deleteRequest.connect(manager.handleDeleteRequest)
-        manager._variableItems.push(object)
+        manager.registerVariable(object)
         manager.newItem(object)
     }
 

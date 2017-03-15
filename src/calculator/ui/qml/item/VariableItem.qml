@@ -22,8 +22,6 @@ Item {
     Visualization.VariableDisplay {
         id: content
 
-        color: "#2A2A2A"
-
         width: parent.width - optionsMenu.menuWidth
         height: parent.height
     }
