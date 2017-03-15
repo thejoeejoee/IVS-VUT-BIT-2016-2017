@@ -31,3 +31,8 @@ BUILTIN_FUNCTIONS_EXPANSION = (
     (BuiltinFunction.SQRT, 'sqrt('),
     (BuiltinFunction.RAND, 'rand(')
 )
+
+HIGHLIGHT_RULES = (
+    (BUILTIN_FUNCTIONS, "red"),
+    (("nyan", ), "purple")
+)

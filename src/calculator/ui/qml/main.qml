@@ -1,7 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
 // TODO allow
-//import ExpSyntaxHighlighter 1.0
+import ExpSyntaxHighlighter 1.0
 import Sides 1.0
 import Calculator 1.0
 import StyleSettings 1.0
@@ -34,10 +34,20 @@ ApplicationWindow {
     }*/
 
 //    Item {
-//        ExpSyntaxHighlighter {
-//            id: esh
-//            target: te
-//        }
+    ExpSyntaxHighlighter {
+        id: esh
+        target: expInput
+
+        Component.onCompleted: {
+            var rules = Calculator.highlightRules
+            for(var key in rules) {
+                var color = rules[key]["color"]
+                var pattern = rules[key]["pattern"]
+
+                esh.addHighlightRule(pattern, color, expInput.font)
+            }
+        }
+    }
 //    }
 
     Loaders.FontsLoader {}

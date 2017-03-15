@@ -6,7 +6,7 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
-from calculator.settings import BUILTIN_FUNCTIONS, BUILTIN_FUNCTIONS_EXPANSION
+from calculator.settings import BUILTIN_FUNCTIONS, BUILTIN_FUNCTIONS_EXPANSION, HIGHLIGHT_RULES
 from calculator.typing import Variable, NumericValue
 
 
@@ -60,6 +60,12 @@ class UIAdapter(QObject):
                 "modified": list(modified_variables)
             }
         }))
+
+    @pyqtProperty(QVariant)
+    def highlightRules(self) -> QVariant:
+        return QVariant([dict(pattern=pattern, color=color)
+                         for (pattern, color) in HIGHLIGHT_RULES]
+                        )
 
     @pyqtProperty(QVariant)
     def builtinFunctions(self) -> QVariant:
