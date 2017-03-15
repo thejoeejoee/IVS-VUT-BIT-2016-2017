@@ -21,6 +21,6 @@ run: venv compile-qt-rcc
 	$(PYTHON) main.py
 
 venv: $(REQUIREMENTS)
-	test -d $(VENV) || virtualenv $(VENV)
+	test -d $(VENV) || pyvenv $(VENV)
 	$(PIP) install -Ur ../requirements.txt
 	touch $(VENV_ACTIVATE)

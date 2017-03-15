@@ -1,4 +1,6 @@
 # coding=utf-8
+
+
 from distutils.core import setup
 
 from setuptools import find_packages
@@ -10,7 +12,7 @@ def install_requires():
 
 
 setup(
-    name='MathCalculatorDejUranDom',
+    name='MathCalculator',
     version='0.1',
     license='GNU GENERAL PUBLIC LICENSE Version 3',
     long_description=open('README.md').read(),
@@ -26,8 +28,10 @@ setup(
         'Topic :: Utilities'
     ],
     author='Josef Kolar, Son Hai Nguyen, Martin Omacht, Robert Navratil',
-    author_email='xkolar71@stud.fit.vutbr.cz, xnguye16@stud.fit.vutbr.cz, xomach00@stud.fit.vutbr.cz, xnavra61@stud.fit.vutbr.cz',
+    author_email='xkolar71@stud.fit.vutbr.cz, xnguye16@stud.fit.vutbr.cz,'
+                 'xomach00@stud.fit.vutbr.cz, xnavra61@stud.fit.vutbr.cz',
     keywords='calculator expression mathematics',
-    packages=find_packages(where='calculator', exclude=['tests']),
-    install_requires=install_requires()
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    install_requires=install_requires(),
+    package_data={'': ['Makefile']},
 )

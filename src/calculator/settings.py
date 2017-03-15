@@ -15,6 +15,18 @@ class BuiltinFunction(object):
     SQRT = 'sqrt'
     RAND = 'rand'
 
+
+class Expansion(QObject):
+    class ExpansionType(IntEnum):
+        NORMAL = 0
+        BRACKETS_PACK = 1
+
+    Q_ENUMS(ExpansionType)
+
+    @staticmethod
+    def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
+        return Expansion()
+
 BUILTIN_FUNCTIONS = (
     BuiltinFunction.ABS,
     BuiltinFunction.FACT,
@@ -31,16 +43,6 @@ HIGHLIGHT_RULES = (
     ((r'\d+',), 'purple'),
     (("(n)(y)(a)(n)",), "#ED1869 #F2BC1F #39BFC1 #672980".split()),
 )
-
-class Expansion(QObject):
-    class ExpansionType(IntEnum):
-        NORMAL = 0
-        BRACKETS_PACK = 1
-    Q_ENUMS(ExpansionType)
-
-    @staticmethod
-    def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
-        return Expansion()
 
 EXPRESSION_EXPANSIONS = (
     (BuiltinFunction.ABS, 'abs(', Expansion.ExpansionType.BRACKETS_PACK),

@@ -2,6 +2,7 @@
 from collections import OrderedDict, Callable
 from functools import update_wrapper, singledispatch
 
+
 def method_single_dispatch(func):
     """
     Decorator like single dispatch, but works with instance methods.
