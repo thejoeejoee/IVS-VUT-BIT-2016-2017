@@ -18,8 +18,8 @@ class BuiltinFunction(object):
 
 class Expansion(QObject):
     class ExpansionType(IntEnum):
-        NORMAL = 0
-        BRACKETS_PACK = 1
+        Normal = 0
+        BracketsPack = 1
 
     Q_ENUMS(ExpansionType)
 
