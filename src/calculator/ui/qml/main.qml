@@ -143,21 +143,13 @@ ApplicationWindow {
     function handleResult(data) {
         if(typeof data["result"] !== "undefined")
             resultDisplay.result = data["result"]
-        var newVariables = data["variablesDiff"]["new"]
-        var modifiedVariables = data["variablesDiff"]["modified"]
+
+        var variablesDiff = data["variablesDiff"]["new"].concat(data["variablesDiff"]["modified"])
         var variables = data["variables"]
-        var identifier, key
 
-        for(key in newVariables) {
-            identifier = newVariables[key]
-            variablePanel.createVariable(identifier, variables[identifier].expression, variables[identifier].value)
-        }
-
-        console.log("Modified", modifiedVariables)
-        console.log("New", newVariables)
-        for(key in modifiedVariables) {
-            identifier = modifiedVariables[key]
-            variablePanel.modifyVariable(identifier, variables[identifier].expression, variables[identifier].value)
+        for(var key in variablesDiff) {
+            var identifier = variablesDiff[key]
+            variablePanel.handleVariableAction(identifier, variables[identifier].expression, variables[identifier].value)
         }
     }
 

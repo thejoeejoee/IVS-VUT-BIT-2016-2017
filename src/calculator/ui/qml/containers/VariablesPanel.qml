@@ -111,6 +111,13 @@ Item {
             });
     }
 
+    function handleVariableAction(identifier, expression, value) {
+        if(manager.findVariable(identifier) === null)
+            manager.addVariable(identifier, expression, value)
+        else
+            manager.setVariable(identifier, expression, value)
+    }
+
     function createVariable(identifier, expression, value) {
         manager.addVariable(identifier, expression, value)
     }
