@@ -13,9 +13,11 @@ TextArea {
     antialiasing: true
     frameVisible: false
 
-    Keys.onReturnPressed: {
-        expInput.confirmed()
-        event.accepted = true
+    Keys.onPressed: {
+        if(event.key == Qt.Key_Return || event.key == Qt.Key_Enter) {
+            expInput.confirmed()
+            event.accepted = true
+        }
     }
 
     Text {
