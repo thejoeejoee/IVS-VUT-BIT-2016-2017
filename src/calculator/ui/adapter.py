@@ -38,7 +38,7 @@ class UIAdapter(QObject):
 
         return created_variables, changed_variables
 
-    @pyqtSlot(str, float)
+    @pyqtSlot(str, int)
     def setVariableValue(self, variable: str, value: NumericValue):
         try:
             _, variables = self._calculator.process_variable(variable=variable, expression=str(value))
