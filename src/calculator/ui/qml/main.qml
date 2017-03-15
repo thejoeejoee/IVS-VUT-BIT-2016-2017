@@ -41,10 +41,10 @@ ApplicationWindow {
         Component.onCompleted: {
             var rules = Calculator.highlightRules
             for(var key in rules) {
-                var color = rules[key]["color"]
-                var pattern = rules[key]["pattern"]
-
-                esh.addHighlightRule(pattern, color, expInput.font)
+                if(typeof rules[key]["color"] == "object")
+                    esh.addHighlightMultiColorRule(rules[key]["pattern"], rules[key]["color"], expInput.font)
+                else
+                    esh.addHighlightSingleColorRule(rules[key]["pattern"], rules[key]["color"], expInput.font)
             }
         }
     }

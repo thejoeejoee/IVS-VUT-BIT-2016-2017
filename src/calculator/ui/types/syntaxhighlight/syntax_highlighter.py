@@ -1,5 +1,7 @@
 # coding=utf-8
-from typing import Optional, Union
+from typing import Optional, Union, Sequence
+
+from collections import Iterable
 
 from PyQt5.QtCore import pyqtSignal, QObject, pyqtProperty, QRegularExpression, pyqtSlot
 from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat
@@ -7,7 +9,8 @@ from PyQt5.QtQuick import QQuickItem, QQuickTextDocument
 
 
 class HighlightRule(QObject):
-    def __init__(self, textFormat: Optional[QTextCharFormat] = None, matchPattern: Optional[QRegularExpression] = None) -> None:
+    def __init__(self, textFormat: Optional[Union[QTextCharFormat, Sequence[QTextCharFormat]]] = None,
+                 matchPattern: Optional[QRegularExpression] = None) -> None:
         """
         :param textFormat: Text format of text mathched by pattern
         :param matchPattern: Regex pattern to match wanted text
@@ -19,7 +22,7 @@ class HighlightRule(QObject):
         self._match_pattern = matchPattern
 
     @property
-    def text_format(self) -> Union[QTextCharFormat, None]:
+    def text_format(self) -> Union[QTextCharFormat, Sequence[QTextCharFormat], None]:
         return self._text_format
 
     @property
@@ -42,6 +45,13 @@ class SyntaxHighlighter(QSyntaxHighlighter):
 
         self.targetChanged.connect(self._setupNewDocument)
 
+    def _setFormat(self, start: int, length: int, text_format: QTextCharFormat) -> None:
+        self.setFormat(
+            start,
+            length,
+            text_format
+        )
+
     def highlightBlock(self, p_str: str) -> None:
         """
          Virtual method, which is called when block of text changed
@@ -55,12 +65,13 @@ class SyntaxHighlighter(QSyntaxHighlighter):
             while match_pattern.match(p_str, cursor).hasMatch():
                 match = match_pattern.match(p_str, cursor)
 
-                self.setFormat(
-                    match.capturedStart(),
-                    match.capturedLength(),
-                    rule.text_format
-                )
-                cursor = match.capturedStart() + match.capturedLength()
+                if isinstance(rule.text_format, Iterable):
+                    for i in range(1, match.lastCapturedIndex() + 1):
+                        self._setFormat(match.capturedStart(i), match.capturedLength(i), rule.text_format[i - 1])
+                        cursor = match.capturedStart(i) + match.capturedLength(i)
+                else:
+                    self._setFormat(match.capturedStart(), match.capturedLength(), rule.text_format)
+                    cursor = match.capturedStart() + match.capturedLength()
 
     def addHighlightRule(self, highlightRule: HighlightRule) -> None:
         self._highlight_rules.append(highlightRule)
@@ -72,7 +83,6 @@ class SyntaxHighlighter(QSyntaxHighlighter):
         :param target: Item, from which document which will extracted
         """
 
-        print(target.property("textDocument").textDocument())
         self.setDocument(target.property("textDocument").textDocument())
 
     @pyqtProperty(QQuickItem)
