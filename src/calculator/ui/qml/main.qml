@@ -93,7 +93,7 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
 
         onClicked: {
-            var expansion = Calculator.builtinFunctionsExpansion[func]
+            var expansion = Calculator.expressionsExpansion[func]
             expInput.text += expansion
             expInput.cursorPosition = expInput.text.length
         }

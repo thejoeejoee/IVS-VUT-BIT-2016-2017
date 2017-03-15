@@ -21,7 +21,6 @@ BUILTIN_FUNCTIONS = (
     BuiltinFunction.RAND,
 )
 
-BUILTIN_FUNCTIONS_EXPANSION = (
     (BuiltinFunction.ABS, 'abs('),
     (BuiltinFunction.FACT, 'fact('),
     (BuiltinFunction.LOG, 'log('),
@@ -30,6 +29,7 @@ BUILTIN_FUNCTIONS_EXPANSION = (
     (BuiltinFunction.POW, 'pow('),
     (BuiltinFunction.SQRT, 'sqrt('),
     (BuiltinFunction.RAND, 'rand(')
+EXPRESSION_EXPANSIONS = (
 )
 
 HIGHLIGHT_RULES = (

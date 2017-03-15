@@ -6,7 +6,7 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
-from calculator.settings import BUILTIN_FUNCTIONS, BUILTIN_FUNCTIONS_EXPANSION, HIGHLIGHT_RULES
+from calculator.settings import BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES
 from calculator.typing import Variable, NumericValue
 
 
@@ -29,6 +29,7 @@ class UIAdapter(QObject):
         :param variables: dict of actual variables
         :return: tuple of created variables and modified variables, both as Set of variable names
         """
+
         created_variables = (set(variables.keys()) - set(self._variables.keys())) - {
             Calculator.ANSWER_VARIABLE_NAME
         }
@@ -72,8 +73,8 @@ class UIAdapter(QObject):
         return QVariant(list(BUILTIN_FUNCTIONS))
 
     @pyqtProperty(QVariant)
-    def builtinFunctionsExpansion(self) -> QVariant:
-        return QVariant({func_name: expansion for (func_name, expansion) in BUILTIN_FUNCTIONS_EXPANSION})
+    def expressionsExpansion(self) -> QVariant:
+        return QVariant({expression: expansion for expression, expansion, _ in EXPRESSION_EXPANSIONS})
 
     @pyqtSlot(str)
     def removeVariable(self, variable_identifier: str) -> None:
