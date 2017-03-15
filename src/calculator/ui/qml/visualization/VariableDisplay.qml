@@ -18,7 +18,9 @@ Rectangle {
 
     // display expression and variable name
     Item {
-        height: parent.height * 0.9
+        id: leftSide
+
+        height: parent.height * 0.85
 
         anchors.leftMargin: internal.sideMargin
         anchors.verticalCenter: parent.verticalCenter
@@ -55,10 +57,10 @@ Rectangle {
         color: component.textColor
 
         font.family: component.font.family
-        font.pixelSize: parent.height * 0.7
+        font.pixelSize: parent.height * 0.65
 
         anchors.right: parent.right
         anchors.rightMargin: internal.sideMargin
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.bottom: leftSide.bottom
     }
 }
