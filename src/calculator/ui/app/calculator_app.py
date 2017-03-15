@@ -9,7 +9,7 @@ from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType, qmlRegi
 from PyQt5.QtWidgets import QApplication
 
 from calculator.ui.adapter import UIAdapter
-from calculator.ui.qmlwrapper.core import Sides
+from calculator.ui.types.core import Sides
 from calculator.ui.types.syntaxhighlight import ExpSyntaxHighlighter
 
 if platform.system() == "Linux":  # Needed for platform.linux_distribution, which is not available on Windows and OSX
