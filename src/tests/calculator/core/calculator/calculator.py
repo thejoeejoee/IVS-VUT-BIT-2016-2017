@@ -193,3 +193,17 @@ class CalculatorTest(TestCase):
 
         with self.assertRaises(VariableError, msg='Remove of unknown variable.'):
             self.calculator.remove_variable('x')
+
+    def test_variable_process(self):
+        result, variables = self.calculator.process_variable('a', '42')
+
+        self.assertIsNone(result, 'None is result of assign.')
+
+        self.assertDictEqual(
+            {
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
+                'a': (42, 'a = 42', set())
+            },
+            variables,
+            'Variables after variable process.'
+        )
