@@ -7,7 +7,7 @@ Rectangle {
     property alias textColor: text.color
     property font font
 
-    Text {
+    AnimatedText {
         id: text
 
         font.family: component.font.family
