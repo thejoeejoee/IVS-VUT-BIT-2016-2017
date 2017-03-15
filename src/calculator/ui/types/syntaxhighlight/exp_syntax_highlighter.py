@@ -1,12 +1,12 @@
 # coding=utf-8
 from typing import Optional, List
 
-from PyQt5.QtCore import QObject, QRegularExpression, pyqtProperty
+from PyQt5.QtCore import QObject, QRegularExpression, pyqtProperty, pyqtSlot
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtGui import QTextCharFormat
 from PyQt5.QtQuick import QQuickItem
 
-from calculator.ui.syntaxhighlight import SyntaxHighlighter, HighlightRule
+from calculator.ui.types.syntaxhighlight import SyntaxHighlighter, HighlightRule
 
 
 class ExpSyntaxHighlighter(QObject):
@@ -19,6 +19,7 @@ class ExpSyntaxHighlighter(QObject):
 
         self._syntax_highlighter = SyntaxHighlighter(self)
 
+    @pyqtSlot(list, QColor, QFont)
     def addHighlightRule(self, patterns: List[str], color: QColor, fontSettings: QFont) -> None:
         """
         Adds highlight rule to syntax highlighter

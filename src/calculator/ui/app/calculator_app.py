@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QApplication
 
 from calculator.ui.adapter import UIAdapter
 from calculator.ui.qmlwrapper.core import Sides
-from calculator.ui.syntaxhighlight import ExpSyntaxHighlighter
+from calculator.ui.types.syntaxhighlight import ExpSyntaxHighlighter
 
 if platform.system() == "Linux":  # Needed for platform.linux_distribution, which is not available on Windows and OSX
     # For Ubuntu: https://bugs.launchpad.net/ubuntu/+source/python-qt4/+bug/941826
