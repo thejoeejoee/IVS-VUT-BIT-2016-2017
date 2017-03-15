@@ -1,12 +1,11 @@
 # coding=utf-8
-from ast import Assign, Name
-from functools import singledispatch
+from ast import Assign, Name, Pass
 from typing import Dict, Tuple, Set, Optional
 
 from calculator.core.solver.solver import Solver
 from calculator.exceptions import VariableError, VariableRemoveRestrictError
 from calculator.typing import NumericValue, Variable
-from calculator.utils import OrderedDefaultDict, method_single_dispatch
+from calculator.utils import OrderedDefaultDict
 
 
 class Calculator(object):
@@ -64,6 +63,8 @@ class Calculator(object):
             self._variables[variable_name] = value, expression, used_variables
             # and refresh all depending
             self._refresh_variable_with_dependencies(variable=variable_name)
+        elif isinstance(root_node, Pass):
+            pass
         else:
             # simple expression
             result = self._solver.compute(expression, self.variables)

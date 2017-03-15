@@ -1,4 +1,5 @@
 # coding=utf-8
+from ast import Pass
 from unittest import TestCase
 
 from calculator.core.parser import Parser
@@ -35,3 +36,10 @@ class ParserTest(TestCase):
     def test_complex_numbers(self):
         with self.assertRaises(ParserSyntaxError, msg='Invalid number with imaginary unit.'):
             self.parser.parse('1+8j')
+
+    def test_empty_expression(self):
+        self.assertIsInstance(
+            self.parser.parse(''),
+            Pass,
+            'Empty expr is Pass'
+        )

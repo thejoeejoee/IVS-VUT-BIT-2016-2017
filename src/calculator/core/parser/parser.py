@@ -1,5 +1,5 @@
 # coding=utf-8
-from ast import AST, NodeTransformer, parse
+from ast import AST, NodeTransformer, parse, Pass
 from typing import Iterable, Sized, Optional, Union, Callable, Tuple
 
 from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor
@@ -61,9 +61,12 @@ class Parser(object):
             raise ParserSyntaxError('Restricted syntax') from e
 
         try:
-            root = parse(
+            body = parse(
                 source=expression
-            ).body[0]
+            ).body
+            if not body:
+                return Pass()
+            root = body[0]
             for transform in self._transforms:
                 root = transform(root)
         except SyntaxError as e:
