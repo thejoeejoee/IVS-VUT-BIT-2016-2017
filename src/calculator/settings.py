@@ -34,5 +34,6 @@ BUILTIN_FUNCTIONS_EXPANSION = (
 
 HIGHLIGHT_RULES = (
     (BUILTIN_FUNCTIONS, "red"),
-    (("nyan", ), "purple")
+    (("(n)(y)(a)(n)",), "green white blue yellow".split()),
+    ((r'\d+',), 'purple')
 )
