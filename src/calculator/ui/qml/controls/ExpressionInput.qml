@@ -5,12 +5,18 @@ import QtQuick.Controls.Styles 1.4
 TextArea {
     id: expInput
 
+    signal confirmed()
     property alias placeholderTextColor: placeholderText.color
 
     focus: true
     textMargin: 15
     antialiasing: true
     frameVisible: false
+
+    Keys.onReturnPressed: {
+        expInput.confirmed()
+        event.accepted = true
+    }
 
     Text {
         id: placeholderText
