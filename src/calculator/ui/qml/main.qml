@@ -103,6 +103,8 @@ ApplicationWindow {
         anchors.top: functionPanel.top
         anchors.bottom: parent.bottom
         anchors.right: calculateButton.left
+
+        onConfirmed: Calculator.process(expInput.text)
     }
 
     ResultDisplay {
