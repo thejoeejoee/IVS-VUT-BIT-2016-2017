@@ -84,7 +84,7 @@ ApplicationWindow {
     FunctionsPanel {
         id: functionPanel
 
-        items: ["pow", "root", "fact", "rand", "log", "e", "pi"]
+        items: Calculator.builtinFunctions
         columns: 1
         backgroundColor: StyleSettings.functionPanel.backgroundColor
         textColor: StyleSettings.functionPanel.textColor
@@ -96,7 +96,11 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
 
-        onClicked: console.log(func)
+        onClicked: {
+            var expansion = Calculator.builtinFunctionsExpansion[func]
+            expInput.text += expansion
+            expInput.cursorPosition = expInput.text.length
+        }
     }
 
     Control.ExpressionInput {

@@ -10,14 +10,14 @@ class BuiltinFunction(object):
     SQRT = 'sqrt'
     RAND = 'rand'
 
-
 BUILTIN_FUNCTIONS = (
     BuiltinFunction.ABS,
     BuiltinFunction.FACT,
     BuiltinFunction.LOG,
     BuiltinFunction.LN,
-    BuiltinFunction.ROOT,
+    BuiltinFunction.POW,
     BuiltinFunction.SQRT,
+    BuiltinFunction.ROOT,
     BuiltinFunction.RAND,
 )
 

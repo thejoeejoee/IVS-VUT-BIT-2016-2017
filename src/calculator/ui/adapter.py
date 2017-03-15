@@ -1,11 +1,9 @@
 # coding=utf-8
 
-from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
-from PyQt5.QtCore import QVariant
-from PyQt5.QtQml import QJSEngine
-from PyQt5.QtQml import QQmlEngine
+from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
+from PyQt5.QtQml import QJSEngine, QQmlEngine
 
-from calculator.settings import BUILTIN_FUNCTIONS_EXPANSION
+from calculator.settings import BUILTIN_FUNCTIONS, BUILTIN_FUNCTIONS_EXPANSION
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
 
@@ -21,6 +19,14 @@ class UIAdapter(QObject):
     def _set_calculator(self, calculator: Calculator) -> None:
         self._calculator = calculator
         self._variables = self._calculator.variables.copy()
+
+    @pyqtProperty(QVariant)
+    def builtinFunctions(self) -> QVariant:
+        return QVariant(list(BUILTIN_FUNCTIONS))
+
+    @pyqtProperty(QVariant)
+    def builtinFunctionsExpansion(self) -> QVariant:
+        return QVariant({func_name: expansion for (func_name, expansion) in BUILTIN_FUNCTIONS_EXPANSION})
 
     @pyqtSlot(str)
     def removeVariable(self, variable_identifier: str) -> None:
