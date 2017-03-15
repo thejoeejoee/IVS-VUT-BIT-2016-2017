@@ -8,6 +8,7 @@ Item {
 
     signal valueSetRequest(string identifier, int value)
     signal deleteRequest(string identifier)
+    signal clicked(string identifier)
 
     property alias color: content.color
     property alias textColor: content.textColor
@@ -24,6 +25,8 @@ Item {
 
         width: parent.width - optionsMenu.menuWidth
         height: parent.height
+
+        onClicked: component.clicked(identifier)
     }
 
 // TODO styles

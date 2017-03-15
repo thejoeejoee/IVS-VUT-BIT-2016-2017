@@ -76,6 +76,7 @@ ApplicationWindow {
 
         onDeleteVariableRequest: Calculator.removeVariable(identifier)
         onSetVariableRequest: Calculator.setVariableValue(identifier, value)
+        onVariableClicked: expandExpression(identifier)
     }
 
     FunctionsPanel {
@@ -138,17 +139,14 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         anchors.right: variablePanel.left
 
-        onClicked: {
-            Calculator.process(expInput.text)
-        }
+        onClicked: Calculator.process(expInput.text)
     }
 
     Component.onCompleted: {
         Calculator.processed.connect(handleResult)
     }
 
-    function expandExpression(expansionKey) {
-        var expansion = Calculator.expressionsExpansion[expansionKey]
+    function expandExpressionDynamically(expansion, expansionType) {
         var selectedText = expInput.selectedText
         var selectedStart = expInput.selectionStart
         var selectedEnd = expInput.selectionEnd
@@ -156,6 +154,25 @@ ApplicationWindow {
         expInput.remove(selectedStart, selectedEnd)
         expInput.insert(selectedStart, expansion + selectedText + ")")
         expInput.cursorPosition = expInput.text.length
+    }
+
+    function expandExpression(expansionKey) {
+        var expansionData = Calculator.expressionsExpansion[expansionKey]
+        var selectedStart = expInput.selectionStart
+        var selectedText = expInput.selectedText
+        var expansion, expansionType
+
+        // if not found, then it is not in Settings, so use normal expansion
+        expansion = (typeof expansionData === "undefined") ?expansionKey :expansionData["expansion"]
+        expansionType = (typeof expansionData === "undefined") ?Expansion.Normal :expansionData["expansionType"]
+
+        if(expansionType == Expansion.BracketsPack) {
+            expInput.remove(selectedStart, expInput.selectionEnd)
+            expInput.insert(selectedStart, expansion + selectedText + ")")
+        }
+
+        else
+            expInput.insert(selectedStart, expansion)
     }
 
     function handleResult(data) {

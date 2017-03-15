@@ -74,7 +74,8 @@ class UIAdapter(QObject):
 
     @pyqtProperty(QVariant)
     def expressionsExpansion(self) -> QVariant:
-        return QVariant({expression: expansion for expression, expansion, _ in EXPRESSION_EXPANSIONS})
+        return QVariant({expression: dict(expansion=expansion, expansionType=expansion_type)
+                         for expression, expansion, expansion_type in EXPRESSION_EXPANSIONS})
 
     @pyqtSlot(str)
     def removeVariable(self, variable_identifier: str) -> None:

@@ -5,9 +5,9 @@ import "../visualization"
 Item {
     id: component
 
-    // TODO connect with adapter
     signal setVariableRequest(string identifier, real value)
     signal deleteVariableRequest(string identifier)
+    signal variableClicked(string identifier)
 
     property real itemHeight: 0
     property color textColor
@@ -42,6 +42,7 @@ Item {
 
             object.width = Qt.binding(function() { return component.width })
             object.height = Qt.binding(function() { return component.itemHeight })
+            object.clicked.connect(component.variableClicked)
         }
     }
 
@@ -66,6 +67,7 @@ Item {
         anchors.left: parent.left
 
         Component.onCompleted: manager.registerVariable(ansItem)
+        onClicked: component.variableClicked(identifier)
     }
 
     Flickable{

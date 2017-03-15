@@ -3,6 +3,8 @@ import QtQuick 2.0
 Rectangle {
     id: component
 
+    signal clicked(string identifier)
+
     property color textColor
     property color identifierTextColor
     property string variableIdentifier: ""
@@ -14,6 +16,11 @@ Rectangle {
         id: internal
 
         property real sideMargin: height / 6.5
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: component.clicked(component.variableIdentifier)
     }
 
     // display expression and variable name

@@ -44,13 +44,14 @@ HIGHLIGHT_RULES = (
     (("(n)(y)(a)(n)",), "#ED1869 #F2BC1F #39BFC1 #672980".split()),
 )
 
+
 EXPRESSION_EXPANSIONS = (
-    (BuiltinFunction.ABS, 'abs(', Expansion.ExpansionType.BRACKETS_PACK),
-    (BuiltinFunction.FACT, 'fact(', Expansion.ExpansionType.BRACKETS_PACK),
-    (BuiltinFunction.LOG, 'log(', Expansion.ExpansionType.BRACKETS_PACK),
-    (BuiltinFunction.LN, 'ln(', Expansion.ExpansionType.BRACKETS_PACK),
-    (BuiltinFunction.ROOT, 'root(', Expansion.ExpansionType.BRACKETS_PACK),
-    (BuiltinFunction.POW, 'pow(', Expansion.ExpansionType.BRACKETS_PACK),
-    (BuiltinFunction.SQRT, 'sqrt(', Expansion.ExpansionType.BRACKETS_PACK),
-    (BuiltinFunction.RAND, 'rand(', Expansion.ExpansionType.BRACKETS_PACK)
+    (BuiltinFunction.ABS, 'abs(', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.FACT, 'fact(', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.LOG, 'log(', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.LN, 'ln(', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.ROOT, 'root(', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.POW, 'pow(', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.SQRT, 'sqrt(', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.RAND, 'rand(', Expansion.ExpansionType.BracketsPack)
 )
