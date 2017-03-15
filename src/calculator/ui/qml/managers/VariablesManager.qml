@@ -4,6 +4,8 @@ QtObject {
     id: manager
 
     signal newItem(var object)
+    signal deleteItem(string identifier)
+    signal setItem(string identifier, real value)
 
     property var itemComponent
     property Item componentsParent
@@ -20,6 +22,17 @@ QtObject {
         object.deleteRequest.connect(manager.handleDeleteRequest)
         manager._variableItems.push(object)
         manager.newItem(object)
+    }
+
+    function setVariable(identifier, expression, value) {
+        var variable = manager.findVariable(identifier)
+        if(variable == null) {
+            console.log("Error: variable not found")
+            return
+        }
+
+        variable.variableExpression = expression
+        variable.variableValue = value
     }
 
     function findVariable(variableIndetifier) {
@@ -39,8 +52,8 @@ QtObject {
     function handleDeleteRequest(variableIndetifier) {
         var object = manager.findVariable(variableIndetifier)
 
-        // TODO call adapter delete
         object.destroy()
+        manager.deleteItem(variableIndetifier)
     }
 
     function handleSetRequest(variableIndetifier, value) {
@@ -49,6 +62,6 @@ QtObject {
         object.variableValue = value
         object.variableExpression = value
 
-        // TODO call adapter set
+        manager.setItem(variableIndetifier, value)
     }
 }

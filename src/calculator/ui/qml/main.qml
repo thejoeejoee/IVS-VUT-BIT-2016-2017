@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
+// TODO allow
 //import ExpSyntaxHighlighter 1.0
 import Sides 1.0
 import Calculator 1.0
@@ -76,6 +77,8 @@ ApplicationWindow {
 
         anchors.top: ans.bottom
         anchors.right: parent.right
+
+        onDeleteVariableRequest: Calculator.removeVariable(identifier)
     }
 
     FunctionsPanel {
@@ -146,7 +149,31 @@ ApplicationWindow {
     }
 
     function handleResult(data) {
-        console.log(data)
-        resultDisplay.result = data["result"]
+        if(typeof data["result"] !== "undefined")
+            resultDisplay.result = data["result"]
+        var newVariables = data["variablesDiff"]["new"]
+        var modifiedVariables = data["variablesDiff"]["modified"]
+        var variables = data["variables"]
+        var identifier, key
+
+        for(key in newVariables) {
+            identifier = newVariables[key]
+
+            variablePanel.createVariable(identifier, variables[identifier].expression, variables[identifier].value)
+        }
+
+        console.log("Modified", modifiedVariables)
+        console.log("New", newVariables)
+        for(key in modifiedVariables) {
+            identifier = modifiedVariables[key]
+            // TODO change
+            if(identifier == "Ans") {
+                ans.variableExpression = variables[identifier].expression
+                ans.variableValue = variables[identifier].value
+            }
+            else
+                variablePanel.modifyVariable(identifier, variables[identifier].expression, variables[identifier].value)
+        }
     }
+
 }

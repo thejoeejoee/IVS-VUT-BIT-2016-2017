@@ -5,6 +5,7 @@ from PyQt5.QtCore import QVariant
 from PyQt5.QtQml import QJSEngine
 from PyQt5.QtQml import QQmlEngine
 
+from calculator.settings import BUILTIN_FUNCTIONS_EXPANSION
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
 
@@ -22,7 +23,13 @@ class UIAdapter(QObject):
         self._variables = self._calculator.variables.copy()
 
     @pyqtSlot(str)
-    def process(self, expression: str):
+    def removeVariable(self, variable_identifier: str) -> None:
+        print(variable_identifier)
+        self._calculator.remove_variable(variable_identifier)
+        self._variables = self._calculator.variables.copy()
+
+    @pyqtSlot(str)
+    def process(self, expression: str) -> None:
         try:
             result, variables = self._calculator.process(expression)
 

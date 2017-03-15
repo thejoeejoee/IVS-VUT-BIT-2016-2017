@@ -4,6 +4,10 @@ import "../managers"
 Item {
     id: component
 
+    // TODO connect with adapter
+    signal setVariableRequest(string identifier, real value)
+    signal deleteVariableRequest(string identifier)
+
     property real itemHeight: 0
     property color textColor
     property color identifierTextColor
@@ -18,9 +22,10 @@ Item {
 
         componentsParent: container
 
-        Component.onCompleted: {
-            _initComponent()
-        }
+        Component.onCompleted: _initComponent()
+
+        onSetItem: component.setVariableRequest(identifier, value)
+        onDeleteItem: component.deleteVariableRequest(identifier)
 
         onNewItem: {
             object.textColor = Qt.binding(function() { return component.textColor })
@@ -77,8 +82,12 @@ Item {
             });
     }
 
-
-    function addVariable(identifier, expression, value) {
+    function createVariable(identifier, expression, value) {
         manager.addVariable(identifier, expression, value)
+    }
+
+
+    function modifyVariable(identifier, expression, value) {
+        manager.setVariable(identifier, expression, value)
     }
 }

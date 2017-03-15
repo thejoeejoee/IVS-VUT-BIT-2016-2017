@@ -20,3 +20,14 @@ BUILTIN_FUNCTIONS = (
     BuiltinFunction.SQRT,
     BuiltinFunction.RAND,
 )
+
+BUILTIN_FUNCTIONS_EXPANSION = (
+    (BuiltinFunction.ABS, 'abs('),
+    (BuiltinFunction.FACT, 'fact('),
+    (BuiltinFunction.LOG, 'log('),
+    (BuiltinFunction.LN, 'ln('),
+    (BuiltinFunction.ROOT, 'root('),
+    (BuiltinFunction.POW, 'pow('),
+    (BuiltinFunction.SQRT, 'sqrt('),
+    (BuiltinFunction.RAND, 'rand(')
+)
