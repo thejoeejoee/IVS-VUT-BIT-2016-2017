@@ -1,11 +1,12 @@
 # coding=utf-8
 from ast import Assign, Name
+from functools import singledispatch
 from typing import Dict, Tuple, Set, Optional
 
 from calculator.core.solver.solver import Solver
 from calculator.exceptions import VariableError, VariableRemoveRestrictError
 from calculator.typing import NumericValue, Variable
-from calculator.utils import OrderedDefaultDict
+from calculator.utils import OrderedDefaultDict, method_single_dispatch
 
 
 class Calculator(object):
@@ -71,6 +72,18 @@ class Calculator(object):
             self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
 
         return result, self._variables.copy()
+
+    def process_variable(self, variable: str, expression: str) -> Tuple[Optional[NumericValue], Dict[str, Variable]]:
+        """
+        Overridden process to set variable directly by expression.
+        :param variable: variable name
+        :param expression: expression to set
+        :return: result and variables, same as standard process
+        """
+        return self.process('{variable} = {expression}'.format(
+            variable=variable,
+            expression=expression
+        ))
 
     def remove_variable(self, variable: str) -> None:
         """

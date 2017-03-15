@@ -1,11 +1,13 @@
 # coding=utf-8
+from typing import Dict, Tuple, Set
 
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
 from PyQt5.QtQml import QJSEngine, QQmlEngine
 
-from calculator.settings import BUILTIN_FUNCTIONS, BUILTIN_FUNCTIONS_EXPANSION
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
+from calculator.settings import BUILTIN_FUNCTIONS, BUILTIN_FUNCTIONS_EXPANSION
+from calculator.typing import Variable, NumericValue
 
 
 class UIAdapter(QObject):
@@ -14,11 +16,50 @@ class UIAdapter(QObject):
     """
 
     processed = pyqtSignal(QVariant)
-    _variables = dict()
+    _variables = dict()  # type: Dict[str, Variable]
 
     def _set_calculator(self, calculator: Calculator) -> None:
         self._calculator = calculator
-        self._variables = self._calculator.variables.copy()
+
+        self._commit_new_variables_state(variables=calculator.variables)
+
+    def _commit_new_variables_state(self, variables: Dict[str, Variable]) -> Tuple[Set[str], Set[str]]:
+        """
+        Commits the new state of variables dict, returning created and modified variables.
+        :param variables: dict of actual variables
+        :return: tuple of created variables and modified variables, both as Set of variable names
+        """
+        created_variables = (set(variables.keys()) - set(self._variables.keys())) - {
+            Calculator.ANSWER_VARIABLE_NAME
+        }
+        changed_variables = {key for key, value in self._variables.items() if value != variables.get(key)}
+
+        self._variables = variables.copy()
+
+        return created_variables, changed_variables
+
+    @pyqtSlot(str, QVariant)
+    def setVariableValue(self, variable: str, value: NumericValue):
+        try:
+            _, variables = self._calculator.process_variable(variable=variable, expression=str(value))
+        except MathError as e:
+            variables = dict()
+            pass  # eg zero divide
+
+        created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
+
+        self.processed.emit(QVariant({
+            "result": 0,  # TODO: result should stay unchanged
+            "variables": {
+                key: dict(value=value, expression=expression)
+                for key, (value, expression, _)
+                in variables.items()
+                },
+            "variablesDiff": {
+                "new": list(created_variables),
+                "modified": list(modified_variables)
+            }
+        }))
 
     @pyqtProperty(QVariant)
     def builtinFunctions(self) -> QVariant:
@@ -39,10 +80,7 @@ class UIAdapter(QObject):
         try:
             result, variables = self._calculator.process(expression)
 
-            new_variables = (set(variables.keys()) - set(self._variables.keys())) - {
-                Calculator.ANSWER_VARIABLE_NAME
-            }
-            modified_variable = {key for key, value in self._variables.items() if value != variables.get(key)}
+            created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
 
             self.processed.emit(QVariant({
                 "result": result,
@@ -52,12 +90,11 @@ class UIAdapter(QObject):
                     in variables.items()
                 },
                 "variablesDiff": {
-                    "new": list(new_variables),
-                    "modified": list(modified_variable)
+                    "new": list(created_variables),
+                    "modified": list(modified_variables)
                 }
             }))
 
-            self._variables = variables
         except SyntaxError as e:
             pass  # TODO: syntax error of given expression
         except MathError as e:

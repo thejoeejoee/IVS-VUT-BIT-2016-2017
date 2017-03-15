@@ -17,7 +17,7 @@ compile-qt-rcc: venv
 test: venv
 	$(PYTHON) test.py || true
 
-run: venv
+run: venv compile-qt-rcc
 	$(PYTHON) main.py
 
 venv: $(REQUIREMENTS)
