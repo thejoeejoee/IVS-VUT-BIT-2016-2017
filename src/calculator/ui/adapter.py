@@ -38,7 +38,7 @@ class UIAdapter(QObject):
 
         return created_variables, changed_variables
 
-    @pyqtSlot(str, QVariant)
+    @pyqtSlot(str, float)
     def setVariableValue(self, variable: str, value: NumericValue):
         try:
             _, variables = self._calculator.process_variable(variable=variable, expression=str(value))
@@ -49,7 +49,7 @@ class UIAdapter(QObject):
         created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
 
         self.processed.emit(QVariant({
-            "result": 0,  # TODO: result should stay unchanged
+            "result": None,
             "variables": {
                 key: dict(value=value, expression=expression)
                 for key, (value, expression, _)

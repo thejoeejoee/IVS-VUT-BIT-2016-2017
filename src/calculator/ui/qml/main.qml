@@ -64,6 +64,7 @@ ApplicationWindow {
         anchors.right: parent.right
 
         onDeleteVariableRequest: Calculator.removeVariable(identifier)
+        onSetVariableRequest: Calculator.setVariableValue(identifier, value)
     }
 
     FunctionsPanel {
