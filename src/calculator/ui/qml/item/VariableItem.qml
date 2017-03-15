@@ -15,6 +15,7 @@ Item {
     property alias variableIdentifier: content.variableIdentifier
     property alias variableExpression: content.variableExpression
     property alias variableValue: content.variableValue
+    property alias font: content.font
 
     clip: true
 
@@ -27,7 +28,7 @@ Item {
         height: parent.height
     }
 
-
+// TODO styles
     Menu.VariableOptions {
         id: optionsMenu
 
