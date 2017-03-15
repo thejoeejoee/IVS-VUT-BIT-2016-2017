@@ -1,4 +1,9 @@
 # coding=utf-8
+from enum import IntEnum
+
+from PyQt5.QtCore import QObject, Q_ENUMS
+from PyQt5.QtQml import QQmlEngine, QJSEngine
+
 
 class BuiltinFunction(object):
     ABS = 'abs'
@@ -21,19 +26,29 @@ BUILTIN_FUNCTIONS = (
     BuiltinFunction.RAND,
 )
 
-    (BuiltinFunction.ABS, 'abs('),
-    (BuiltinFunction.FACT, 'fact('),
-    (BuiltinFunction.LOG, 'log('),
-    (BuiltinFunction.LN, 'ln('),
-    (BuiltinFunction.ROOT, 'root('),
-    (BuiltinFunction.POW, 'pow('),
-    (BuiltinFunction.SQRT, 'sqrt('),
-    (BuiltinFunction.RAND, 'rand(')
-EXPRESSION_EXPANSIONS = (
-)
-
 HIGHLIGHT_RULES = (
     (BUILTIN_FUNCTIONS, "red"),
-    (("(n)(y)(a)(n)",), "green white blue yellow".split()),
-    ((r'\d+',), 'purple')
+    ((r'\d+',), 'purple'),
+    (("(n)(y)(a)(n)",), "#ED1869 #F2BC1F #39BFC1 #672980".split()),
+)
+
+class Expansion(QObject):
+    class ExpansionType(IntEnum):
+        NORMAL = 0
+        BRACKETS_PACK = 1
+    Q_ENUMS(ExpansionType)
+
+    @staticmethod
+    def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
+        return Expansion()
+
+EXPRESSION_EXPANSIONS = (
+    (BuiltinFunction.ABS, 'abs(', Expansion.ExpansionType.BRACKETS_PACK),
+    (BuiltinFunction.FACT, 'fact(', Expansion.ExpansionType.BRACKETS_PACK),
+    (BuiltinFunction.LOG, 'log(', Expansion.ExpansionType.BRACKETS_PACK),
+    (BuiltinFunction.LN, 'ln(', Expansion.ExpansionType.BRACKETS_PACK),
+    (BuiltinFunction.ROOT, 'root(', Expansion.ExpansionType.BRACKETS_PACK),
+    (BuiltinFunction.POW, 'pow(', Expansion.ExpansionType.BRACKETS_PACK),
+    (BuiltinFunction.SQRT, 'sqrt(', Expansion.ExpansionType.BRACKETS_PACK),
+    (BuiltinFunction.RAND, 'rand(', Expansion.ExpansionType.BRACKETS_PACK)
 )
