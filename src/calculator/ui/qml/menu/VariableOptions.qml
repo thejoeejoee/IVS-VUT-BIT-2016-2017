@@ -30,7 +30,7 @@ Item {
     QtObject {
         id: internal
 
-        readonly property bool menuVisible: (component.anchors.leftMargin != -dots.width)
+        readonly property bool menuVisible: (component.anchors.leftMargin == -component.width)
         readonly property bool menuContainMouse: (dots.hovered || zeroSetter.hovered ||
                                          oneSetter.hovered || removeButton.hovered ||
                                          mouseAreaOverlay.containsMouse)
