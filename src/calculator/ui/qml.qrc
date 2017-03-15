@@ -36,5 +36,6 @@
         <file>qml/visualization/ResultDisplay.qml</file>
         <file>qml/controls/CalculateButton.qml</file>
         <file>assets/images/equal.svg</file>
+        <file>qml/visualization/AnimatedText.qml</file>
     </qresource>
 </RCC>
