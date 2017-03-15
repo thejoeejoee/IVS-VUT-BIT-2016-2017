@@ -36,7 +36,7 @@ Rectangle {
             anchors.left: parent.left
         }
 
-        Text {
+        AnimatedText {
             antialiasing: true
             text: component.variableExpression
             color: component.textColor
@@ -50,7 +50,7 @@ Rectangle {
     }
 
     // value display
-    Text {
+    AnimatedText {
         text: component.variableValue
         color: component.textColor
 
