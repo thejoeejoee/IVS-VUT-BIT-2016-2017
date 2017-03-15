@@ -178,6 +178,8 @@ ApplicationWindow {
     function handleResult(data) {
         if(typeof data["result"] !== "undefined")
             resultDisplay.result = data["result"]
+        else
+            expInput.text = ""
 
         var variablesDiff = data["variablesDiff"]["new"].concat(data["variablesDiff"]["modified"])
         var variables = data["variables"]
