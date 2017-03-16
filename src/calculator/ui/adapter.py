@@ -8,6 +8,7 @@ from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
 from calculator.settings import BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES
 from calculator.typing import Variable, NumericValue
+from calculator.utils.number_formatter import NumberFormatter
 from calculator.utils.translate import translate
 
 
@@ -18,6 +19,7 @@ class UIAdapter(QObject):
 
     processed = pyqtSignal(QVariant)
     _variables = dict()  # type: Dict[str, Variable]
+    _formatter = NumberFormatter
 
     def _set_calculator(self, calculator: Calculator) -> None:
         self._calculator = calculator
@@ -53,7 +55,7 @@ class UIAdapter(QObject):
         self.processed.emit(QVariant({
             "result": None,
             "variables": {
-                key: dict(value=value, expression=expression)
+                key: dict(value=self._formatter.format(value), expression=expression)
                 for key, (value, expression, _)
                 in variables.items()
                 },
@@ -92,9 +94,9 @@ class UIAdapter(QObject):
             created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
 
             self.processed.emit(QVariant({
-                "result": result,
+                "result": None if result is None else self._formatter.format(result),
                 "variables": {
-                    key: dict(value=value, expression=expression)
+                    key: dict(value=self._formatter.format(value), expression=expression)
                     for key, (value, expression, _)
                     in variables.items()
                 },

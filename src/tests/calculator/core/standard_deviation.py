@@ -16,7 +16,7 @@ class StandardDeviationTest(TestCase):
         )
 
     def test_standard_deviation(self):
-        values = self.generate_values(10**5)
+        values = self.generate_values()
         self.assertAlmostEqual(
             standard_deviation(values),
             stdev(values),
@@ -24,5 +24,5 @@ class StandardDeviationTest(TestCase):
         )
 
     @staticmethod
-    def generate_values(n=100):
+    def generate_values(n=1000):
         return tuple(randint(-n, n) for _ in range(2 * n))

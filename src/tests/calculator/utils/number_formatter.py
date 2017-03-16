@@ -13,9 +13,9 @@ class TestNumberFormatter(TestCase):
             (2, '2'),
             (2.35, '2.35'),
             (1. / 3, '0.333333'),
-            (10 ** 100, '1e101'),
-            (0.123456789, '0.123456789'[:NumberFormatter.DEFAULT_CHARACTERS_LIMIT]),
-            (123456789.123456789, '1.2346e+08')
+            (10 ** 100, '1.00e+100'),
+            (0.123456789, '0.123456'),
+            (123456789.123456789, '1.23e+8')
         )
         for value, formatted in cases:
             self.assertEqual(
