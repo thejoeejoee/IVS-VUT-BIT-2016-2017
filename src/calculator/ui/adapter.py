@@ -8,6 +8,7 @@ from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
 from calculator.settings import BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES
 from calculator.typing import Variable, NumericValue
+from calculator.utils.translate import translate
 
 
 class UIAdapter(QObject):
