@@ -61,3 +61,31 @@ class SolverAdvancedTest(TestCase):
             -5,
             'Expression of absolute value from factorial.'
         )
+
+    def test_floor_division(self):
+        self.assertEqual(
+            self.solver.compute('5 // 3'),
+            1,
+            'Floor division of standard numbers'
+        )
+
+    def test_floor_negative_division(self):
+        self.assertEqual(
+            self.solver.compute('-5 // 3'),
+            -2,
+            'Floor division with negative number'
+        )
+
+    def test_modulo(self):
+        self.assertEqual(
+            self.solver.compute('5 % 3'),
+            2,
+            'Modulo of with standard numbers'
+        )
+
+    def test_negative_modulo(self):
+        self.assertEqual(
+            self.solver.compute('-5 % 3'),
+            1,
+            'Modulo with negative number'
+        )
