@@ -98,3 +98,31 @@ class MathTest(TestCase):
         )
         with self.assertRaises(MathError, msg='Invalid root of -8.'):
             self.math.root(-8)
+
+    def test_floor_div(self):
+        self.assertEqual(
+            self.math.floor_divide(18, 4),
+            4,
+            'Floor divided 6 by 4 is 2.'
+        )
+        self.assertEqual(
+            self.math.floor_divide(-3, 4),
+            -1,
+            'Floor divide.'
+        )
+        with self.assertRaises(MathError, msg='Invalid floor divide.'):
+            self.math.floor_divide(78, 0)
+
+    def test_modulo(self):
+        self.assertEqual(
+            self.math.modulo(18, 4),
+            2,
+            'Modulo of positive.'
+        )
+        self.assertEqual(
+            self.math.modulo(-9, 4),
+            3,
+            'Modulo of negative.'
+        )
+        with self.assertRaises(MathError, msg='Invalid modulo divider.'):
+            self.math.modulo(78, 0)

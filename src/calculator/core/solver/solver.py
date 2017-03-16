@@ -1,15 +1,14 @@
 # coding=utf-8
-from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name, Pow
+from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name, Pow, FloorDiv, Mod
 from typing import Dict, Union, Type, Set, Optional
 
 from calculator.core.math import Math
 from calculator.core.parser import Parser
-from calculator.core.parser.preprocessor import AbsoluteValuePreprocessor, FactorialPreprocessor
+from calculator.settings import BuiltinFunction
 from calculator.typing import BinaryNumericFunction
 from calculator.typing import NumericFunction
 from calculator.typing import NumericValue
 from calculator.typing import Variable
-from calculator.settings import BuiltinFunction
 from calculator.utils import method_single_dispatch
 
 
@@ -22,7 +21,9 @@ class Solver(object):
         Sub: Math.subtract,
         Div: Math.divide,
         Mult: Math.multiple,
-        Pow: Math.pow
+        Pow: Math.pow,
+        FloorDiv: Math.floor_divide,
+        Mod: Math.modulo,
     }  # type: Dict[Type[AST], BinaryNumericFunction]
 
     builtin_functions = {

@@ -27,6 +27,20 @@ class Math(object):
             raise MathError from e
 
     @staticmethod
+    def floor_divide(a: NumericValue, b: NumericValue) -> NumericValue:
+        try:
+            return operator.floordiv(a, b)
+        except ZeroDivisionError as e:
+            raise MathError from e
+
+    @staticmethod
+    def modulo(a: NumericValue, b: NumericValue) -> NumericValue:
+        try:
+            return operator.mod(a, b)
+        except ZeroDivisionError as e:
+            raise MathError from e
+
+    @staticmethod
     def fact(n: int) -> int:
         try:
             return math.factorial(n)
