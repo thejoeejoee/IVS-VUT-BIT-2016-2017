@@ -60,10 +60,12 @@ ApplicationWindow {
         textColor: StyleSettings.variablesPanel.textColor
         identifierTextColor: StyleSettings.variablesPanel.identifierColor
         scrollBarColor: StyleSettings.variablesPanel.scrollBarColor
+        expressionHoverColor: StyleSettings.variablesPanel.expressionHoverColor
 
         ansTextColor: StyleSettings.ans.textColor
         ansIdentifierTextColor: StyleSettings.ans.identifierColor
         ansColor: StyleSettings.ans.backgroundColor
+        ansExpressionHoverColor: StyleSettings.ans.expressionHoverColor
 
         font.family: StyleSettings.variablesPanel.font.family
 
@@ -76,7 +78,8 @@ ApplicationWindow {
 
         onDeleteVariableRequest: Calculator.removeVariable(identifier)
         onSetVariableRequest: Calculator.setVariableValue(identifier, value)
-        onVariableClicked: expandExpression(identifier)
+        onExpandRequest: expandExpression(data)
+        onOverwriteRequest: overwriteExpression(data)
     }
 
     FunctionsPanel {
@@ -94,7 +97,7 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
 
-        onClicked: expandExpression(func)
+        onExpandRequest: expandExpression(func)
     }
 
     Control.ExpressionInput {
@@ -146,30 +149,25 @@ ApplicationWindow {
         Calculator.processed.connect(handleResult)
     }
 
-    function expandExpressionDynamically(expansion, expansionType) {
-        var selectedText = expInput.selectedText
-        var selectedStart = expInput.selectionStart
-        var selectedEnd = expInput.selectionEnd
-
-        expInput.remove(selectedStart, selectedEnd)
-        expInput.insert(selectedStart, expansion + selectedText + ")")
-        expInput.cursorPosition = expInput.text.length
+    function overwriteExpression(newExpression) {
+        expInput.text = newExpression
     }
 
     function expandExpression(expansionKey) {
         var expansionData = Calculator.expressionsExpansion[expansionKey]
         var selectedStart = expInput.selectionStart
         var selectedText = expInput.selectedText
+        var selectedEnd = expInput.selectionEnd
         var expansion, expansionType
 
         // if not found, then it is not in Settings, so use normal expansion
         expansion = (typeof expansionData === "undefined") ?expansionKey :expansionData["expansion"]
         expansionType = (typeof expansionData === "undefined") ?Expansion.Normal :expansionData["expansionType"]
 
-        if(expansionType == Expansion.BracketsPack) {
-            expInput.remove(selectedStart, expInput.selectionEnd)
+        expInput.remove(selectedStart, selectedEnd)
+
+        if(expansionType == Expansion.BracketsPack)
             expInput.insert(selectedStart, expansion + selectedText + ")")
-        }
 
         else
             expInput.insert(selectedStart, expansion)

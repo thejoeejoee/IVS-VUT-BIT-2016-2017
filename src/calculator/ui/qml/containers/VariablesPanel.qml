@@ -7,7 +7,8 @@ Item {
 
     signal setVariableRequest(string identifier, real value)
     signal deleteVariableRequest(string identifier)
-    signal variableClicked(string identifier)
+    signal expandRequest(string data)
+    signal overwriteRequest(string data)
 
     property real itemHeight: 0
     property color textColor
@@ -15,10 +16,12 @@ Item {
     property color color: backgroundColor
     property alias backgroundColor: background.color
     property alias scrollBarColor: scrollBar.color
+    property color expressionHoverColor
 
     property alias ansColor: ansItem.color
     property alias ansTextColor: ansItem.textColor
     property alias ansIdentifierTextColor: ansItem.identifierTextColor
+    property alias ansExpressionHoverColor: ansItem.expressionHoverColor
 
     property font font
 
@@ -37,12 +40,15 @@ Item {
         onNewItem: {
             object.color = Qt.binding(function() { return component.color })
             object.textColor = Qt.binding(function() { return component.textColor })
+            object.expressionHoverColor = Qt.binding(function() { return component.expressionHoverColor })
             object.identifierTextColor = Qt.binding(function() { return component.identifierTextColor })
             object.font.family = Qt.binding(function() { return component.font.family })
 
             object.width = Qt.binding(function() { return component.width })
             object.height = Qt.binding(function() { return component.itemHeight })
-            object.clicked.connect(component.variableClicked)
+
+            object.overwriteRequest.connect(component.overwriteRequest)
+            object.expandRequest.connect(component.expandRequest)
         }
     }
 
@@ -67,7 +73,8 @@ Item {
         anchors.left: parent.left
 
         Component.onCompleted: manager.registerVariable(ansItem)
-        onClicked: component.variableClicked(identifier)
+        onExpandRequest: component.expandRequest(data)
+        onOverwriteRequest: component.overwriteRequest(data)
     }
 
     Flickable{

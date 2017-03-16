@@ -63,6 +63,7 @@ QtObject {
         property color backgroundColor: "#2A2A2A"
         property color textColor: "white"
         property color identifierColor: "#ED1946"
+        property color expressionHoverColor: "#3D3D3D"
         property color scrollBarColor: "#B7B7B7"
         property font font: Qt.font({
             family: "Roboto Light"
@@ -73,6 +74,7 @@ QtObject {
         property color backgroundColor: "#C1C0C0"
         property color textColor: "white"
         property color identifierColor: "black"
+        property color expressionHoverColor: "#AAAAAA"
         property font font: styles.variablesPanel.font
     }
 

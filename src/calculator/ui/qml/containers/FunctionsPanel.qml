@@ -4,7 +4,7 @@ import "../controls" as Control
 Item {
     id: component
 
-    signal clicked(string func)
+    signal expandRequest(string func)
 
     property var items
     property alias columns: grid.columns
@@ -28,7 +28,7 @@ Item {
                 width: component.width / grid.columns
                 height: component.height / grid.rows
 
-                onClicked: component.clicked(modelData)
+                onClicked: component.expandRequest(modelData)
             }
         }
     }

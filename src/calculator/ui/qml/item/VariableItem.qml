@@ -8,13 +8,15 @@ Item {
 
     signal valueSetRequest(string identifier, int value)
     signal deleteRequest(string identifier)
-    signal clicked(string identifier)
+    signal expandRequest(string data)
+    signal overwriteRequest(string data)
 
     property alias color: content.color
     property alias textColor: content.textColor
     property alias identifierTextColor: content.identifierTextColor
     property alias variableIdentifier: content.variableIdentifier
     property alias variableExpression: content.variableExpression
+    property alias expressionHoverColor: content.expressionHoverColor
     property alias variableValue: content.variableValue
     property alias font: content.font
 
@@ -26,7 +28,8 @@ Item {
         width: parent.width - optionsMenu.menuWidth
         height: parent.height
 
-        onClicked: component.clicked(identifier)
+        onExpandRequest: component.expandRequest(data)
+        onOverwriteRequest: component.overwriteRequest(data)
     }
 
 // TODO styles

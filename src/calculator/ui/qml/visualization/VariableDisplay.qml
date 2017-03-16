@@ -3,10 +3,12 @@ import QtQuick 2.0
 Rectangle {
     id: component
 
-    signal clicked(string identifier)
+    signal expandRequest(string data)
+    signal overwriteRequest(string data)
 
     property color textColor
     property color identifierTextColor
+    property color expressionHoverColor
     property string variableIdentifier: ""
     property string variableExpression: ""
     property real variableValue: 0
@@ -20,14 +22,34 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: component.clicked(component.variableIdentifier)
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: {
+            if(mouse.button == Qt.LeftButton)
+                component.expandRequest(component.variableIdentifier)
+            else
+                component.overwriteRequest(component.variableExpression)
+        }
+    }
+
+    Rectangle {
+        id: expressionBackground
+
+        color: "transparent"
+
+        width: component.width
+        height: expression.y + expression.height + leftSide.y
+        anchors.top: parent.top
+
+        Behavior on color {
+            ColorAnimation { duration: 300 }
+        }
     }
 
     // display expression and variable name
     Item {
         id: leftSide
 
-        height: parent.height * 0.85
+        height: parent.height * 0.92
 
         anchors.leftMargin: internal.sideMargin
         anchors.verticalCenter: parent.verticalCenter
@@ -46,15 +68,30 @@ Rectangle {
         }
 
         AnimatedText {
+            id: expression
+
             antialiasing: true
             text: component.variableExpression
             color: component.textColor
 
             font.family: component.font.family
-            font.pixelSize: parent.height * 0.25
+            font.pixelSize: parent.height * 0.23
 
             anchors.left: parent.left
             anchors.top: parent.top
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onClicked: component.overwriteRequest(component.variableExpression)
+                onContainsMouseChanged: {
+                    if(containsMouse)
+                        expressionBackground.color = component.expressionHoverColor
+                    else
+                        expressionBackground.color = "transparent"
+                }
+            }
         }
     }
 
@@ -64,7 +101,7 @@ Rectangle {
         color: component.textColor
 
         font.family: component.font.family
-        font.pixelSize: parent.height * 0.65
+        font.pixelSize: parent.height * 0.62
 
         anchors.right: parent.right
         anchors.rightMargin: internal.sideMargin
