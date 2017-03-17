@@ -1,0 +1,17 @@
+# Termíny
+2. dubna - dokončení základní verze kalkulačky
+
+
+# Přidělení úkolů
+Kolář - architektura aplikace, testy pro systém proměnných, správa repozitáře, CI, verzí, instalátor
+Nguyen - návrh a implementace grafického rozhraní, propojení GUI s knihovnou
+Omacht - implementace systému proměnných, matematická knihovna, programová dokumentace
+Navrátil - implementace grafického rozhranní, end-user testování, uživatelská dokumentace  
+
+
+# Komunikace
+Pro správu úkolů použity "Github issues", pro promtní komunikaci chat na službě Facebook či osobní setkání. 
+
+
+# Repozitář
+Git repozitář hostovaný na službě Github na adrese https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017. K vývoji použita odlehčená verze techniky známé jako "gitflow". Do repozitáře přidán přístup pro github uživatele "ivskontrola".
