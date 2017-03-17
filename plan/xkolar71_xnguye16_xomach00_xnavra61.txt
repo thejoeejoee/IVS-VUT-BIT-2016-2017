@@ -1,11 +1,13 @@
 # Termíny
+13. února - teambuilding
 19. února - architektura a struktura aplikace
 26. února - definice testů pro matematickou knihovnu, systém proměnných a vestavěné funkce
 5. března - základní funkce kalkulačky jako takové
 19. března - dokončení systému proměnných, prvotní integrace s GUI
+21. března - vydání alpha verze
 2. dubna - dokončení integrace s GUI, end-user testování
 16. dubna - instalátor, úpravy dle provedených end-user testů
-
+24. dubna - oslava k dokončení projektu
 
 # Přidělení úkolů
 Kolář - architektura aplikace, testy pro systém proměnných, správa repozitáře, CI, verzí, instalátor
