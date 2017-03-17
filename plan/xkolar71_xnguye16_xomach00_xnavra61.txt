@@ -1,5 +1,10 @@
 # Termíny
-2. dubna - dokončení základní verze kalkulačky
+19. února - architektura a struktura aplikace
+26. února - definice testů pro matematickou knihovnu, systém proměnných a vestavěné funkce
+5. března - základní funkce kalkulačky jako takové
+19. března - dokončení systému proměnných, prvotní integrace s GUI
+2. dubna - dokončení integrace s GUI, end-user testování
+16. dubna - instalátor, úpravy dle provedených end-user testů
 
 
 # Přidělení úkolů
