@@ -145,8 +145,18 @@ ApplicationWindow {
         onClicked: Calculator.process(expInput.text)
     }
 
+    Error {
+        maskColor: StyleSettings.errorDialog.maskColor
+        dialogColor: StyleSettings.errorDialog.color
+        textColor: StyleSettings.errorDialog.textColor
+        font: StyleSettings.errorDialog.font
+
+        anchors.fill: parent
+    }
+
     Component.onCompleted: {
         Calculator.processed.connect(handleResult)
+        Calculator.error.connect(error.show)
     }
 
     function overwriteExpression(newExpression) {

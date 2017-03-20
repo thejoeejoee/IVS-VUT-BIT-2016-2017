@@ -89,4 +89,11 @@ QtObject {
     property QtObject calculateButton: QtObject {
         property color backgroundColor: "#ED1946"
     }
+
+    property QtObject errorDialog: QtObject {
+        property color maskColor: "black"
+        property color color: "#ED1D2B"
+        property color textColor: "white"
+        property font font: Qt.font({family: "Roboto Light"})
+    }
 }
