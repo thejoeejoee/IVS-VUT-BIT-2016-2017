@@ -5,6 +5,7 @@ Item {
     id: component
 
     signal hide()
+    signal hidden()
     signal show(string error)
     signal hideAnimation()
     signal showAnimation()
@@ -34,7 +35,7 @@ Item {
 
     onHideAnimation: SequentialAnimation {
         NumberAnimation { target: component; property: "opacity"; to: 0; from: 1; duration: 300 }
-        ScriptAction { script: { component.visible = false }}
+        ScriptAction { script: { component.visible = false; component.hidden() }}
     }
 
     Rectangle {

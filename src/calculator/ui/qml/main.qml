@@ -165,6 +165,8 @@ ApplicationWindow {
         font: StyleSettings.errorDialog.font
 
         anchors.fill: parent
+
+        onHidden: expInput.focus = true
     }
 
     Component.onCompleted: {
