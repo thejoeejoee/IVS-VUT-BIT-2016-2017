@@ -151,6 +151,8 @@ ApplicationWindow {
     }
 
     Error {
+        id: error
+
         maskColor: StyleSettings.errorDialog.maskColor
         dialogColor: StyleSettings.errorDialog.color
         textColor: StyleSettings.errorDialog.textColor
