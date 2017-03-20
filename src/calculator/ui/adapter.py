@@ -18,6 +18,7 @@ class UIAdapter(QObject):
     """
 
     processed = pyqtSignal(QVariant)
+    error = pyqtSignal(str)
     _variables = dict()  # type: Dict[str, Variable]
     _formatter = NumberFormatter
 
@@ -107,11 +108,14 @@ class UIAdapter(QObject):
             }))
 
         except SyntaxError as e:
-            pass  # TODO: syntax error of given expression
+            self.error.emit(translate("Adapter", "Expression contains syntax error."))
         except MathError as e:
-            pass  # TODO: generic math error
+            self.error.emit(translate("Adapter", "Math error occured."))
         except VariableError as e:
-            pass  # TODO: problem with vars
+            self.error.emit(translate("Adapter", "Error in defining variable."))
+        except OverflowError:
+            self.error.emit(translate("Adapter", "Result is too big."))
+
 
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
