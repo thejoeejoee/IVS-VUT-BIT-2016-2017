@@ -79,6 +79,8 @@ ApplicationWindow {
     Entities.NyanCat {
         id: nyan
 
+        x: gameWindow.width / 2 - nyan.width / 2
+        y: gameWindow.height / 2 - nyan.height / 2
         width: 50
         height: width
 
