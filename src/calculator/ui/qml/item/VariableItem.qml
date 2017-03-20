@@ -51,12 +51,11 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.right
         anchors.leftMargin: -optionsMenu.menuWidth
-    }
-
-    Connections {
-        target: optionsMenu
 
         onValueSetRequest: component.valueSetRequest(component.variableIdentifier, value)
-        onDeleteRequest: component.deleteRequest(component.variableIdentifier)
+        onDeleteRequest: SequentialAnimation {
+            NumberAnimation { target: component; property: "opacity"; from: 1; to: 0; duration: 200 }
+            ScriptAction { script: component.deleteRequest(component.variableIdentifier) }
+        }
     }
 }
