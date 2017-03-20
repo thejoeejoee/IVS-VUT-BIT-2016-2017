@@ -4,6 +4,7 @@ from enum import IntEnum
 from PyQt5.QtCore import QObject, Q_ENUMS
 from PyQt5.QtQml import QQmlEngine, QJSEngine
 
+ICON_SIZES = (16, 24, 32, 48, 256)
 
 class BuiltinFunction(object):
     ABS = 'abs'

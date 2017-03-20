@@ -40,5 +40,10 @@
         <file>qml/visualization/Error.qml</file>
         <file>qml/controls/DefaultButton.qml</file>
         <file alias="translations/cs.qm">../translations/cs.qm</file>
+        <file>assets/icons/16x16.png</file>
+        <file>assets/icons/24x24.png</file>
+        <file>assets/icons/32x32.png</file>
+        <file>assets/icons/48x48.png</file>
+        <file>assets/icons/256x256.png</file>
     </qresource>
 </RCC>
