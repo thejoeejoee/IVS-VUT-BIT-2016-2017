@@ -20,6 +20,13 @@ Item {
     property alias variableValue: content.variableValue
     property alias font: content.font
 
+    property alias dotsBackgroundColor: optionsMenu.dotsBackgroundColor
+    property alias removeButtonColor: optionsMenu.removeButtonColor
+    property alias settersColor: optionsMenu.settersColor
+    property alias settersHoveredColor: optionsMenu.settersHoveredColor
+    property alias settersTextColor: optionsMenu.settersTextColor
+
+
     clip: true
 
     Visualization.VariableDisplay {
@@ -38,6 +45,8 @@ Item {
 
         height: parent.height
         width: parent.width / 3.2
+
+        font: content.font
 
         anchors.top: parent.top
         anchors.left: parent.right

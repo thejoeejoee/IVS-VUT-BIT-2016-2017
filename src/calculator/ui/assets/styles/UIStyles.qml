@@ -78,6 +78,22 @@ QtObject {
         property font font: styles.variablesPanel.font
     }
 
+    property QtObject variableItem: QtObject {
+        property QtObject dots: QtObject {
+            property color color: "#3D3D3D"
+        }
+
+        property QtObject removeButton: QtObject {
+            property color color: "#D71F26"
+        }
+
+        property QtObject setters: QtObject {
+            property color color: "#2C2C2C"
+            property color hoverColor: "#3D3D3D"
+            property color textColor: "white"
+        }
+    }
+
     property QtObject resultDisplay: QtObject {
         property color backgroundColor: "white"
         property color textColor: "#2F2F2F"

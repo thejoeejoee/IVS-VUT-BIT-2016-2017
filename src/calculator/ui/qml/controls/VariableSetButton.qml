@@ -8,6 +8,7 @@ Controls.Clickable {
     property color color
     property color hoverColor
     property color textColor
+    property font font
 
     hoverEnabled: true
 
@@ -29,7 +30,7 @@ Controls.Clickable {
         text: "=" + component.value
         color: component.textColor
 
-        font.family: "Roboto Light"
+        font.family: component.font.family
         font.pixelSize: parent.height * 0.9
 
         anchors.centerIn: parent

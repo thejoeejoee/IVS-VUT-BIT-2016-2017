@@ -66,6 +66,12 @@ ApplicationWindow {
         ansColor: StyleSettings.ans.backgroundColor
         ansExpressionHoverColor: StyleSettings.ans.expressionHoverColor
 
+        dotsBackgroundColor: StyleSettings.variableItem.dots.color
+        removeButtonColor: StyleSettings.variableItem.removeButton.color
+        settersColor: StyleSettings.variableItem.setters.color
+        settersHoveredColor: StyleSettings.variableItem.setters.hoverColor
+        settersTextColor: StyleSettings.variableItem.setters.textColor
+
         font.family: StyleSettings.variablesPanel.font.family
 
         width: parent.width / 3.2

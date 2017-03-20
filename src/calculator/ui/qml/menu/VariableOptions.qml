@@ -9,6 +9,12 @@ Item {
 
     readonly property alias menuWidth: dots.width
     readonly property alias animationRunning: xAnimation.running
+    property alias dotsBackgroundColor: dotsBackground.color
+    property alias removeButtonColor: removeButtonBackground.color
+    property color settersColor
+    property color settersHoveredColor
+    property color settersTextColor
+    property font font
 
     state: "hidden"
 
@@ -45,7 +51,7 @@ Item {
         height: parent.height
 
         Rectangle {
-            color: "#3D3D3D"
+            id: dotsBackground
             anchors.fill: parent
         }
 
@@ -79,9 +85,10 @@ Item {
             height: parent.height / 2
 
             value: 0
-            color: "#2C2C2C"
-            hoverColor: "#3D3D3D"
-            textColor: "white"
+            color: component.settersColor
+            hoverColor: component.settersHoveredColor
+            textColor: component.settersTextColor
+            font: component.font
         }
 
         Controls.VariableSetButton {
@@ -91,9 +98,10 @@ Item {
             height: parent.height / 2
 
             value: 1
-            color: "#2C2C2C"
-            hoverColor: "#3D3D3D"
-            textColor: "white"
+            color: component.settersColor
+            hoverColor: component.settersHoveredColor
+            textColor: component.settersTextColor
+            font: component.font
         }
     }
 
@@ -108,7 +116,7 @@ Item {
         anchors.left: setters.right
 
         Rectangle {
-            color: "#D71F26"
+            id: removeButtonBackground
             anchors.fill: parent
         }
 
