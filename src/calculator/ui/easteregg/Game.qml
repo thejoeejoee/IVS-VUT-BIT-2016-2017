@@ -22,15 +22,17 @@ ApplicationWindow {
     width: 1500
     height: 800
 
-    visible: true
+    title: qsTr("Easter egg")
+    visible: false
     modality: Qt.ApplicationModal
-    //visibility: Window.FullScreen
 
     onRun: {
+        visibility = Window.FullScreen
         visible = true
         startGame()
     }
 
+    onClosing: endGame()
     onGameOver: endGame()
 
     Rectangle {

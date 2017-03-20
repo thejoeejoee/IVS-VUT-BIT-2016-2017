@@ -29,7 +29,6 @@ ApplicationWindow {
         Game {
             id: game
 
-            Component.onCompleted: game.run()
             onGameOver: console.log(msg)
         }
     }*/
@@ -116,6 +115,12 @@ ApplicationWindow {
         anchors.right: calculateButton.left
 
         onConfirmed: Calculator.process(expInput.text)
+        onTextChanged: {
+            if(text.search("nyan") != -1) {
+                expInput.text = ""
+                game.run()
+            }
+        }
     }
 
     ResultDisplay {
