@@ -67,7 +67,7 @@ ApplicationWindow {
         id: frameTimer
 
         interval: 5
-        running: true
+        running: false
         repeat: true
 
         onTriggered: {
