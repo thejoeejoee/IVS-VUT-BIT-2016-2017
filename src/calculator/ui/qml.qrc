@@ -39,5 +39,6 @@
         <file>qml/visualization/AnimatedText.qml</file>
         <file>qml/visualization/Error.qml</file>
         <file>qml/controls/DefaultButton.qml</file>
+        <file alias="translations/cs.qm">../translations/cs.qm</file>
     </qresource>
 </RCC>

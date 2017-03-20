@@ -3,7 +3,7 @@ import platform
 from typing import List
 
 from PyQt5.QtCore import QTranslator
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QLocale
 from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType, qmlRegisterType
 from PyQt5.QtWidgets import QApplication
 
@@ -29,7 +29,7 @@ class CalculatorApp(QApplication):
         super().__init__(argv)
 
         self._translator = QTranslator()
-        self._translator.load("qrc:/assets/translations/cs.qm")
+        self._translator.load("".join((":/translations/", QLocale().system().name(), ".qsm")))
         self.installTranslator(self._translator)
 
     @staticmethod
