@@ -32,6 +32,8 @@ Item {
     visible: false
     height: flick.height
 
+    onModelChanged: currentItemIndex = 0
+
     onShow: {
         if(!component.visible)
             component.showAnimation()
