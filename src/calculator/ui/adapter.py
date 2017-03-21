@@ -1,4 +1,6 @@
 # coding=utf-8
+import re
+
 from typing import Dict, Tuple, Set
 
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
@@ -6,10 +8,11 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
-from calculator.settings import BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES
 from calculator.typing import Variable, NumericValue
 from calculator.utils.number_formatter import NumberFormatter
 from calculator.utils.translate import translate
+from calculator.settings import (BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS,
+                                 Expression)
 
 
 class UIAdapter(QObject):
@@ -17,10 +20,13 @@ class UIAdapter(QObject):
     Adapter, that connects UI signals to Calculator object, which handle the domain logic with variables.
     """
 
+    identifiersTypesChanged = pyqtSignal(QVariant)
     processed = pyqtSignal(QVariant)
     error = pyqtSignal(str)
     _variables = dict()  # type: Dict[str, Variable]
     _formatter = NumberFormatter
+    func_identifiers_types = [{"identifier": func, "type": Expression.ExpressionTypes.Function}
+                              for func in BUILTIN_FUNCTIONS]
 
     @pyqtSlot(str)
     def process(self, expression: str) -> None:
@@ -29,6 +35,7 @@ class UIAdapter(QObject):
 
             created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
 
+            self.identifiersTypesChanged.emit(self.identifiersTypes)
             self.processed.emit(QVariant({
                 "result": None if result is None else self._formatter.format(result, 16),
                 "variables": {
@@ -129,10 +136,29 @@ class UIAdapter(QObject):
             Calculator.ANSWER_VARIABLE_NAME
         }
         changed_variables = {key for key, value in self._variables.items() if value != variables.get(key)}
-
         self._variables = variables.copy()
 
         return created_variables, changed_variables
+
+    @pyqtProperty(QVariant)
+    def expressionSplitters(self) -> QVariant:
+        return QVariant(list(EXPRESSION_SPLITTERS))
+
+    @pyqtProperty(str)
+    def expressionSplittersRegExp(self) -> str:
+        result = re.escape("".join(EXPRESSION_SPLITTERS))
+        return "".join(("[", result ,"]"))
+
+    @pyqtProperty(QVariant, notify=identifiersTypesChanged)
+    def variables(self) -> QVariant:
+        return QVariant(list(self._calculator.variables.keys()))
+
+    #TODO notify
+    @pyqtProperty(QVariant, notify=identifiersTypesChanged)
+    def identifiersTypes(self):
+        return UIAdapter.func_identifiers_types + \
+               [{"identifier": var_identifier, "type": Expression.ExpressionTypes.Variable}
+                for var_identifier in self._calculator.variables.keys()]
 
     @staticmethod
     def _format_source_expression(variable: str, source_expression: str) -> str:

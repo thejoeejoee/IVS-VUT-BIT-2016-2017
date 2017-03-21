@@ -5,6 +5,7 @@ import ExpSyntaxHighlighter 1.0
 import Sides 1.0
 import Calculator 1.0
 import Expansion 1.0
+import Expression 1.0
 import StyleSettings 1.0
 
 import "controls" as Control
@@ -105,6 +106,11 @@ ApplicationWindow {
         onExpandRequest: expandExpression(func)
     }
 
+    FontMetrics {
+        id: fmExpInput
+        font: expInput.font
+    }
+
     Control.ExpressionInput {
         id: expInput
 
@@ -120,13 +126,27 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         anchors.right: calculateButton.left
 
-        onConfirmed: Calculator.process(expInput.text)
+        onConfirmed: {
+            if(!completer.visible)
+                Calculator.process(expInput.text)
+        }
         onTextChanged: {
             if(text.search("nyan") != -1) {
                 expInput.text = ""
                 game.run()
             }
+
+            completeText()
         }
+        onSelectedTextChanged: {
+            if(selectedText.length) {
+                completer.model = completer.constantModel
+                completer.currentText = ""
+            }
+            else
+                completeText()
+        }
+        onCursorPositionChanged: completeText()
     }
 
     ResultDisplay {
@@ -172,6 +192,76 @@ ApplicationWindow {
     Component.onCompleted: {
         Calculator.processed.connect(handleResult)
         Calculator.error.connect(error.show)
+    }
+
+    Control.Completer {
+        id: completer
+
+        target: expInput
+        constantModel: Calculator.identifiersTypes
+
+        color: StyleSettings.completer.color
+        hoverColor: StyleSettings.completer.hoverColor
+        textColor: StyleSettings.completer.textColor
+        scrollBarColor: StyleSettings.completer.scrollBarColor
+
+        width: 200
+        itemHeight: 20
+        x: calcPos()
+        y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
+
+        onItemChoosed: {
+            var end = expInput.cursorPosition
+            var start = end - currentText.length
+
+            expInput.remove(start, end)
+            expandExpression(currentItem["identifier"])
+        }
+
+        function calcPos() {
+            if(expInput.cursorRectangle.x + completer.width + fmExpInput.advanceWidth(" ") < expInput.width)
+                return expInput.cursorRectangle.x + expInput.x
+            else
+                return expInput.x + expInput.width - completer.width - expInput.textMargin
+        }
+    }
+
+    function currentWord() {
+        var result = ""
+        var startIndex = expInput.cursorPosition - 1
+        var regExp = new RegExp(Calculator.expressionSplittersRegExp)
+
+        if(expInput.cursorPosition == 0)
+            return
+
+        while(expInput.text[startIndex]) {
+            if(expInput.text[startIndex].match(regExp))
+                break;
+            --startIndex
+        }
+        startIndex++;
+
+        while(expInput.text[startIndex]) {
+            if(expInput.text[startIndex].match(regExp))
+                break
+            result += expInput.text[startIndex]
+            startIndex++
+        }
+
+        return result
+    }
+
+    function completeText() {
+        var lastChar = expInput.text.slice(-1)
+        if(Calculator.expressionSplitters.indexOf(lastChar) != -1)
+            completer.show()
+
+        if(typeof currentWord() != "undefined")
+            completer.currentText = currentWord()
+        else
+            completer.currentText = ""
+
+        completer.currentTextChanged(completer.currentText)
     }
 
     function overwriteExpression(newExpression) {

@@ -45,5 +45,7 @@
         <file>assets/icons/32x32.png</file>
         <file>assets/icons/48x48.png</file>
         <file>assets/icons/256x256.png</file>
+        <file>qml/controls/DropDown.qml</file>
+        <file>qml/controls/Completer.qml</file>
     </qresource>
 </RCC>

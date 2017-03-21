@@ -17,6 +17,18 @@ class BuiltinFunction(object):
     RAND = 'rand'
 
 
+EXPRESSION_SPLITTERS = ("+", "-", "(")
+class Expression(QObject):
+    class ExpressionTypes(IntEnum):
+        Function = 0
+        Variable = 1
+
+    Q_ENUMS(ExpressionTypes)
+
+    @staticmethod
+    def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
+        return Expression()
+
 class Expansion(QObject):
     class ExpansionType(IntEnum):
         Normal = 0
