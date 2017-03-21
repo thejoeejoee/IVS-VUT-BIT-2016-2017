@@ -95,7 +95,7 @@ class UIAdapter(QObject):
             created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
 
             self.processed.emit(QVariant({
-                "result": None if result is None else self._formatter.format(result),
+                "result": None if result is None else self._formatter.format(result, 16),
                 "variables": {
                     key: dict(value=self._formatter.format(value), expression=expression)
                     for key, (value, expression, _)

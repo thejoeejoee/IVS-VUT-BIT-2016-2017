@@ -95,7 +95,7 @@ class Calculator(object):
         if variable not in self.variables:
             raise VariableError("Unknown variable '{}' to remove.".format(variable))
 
-        dependencies = self._get_depending_variables(variable=variable)
+        dependencies = self._get_depending_variables(variable=variable) - {Calculator.ANSWER_VARIABLE_NAME}
         if dependencies:
             raise VariableRemoveRestrictError(dependencies=dependencies)
 
