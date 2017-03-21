@@ -3,6 +3,6 @@ comment:
   require_changes: yes
 
 ignore:
-  - "src/tests/**/*"
+  - "src/tests"
   - "src/test.py"
   - "src/calculator/ui"
