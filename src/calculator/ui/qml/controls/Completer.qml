@@ -15,6 +15,11 @@ DropDown {
     scrollbarWidth: 3
     model: constantModel
 
+    onModelChanged: {
+        if(!model.length)
+            component.hide()
+    }
+
     onCurrentTextChanged: {
         var newModel = []
 

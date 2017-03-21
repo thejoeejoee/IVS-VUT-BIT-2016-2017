@@ -137,6 +137,15 @@ ApplicationWindow {
 
             completeText()
         }
+        onSelectedTextChanged: {
+            if(selectedText.length) {
+                completer.model = completer.constantModel
+                completer.currentText = ""
+            }
+            else
+                completeText()
+        }
+        onCursorPositionChanged: completeText()
     }
 
     ResultDisplay {
@@ -203,6 +212,7 @@ ApplicationWindow {
         onItemChoosed: {
             var end = expInput.cursorPosition
             var start = end - currentText.length
+
             expInput.remove(start, end)
             expandExpression(currentItem["identifier"])
         }
@@ -215,16 +225,42 @@ ApplicationWindow {
         }
     }
 
+    function currentWord() {
+        var result = ""
+        var startIndex = expInput.cursorPosition - 1
+        var regExp = new RegExp(Calculator.expressionSplittersRegExp)
+
+        if(expInput.cursorPosition == 0)
+            return
+
+        while(expInput.text[startIndex]) {
+            if(expInput.text[startIndex].match(regExp))
+                break;
+            --startIndex
+        }
+        startIndex++;
+
+        while(expInput.text[startIndex]) {
+            if(expInput.text[startIndex].match(regExp))
+                break
+            result += expInput.text[startIndex]
+            startIndex++
+        }
+
+        return result
+    }
+
     function completeText() {
         var lastChar = expInput.text.slice(-1)
-
         if(Calculator.expressionSplitters.indexOf(lastChar) != -1)
             completer.show()
 
-        var regExp = new RegExp(Calculator.expressionSplittersRegExp)
-        var splitted = expInput.text.split(regExp)
+        if(typeof currentWord() != "undefined")
+            completer.currentText = currentWord()
+        else
+            completer.currentText = ""
 
-        completer.currentText = splitted[splitted.length - 1]
+        completer.currentTextChanged(completer.currentText)
     }
 
     function overwriteExpression(newExpression) {
