@@ -12,6 +12,7 @@ TextArea {
     textMargin: 15
     antialiasing: true
     frameVisible: false
+    wrapMode: Text.WordWrap
 
     Keys.onPressed: {
         if(event.key == Qt.Key_Return || event.key == Qt.Key_Enter) {
