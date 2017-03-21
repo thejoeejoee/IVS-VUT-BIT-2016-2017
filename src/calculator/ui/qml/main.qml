@@ -5,6 +5,7 @@ import ExpSyntaxHighlighter 1.0
 import Sides 1.0
 import Calculator 1.0
 import Expansion 1.0
+import Expression 1.0
 import StyleSettings 1.0
 
 import "controls" as Control
