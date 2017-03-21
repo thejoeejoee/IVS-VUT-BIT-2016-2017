@@ -105,6 +105,11 @@ ApplicationWindow {
         onExpandRequest: expandExpression(func)
     }
 
+    FontMetrics {
+        id: fmExpInput
+        font: expInput.font
+    }
+
     Control.ExpressionInput {
         id: expInput
 
@@ -126,6 +131,8 @@ ApplicationWindow {
                 expInput.text = ""
                 game.run()
             }
+
+            completeText()
         }
     }
 
@@ -172,6 +179,28 @@ ApplicationWindow {
     Component.onCompleted: {
         Calculator.processed.connect(handleResult)
         Calculator.error.connect(error.show)
+    }
+
+    Control.Completer {
+        id: completer
+
+        target: expInput
+        constantModel: ["ahoj", "da", "ahojky", "1", "2", "3", "4", "5"]
+        width: 100
+        itemHeight: 20
+        x: fmExpInput.advanceWidth(expInput.text) + expInput.textMargin + expInput.x
+        y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
+
+        onItemChoosed: expandExpression(currentItem)
+    }
+
+    function completeText() {
+        var lastChar = expInput.text.slice(-1)
+        if(lastChar == " ")
+            completer.show()
+
+        var splitted = expInput.text.split(" ")
+        completer.currentText = splitted[splitted.length - 1]
     }
 
     function overwriteExpression(newExpression) {
