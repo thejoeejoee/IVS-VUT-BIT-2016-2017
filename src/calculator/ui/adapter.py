@@ -6,7 +6,7 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
-from calculator.settings import BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES
+from calculator.settings import BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS
 from calculator.typing import Variable, NumericValue
 from calculator.utils.number_formatter import NumberFormatter
 from calculator.utils.translate import translate
@@ -116,6 +116,15 @@ class UIAdapter(QObject):
         except OverflowError:
             self.error.emit(translate("Adapter", "Result is too big."))
 
+    @pyqtProperty(QVariant)
+    def expressionSplitters(self) -> QVariant:
+        return QVariant(list(EXPRESSION_SPLITTERS))
+
+    @pyqtProperty(str)
+    def expressionSplittersRegExp(self) -> str:
+        chars_to_escape = ("(", ")")
+        result = ["".join(("\\\\", c)) if c in chars_to_escape else c for c in EXPRESSION_SPLITTERS]
+        return "".join(["["] + result + ["]"])
 
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
