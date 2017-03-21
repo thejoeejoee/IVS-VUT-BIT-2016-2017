@@ -39,7 +39,6 @@ Item {
         onOverwriteRequest: component.overwriteRequest(data)
     }
 
-// TODO styles
     Menu.VariableOptions {
         id: optionsMenu
 

@@ -22,19 +22,15 @@ ApplicationWindow {
     minimumHeight: width * (522 / 1101)
     maximumHeight: minimumHeight
 
-    //flags: Qt.FramelessWindowHint
     title: qsTr("Barbie Calculator")
     visible: true
 
-    /*Item{
-        Game {
-            id: game
+    Game {
+        id: game
 
-            onGameOver: console.log(msg)
-        }
-    }*/
+        onGameOver: console.log(msg)
+    }
 
-//    Item {
     ExpSyntaxHighlighter {
         id: esh
         target: expInput
@@ -49,7 +45,6 @@ ApplicationWindow {
             }
         }
     }
-//    }
 
     Loaders.FontsLoader {}
 
@@ -302,5 +297,4 @@ ApplicationWindow {
             variablePanel.handleVariableAction(identifier, variables[identifier].expression, variables[identifier].value)
         }
     }
-
 }
