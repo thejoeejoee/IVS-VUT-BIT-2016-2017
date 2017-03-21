@@ -188,17 +188,7 @@ ApplicationWindow {
         id: completer
 
         target: expInput
-        // TODO enum
-        constantModel: [
-            {"identifier": "ahoj", "type": "f"},
-            {"identifier": "da", "type": "f"},
-            {"identifier": "ahojky", "type": "v"},
-            {"identifier": "1", "type": "v"},
-            {"identifier": "2", "type": "v"},
-            {"identifier": "3", "type": "v"},
-            {"identifier": "4", "type": "v"},
-            {"identifier": "5", "type": "v"}
-        ]
+        constantModel: Calculator.identifiersTypes
 
         color: StyleSettings.completer.color
         hoverColor: StyleSettings.completer.hoverColor

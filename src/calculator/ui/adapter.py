@@ -6,10 +6,11 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError
-from calculator.settings import BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS
 from calculator.typing import Variable, NumericValue
 from calculator.utils.number_formatter import NumberFormatter
 from calculator.utils.translate import translate
+from calculator.settings import (BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS,
+                                 Expression)
 
 
 class UIAdapter(QObject):
@@ -17,10 +18,13 @@ class UIAdapter(QObject):
     Adapter, that connects UI signals to Calculator object, which handle the domain logic with variables.
     """
 
+    identifiersTypesChanged = pyqtSignal(QVariant)
     processed = pyqtSignal(QVariant)
     error = pyqtSignal(str)
     _variables = dict()  # type: Dict[str, Variable]
     _formatter = NumberFormatter
+    func_identifiers_types = [{"identifier": func, "type": Expression.ExpressionTypes.Function}
+                              for func in BUILTIN_FUNCTIONS]
 
     def _set_calculator(self, calculator: Calculator) -> None:
         self._calculator = calculator
@@ -87,6 +91,8 @@ class UIAdapter(QObject):
         self._calculator.remove_variable(variable_identifier)
         self._variables = self._calculator.variables.copy()
 
+        self.identifiersTypesChanged.emit(self.identifiersTypes)
+
     @pyqtSlot(str)
     def process(self, expression: str) -> None:
         try:
@@ -94,6 +100,7 @@ class UIAdapter(QObject):
 
             created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
 
+            self.identifiersTypesChanged.emit(self.identifiersTypes)
             self.processed.emit(QVariant({
                 "result": None if result is None else self._formatter.format(result),
                 "variables": {
@@ -125,6 +132,18 @@ class UIAdapter(QObject):
         chars_to_escape = ("(", ")")
         result = ["".join(("\\\\", c)) if c in chars_to_escape else c for c in EXPRESSION_SPLITTERS]
         return "".join(["["] + result + ["]"])
+
+    @pyqtProperty(QVariant, notify=identifiersTypesChanged)
+    def variables(self) -> QVariant:
+        return QVariant(list(self._calculator.variables.keys()))
+
+    #TODO notify
+    @pyqtProperty(QVariant, notify=identifiersTypesChanged)
+    def identifiersTypes(self):
+        return UIAdapter.func_identifiers_types + \
+               [{"identifier": var_identifier, "type": Expression.ExpressionTypes.Variable}
+                for var_identifier in self._calculator.variables.keys()]
+
 
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
