@@ -59,12 +59,12 @@ DropDown {
         Rectangle {
             id: symbol
 
-            width: 10
-            height: 10
+            width: height
+            height: component.itemHeight / 2
             color: StyleSettings.completer.typeColors[itemData["type"]]
 
             anchors.left: parent.left
-            anchors.leftMargin: 10
+            anchors.leftMargin: width
             anchors.verticalCenter: parent.verticalCenter
         }
 
@@ -73,7 +73,7 @@ DropDown {
             text: itemData["identifier"]
             font.pixelSize: parent.height * 0.8
             anchors.left: symbol.right
-            anchors.leftMargin: 10
+            anchors.leftMargin: symbol.anchors.leftMargin
             anchors.verticalCenter: parent.verticalCenter
         }
     }

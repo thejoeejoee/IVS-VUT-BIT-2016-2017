@@ -200,8 +200,8 @@ ApplicationWindow {
         textColor: StyleSettings.completer.textColor
         scrollBarColor: StyleSettings.completer.scrollBarColor
 
-        width: 200
-        itemHeight: 20
+        width: parent.width * 0.18
+        itemHeight: width / 8
         x: calcPos()
         y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
 
