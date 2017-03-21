@@ -1,4 +1,6 @@
 # coding=utf-8
+import re
+
 from typing import Dict, Tuple, Set
 
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
@@ -129,9 +131,8 @@ class UIAdapter(QObject):
 
     @pyqtProperty(str)
     def expressionSplittersRegExp(self) -> str:
-        chars_to_escape = ("(", ")")
-        result = ["".join(("\\\\", c)) if c in chars_to_escape else c for c in EXPRESSION_SPLITTERS]
-        return "".join(["["] + result + ["]"])
+        result = re.escape("".join(EXPRESSION_SPLITTERS))
+        return "".join(("[", result ,"]"))
 
     @pyqtProperty(QVariant, notify=identifiersTypesChanged)
     def variables(self) -> QVariant:
