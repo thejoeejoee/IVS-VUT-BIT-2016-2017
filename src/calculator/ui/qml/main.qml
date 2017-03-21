@@ -125,7 +125,10 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         anchors.right: calculateButton.left
 
-        onConfirmed: Calculator.process(expInput.text)
+        onConfirmed: {
+            if(!completer.visible)
+                Calculator.process(expInput.text)
+        }
         onTextChanged: {
             if(text.search("nyan") != -1) {
                 expInput.text = ""
@@ -186,7 +189,6 @@ ApplicationWindow {
 
         target: expInput
         // TODO enum
-        // BUG when delete char from second line to first, then completer not set x correctly
         constantModel: [
             {"identifier": "ahoj", "type": "f"},
             {"identifier": "da", "type": "f"},
@@ -208,21 +210,30 @@ ApplicationWindow {
         x: calcPos()
         y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
 
-        onItemChoosed: expandExpression(currentItem)
+        onItemChoosed: {
+            var end = expInput.cursorPosition
+            var start = end - currentText.length
+            expInput.remove(start, end)
+            expandExpression(currentItem["identifier"])
+        }
 
         function calcPos() {
             if(expInput.cursorRectangle.x + completer.width + fmExpInput.advanceWidth(" ") < expInput.width)
                 return expInput.cursorRectangle.x + expInput.x
-            return completer.x
+            else
+                return expInput.x + expInput.width - completer.width - expInput.textMargin
         }
     }
 
     function completeText() {
         var lastChar = expInput.text.slice(-1)
-        if(lastChar == " ")
+
+        if(Calculator.expressionSplitters.indexOf(lastChar) != -1)
             completer.show()
 
-        var splitted = expInput.text.split(" ")
+        var regExp = new RegExp(Calculator.expressionSplittersRegExp)
+        var splitted = expInput.text.split(regExp)
+
         completer.currentText = splitted[splitted.length - 1]
     }
 
