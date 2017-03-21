@@ -11,7 +11,7 @@ Rectangle {
     property color expressionHoverColor
     property string variableIdentifier: ""
     property string variableExpression: ""
-    property real variableValue: 0
+    property string variableValue: "0"
     property font font
 
     QtObject {
@@ -101,7 +101,7 @@ Rectangle {
         color: component.textColor
 
         font.family: component.font.family
-        font.pixelSize: parent.height * 0.62
+        font.pixelSize: parent.height * 0.55
 
         anchors.right: parent.right
         anchors.rightMargin: internal.sideMargin

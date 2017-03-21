@@ -74,7 +74,7 @@ Item {
 
         variableIdentifier: "Ans"
         variableExpression: variableValue
-        variableValue: 0
+        variableValue: "0"
 
         height: component.itemHeight
 
