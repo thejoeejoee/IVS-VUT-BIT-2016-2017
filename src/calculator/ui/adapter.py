@@ -156,9 +156,9 @@ class UIAdapter(QObject):
     #TODO notify
     @pyqtProperty(QVariant, notify=identifiersTypesChanged)
     def identifiersTypes(self):
-        return UIAdapter.func_identifiers_types + \
-               [{"identifier": var_identifier, "type": Expression.ExpressionTypes.Variable}
-                for var_identifier in self._calculator.variables.keys()]
+        return [{"identifier": var_identifier, "type": Expression.ExpressionTypes.Variable}
+                for var_identifier in sorted(self._calculator.variables.keys())] + \
+               UIAdapter.func_identifiers_types
 
     @staticmethod
     def _format_source_expression(variable: str, source_expression: str) -> str:

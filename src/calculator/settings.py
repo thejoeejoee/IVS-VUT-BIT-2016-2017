@@ -17,7 +17,7 @@ class BuiltinFunction(object):
     RAND = 'rand'
 
 
-EXPRESSION_SPLITTERS = ("+", "-", "(")
+EXPRESSION_SPLITTERS = ("+", "-", "(", "*", "/")
 class Expression(QObject):
     class ExpressionTypes(IntEnum):
         Function = 0
