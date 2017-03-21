@@ -28,26 +28,41 @@ class UIAdapter(QObject):
     func_identifiers_types = [{"identifier": func, "type": Expression.ExpressionTypes.Function}
                               for func in BUILTIN_FUNCTIONS]
 
-    def _set_calculator(self, calculator: Calculator) -> None:
-        self._calculator = calculator
+    @pyqtSlot(str)
+    def process(self, expression: str) -> None:
+        try:
+            result, variables = self._calculator.process(expression)
 
-        self._commit_new_variables_state(variables=calculator.variables)
+            created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
 
-    def _commit_new_variables_state(self, variables: Dict[str, Variable]) -> Tuple[Set[str], Set[str]]:
-        """
-        Commits the new state of variables dict, returning created and modified variables.
-        :param variables: dict of actual variables
-        :return: tuple of created variables and modified variables, both as Set of variable names
-        """
+            self.identifiersTypesChanged.emit(self.identifiersTypes)
+            self.processed.emit(QVariant({
+                "result": None if result is None else self._formatter.format(result, 16),
+                "variables": {
+                    key: dict(
+                        value=self._formatter.format(value),
+                        expression=self._format_source_expression(
+                            variable=key,
+                            source_expression=expression
+                        )
+                    )
+                    for key, (value, expression, _)
+                    in variables.items()
+                    },
+                "variablesDiff": {
+                    "new": list(created_variables),
+                    "modified": list(modified_variables)
+                }
+            }))
 
-        created_variables = (set(variables.keys()) - set(self._variables.keys())) - {
-            Calculator.ANSWER_VARIABLE_NAME
-        }
-        changed_variables = {key for key, value in self._variables.items() if value != variables.get(key)}
-
-        self._variables = variables.copy()
-
-        return created_variables, changed_variables
+        except SyntaxError as e:
+            self.error.emit(translate("Adapter", "Expression contains syntax error."))
+        except MathError as e:
+            self.error.emit(translate("Adapter", "Math error occured."))
+        except VariableError as e:
+            self.error.emit(translate("Adapter", "Error in defining variable."))
+        except OverflowError:
+            self.error.emit(translate("Adapter", "Result is too big."))
 
     @pyqtSlot(str, int)
     def setVariableValue(self, variable: str, value: NumericValue):
@@ -62,7 +77,13 @@ class UIAdapter(QObject):
         self.processed.emit(QVariant({
             "result": None,
             "variables": {
-                key: dict(value=self._formatter.format(value), expression=expression)
+                key: dict(
+                    value=self._formatter.format(value),
+                    expression=self._format_source_expression(
+                        variable=key,
+                        source_expression=expression
+                    )
+                )
                 for key, (value, expression, _)
                 in variables.items()
                 },
@@ -71,6 +92,12 @@ class UIAdapter(QObject):
                 "modified": list(modified_variables)
             }
         }))
+
+    @pyqtSlot(str)
+    def removeVariable(self, variable_identifier: str) -> None:
+        print(variable_identifier)
+        self._calculator.remove_variable(variable_identifier)
+        self._variables = self._calculator.variables.copy()
 
     @pyqtProperty(QVariant)
     def highlightRules(self) -> QVariant:
@@ -87,43 +114,31 @@ class UIAdapter(QObject):
         return QVariant({expression: dict(expansion=expansion, expansionType=expansion_type)
                          for expression, expansion, expansion_type in EXPRESSION_EXPANSIONS})
 
-    @pyqtSlot(str)
-    def removeVariable(self, variable_identifier: str) -> None:
-        print(variable_identifier)
-        self._calculator.remove_variable(variable_identifier)
-        self._variables = self._calculator.variables.copy()
+    @staticmethod
+    def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
+        adapter = UIAdapter()
+        adapter._set_calculator(Calculator())
+        return adapter
 
-        self.identifiersTypesChanged.emit(self.identifiersTypes)
+    def _set_calculator(self, calculator: Calculator) -> None:
+        self._calculator = calculator
 
-    @pyqtSlot(str)
-    def process(self, expression: str) -> None:
-        try:
-            result, variables = self._calculator.process(expression)
+        self._commit_new_variables_state(variables=calculator.variables)
 
-            created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
+    def _commit_new_variables_state(self, variables: Dict[str, Variable]) -> Tuple[Set[str], Set[str]]:
+        """
+        Commits the new state of variables dict, returning created and modified variables.
+        :param variables: dict of actual variables
+        :return: tuple of created variables and modified variables, both as Set of variable names
+        """
 
-            self.identifiersTypesChanged.emit(self.identifiersTypes)
-            self.processed.emit(QVariant({
-                "result": None if result is None else self._formatter.format(result),
-                "variables": {
-                    key: dict(value=self._formatter.format(value), expression=expression)
-                    for key, (value, expression, _)
-                    in variables.items()
-                },
-                "variablesDiff": {
-                    "new": list(created_variables),
-                    "modified": list(modified_variables)
-                }
-            }))
+        created_variables = (set(variables.keys()) - set(self._variables.keys())) - {
+            Calculator.ANSWER_VARIABLE_NAME
+        }
+        changed_variables = {key for key, value in self._variables.items() if value != variables.get(key)}
+        self._variables = variables.copy()
 
-        except SyntaxError as e:
-            self.error.emit(translate("Adapter", "Expression contains syntax error."))
-        except MathError as e:
-            self.error.emit(translate("Adapter", "Math error occured."))
-        except VariableError as e:
-            self.error.emit(translate("Adapter", "Error in defining variable."))
-        except OverflowError:
-            self.error.emit(translate("Adapter", "Result is too big."))
+        return created_variables, changed_variables
 
     @pyqtProperty(QVariant)
     def expressionSplitters(self) -> QVariant:
@@ -145,9 +160,12 @@ class UIAdapter(QObject):
                [{"identifier": var_identifier, "type": Expression.ExpressionTypes.Variable}
                 for var_identifier in self._calculator.variables.keys()]
 
-
     @staticmethod
-    def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
-        adapter = UIAdapter()
-        adapter._set_calculator(Calculator())
-        return adapter
+    def _format_source_expression(variable: str, source_expression: str) -> str:
+        """
+        From source expression strips the variable name and whitespace before =.
+        :param variable: variable name
+        :param source_expression: source expression for variable
+        :return: striped source expression
+        """
+        return source_expression.lstrip(variable).lstrip()

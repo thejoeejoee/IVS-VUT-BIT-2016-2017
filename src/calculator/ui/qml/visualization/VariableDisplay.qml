@@ -27,7 +27,7 @@ Rectangle {
             if(mouse.button == Qt.LeftButton)
                 component.expandRequest(component.variableIdentifier)
             else
-                component.overwriteRequest(component.variableExpression)
+                component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
         }
     }
 
@@ -84,7 +84,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
 
-                onClicked: component.overwriteRequest(component.variableExpression)
+                onClicked: component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
                 onContainsMouseChanged: {
                     if(containsMouse)
                         expressionBackground.color = component.expressionHoverColor

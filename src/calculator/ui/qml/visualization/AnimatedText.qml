@@ -30,6 +30,7 @@ Item {
 
         color: component.color
         font: component.font
+        textFormat: Text.RichText
 
         anchors.top: parent.top
         anchors.left: parent.left
@@ -42,6 +43,7 @@ Item {
         color: component.color
         opacity: 0
         font: component.font
+        textFormat: Text.RichText
 
         anchors.top: parent.top
         anchors.left: parent.left
