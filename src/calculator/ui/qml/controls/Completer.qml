@@ -2,16 +2,17 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 import StyleSettings 1.0
 
-// TODO styles
 DropDown {
     id: component
 
-    property color color: "white"
+    property color color
     property var constantModel
     property var target
     property string currentText
+    property color hoverColor
+    property color textColor
 
-    scrollbarWidth: 4
+    scrollbarWidth: 3
     model: constantModel
 
     onCurrentTextChanged: {
@@ -20,7 +21,7 @@ DropDown {
         for(var key in component.constantModel) {
             var value = component.constantModel[key]
 
-            if(value.search("^" + currentText) !== -1)
+            if(value["identifier"].search("^" + currentText) !== -1)
                 newModel.push(value)
         }
 
@@ -28,18 +29,35 @@ DropDown {
     }
 
     dropDownMenuBackground: Rectangle {
-        color: "transparent"
-        border.width: 1
-        border.color: component.color
+        color: component.color
+        anchors.fill: parent
     }
 
-    menuItem: Rectangle {
-        color: (hovered) ?"blue" :"red"
+    menuItem: Item {
+        Rectangle {     // hover overlay
+            opacity: 0.8
+            color: (hovered) ?component.hoverColor :"transparent"
+
+            anchors.fill: parent
+        }
+
+        Rectangle {
+            id: symbol
+
+            width: 10
+            height: 10
+            color: StyleSettings.completer.typeColors[itemData["type"]]
+
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.verticalCenter: parent.verticalCenter
+        }
 
         Text {
-            color: "white"
-            text: itemData
-            anchors.left: parent.left
+            color: component.textColor
+            text: itemData["identifier"]
+            font.pixelSize: parent.height * 0.8
+            anchors.left: symbol.right
             anchors.leftMargin: 10
             anchors.verticalCenter: parent.verticalCenter
         }

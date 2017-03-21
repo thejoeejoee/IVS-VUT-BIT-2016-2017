@@ -3,7 +3,6 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-// TODO visibility of items
 Item {
     id: component
 
@@ -19,7 +18,7 @@ Item {
     property var currentItem: model[0]
     property int currentItemIndex: 0
     property int visibleItemCount: 4
-    property alias scrollbarColor: scrollbar.color
+    property alias scrollBarColor: scrollbar.color
     property alias scrollbarWidth: scrollbar.width
 
     readonly property bool dropMenuVisible: dropMenu.visible
@@ -74,7 +73,7 @@ Item {
     }
 
     onShowAnimation: SequentialAnimation {
-        ScriptAction { script: { component.visible = true } }
+        ScriptAction { script: { component.visible = true }}
         NumberAnimation {
             target: flick
             property: "y"
@@ -101,10 +100,20 @@ Item {
         id: scrollbar
 
         z: 2
-        y: flick.visibleArea.yPosition * flick.height
+        y: flick.visibleArea.yPosition * flick.height + flick.y
         height: flick.visibleArea.heightRatio * flick.height
+        opacity: flick.visibleArea.heightRatio != 1
 
         anchors.right: flick.right
+
+        Behavior on opacity {
+            NumberAnimation { duration: 200 }
+        }
+    }
+
+    Loader {
+        sourceComponent: component.dropDownMenuBackground
+        anchors.fill: flick
     }
 
     Flickable {
@@ -117,10 +126,6 @@ Item {
         width: parent.width
         clip: true
         boundsBehavior: Flickable.StopAtBounds
-
-        Behavior on height {
-            NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
-        }
 
         Column {
             id: dropMenu
@@ -172,10 +177,5 @@ Item {
                 return false
             return true
         }
-    }
-
-    Loader {
-        sourceComponent: component.dropDownMenuBackground
-        anchors.fill: flick
     }
 }

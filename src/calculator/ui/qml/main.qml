@@ -185,13 +185,36 @@ ApplicationWindow {
         id: completer
 
         target: expInput
-        constantModel: ["ahoj", "da", "ahojky", "1", "2", "3", "4", "5"]
-        width: 100
+        // TODO enum
+        // BUG when delete char from second line to first, then completer not set x correctly
+        constantModel: [
+            {"identifier": "ahoj", "type": "f"},
+            {"identifier": "da", "type": "f"},
+            {"identifier": "ahojky", "type": "v"},
+            {"identifier": "1", "type": "v"},
+            {"identifier": "2", "type": "v"},
+            {"identifier": "3", "type": "v"},
+            {"identifier": "4", "type": "v"},
+            {"identifier": "5", "type": "v"}
+        ]
+
+        color: StyleSettings.completer.color
+        hoverColor: StyleSettings.completer.hoverColor
+        textColor: StyleSettings.completer.textColor
+        scrollBarColor: StyleSettings.completer.scrollBarColor
+
+        width: 200
         itemHeight: 20
-        x: fmExpInput.advanceWidth(expInput.text) + expInput.textMargin + expInput.x
+        x: calcPos()
         y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
 
         onItemChoosed: expandExpression(currentItem)
+
+        function calcPos() {
+            if(expInput.cursorRectangle.x + completer.width + fmExpInput.advanceWidth(" ") < expInput.width)
+                return expInput.cursorRectangle.x + expInput.x
+            return completer.x
+        }
     }
 
     function completeText() {

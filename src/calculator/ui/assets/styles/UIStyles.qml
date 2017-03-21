@@ -112,4 +112,17 @@ QtObject {
         property color textColor: "white"
         property font font: Qt.font({family: "Roboto Light"})
     }
+
+    property QtObject completer: QtObject {
+        property color color: "#2A2A2A"
+        property color hoverColor: "#ED1946"
+        property color textColor: "#C1C0C0"
+        property color scrollBarColor: "#9F9F9F"
+        // TODO use enum
+        property var typeColors: {
+            "f": "#EF4223",
+            "v": "#C1C0C0"
+        }
+        property font font: Qt.font({family: "Roboto Light"})
+    }
 }
