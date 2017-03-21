@@ -5,4 +5,4 @@ comment:
 ignore:
   - "src/tests/**/*"
   - "src/test.py"
-  - "src/calculator/ui/**/*"
+  - "src/calculator/ui"
