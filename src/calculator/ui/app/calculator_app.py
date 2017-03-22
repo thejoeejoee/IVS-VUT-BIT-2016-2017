@@ -35,13 +35,10 @@ class CalculatorApp(QApplication):
         self._translator.load("".join((":/translations/", QLocale().system().name(), ".qsm")))
         self.installTranslator(self._translator)
 
-        print(QPixmap(":/assets/images/icon.png").width())
         icon = QIcon()
 
         for size in ICON_SIZES:
-            print(":/assets/icons/{}x{}.png".format(size, size))
             icon.addFile(":/assets/icons/{}x{}.png".format(size, size), QSize(size, size))
-            #icon.addPixmap(QPixmap(":/assets/icons/{}x{}.png".format(size, size)))
 
         self.setWindowIcon(icon)
 
