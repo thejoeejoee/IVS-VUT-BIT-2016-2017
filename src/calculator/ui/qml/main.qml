@@ -28,7 +28,7 @@ ApplicationWindow {
     Game {
         id: game
 
-        onGameOver: console.log(msg)
+        onGameOver: info.show(msg)
     }
 
     ExpSyntaxHighlighter {
