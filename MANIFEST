@@ -1,2 +1,3 @@
 recursive-include src/calculator/ui/ *.qml
 src/Makefile
+README.md

@@ -7,19 +7,20 @@ from PyQt5.QtCore import QTranslator
 from PyQt5.QtCore import QUrl, QLocale
 from PyQt5.QtGui import QIcon
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType, qmlRegisterType
+from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType
 from PyQt5.QtWidgets import QApplication
 
+from calculator.settings import Expansion, ICON_SIZES
 from calculator.ui.adapter import UIAdapter
 from calculator.ui.types.core import Sides
-from calculator.ui.types.syntaxhighlight import ExpSyntaxHighlighter
 from calculator.ui.types.qmlwrapper.utils import TypeRegister
-from calculator.settings import Expansion, ICON_SIZES
+from calculator.ui.types.syntaxhighlight import ExpSyntaxHighlighter
 
 if platform.system() == "Linux":  # Needed for platform.linux_distribution, which is not available on Windows and OSX
     # For Ubuntu: https://bugs.launchpad.net/ubuntu/+source/python-qt4/+bug/941826
     platform_identifier = platform.platform()
-    if 'Ubuntu' in platform_identifier or 'Debian' in platform_identifier:  # Just in case it also happens on Debian, so it can be added
+    # Just in case it also happens on Debian, so it can be added
+    if 'Ubuntu' in platform_identifier or 'Debian' in platform_identifier:
         # noinspection PyUnresolvedReferences
         from OpenGL import GL
 
