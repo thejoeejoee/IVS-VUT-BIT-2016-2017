@@ -1,13 +1,26 @@
 import QtQuick 2.0
 
+/**
+  Simple countdown display only number of remaining time
+  */
 Item {
     id: component
 
+    /**
+      Start countdown and display component
+      @param seconds Count of seconds to be counted down
+      */
     signal start(int seconds)
+    /**
+      Emits after time runs out
+      */
     signal triggered()
 
+    /// Holds current remaining time in seconds
     readonly property alias count: timer.count
+    /// Text color of numbers
     property alias color: text.color
+    /// Font of text
     property font font
 
     focus: visible

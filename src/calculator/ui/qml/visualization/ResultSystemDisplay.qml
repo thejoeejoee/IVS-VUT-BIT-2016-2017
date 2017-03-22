@@ -1,14 +1,23 @@
 import QtQuick 2.7
 import Calculator 1.0
 
+/**
+  Display result of calculation in different bases
+  */
 Rectangle {
     id: component
 
+    /// List of bases to be displayed
     property var bases
+    /// Value which will be converted to different bases
     property real value: 0
+    /// Used font
     property font font
+    /// Text color of base name
     property color baseTextColor
+    /// Text color of converted value
     property color valueTextColor
+    /// Margin of text
     readonly property int margin: 10
 
     Column {

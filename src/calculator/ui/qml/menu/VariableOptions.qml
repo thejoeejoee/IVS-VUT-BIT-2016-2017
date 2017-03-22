@@ -1,19 +1,37 @@
 import QtQuick 2.0
 import "../controls" as Controls
 
+/**
+  Menu with variable actions
+  */
 Item {
     id: component
 
+    /**
+      Emits after clicking on setter
+      @param value Value requested to be set
+      */
     signal valueSetRequest(int value)
+    /**
+      Emits after clicking on delete button
+      */
     signal deleteRequest()
 
+    /// Holds current width of menu(dynamically changes)
     readonly property alias menuWidth: dots.width
+    /// Sets true if menu is running show animation
     readonly property alias animationRunning: xAnimation.running
+    /// Background color of dots(area to slide up menu)
     property alias dotsBackgroundColor: dotsBackground.color
+    /// Background color of remove button
     property alias removeButtonColor: removeButtonBackground.color
+    /// Background color of setters
     property color settersColor
+    /// Background color of setters when hovered
     property color settersHoveredColor
+    /// Text color of setters
     property color settersTextColor
+    /// Font of component
     property font font
 
     state: "hidden"

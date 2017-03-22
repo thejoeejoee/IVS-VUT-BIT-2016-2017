@@ -19,6 +19,8 @@ ApplicationWindow {
     id: mainWindow
 
     width: 1101
+    height: width * (522 / 1101)
+
     minimumHeight: width * (522 / 1101)
     maximumHeight: minimumHeight
 
@@ -161,7 +163,7 @@ ApplicationWindow {
 
         value: 0
         bases: { "DEC": 10, "BIN": 2, "HEX": 16, "OCT": 8 }
-        height: 100
+        height: parent.height / 5.1
         baseTextColor: StyleSettings.resultSystemDisplay.baseTextColor
         valueTextColor: StyleSettings.resultSystemDisplay.valueTextColor
         font: StyleSettings.resultSystemDisplay.font
@@ -265,6 +267,10 @@ ApplicationWindow {
         }
     }
 
+    /**
+      According to cursor in text it determinates current word which is edited
+      @return Current word
+      */
     function currentWord() {
         var result = ""
         var startIndex = expInput.cursorPosition - 1
@@ -290,6 +296,9 @@ ApplicationWindow {
         return result
     }
 
+    /**
+      Show suggestion box with filtered suggestions
+      */
     function completeText() {
         var lastChar = expInput.text.slice(-1)
         if(Calculator.expressionSplitters.indexOf(lastChar) != -1)
@@ -303,10 +312,18 @@ ApplicationWindow {
         completer.currentTextChanged(completer.currentText)
     }
 
+    /**
+      Overwrite current expression by new expression
+      @param newExpression New expression
+      */
     function overwriteExpression(newExpression) {
         expInput.text = newExpression
     }
 
+    /**
+      Expand expression into current expresion
+      @param expressionKey Key of builtin expression or dynamic expression
+      */
     function expandExpression(expansionKey) {
         var expansionData = Calculator.expressionsExpansion[expansionKey]
         var selectedStart = expInput.selectionStart
@@ -327,6 +344,10 @@ ApplicationWindow {
             expInput.insert(selectedStart, expansion)
     }
 
+    /**
+      After calculation handles variable and display synchronization
+      @param data Data with result and variables
+      */
     function handleResult(data) {
         if(typeof data["result"] !== "undefined") {
             resultDisplay.result = data["result"]

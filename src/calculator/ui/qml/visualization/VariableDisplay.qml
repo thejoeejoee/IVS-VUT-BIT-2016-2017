@@ -3,15 +3,30 @@ import QtQuick 2.0
 Rectangle {
     id: component
 
+    /**
+      Emits request to expand text by variable data
+      @param data String requested to be expanded
+      */
     signal expandRequest(string data)
+    /**
+      Emits request to overwrite text by variable data
+      @param data String requested to be expanded
+      */
     signal overwriteRequest(string data)
 
+    /// Text color
     property color textColor
+    /// Text color of identifier
     property color identifierTextColor
+    /// Background color of expression when hovered
     property color expressionHoverColor
+    /// Variable identifier
     property string variableIdentifier: ""
+    /// Variable expression
     property string variableExpression: ""
+    /// Variable value
     property string variableValue: "0"
+    /// Used font
     property font font
 
     QtObject {

@@ -1,5 +1,8 @@
 import QtQuick 2.0
 
+/**
+  Component which loads all fonts
+  */
 Item {
     // loading font
     FontLoader {

@@ -1,20 +1,45 @@
 import QtQuick 2.0
 import "../controls" as Controls
 
+/**
+  Base for modal PopUp dialogs
+  */
 Item {
     id: component
 
+    /**
+      Used as function to hide component
+      */
     signal hide()
+    /**
+      Emits after component is hidden
+      */
     signal hidden()
+    /**
+      Used as function to show component
+      @param msg Message to be displayed
+      */
     signal show(string msg)
-    signal hideAnimation()
+    /**
+      Signal to start show animation
+      */
     signal showAnimation()
+    /**
+      Signal to start hide animation
+      */
+    signal hideAnimation()
 
+    /// Background color of modal
     property alias maskColor: mask.color
+    /// Background color of dialog
     property alias dialogColor: dialog.color
+    /// Text color
     property alias textColor: title.color
+    /// Text to be displayed in dialog
     property alias message: message.text
+    /// Title of dialog
     property alias title: title.text
+    /// Used font
     property font font
 
     visible: false
