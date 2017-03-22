@@ -147,6 +147,7 @@ ApplicationWindow {
     ResultDisplay {
         id: resultDisplay
 
+        result: "0"
         color: StyleSettings.resultDisplay.backgroundColor
         textColor: StyleSettings.resultDisplay.textColor
         font.family: StyleSettings.resultDisplay.font.family
@@ -154,7 +155,22 @@ ApplicationWindow {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: variablePanel.left
+        anchors.bottom: resultSystemDisplay.top
+    }
+
+    ResultSystemDisplay {
+        id: resultSystemDisplay
+
+        value: 0
+        bases: { "DEC": 10, "BIN": 2, "HEX": 16, "OCT": 8 }
+        height: 100
+        baseTextColor: StyleSettings.resultSystemDisplay.baseTextColor
+        valueTextColor: StyleSettings.resultSystemDisplay.valueTextColor
+        font: StyleSettings.resultSystemDisplay.font
+
         anchors.bottom: functionPanel.top
+        anchors.left: parent.left
+        anchors.right: variablePanel.left
     }
 
     Control.CalculateButton {
@@ -284,8 +300,10 @@ ApplicationWindow {
     }
 
     function handleResult(data) {
-        if(typeof data["result"] !== "undefined")
+        if(typeof data["result"] !== "undefined") {
             resultDisplay.result = data["result"]
+            resultSystemDisplay.value = data["unformattedResult"]
+        }
         else
             expInput.text = ""
 

@@ -1,6 +1,7 @@
 pragma Singleton
 import QtQuick 2.0
 import QtQuick.Controls.Styles 1.4
+// TODO allow
 import Expression 1.0
 
 QtObject {
@@ -122,9 +123,17 @@ QtObject {
         property var typeColors: ({})
         property font font: Qt.font({family: "Roboto Light"})
 
+        // TODO allow
         Component.onCompleted: {
             typeColors[Expression.Function] = "#EF4223"
             typeColors[Expression.Variable] = "#C1C0C0"
         }
+    }
+
+    property QtObject resultSystemDisplay: QtObject {
+        property color color: "#F2F2F2"
+        property color baseTextColor: "#ED1D3D"
+        property color valueTextColor: "#3D3D3D"
+        property font font: Qt.font({family: "Roboto Light"})
     }
 }

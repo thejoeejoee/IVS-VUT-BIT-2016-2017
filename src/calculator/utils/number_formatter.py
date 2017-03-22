@@ -2,12 +2,16 @@
 from decimal import Decimal
 
 from calculator.typing import NumericValue
+from calculator.settings import SUPPORTED_BASES
+
+from calculator.exceptions import UnsupportedBaseError
 
 
 class NumberFormatter(object):
     DEFAULT_CHARACTERS_LIMIT = 8
 
     EXP_FORMAT = '{value} <small>&times;</small>10<sup><small>{exp}</small></sup>'
+    BASE_CONVERTERS = {2: bin, 8: oct, 16: hex, 10: lambda x: str(x)}
 
     _EXP_DIVIDER = 'e'
 
@@ -23,3 +27,12 @@ class NumberFormatter(object):
             value=value,
             exp=exp.lstrip('+')
         )
+
+    @classmethod
+    def format_in_base(cls, value: int, base: int) -> str:
+        if abs(value - int(value)) > 0:
+            raise ValueError()
+        if not base in SUPPORTED_BASES:
+            raise UnsupportedBaseError("Base {} is not supported.".format(base))
+
+        return cls.BASE_CONVERTERS[base](int(value))

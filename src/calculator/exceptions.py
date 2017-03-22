@@ -24,6 +24,10 @@ class VariableError(Exception):
     Exception for signalizing of invalid definition for calculator variable.
     """
 
+class UnsupportedBaseError(Exception):
+    """
+    Raised when trying convert number into unsupported base
+    """
 
 class VariableRemoveRestrictError(VariableError):
     """

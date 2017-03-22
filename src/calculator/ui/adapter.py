@@ -7,7 +7,7 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
 from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from calculator.core.calculator import Calculator
-from calculator.exceptions import MathError, VariableError
+from calculator.exceptions import MathError, VariableError, UnsupportedBaseError
 from calculator.typing import Variable, NumericValue
 from calculator.utils.number_formatter import NumberFormatter
 from calculator.utils.translate import translate
@@ -28,6 +28,16 @@ class UIAdapter(QObject):
     func_identifiers_types = [{"identifier": func, "type": Expression.ExpressionTypes.Function}
                               for func in BUILTIN_FUNCTIONS]
 
+    @pyqtSlot(float, int, result=str)
+    def convertToBase(self, value: NumericValue, base: int) -> str:
+        try:
+            v = self._formatter.format_in_base(value, base)
+            return v
+        except UnsupportedBaseError as e:
+            return translate("Adapter", "Unsupported base.")
+        except ValueError as e:
+            return "-"
+
     @pyqtSlot(str)
     def process(self, expression: str) -> None:
         try:
@@ -38,6 +48,7 @@ class UIAdapter(QObject):
             self.identifiersTypesChanged.emit(self.identifiersTypes)
             self.processed.emit(QVariant({
                 "result": None if result is None else self._formatter.format(result, 16),
+                "unformattedResult": result,
                 "variables": {
                     key: dict(
                         value=self._formatter.format(value),
