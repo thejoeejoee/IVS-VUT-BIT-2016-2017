@@ -122,6 +122,7 @@ ApplicationWindow {
 
     function startGame() {
         nyan.vector = Qt.point(Math.cos(Math.PI / 3), -Math.sin(Math.PI / 3))
+        nyan.rotateNyanCat()
         nyan.x = gameWindow.width / 2 - nyan.width / 2
         nyan.y = gameWindow.height / 2 - nyan.height / 2
         gameWindow.playerScore = 0
