@@ -13,10 +13,9 @@ ApplicationWindow {
     signal run()
     signal gameOver(string msg)
 
-    property bool running: false
     property int playerScore: 0
     property int enemyScore: 0
-    property int maxScore: 3
+    readonly property int maxScore: 3
     property size playerSize: Qt.size(10, 100)
 
     width: 1500
