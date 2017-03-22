@@ -145,8 +145,8 @@ ApplicationWindow {
             gameWindow.enemyScore += 1
 
         if(gameWindow.enemyScore == gameWindow.maxScore)
-            gameWindow.gameOver("YouAreLooser")
+            gameWindow.gameOver(qsTr("You are looser."))
         if(gameWindow.playerScore == gameWindow.maxScore)
-            gameWindow.gameOver("AIIsNoob")
+            gameWindow.gameOver(qsTr("AI is noob."))
     }
 }

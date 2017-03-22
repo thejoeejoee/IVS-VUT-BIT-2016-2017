@@ -115,6 +115,13 @@ QtObject {
         property font font: Qt.font({family: "Roboto Light"})
     }
 
+    property QtObject infoDialog: QtObject {
+        property color maskColor: "black"
+        property color color: "#FFCE00"
+        property color textColor: "white"
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
     property QtObject completer: QtObject {
         property color color: "#2A2A2A"
         property color hoverColor: "#ED1946"

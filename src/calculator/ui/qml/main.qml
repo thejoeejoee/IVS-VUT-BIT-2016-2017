@@ -201,6 +201,20 @@ ApplicationWindow {
         onHidden: expInput.focus = true
     }
 
+    PopUp {
+        id: info
+
+        title: qsTr("Info")
+        maskColor: StyleSettings.infoDialog.maskColor
+        dialogColor: StyleSettings.infoDialog.color
+        textColor: StyleSettings.infoDialog.textColor
+        font: StyleSettings.infoDialog.font
+
+        anchors.fill: parent
+
+        onHidden: expInput.focus = true
+    }
+
     Component.onCompleted: {
         Calculator.processed.connect(handleResult)
         Calculator.error.connect(error.show)
