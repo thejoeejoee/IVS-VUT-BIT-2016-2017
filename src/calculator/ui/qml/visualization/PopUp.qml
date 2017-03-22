@@ -61,8 +61,6 @@ Item {
         Text {
             id: title
 
-            text: qsTr("Error")
-
             font.pixelSize: parent.height / 3
             font.family: component.font.family
 
