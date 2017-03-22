@@ -1,11 +1,18 @@
 import QtQuick 2.0
 
+/**
+  Regular styled button
+  */
 Clickable {
     id: component
 
+    /// Color of button
     property color color
+    /// Color of background which is behind button
     property color backgroundColor
+    /// Label of button
     property alias text: buttonText.text
+    /// Font of button
     property font font
 
     hoverEnabled: true

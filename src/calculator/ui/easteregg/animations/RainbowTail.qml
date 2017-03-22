@@ -1,12 +1,19 @@
 import QtQuick 2.0
 import QtQuick.Particles 2.0
 
+/**
+  Component which generates rainbow like particles
+  */
 Item {
     id: rainbowTail
 
+    /// Angle of particles, determinates angle of their trajectory
     property real generationAngle: 0
+    /// Size of particle in pixels
     property size particleSize: Qt.size(10, 10)
+    /// Reference to root item, so particle could not be affected by any relatice coord system
     property Item rootItem
+    /// Reference to item to which particle emitters attached
     property Item containerItem
 
     clip: false

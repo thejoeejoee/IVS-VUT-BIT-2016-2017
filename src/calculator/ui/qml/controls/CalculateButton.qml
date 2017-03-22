@@ -1,6 +1,10 @@
 import QtQuick 2.0
 
+/**
+  Button to confirm calculation
+  */
 Clickable {
+    /// Bakcground color of button
     property alias color: background.color
 
     Rectangle {

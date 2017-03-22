@@ -3,9 +3,14 @@ import QtQuick 2.0
 import "../visualization" as Visualization
 import "../menu" as Menu
 
+/**
+  Single item which represents variable
+  */
 Item {
     id: component
 
+    /**
+      */
     signal valueSetRequest(string identifier, int value)
     signal deleteRequest(string identifier)
     signal expandRequest(string data)

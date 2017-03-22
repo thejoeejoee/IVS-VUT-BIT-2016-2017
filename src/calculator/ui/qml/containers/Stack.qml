@@ -1,5 +1,8 @@
 import QtQuick 2.0
 
+/**
+  Container item with addition and move animation
+  */
 Column {
     id: component
 

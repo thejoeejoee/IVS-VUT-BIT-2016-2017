@@ -7,15 +7,29 @@ import "entities" as Entities
 import "visualization" as Visualization
 import "logic/collision" as Collision
 
+/**
+  Standalone window with game(pong)
+  */
 ApplicationWindow {
     id: gameWindow
 
+    /**
+      Used as function to start game
+      */
     signal run()
+    /**
+      Emits when some of players loose
+      @param msg Message to player
+      */
     signal gameOver(string msg)
 
+    /// Score of player
     property int playerScore: 0
+    /// Score of other player
     property int enemyScore: 0
+    /// Max score which player need to archieve to win
     readonly property int maxScore: 3
+    /// Size of player rebound area
     property size playerSize: Qt.size(10, 100)
 
     width: 1500
@@ -119,6 +133,9 @@ ApplicationWindow {
         Component.onCompleted: collisionSystem.registerPair(nyan, ai)
     }
 
+    /**
+      Resets component to begin game
+      */
     function startGame() {
         nyan.vector = Qt.point(Math.cos(Math.PI / 3), -Math.sin(Math.PI / 3))
         nyan.rotateNyanCat()
@@ -130,11 +147,19 @@ ApplicationWindow {
         frameTimer.running = true
     }
 
+    /**
+      Sets component to end game
+      */
     function endGame() {
         frameTimer.running = false
         gameWindow.visible = false
     }
 
+    /**
+      React to collision of ball to increment score
+      @param obj Ball reference
+      @param side Side of collision to determinate who has point
+      */
     function handleCollisionWithWall(obj, side) {
         if(!obj.isVoid)
             return

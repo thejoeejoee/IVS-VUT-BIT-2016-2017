@@ -2,9 +2,18 @@ import QtQuick 2.0
 import Sides 1.0
 import "../extendedmath.js" as EMath
 
+/**
+  System to determinate collision of registered objects
+  */
 QtObject {
     id: system
 
+    /**
+      Checks whether collision between two objects happened
+      @param bc1 First object
+      @param bc2 Second object
+      @return Side of collision referenced to first object, if collision did not happened return -1
+      */
     function checkCollision(bc1, bc2) {
         var r1 = bc1.mapToItem(null, 0, 0, bc1.width, bc1.height)
         var r2 = bc2.mapToItem(null, 0, 0, bc2.width, bc2.height)
@@ -34,6 +43,11 @@ QtObject {
         return Sides.Right
     }
 
+    /**
+      Checks for collisions and if collision occure then emits signals of objects
+      @param bc1 First object
+      @param bc2 Second object
+      */
     function watchCollision(bc1, bc2) {
         var result = system.checkCollision(bc1, bc2)
 
@@ -43,6 +57,11 @@ QtObject {
         }
     }
 
+    /**
+      Register objects to system
+      @param bc1 First object
+      @param bc2 Second object
+      */
     function registerPair(bc1, bc2) {
         bc1.xChanged.connect((function() {system.watchCollision(bc1, bc2)}))
         bc1.yChanged.connect((function() {system.watchCollision(bc1, bc2)}))
