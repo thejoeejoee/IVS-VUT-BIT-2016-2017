@@ -6,14 +6,15 @@ Item {
 
     signal hide()
     signal hidden()
-    signal show(string error)
+    signal show(string msg)
     signal hideAnimation()
     signal showAnimation()
 
     property alias maskColor: mask.color
     property alias dialogColor: dialog.color
-    property alias textColor: errorText.color
-    property alias errorMessage: errorMsg.text
+    property alias textColor: title.color
+    property alias message: message.text
+    property alias title: title.text
     property font font
 
     visible: false
@@ -22,7 +23,7 @@ Item {
     Keys.onPressed: component.hide()
 
     onShow: {
-        component.errorMessage = error
+        component.message = msg
         component.showAnimation()
     }
 
@@ -58,7 +59,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
 
         Text {
-            id: errorText
+            id: title
 
             text: qsTr("Error")
 
@@ -72,21 +73,21 @@ Item {
         }
 
         Text {
-            id: errorMsg
+            id: message
 
-            color: errorText.color
+            color: title.color
 
             font.pixelSize: parent.height / 7
             font.family: component.font.family
 
-            anchors.left: errorText.left
-            anchors.top: errorText.bottom
+            anchors.left: title.left
+            anchors.top: title.bottom
             anchors.topMargin: parent.height / 25
         }
 
         Controls.DefaultButton {
             text: qsTr("Ok")
-            color: errorText.color
+            color: title.color
             backgroundColor: component.dialogColor
             font.family: component.font.family
 

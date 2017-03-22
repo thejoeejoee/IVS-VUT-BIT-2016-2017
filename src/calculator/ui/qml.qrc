@@ -37,7 +37,7 @@
         <file>qml/controls/CalculateButton.qml</file>
         <file>assets/images/equal.svg</file>
         <file>qml/visualization/AnimatedText.qml</file>
-        <file>qml/visualization/Error.qml</file>
+        <file>qml/visualization/PopUp.qml</file>
         <file>qml/controls/DefaultButton.qml</file>
         <file alias="translations/cs.qm">../translations/cs.qm</file>
         <file>assets/icons/16x16.png</file>

@@ -187,9 +187,10 @@ ApplicationWindow {
         onClicked: Calculator.process(expInput.text)
     }
 
-    Error {
+    PopUp {
         id: error
 
+        title: qsTr("Error")
         maskColor: StyleSettings.errorDialog.maskColor
         dialogColor: StyleSettings.errorDialog.color
         textColor: StyleSettings.errorDialog.textColor
