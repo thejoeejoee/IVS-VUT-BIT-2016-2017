@@ -151,10 +151,7 @@ Item {
                         anchors.fill: parent
                         hoverEnabled: true
                         onEntered: component.currentItemIndex = index
-                        onClicked: {
-                            component.hide()
-                            component.currentItem = modelData
-                        }
+                        onClicked: component.chooseCurrent()
                     }
                 }
             }
