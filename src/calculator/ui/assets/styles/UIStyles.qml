@@ -137,6 +137,11 @@ QtObject {
         }
     }
 
+    property QtObject countDown: QtObject {
+        property var textColors: {0: "#ED1869", 1: "#F2BC1F", 2: "#39BFC1", 3: "#672980"}
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
     property QtObject resultSystemDisplay: QtObject {
         property color color: "#F2F2F2"
         property color baseTextColor: "#ED1D3D"

@@ -126,10 +126,8 @@ ApplicationWindow {
                 Calculator.process(expInput.text)
         }
         onTextChanged: {
-            if(text.search("nyan") != -1) {
-                expInput.text = ""
-                game.run()
-            }
+            if(text.search("nyan") != -1)
+                countDown.start(3)
 
             completeText()
         }
@@ -213,6 +211,21 @@ ApplicationWindow {
         anchors.fill: parent
 
         onHidden: expInput.focus = true
+    }
+
+    CountDown {
+        id: countDown
+
+        anchors.fill: parent
+        font.family: StyleSettings.countDown.font
+        color: StyleSettings.countDown.textColors[count + 1]
+
+
+        onTriggered: {
+            expInput.focus = true
+            expInput.text = ""
+            game.run()
+        }
     }
 
     Component.onCompleted: {
