@@ -4,8 +4,8 @@ import operator
 import random
 
 from calculator.exceptions import MathError
-from calculator.typing import BinaryNumericFunction
-from calculator.typing import NumericValue
+from calculator._typing import BinaryNumericFunction
+from calculator._typing import NumericValue
 
 
 class Math(object):

@@ -2,32 +2,24 @@
 
 
 from distutils import core
-from distutils.command.install import install
-from unittest.mock import patch
+from os.path import abspath, dirname, join
 
 from setuptools import find_packages
 
+base_path = abspath(dirname(__file__))
+
 
 def install_requires():
-    with open('requirements.txt') as f:
+    with open(join(base_path, 'requirements.txt')) as f:
         return [line.strip().split('#')[0] for line in f.readlines() if line.strip()]
-
-
-class CalculatorInstallation(install):
-    def run(self):
-        super(CalculatorInstallation, self).run()
-
-        with patch('sys.argv', ['', '-o', 'src/calculator/ui/resources.py', 'src/calculator/ui/qml.qrc']):
-            from PyQt5.pyrcc_main import main
-            main()
 
 
 def setup():
     core.setup(
         name='calculator',
-        version='0.1',
+        version='0.2',
         license='GNU GENERAL PUBLIC LICENSE Version 3',
-        # long_description=open('./README.md').read(),
+        long_description=open(join(base_path, './README.md')).read(),
         url='https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017',
         classifiers=[
             'Development Status :: 3 - Alpha',
@@ -47,17 +39,17 @@ def setup():
         install_requires=install_requires() + [
             'PyOpenGL #;"Debian" in platform_version or "Ubuntu" in platform_version'
         ],
-        package_dir={'': 'src'},
+        package_dir={'': 'src/'},
+        # package_data={
+        #    '': ['**/*.{file_type}'.format(file_type=file_type) for file_type in file_types]
+        # },
         entry_points={
             'console_scripts': [
                 'calculator-console=calculator.console:main',
                 'calculator-app=calculator.main:main',
             ]
         },
-        # include_package_data=True,
-        cmdclass=dict(
-            install=CalculatorInstallation
-        ),
+        include_package_data=True,
         test_suite='tests',
     )
 

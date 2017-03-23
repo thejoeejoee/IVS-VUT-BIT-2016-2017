@@ -2,13 +2,10 @@
 from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name, Pow, FloorDiv, Mod
 from typing import Dict, Union, Type, Set, Optional
 
+from calculator import BinaryNumericFunction, NumericFunction, NumericValue, Variable
 from calculator.core.math import Math
 from calculator.core.parser import Parser
 from calculator.settings import BuiltinFunction
-from calculator.typing import BinaryNumericFunction
-from calculator.typing import NumericFunction
-from calculator.typing import NumericValue
-from calculator.typing import Variable
 from calculator.utils import method_single_dispatch
 
 

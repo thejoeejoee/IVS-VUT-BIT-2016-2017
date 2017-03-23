@@ -1,41 +1,46 @@
-
 REQUIREMENTS=../requirements.txt
 
-VENV=true
-
-ifdef VENV
- VENV=../.venv
- VENV_ACTIVATE=$(VENV)/bin/activate
- PYTHON="$(VENV)/bin/python"
- PIP="$(VENV)/bin/pip"
- PYRCC5="$(VENV)/bin/pyrcc5"
+ifdef ENVIROMENT
+     ENVIROMENT:=$(shell echo $(ENVIROMENT) | tr a-z A-Z)
 else
- PYTHON="python3"
- PIP="pip3"
- PYRCC5="pyrcc5"
+     ENVIROMENT=$(shell if [ "${VIRTUAL_ENV}" != "" ] > /dev/null; then echo LOCAL; else echo GLOBAL; fi)
 endif
 
+GLOBAL_PYTHON=python3
+GLOBAL_PIP=pip3
+GLOBAL_PYRCC5=pyrcc5
 
-install: install-python venv install-calculator
+VENV_PATH=../.venv
+LOCAL_PYTHON=$(VENV_PATH)/bin/$(GLOBAL_PYTHON)
+LOCAL_PIP=$(VENV_PATH)/bin/$(GLOBAL_PIP)
+LOCAL_PYRCC5=$(VENV_PATH)/bin/$(GLOBAL_PYRCC5)
+
+PYTHON=$(ENVIROMENT)_PYTHON
+
+all: run
+
+LOCAL:
+	@touch $(VENV_PATH) || pyvenv $(VENV_PATH)
+	$(info ***** Using LOCAL enviroment with python $(abspath $($(PYTHON))). *****)
+
+GLOBAL:
+	$(info ***** Using SYSTEM enviroment with python $(shell which $($(PYTHON))). *****)
+
+# .PHONY: install $(ENVIROMENT) install-python install-calculator test run
+
+install: install-python $(ENVIROMENT) install-calculator
 
 install-python:
-	apt-get update && apt-get -y install python3.5 python3-pip python3-venv && pip3 install --upgrade pip
+	@if ! dpkg -s python3.5 > /dev/null && dpkg -s python3-pip > /dev/null; then\
+		apt-get update && apt-get -y install python3.5 python3-pip python3-venv;\
+	fi
+	pip3 install --upgrade pip > /dev/null
 
-install-calculator:
-	$(PYTHON) ../setup.py install
+install-calculator: $(ENVIROMENT)
+	$($(PYTHON)) ../setup.py install
 
-compile-qt-rcc: venv
-	$(PYRCC5) -o calculator/ui/resources.py calculator/ui/qml.qrc
+test: $(ENVIROMENT)
+	$($(PYTHON)) test.py || true
 
-test: venv
-	$(PYTHON) test.py || true
-
-run: venv compile-qt-rcc
-	$(PYTHON) calculator/main.py
-
-venv: $(REQUIREMENTS)
-ifdef VENV
-	test -d $(VENV) || pyvenv $(VENV)
-	$(PIP) install -Ur ../requirements.txt
-	touch $(VENV_ACTIVATE)
-endif
+run: $(ENVIROMENT)
+	$($(PYTHON)) calculator/main.py

@@ -1,7 +1,7 @@
 # coding=utf-8
 from decimal import Decimal
 
-from calculator.typing import NumericValue
+from calculator._typing import NumericValue
 
 
 class NumberFormatter(object):
