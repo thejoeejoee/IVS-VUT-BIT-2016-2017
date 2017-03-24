@@ -164,6 +164,7 @@ ApplicationWindow {
         value: 0
         bases: { "DEC": 10, "BIN": 2, "HEX": 16, "OCT": 8 }
         height: parent.height / 5.1
+        scrollbarColor: StyleSettings.resultSystemDisplay.scrollbarColor
         baseTextColor: StyleSettings.resultSystemDisplay.baseTextColor
         valueTextColor: StyleSettings.resultSystemDisplay.valueTextColor
         font: StyleSettings.resultSystemDisplay.font
