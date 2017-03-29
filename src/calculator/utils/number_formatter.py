@@ -1,7 +1,7 @@
 # coding=utf-8
 from decimal import Decimal
 
-from calculator.typing import NumericValue
+from calculator import NumericValue
 from calculator.settings import SUPPORTED_BASES
 
 from calculator.exceptions import UnsupportedBaseError

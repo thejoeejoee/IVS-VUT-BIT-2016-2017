@@ -5,3 +5,4 @@ termcolor
 doxyqml
 
 # on Debian + Nvidia you need to install also package PyOpenGL
+PyOpenGL

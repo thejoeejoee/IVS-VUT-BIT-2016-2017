@@ -6,9 +6,10 @@ from typing import Dict, Tuple, Set
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
 from PyQt5.QtQml import QJSEngine, QQmlEngine
 
+from calculator import Variable, NumericValue
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError, UnsupportedBaseError
-from calculator.typing import Variable, NumericValue
+from calculator.settings import BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES
 from calculator.utils.number_formatter import NumberFormatter
 from calculator.utils.translate import translate
 from calculator.settings import (BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS,
