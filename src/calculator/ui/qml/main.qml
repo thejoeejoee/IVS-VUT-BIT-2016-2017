@@ -5,6 +5,7 @@ import ExpSyntaxHighlighter 1.0
 import Sides 1.0
 import Calculator 1.0
 import Expansion 1.0
+import Expression 1.0
 import StyleSettings 1.0
 
 import "controls" as Control
@@ -18,22 +19,20 @@ ApplicationWindow {
     id: mainWindow
 
     width: 1101
+    height: width * (522 / 1101)
+
     minimumHeight: width * (522 / 1101)
     maximumHeight: minimumHeight
 
-    //flags: Qt.FramelessWindowHint
     title: qsTr("Barbie Calculator")
     visible: true
 
-    /*Item{
-        Game {
-            id: game
+    Game {
+        id: game
 
-            onGameOver: console.log(msg)
-        }
-    }*/
+        onGameOver: info.show(msg)
+    }
 
-//    Item {
     ExpSyntaxHighlighter {
         id: esh
         target: expInput
@@ -48,7 +47,6 @@ ApplicationWindow {
             }
         }
     }
-//    }
 
     Loaders.FontsLoader {}
 
@@ -105,6 +103,11 @@ ApplicationWindow {
         onExpandRequest: expandExpression(func)
     }
 
+    FontMetrics {
+        id: fmExpInput
+        font: expInput.font
+    }
+
     Control.ExpressionInput {
         id: expInput
 
@@ -120,18 +123,31 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         anchors.right: calculateButton.left
 
-        onConfirmed: Calculator.process(expInput.text)
-        onTextChanged: {
-            if(text.search("nyan") != -1) {
-                expInput.text = ""
-                game.run()
-            }
+        onConfirmed: {
+            if(!completer.visible)
+                Calculator.process(expInput.text)
         }
+        onTextChanged: {
+            if(text.search("nyan") != -1)
+                countDown.start(3)
+
+            completeText()
+        }
+        onSelectedTextChanged: {
+            if(selectedText.length) {
+                completer.model = completer.constantModel
+                completer.currentText = ""
+            }
+            else
+                completeText()
+        }
+        onCursorPositionChanged: completeText()
     }
 
     ResultDisplay {
         id: resultDisplay
 
+        result: "0"
         color: StyleSettings.resultDisplay.backgroundColor
         textColor: StyleSettings.resultDisplay.textColor
         font.family: StyleSettings.resultDisplay.font.family
@@ -139,7 +155,22 @@ ApplicationWindow {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: variablePanel.left
+        anchors.bottom: resultSystemDisplay.top
+    }
+
+    ResultSystemDisplay {
+        id: resultSystemDisplay
+
+        value: 0
+        bases: { "DEC": 10, "BIN": 2, "HEX": 16, "OCT": 8 }
+        height: parent.height / 5.1
+        baseTextColor: StyleSettings.resultSystemDisplay.baseTextColor
+        valueTextColor: StyleSettings.resultSystemDisplay.valueTextColor
+        font: StyleSettings.resultSystemDisplay.font
+
         anchors.bottom: functionPanel.top
+        anchors.left: parent.left
+        anchors.right: variablePanel.left
     }
 
     Control.CalculateButton {
@@ -156,9 +187,10 @@ ApplicationWindow {
         onClicked: Calculator.process(expInput.text)
     }
 
-    Error {
+    PopUp {
         id: error
 
+        title: qsTr("Error")
         maskColor: StyleSettings.errorDialog.maskColor
         dialogColor: StyleSettings.errorDialog.color
         textColor: StyleSettings.errorDialog.textColor
@@ -169,15 +201,129 @@ ApplicationWindow {
         onHidden: expInput.focus = true
     }
 
+    PopUp {
+        id: info
+
+        title: qsTr("Info")
+        maskColor: StyleSettings.infoDialog.maskColor
+        dialogColor: StyleSettings.infoDialog.color
+        textColor: StyleSettings.infoDialog.textColor
+        font: StyleSettings.infoDialog.font
+
+        anchors.fill: parent
+
+        onHidden: expInput.focus = true
+    }
+
+    CountDown {
+        id: countDown
+
+        anchors.fill: parent
+        font.family: StyleSettings.countDown.font
+        color: StyleSettings.countDown.textColors[count + 1]
+
+
+        onTriggered: {
+            expInput.focus = true
+            expInput.text = ""
+            game.run()
+        }
+    }
+
     Component.onCompleted: {
         Calculator.processed.connect(handleResult)
         Calculator.error.connect(error.show)
     }
 
+    Control.Completer {
+        id: completer
+
+        target: expInput
+        constantModel: Calculator.identifiersTypes
+
+        color: StyleSettings.completer.color
+        hoverColor: StyleSettings.completer.hoverColor
+        textColor: StyleSettings.completer.textColor
+        scrollBarColor: StyleSettings.completer.scrollBarColor
+
+        width: parent.width * 0.18
+        itemHeight: width / 8
+        x: calcPos()
+        y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
+
+        onItemChoosed: {
+            var end = expInput.cursorPosition
+            var start = end - currentText.length
+
+            expInput.remove(start, end)
+            expandExpression(currentItem["identifier"])
+        }
+
+        function calcPos() {
+            if(expInput.cursorRectangle.x + completer.width + fmExpInput.advanceWidth(" ") < expInput.width)
+                return expInput.cursorRectangle.x + expInput.x
+            else
+                return expInput.x + expInput.width - completer.width - expInput.textMargin
+        }
+    }
+
+    /**
+      According to cursor in text it determinates current word which is edited
+      @return Current word
+      */
+    function currentWord() {
+        var result = ""
+        var startIndex = expInput.cursorPosition - 1
+        var regExp = new RegExp(Calculator.expressionSplittersRegExp)
+
+        if(expInput.cursorPosition == 0)
+            return
+
+        while(expInput.text[startIndex]) {
+            if(expInput.text[startIndex].match(regExp))
+                break;
+            --startIndex
+        }
+        startIndex++;
+
+        while(expInput.text[startIndex]) {
+            if(expInput.text[startIndex].match(regExp))
+                break
+            result += expInput.text[startIndex]
+            startIndex++
+        }
+
+        return result
+    }
+
+    /**
+      Show suggestion box with filtered suggestions
+      */
+    function completeText() {
+        var lastChar = expInput.text.slice(-1)
+        if(Calculator.expressionSplitters.indexOf(lastChar) != -1)
+            completer.show()
+
+        if(typeof currentWord() != "undefined")
+            completer.currentText = currentWord()
+        else
+            completer.currentText = ""
+
+        completer.currentTextChanged(completer.currentText)
+    }
+
+    /**
+      Overwrite current expression by new expression
+      @param newExpression New expression
+      */
     function overwriteExpression(newExpression) {
         expInput.text = newExpression
     }
 
+    /**
+      Expand expression into current expresion
+      @param expressionKey Key of builtin expression or dynamic expression
+      */
     function expandExpression(expansionKey) {
         var expansionData = Calculator.expressionsExpansion[expansionKey]
         var selectedStart = expInput.selectionStart
@@ -198,9 +344,15 @@ ApplicationWindow {
             expInput.insert(selectedStart, expansion)
     }
 
+    /**
+      After calculation handles variable and display synchronization
+      @param data Data with result and variables
+      */
     function handleResult(data) {
-        if(typeof data["result"] !== "undefined")
+        if(typeof data["result"] !== "undefined") {
             resultDisplay.result = data["result"]
+            resultSystemDisplay.value = data["unformattedResult"]
+        }
         else
             expInput.text = ""
 
@@ -212,5 +364,4 @@ ApplicationWindow {
             variablePanel.handleVariableAction(identifier, variables[identifier].expression, variables[identifier].value)
         }
     }
-
 }

@@ -5,6 +5,7 @@ from PyQt5.QtCore import QObject, Q_ENUMS
 from PyQt5.QtQml import QQmlEngine, QJSEngine
 
 ICON_SIZES = (16, 24, 32, 48, 256)
+SUPPORTED_BASES = (10, 2, 8, 16)
 
 class BuiltinFunction(object):
     ABS = 'abs'
@@ -16,6 +17,18 @@ class BuiltinFunction(object):
     SQRT = 'sqrt'
     RAND = 'rand'
 
+
+EXPRESSION_SPLITTERS = ("+", "-", "(", "*", "/")
+class Expression(QObject):
+    class ExpressionTypes(IntEnum):
+        Function = 0
+        Variable = 1
+
+    Q_ENUMS(ExpressionTypes)
+
+    @staticmethod
+    def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
+        return Expression()
 
 class Expansion(QObject):
     class ExpansionType(IntEnum):

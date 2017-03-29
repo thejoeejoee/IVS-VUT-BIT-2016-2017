@@ -2,16 +2,22 @@ import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
+/**
+  Specialized input for calculation expression
+  */
 TextArea {
     id: expInput
 
+    /// Emits after expression was confirmed with enter key
     signal confirmed()
+    /// Text color of placeholder
     property alias placeholderTextColor: placeholderText.color
 
     focus: true
     textMargin: 15
     antialiasing: true
     frameVisible: false
+    wrapMode: Text.WordWrap
 
     Keys.onPressed: {
         if(event.key == Qt.Key_Return || event.key == Qt.Key_Enter) {

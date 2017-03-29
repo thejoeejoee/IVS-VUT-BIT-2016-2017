@@ -1,6 +1,8 @@
 pragma Singleton
 import QtQuick 2.0
 import QtQuick.Controls.Styles 1.4
+// TODO allow
+import Expression 1.0
 
 QtObject {
     id: styles
@@ -110,6 +112,40 @@ QtObject {
         property color maskColor: "black"
         property color color: "#ED1D2B"
         property color textColor: "white"
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
+    property QtObject infoDialog: QtObject {
+        property color maskColor: "black"
+        property color color: "#FFCE00"
+        property color textColor: "white"
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
+    property QtObject completer: QtObject {
+        property color color: "#2A2A2A"
+        property color hoverColor: "#ED1946"
+        property color textColor: "#C1C0C0"
+        property color scrollBarColor: "#9F9F9F"
+        property var typeColors: ({})
+        property font font: Qt.font({family: "Roboto Light"})
+
+        // TODO allow
+        Component.onCompleted: {
+            typeColors[Expression.Function] = "#EF4223"
+            typeColors[Expression.Variable] = "#C1C0C0"
+        }
+    }
+
+    property QtObject countDown: QtObject {
+        property var textColors: {0: "#ED1869", 1: "#F2BC1F", 2: "#39BFC1", 3: "#672980"}
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
+    property QtObject resultSystemDisplay: QtObject {
+        property color color: "#F2F2F2"
+        property color baseTextColor: "#ED1D3D"
+        property color valueTextColor: "#3D3D3D"
         property font font: Qt.font({family: "Roboto Light"})
     }
 }

@@ -3,15 +3,30 @@ import QtQuick 2.0
 Rectangle {
     id: component
 
+    /**
+      Emits request to expand text by variable data
+      @param data String requested to be expanded
+      */
     signal expandRequest(string data)
+    /**
+      Emits request to overwrite text by variable data
+      @param data String requested to be expanded
+      */
     signal overwriteRequest(string data)
 
+    /// Text color
     property color textColor
+    /// Text color of identifier
     property color identifierTextColor
+    /// Background color of expression when hovered
     property color expressionHoverColor
+    /// Variable identifier
     property string variableIdentifier: ""
+    /// Variable expression
     property string variableExpression: ""
-    property real variableValue: 0
+    /// Variable value
+    property string variableValue: "0"
+    /// Used font
     property font font
 
     QtObject {
@@ -27,7 +42,7 @@ Rectangle {
             if(mouse.button == Qt.LeftButton)
                 component.expandRequest(component.variableIdentifier)
             else
-                component.overwriteRequest(component.variableExpression)
+                component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
         }
     }
 
@@ -84,7 +99,7 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
 
-                onClicked: component.overwriteRequest(component.variableExpression)
+                onClicked: component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
                 onContainsMouseChanged: {
                     if(containsMouse)
                         expressionBackground.color = component.expressionHoverColor
@@ -101,7 +116,7 @@ Rectangle {
         color: component.textColor
 
         font.family: component.font.family
-        font.pixelSize: parent.height * 0.62
+        font.pixelSize: parent.height * 0.55
 
         anchors.right: parent.right
         anchors.rightMargin: internal.sideMargin

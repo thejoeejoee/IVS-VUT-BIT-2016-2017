@@ -1,12 +1,19 @@
 import QtQuick 2.0
 import "../controls" as Controls
 
+/**
+  Button with label and simple animation
+  */
 Controls.Clickable {
     id: component
 
+    /// Label of button
     property alias buttonText: innerText.text;
+    /// Background color
     property color color: "black"
+    /// Text color
     property color textColor: "black"
+    /// text color when hovered
     property color hoverTextColor: "white"
 
     hoverEnabled: true
