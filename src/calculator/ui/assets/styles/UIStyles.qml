@@ -146,6 +146,7 @@ QtObject {
         property color color: "#F2F2F2"
         property color baseTextColor: "#ED1D3D"
         property color valueTextColor: "#3D3D3D"
+        property color scrollbarColor: "#ED1D3D"
         property font font: Qt.font({family: "Roboto Light"})
     }
 }

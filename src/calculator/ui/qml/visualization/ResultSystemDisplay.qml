@@ -17,6 +17,8 @@ Rectangle {
     property color baseTextColor
     /// Text color of converted value
     property color valueTextColor
+    /// Color of value scrollbar
+    property color scrollbarColor
     /// Margin of text
     readonly property int margin: 10
 
@@ -50,17 +52,47 @@ Rectangle {
                     anchors.left: parent.left
                 }
 
-                AnimatedText {
-                    text: Calculator.convertToBase(component.value, component.bases[modelData])
-                    color: component.valueTextColor
+                FontMetrics {
+                    id: fm
                     font: baseText.font
+                }
 
-                    anchors.top: parent.top
+                Rectangle {
+                    color: component.scrollbarColor
+                    opacity: (flick.visibleArea.widthRatio != 1 && flick.moving)
+
+                    x: flick.width * flick.visibleArea.xPosition + flick.x
+                    width: flick.width * flick.visibleArea.widthRatio
+                    height: 2
+
+                    anchors.top: flick.bottom
+                    anchors.topMargin: height
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 200 }
+                    }
+                }
+
+                Flickable {
+                    id: flick
+
+                    boundsBehavior: Flickable.StopAtBounds
+                    flickableDirection: Flickable.HorizontalFlick
+                    clip: true
+
+                    width: parent.width - anchors.leftMargin
+                    height: parent.height
+
+                    contentHeight: valueText.height
+                    contentWidth: valueText.width
+
                     anchors.left: parent.left
                     anchors.leftMargin: component.margin * 3 + fm.advanceWidth("DEC")   // some constant to measure font width
 
-                    FontMetrics {
-                        id: fm
+                    AnimatedText {
+                        id: valueText
+                        text: Calculator.convertToBase(component.value, component.bases[modelData])
+                        color: component.valueTextColor
                         font: baseText.font
                     }
                 }
