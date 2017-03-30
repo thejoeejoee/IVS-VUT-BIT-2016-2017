@@ -4,27 +4,27 @@
 <context>
     <name>Adapter</name>
     <message>
-        <location filename="../ui/adapter.py" line="37"/>
+        <location filename="../adapter.py" line="37"/>
         <source>Unsupported base.</source>
         <translation>Nepodporovaná číselná soustava.</translation>
     </message>
     <message>
-        <location filename="../ui/adapter.py" line="72"/>
+        <location filename="../adapter.py" line="72"/>
         <source>Math error occured.</source>
         <translation>Matematická chyba.</translation>
     </message>
     <message>
-        <location filename="../ui/adapter.py" line="74"/>
+        <location filename="../adapter.py" line="74"/>
         <source>Error in defining variable.</source>
         <translation>Chyba při definování proměnné.</translation>
     </message>
     <message>
-        <location filename="../ui/adapter.py" line="76"/>
+        <location filename="../adapter.py" line="76"/>
         <source>Result is too big.</source>
         <translation>Výsledek je příliš velký.</translation>
     </message>
     <message>
-        <location filename="../ui/adapter.py" line="70"/>
+        <location filename="../adapter.py" line="70"/>
         <source>Expression contains syntax error.</source>
         <translation>Výraz obsahuje syntaktickou chybu.</translation>
     </message>
@@ -43,7 +43,7 @@
 <context>
     <name>ExpressionInput</name>
     <message>
-        <location filename="../ui/qml/controls/ExpressionInput.qml" line="27"/>
+        <location filename="../qml/controls/ExpressionInput.qml" line="32"/>
         <source>Enter expression...</source>
         <translation>Zadejte výraz...</translation>
     </message>
@@ -51,17 +51,17 @@
 <context>
     <name>Game</name>
     <message>
-        <location filename="../ui/easteregg/Game.qml" line="25"/>
+        <location filename="../easteregg/Game.qml" line="38"/>
         <source>Easter egg</source>
         <translation>Easter egg</translation>
     </message>
     <message>
-        <location filename="../ui/easteregg/Game.qml" line="149"/>
+        <location filename="../easteregg/Game.qml" line="173"/>
         <source>You are looser.</source>
         <translation>Jste looser.</translation>
     </message>
     <message>
-        <location filename="../ui/easteregg/Game.qml" line="151"/>
+        <location filename="../easteregg/Game.qml" line="175"/>
         <source>AI is noob.</source>
         <translation>AI je noob. </translation>
     </message>
@@ -69,7 +69,7 @@
 <context>
     <name>PopUp</name>
     <message>
-        <location filename="../ui/qml/visualization/PopUp.qml" line="87"/>
+        <location filename="../qml/visualization/PopUp.qml" line="112"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -77,17 +77,17 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../ui/qml/main.qml" line="27"/>
+        <location filename="../qml/main.qml" line="27"/>
         <source>Barbie Calculator</source>
         <translation>Barbie Calculator</translation>
     </message>
     <message>
-        <location filename="../ui/qml/main.qml" line="193"/>
+        <location filename="../qml/main.qml" line="194"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../ui/qml/main.qml" line="207"/>
+        <location filename="../qml/main.qml" line="208"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
