@@ -236,6 +236,19 @@ ApplicationWindow {
         Calculator.error.connect(error.show)
     }
 
+    FunctionSignatureDisplay {
+        id: functionSignature
+
+        color: StyleSettings.functionSignatureDisplay.color
+        textColor: StyleSettings.functionSignatureDisplay.textColor
+        font: StyleSettings.functionSignatureDisplay.font
+        opacity: 0.8
+
+        x: completer.calcTextInfoPos(width)
+        y: expInput.cursorRectangle.y - height + expInput.y
+        height: completer.itemHeight * 1.2
+    }
+
     Control.Completer {
         id: completer
 
@@ -249,7 +262,7 @@ ApplicationWindow {
 
         width: parent.width * 0.18
         itemHeight: width / 8
-        x: calcPos()
+        x: calcTextInfoPos(width)
         y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
 
         onItemChoosed: {
@@ -260,12 +273,13 @@ ApplicationWindow {
             expandExpression(currentItem["identifier"])
         }
 
-        function calcPos() {
-            if(expInput.cursorRectangle.x + completer.width + fmExpInput.advanceWidth(" ") < expInput.width)
+        function calcTextInfoPos(infoWidth) {
+            if(expInput.cursorRectangle.x + infoWidth + fmExpInput.advanceWidth(" ") < expInput.width)
                 return expInput.cursorRectangle.x + expInput.x
             else
-                return expInput.x + expInput.width - completer.width - expInput.textMargin
+                return expInput.x + expInput.width - infoWidth - expInput.textMargin
         }
+
     }
 
     /**
@@ -338,8 +352,13 @@ ApplicationWindow {
 
         expInput.remove(selectedStart, selectedEnd)
 
-        if(expansionType == Expansion.BracketsPack)
-            expInput.insert(selectedStart, expansion + selectedText + ")")
+        if(expansionType == Expansion.BracketsPack) {
+            expInput.insert(selectedStart, expansion + "(" + selectedText + ")")
+            var funcSignature = Calculator.checkFunctionExpansion(expansion)
+            if(funcSignature != "") {
+                functionSignature.text = funcSignature
+            }
+        }
 
         else
             expInput.insert(selectedStart, expansion)

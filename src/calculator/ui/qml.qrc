@@ -39,9 +39,7 @@
         <file>qml/visualization/AnimatedText.qml</file>
         <file>qml/visualization/PopUp.qml</file>
         <file>qml/controls/DefaultButton.qml</file>
-
         <file>translations/cs.qm</file>
-
         <file>assets/icons/16x16.png</file>
         <file>assets/icons/24x24.png</file>
         <file>assets/icons/32x32.png</file>
@@ -51,5 +49,6 @@
         <file>qml/controls/Completer.qml</file>
         <file>qml/visualization/ResultSystemDisplay.qml</file>
         <file>qml/visualization/CountDown.qml</file>
+        <file>qml/visualization/FunctionSignatureDisplay.qml</file>
     </qresource>
 </RCC>

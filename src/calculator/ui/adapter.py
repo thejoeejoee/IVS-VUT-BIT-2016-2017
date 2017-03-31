@@ -1,12 +1,15 @@
 # coding=utf-8
 import re
+import inspect
 
 from typing import Dict, Tuple, Set
 
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
 from PyQt5.QtQml import QJSEngine, QQmlEngine
+from math import fabs
 
 from calculator import Variable, NumericValue
+from calculator.core.solver import Solver
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError, UnsupportedBaseError
 from calculator.utils.number_formatter import NumberFormatter
@@ -23,6 +26,7 @@ class UIAdapter(QObject):
     identifiersTypesChanged = pyqtSignal(QVariant)
     processed = pyqtSignal(QVariant)
     error = pyqtSignal(str)
+
     _variables = dict()  # type: Dict[str, Variable]
     _formatter = NumberFormatter
     func_identifiers_types = [{"identifier": func, "type": Expression.ExpressionTypes.Function}
@@ -103,6 +107,17 @@ class UIAdapter(QObject):
                 "modified": list(modified_variables)
             }
         }))
+
+    @pyqtSlot(str, result=str)
+    def checkFunctionExpansion(self, expansion: str):
+        if expansion in BUILTIN_FUNCTIONS:
+            func = Solver.builtin_functions[expansion]
+
+            try:
+                return self._formatter.format_function_args_spec(expansion, inspect.signature(func))
+            except ValueError:
+                print("No signature")
+            return ""
 
     @pyqtSlot(str)
     def removeVariable(self, variable_identifier: str) -> None:
