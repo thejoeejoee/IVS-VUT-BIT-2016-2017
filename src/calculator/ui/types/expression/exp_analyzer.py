@@ -55,7 +55,7 @@ class ExpAnalyzer(QObject):
         if right_splitters_pos:
             word_end = min(right_splitters_pos, key=lambda x: abs(x - cursor))
 
-        return re.escape(content[word_start: word_end:].lstrip().rstrip())
+        return re.escape(content[word_start: word_end:].strip())
 
     @pyqtProperty(QQuickItem)
     def target(self) -> QQuickItem:
