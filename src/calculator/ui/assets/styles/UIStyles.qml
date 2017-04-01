@@ -149,4 +149,10 @@ QtObject {
         property color scrollbarColor: "#ED1D3D"
         property font font: Qt.font({family: "Roboto Light"})
     }
+
+    property QtObject functionSignatureDisplay: QtObject {
+        property color color: "black"
+        property color textColor: "white"
+        property font font: Qt.font({family: "Roboto Light"})
+    }
 }

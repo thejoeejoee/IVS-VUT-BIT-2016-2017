@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 1.4
 // TODO allow
 import ExpSyntaxHighlighter 1.0
+import ExpAnalyzer 1.0
 import Sides 1.0
 import Calculator 1.0
 import Expansion 1.0
@@ -31,6 +32,11 @@ ApplicationWindow {
         id: game
 
         onGameOver: info.show(msg)
+    }
+
+    ExpAnalyzer {
+        id: exa
+        target: expInput
     }
 
     ExpSyntaxHighlighter {
@@ -132,16 +138,22 @@ ApplicationWindow {
                 countDown.start(3)
 
             completeText()
+            showFunctionSignature()
         }
         onSelectedTextChanged: {
             if(selectedText.length) {
                 completer.model = completer.constantModel
                 completer.currentText = ""
             }
-            else
+            else {
                 completeText()
+                showFunctionSignature()
+            }
         }
-        onCursorPositionChanged: completeText()
+        onCursorPositionChanged: {
+            completeText()
+            showFunctionSignature()
+        }
     }
 
     ResultDisplay {
@@ -236,6 +248,19 @@ ApplicationWindow {
         Calculator.error.connect(error.show)
     }
 
+    FunctionSignatureDisplay {
+        id: functionSignature
+
+        color: StyleSettings.functionSignatureDisplay.color
+        textColor: StyleSettings.functionSignatureDisplay.textColor
+        font: StyleSettings.functionSignatureDisplay.font
+        opacity: 0.8
+
+        x: completer.calcTextInfoPos(width)
+        y: expInput.cursorRectangle.y - height + expInput.y
+        height: completer.itemHeight * 1.2
+    }
+
     Control.Completer {
         id: completer
 
@@ -249,7 +274,7 @@ ApplicationWindow {
 
         width: parent.width * 0.18
         itemHeight: width / 8
-        x: calcPos()
+        x: calcTextInfoPos(width)
         y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
 
         onItemChoosed: {
@@ -260,41 +285,13 @@ ApplicationWindow {
             expandExpression(currentItem["identifier"])
         }
 
-        function calcPos() {
-            if(expInput.cursorRectangle.x + completer.width + fmExpInput.advanceWidth(" ") < expInput.width)
+        function calcTextInfoPos(infoWidth) {
+            if(expInput.cursorRectangle.x + infoWidth + fmExpInput.advanceWidth(" ") < expInput.width)
                 return expInput.cursorRectangle.x + expInput.x
             else
-                return expInput.x + expInput.width - completer.width - expInput.textMargin
-        }
-    }
-
-    /**
-      According to cursor in text it determinates current word which is edited
-      @return Current word
-      */
-    function currentWord() {
-        var result = ""
-        var startIndex = expInput.cursorPosition - 1
-        var regExp = new RegExp(Calculator.expressionSplittersRegExp)
-
-        if(expInput.cursorPosition == 0)
-            return
-
-        while(expInput.text[startIndex]) {
-            if(expInput.text[startIndex].match(regExp))
-                break;
-            --startIndex
-        }
-        startIndex++;
-
-        while(expInput.text[startIndex]) {
-            if(expInput.text[startIndex].match(regExp))
-                break
-            result += expInput.text[startIndex]
-            startIndex++
+                return expInput.x + expInput.width - infoWidth - expInput.textMargin
         }
 
-        return result
     }
 
     /**
@@ -302,15 +299,20 @@ ApplicationWindow {
       */
     function completeText() {
         var lastChar = expInput.text.slice(-1)
+        var currentWord = exa.currentWord()
+
         if(Calculator.expressionSplitters.indexOf(lastChar) != -1)
             completer.show()
 
-        if(typeof currentWord() != "undefined")
-            completer.currentText = currentWord()
-        else
-            completer.currentText = ""
-
+        completer.currentText = currentWord
         completer.currentTextChanged(completer.currentText)
+    }
+
+    function showFunctionSignature() {
+        var currentFunction = exa.currentFunction()
+        var funcSignature = exa.currentFunctionSignature()
+
+        functionSignature.text = funcSignature
     }
 
     /**
@@ -326,23 +328,8 @@ ApplicationWindow {
       @param expressionKey Key of builtin expression or dynamic expression
       */
     function expandExpression(expansionKey) {
-        var expansionData = Calculator.expressionsExpansion[expansionKey]
-        var selectedStart = expInput.selectionStart
-        var selectedText = expInput.selectedText
-        var selectedEnd = expInput.selectionEnd
-        var expansion, expansionType
-
-        // if not found, then it is not in Settings, so use normal expansion
-        expansion = (typeof expansionData === "undefined") ?expansionKey :expansionData["expansion"]
-        expansionType = (typeof expansionData === "undefined") ?Expansion.Normal :expansionData["expansionType"]
-
-        expInput.remove(selectedStart, selectedEnd)
-
-        if(expansionType == Expansion.BracketsPack)
-            expInput.insert(selectedStart, expansion + selectedText + ")")
-
-        else
-            expInput.insert(selectedStart, expansion)
+        expInput.remove(expInput.selectionStart, expInput.selectionEnd)
+        expInput.insert(expInput.selectionStart, exa.expandExpression(expansionKey))
     }
 
     /**

@@ -1,6 +1,4 @@
 # coding=utf-8
-import re
-
 from typing import Dict, Tuple, Set
 
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
@@ -11,8 +9,7 @@ from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError, UnsupportedBaseError
 from calculator.utils.number_formatter import NumberFormatter
 from calculator.utils.translate import translate
-from calculator.settings import (BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS,
-                                 Expression)
+from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS, Expression)
 
 
 class UIAdapter(QObject):
@@ -23,6 +20,7 @@ class UIAdapter(QObject):
     identifiersTypesChanged = pyqtSignal(QVariant)
     processed = pyqtSignal(QVariant)
     error = pyqtSignal(str)
+
     _variables = dict()  # type: Dict[str, Variable]
     _formatter = NumberFormatter
     func_identifiers_types = [{"identifier": func, "type": Expression.ExpressionTypes.Function}
@@ -120,11 +118,6 @@ class UIAdapter(QObject):
     def builtinFunctions(self) -> QVariant:
         return QVariant(list(BUILTIN_FUNCTIONS))
 
-    @pyqtProperty(QVariant)
-    def expressionsExpansion(self) -> QVariant:
-        return QVariant({expression: dict(expansion=expansion, expansionType=expansion_type)
-                         for expression, expansion, expansion_type in EXPRESSION_EXPANSIONS})
-
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
         adapter = UIAdapter()
@@ -154,11 +147,6 @@ class UIAdapter(QObject):
     @pyqtProperty(QVariant)
     def expressionSplitters(self) -> QVariant:
         return QVariant(list(EXPRESSION_SPLITTERS))
-
-    @pyqtProperty(str)
-    def expressionSplittersRegExp(self) -> str:
-        result = re.escape("".join(EXPRESSION_SPLITTERS))
-        return "".join(("[", result ,"]"))
 
     @pyqtProperty(QVariant, notify=identifiersTypesChanged)
     def variables(self) -> QVariant:

@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QApplication
 
 from calculator.ui.adapter import UIAdapter
 from calculator.ui.types.core import Sides
-from calculator.ui.types.syntaxhighlight import ExpSyntaxHighlighter
+from calculator.ui.types.expression import ExpSyntaxHighlighter, ExpAnalyzer
 from calculator.ui.types.qmlwrapper.utils import TypeRegister
 from calculator.settings import Expansion, ICON_SIZES, Expression
 
@@ -50,6 +50,7 @@ class CalculatorApp(QApplication):
         qmlRegisterSingletonType(Expression, "Expression", 1, 0 ,"Expression", Expression.singletonProvider)
         qmlRegisterSingletonType(UIAdapter, "Calculator", 1, 0, "Calculator", UIAdapter.singletonProvider)
         TypeRegister.register_type(ExpSyntaxHighlighter)
+        TypeRegister.register_type(ExpAnalyzer)
 
     def run(self) -> int:
         CalculatorApp.registerTypes()

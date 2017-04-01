@@ -1,5 +1,9 @@
 # coding=utf-8
+import re
+
 from decimal import Decimal
+
+from inspect import Signature
 
 from calculator import NumericValue
 from calculator.settings import SUPPORTED_BASES
@@ -36,3 +40,25 @@ class NumberFormatter(object):
             raise UnsupportedBaseError("Base {} is not supported.".format(base))
 
         return cls.BASE_CONVERTERS[base](int(value))
+
+    @staticmethod
+    def format_function_args_spec(func_identifier: str, func_signature: Signature) -> str:
+        raw_args = [(arg_identifier, func_signature.parameters[arg_identifier].annotation)
+                    for arg_identifier in func_signature.parameters.keys()]
+        formatted_args_list = list()
+
+        for arg_identifier, arg_annotation in raw_args:
+            arg_annotation = repr(arg_annotation)
+
+            if "<class" in arg_annotation:
+                formatted_args_list.append((arg_identifier, re.search("(?<=').+(?=')", arg_annotation).group(0)))
+            else:
+                formatted_args_list.append((arg_identifier, arg_annotation.split("typing.")[-1]))
+
+        formatted_args = "{}({})".format(func_identifier, ", ".join(["{}: {}".format(
+            arg_identifier,
+            arg_annotation
+        )
+        for arg_identifier, arg_annotation in formatted_args_list]))
+
+        return formatted_args

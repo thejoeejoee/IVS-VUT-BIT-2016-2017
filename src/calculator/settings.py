@@ -18,7 +18,7 @@ class BuiltinFunction(object):
     RAND = 'rand'
 
 
-EXPRESSION_SPLITTERS = ("+", "-", "(", "*", "/")
+EXPRESSION_SPLITTERS = {"+", "-", "(", "*", "/"}
 class Expression(QObject):
     class ExpressionTypes(IntEnum):
         Function = 0
@@ -60,12 +60,12 @@ HIGHLIGHT_RULES = (
 
 
 EXPRESSION_EXPANSIONS = (
-    (BuiltinFunction.ABS, 'abs(', Expansion.ExpansionType.BracketsPack),
-    (BuiltinFunction.FACT, 'fact(', Expansion.ExpansionType.BracketsPack),
-    (BuiltinFunction.LOG, 'log(', Expansion.ExpansionType.BracketsPack),
-    (BuiltinFunction.LN, 'ln(', Expansion.ExpansionType.BracketsPack),
-    (BuiltinFunction.ROOT, 'root(', Expansion.ExpansionType.BracketsPack),
-    (BuiltinFunction.POW, 'pow(', Expansion.ExpansionType.BracketsPack),
-    (BuiltinFunction.SQRT, 'sqrt(', Expansion.ExpansionType.BracketsPack),
-    (BuiltinFunction.RAND, 'rand(', Expansion.ExpansionType.BracketsPack)
+    (BuiltinFunction.ABS, 'abs', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.FACT, 'fact', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.LOG, 'log', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.LN, 'ln', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.ROOT, 'root', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.POW, 'pow', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.SQRT, 'sqrt', Expansion.ExpansionType.BracketsPack),
+    (BuiltinFunction.RAND, 'rand', Expansion.ExpansionType.BracketsPack)
 )
