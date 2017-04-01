@@ -138,16 +138,22 @@ ApplicationWindow {
                 countDown.start(3)
 
             completeText()
+            showFunctionSignature()
         }
         onSelectedTextChanged: {
             if(selectedText.length) {
                 completer.model = completer.constantModel
                 completer.currentText = ""
             }
-            else
+            else {
                 completeText()
+                showFunctionSignature()
+            }
         }
-        onCursorPositionChanged: completeText()
+        onCursorPositionChanged: {
+            completeText()
+            showFunctionSignature()
+        }
     }
 
     ResultDisplay {
@@ -302,6 +308,13 @@ ApplicationWindow {
         completer.currentTextChanged(completer.currentText)
     }
 
+    function showFunctionSignature() {
+        var currentFunction = exa.currentFunction()
+        var funcSignature = exa.currentFunctionSignature()
+
+        functionSignature.text = funcSignature
+    }
+
     /**
       Overwrite current expression by new expression
       @param newExpression New expression
@@ -315,28 +328,8 @@ ApplicationWindow {
       @param expressionKey Key of builtin expression or dynamic expression
       */
     function expandExpression(expansionKey) {
-        var expansionData = Calculator.expressionsExpansion[expansionKey]
-        var selectedStart = expInput.selectionStart
-        var selectedText = expInput.selectedText
-        var selectedEnd = expInput.selectionEnd
-        var expansion, expansionType
-
-        // if not found, then it is not in Settings, so use normal expansion
-        expansion = (typeof expansionData === "undefined") ?expansionKey :expansionData["expansion"]
-        expansionType = (typeof expansionData === "undefined") ?Expansion.Normal :expansionData["expansionType"]
-
-        expInput.remove(selectedStart, selectedEnd)
-
-        if(expansionType == Expansion.BracketsPack) {
-            expInput.insert(selectedStart, expansion + "(" + selectedText + ")")
-            var funcSignature = Calculator.checkFunctionExpansion(expansion)
-            if(funcSignature != "") {
-                functionSignature.text = funcSignature
-            }
-        }
-
-        else
-            expInput.insert(selectedStart, expansion)
+        expInput.remove(expInput.selectionStart, expInput.selectionEnd)
+        expInput.insert(expInput.selectionStart, exa.expandExpression(expansionKey))
     }
 
     /**

@@ -1,21 +1,15 @@
 # coding=utf-8
-import re
-import inspect
-
 from typing import Dict, Tuple, Set
 
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
 from PyQt5.QtQml import QJSEngine, QQmlEngine
-from math import fabs
 
 from calculator import Variable, NumericValue
-from calculator.core.solver import Solver
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError, UnsupportedBaseError
 from calculator.utils.number_formatter import NumberFormatter
 from calculator.utils.translate import translate
-from calculator.settings import (BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS,
-                                 Expression)
+from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS, Expression)
 
 
 class UIAdapter(QObject):
@@ -108,17 +102,6 @@ class UIAdapter(QObject):
             }
         }))
 
-    @pyqtSlot(str, result=str)
-    def checkFunctionExpansion(self, expansion: str):
-        if expansion in BUILTIN_FUNCTIONS:
-            func = Solver.builtin_functions[expansion]
-
-            try:
-                return self._formatter.format_function_args_spec(expansion, inspect.signature(func))
-            except ValueError:
-                print("No signature")
-            return ""
-
     @pyqtSlot(str)
     def removeVariable(self, variable_identifier: str) -> None:
         print(variable_identifier)
@@ -134,11 +117,6 @@ class UIAdapter(QObject):
     @pyqtProperty(QVariant)
     def builtinFunctions(self) -> QVariant:
         return QVariant(list(BUILTIN_FUNCTIONS))
-
-    @pyqtProperty(QVariant)
-    def expressionsExpansion(self) -> QVariant:
-        return QVariant({expression: dict(expansion=expansion, expansionType=expansion_type)
-                         for expression, expansion, expansion_type in EXPRESSION_EXPANSIONS})
 
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
@@ -169,11 +147,6 @@ class UIAdapter(QObject):
     @pyqtProperty(QVariant)
     def expressionSplitters(self) -> QVariant:
         return QVariant(list(EXPRESSION_SPLITTERS))
-
-    @pyqtProperty(str)
-    def expressionSplittersRegExp(self) -> str:
-        result = re.escape("".join(EXPRESSION_SPLITTERS))
-        return "".join(("[", result ,"]"))
 
     @pyqtProperty(QVariant, notify=identifiersTypesChanged)
     def variables(self) -> QVariant:

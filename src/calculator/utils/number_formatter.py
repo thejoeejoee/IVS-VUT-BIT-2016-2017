@@ -60,4 +60,5 @@ class NumberFormatter(object):
             arg_annotation
         )
         for arg_identifier, arg_annotation in formatted_args_list]))
+
         return formatted_args
