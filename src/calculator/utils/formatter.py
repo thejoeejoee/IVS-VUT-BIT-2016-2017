@@ -11,7 +11,7 @@ from calculator.settings import SUPPORTED_BASES
 from calculator.exceptions import UnsupportedBaseError
 
 
-class NumberFormatter(object):
+class Formatter(object):
     DEFAULT_CHARACTERS_LIMIT = 8
 
     EXP_FORMAT = '{value} <small>&times;</small>10<sup><small>{exp}</small></sup>'
@@ -20,7 +20,7 @@ class NumberFormatter(object):
     _EXP_DIVIDER = 'e'
 
     @classmethod
-    def format(cls, value: NumericValue, characters_limit: int = DEFAULT_CHARACTERS_LIMIT) -> str:
+    def format_number(cls, value: NumericValue, characters_limit: int = DEFAULT_CHARACTERS_LIMIT) -> str:
         stringed = str(value)
 
         if cls._EXP_DIVIDER not in stringed and not (len(stringed) > characters_limit):
@@ -33,7 +33,7 @@ class NumberFormatter(object):
         )
 
     @classmethod
-    def format_in_base(cls, value: int, base: int) -> str:
+    def format_number_in_base(cls, value: int, base: int) -> str:
         if abs(value - int(value)) > 0:
             raise ValueError()
         if not base in SUPPORTED_BASES:

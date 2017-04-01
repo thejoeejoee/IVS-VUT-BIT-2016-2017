@@ -9,7 +9,7 @@ from PyQt5.QtQuick import QQuickItem
 
 from calculator.core.solver import Solver
 from calculator.settings import EXPRESSION_SPLITTERS, EXPRESSION_EXPANSIONS, Expansion, BUILTIN_FUNCTIONS
-from calculator.utils.number_formatter import NumberFormatter
+from calculator.utils.formatter import Formatter
 
 
 class ExpAnalyzer(QObject):
@@ -43,7 +43,7 @@ class ExpAnalyzer(QObject):
             func = Solver.builtin_functions[func_identifier]
 
             try:
-                return NumberFormatter.format_function_args_spec(func_identifier, inspect.signature(func))
+                return Formatter.format_function_args_spec(func_identifier, inspect.signature(func))
             except ValueError:
                 print("No signature")
             return ""

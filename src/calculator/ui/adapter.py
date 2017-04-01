@@ -7,7 +7,7 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 from calculator import Variable, NumericValue
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError, UnsupportedBaseError
-from calculator.utils.number_formatter import NumberFormatter
+from calculator.utils.formatter import Formatter
 from calculator.utils.translate import translate
 from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS, Expression)
 
@@ -22,14 +22,14 @@ class UIAdapter(QObject):
     error = pyqtSignal(str)
 
     _variables = dict()  # type: Dict[str, Variable]
-    _formatter = NumberFormatter
+    _formatter = Formatter
     func_identifiers_types = [{"identifier": func, "type": Expression.ExpressionTypes.Function}
                               for func in BUILTIN_FUNCTIONS]
 
     @pyqtSlot(float, int, result=str)
     def convertToBase(self, value: NumericValue, base: int) -> str:
         try:
-            v = self._formatter.format_in_base(value, base)
+            v = self._formatter.format_number_in_base(value, base)
             return v
         except UnsupportedBaseError as e:
             return translate("Adapter", "Unsupported base.")
@@ -45,11 +45,11 @@ class UIAdapter(QObject):
 
             self.identifiersTypesChanged.emit(self.identifiersTypes)
             self.processed.emit(QVariant({
-                "result": None if result is None else self._formatter.format(result, 16),
+                "result": None if result is None else self._formatter.format_number(result, 16),
                 "unformattedResult": result,
                 "variables": {
                     key: dict(
-                        value=self._formatter.format(value),
+                        value=self._formatter.format_number(value),
                         expression=self._format_source_expression(
                             variable=key,
                             source_expression=expression
@@ -87,7 +87,7 @@ class UIAdapter(QObject):
             "result": None,
             "variables": {
                 key: dict(
-                    value=self._formatter.format(value),
+                    value=self._formatter.format_number(value),
                     expression=self._format_source_expression(
                         variable=key,
                         source_expression=expression
