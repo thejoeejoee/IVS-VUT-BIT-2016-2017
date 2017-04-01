@@ -32,20 +32,10 @@ DropDown {
     onCurrentTextChanged: {
         var newModel = []
 
-        if(currentText.search(/^[ ]*$/) != -1) {
-            component.model = constantModel
-            return
-        }
-
         for(var key in component.constantModel) {
             var value = component.constantModel[key]
-            var currentTextWithoutSpace = currentText.replace(new RegExp("[ ]*(?=\\S+)", 'g'), "")
 
-            // contains ")" which need to be escaped
-            if(currentTextWithoutSpace.search(/\)/) !== -1)
-                currentTextWithoutSpace = currentText.replace(/\)/g, "\\)")
-
-            if(value["identifier"].search("^" + currentTextWithoutSpace) !== -1)
+            if(value["identifier"].search("^" + currentText) !== -1)
                 newModel.push(value)
         }
 

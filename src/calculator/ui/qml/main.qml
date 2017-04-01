@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 1.4
 // TODO allow
 import ExpSyntaxHighlighter 1.0
+import ExpAnalyzer 1.0
 import Sides 1.0
 import Calculator 1.0
 import Expansion 1.0
@@ -31,6 +32,11 @@ ApplicationWindow {
         id: game
 
         onGameOver: info.show(msg)
+    }
+
+    ExpAnalyzer {
+        id: exa
+        target: expInput
     }
 
     ExpSyntaxHighlighter {
@@ -283,47 +289,16 @@ ApplicationWindow {
     }
 
     /**
-      According to cursor in text it determinates current word which is edited
-      @return Current word
-      */
-    function currentWord() {
-        var result = ""
-        var startIndex = expInput.cursorPosition - 1
-        var regExp = new RegExp(Calculator.expressionSplittersRegExp)
-
-        if(expInput.cursorPosition == 0)
-            return
-
-        while(expInput.text[startIndex]) {
-            if(expInput.text[startIndex].match(regExp))
-                break;
-            --startIndex
-        }
-        startIndex++;
-
-        while(expInput.text[startIndex]) {
-            if(expInput.text[startIndex].match(regExp))
-                break
-            result += expInput.text[startIndex]
-            startIndex++
-        }
-
-        return result
-    }
-
-    /**
       Show suggestion box with filtered suggestions
       */
     function completeText() {
         var lastChar = expInput.text.slice(-1)
+        var currentWord = exa.currentWord()
+
         if(Calculator.expressionSplitters.indexOf(lastChar) != -1)
             completer.show()
 
-        if(typeof currentWord() != "undefined")
-            completer.currentText = currentWord()
-        else
-            completer.currentText = ""
-
+        completer.currentText = currentWord
         completer.currentTextChanged(completer.currentText)
     }
 
