@@ -208,6 +208,7 @@ ApplicationWindow {
         dialogColor: StyleSettings.errorDialog.color
         textColor: StyleSettings.errorDialog.textColor
         font: StyleSettings.errorDialog.font
+        z: 2
 
         anchors.fill: parent
 
@@ -222,6 +223,7 @@ ApplicationWindow {
         dialogColor: StyleSettings.infoDialog.color
         textColor: StyleSettings.infoDialog.textColor
         font: StyleSettings.infoDialog.font
+        z: 2
 
         anchors.fill: parent
 
