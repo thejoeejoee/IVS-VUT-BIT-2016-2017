@@ -7,9 +7,9 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 from calculator import Variable, NumericValue
 from calculator.core.calculator import Calculator
 from calculator.exceptions import MathError, VariableError, UnsupportedBaseError
+from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS, Expression)
 from calculator.utils.formatter import Formatter
 from calculator.utils.translate import translate
-from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS, Expression)
 
 
 class UIAdapter(QObject):
@@ -170,4 +170,4 @@ class UIAdapter(QObject):
         :param source_expression: source expression for variable
         :return: striped source expression
         """
-        return source_expression.lstrip(variable).lstrip()
+        return source_expression.replace(variable, '', 1).lstrip()

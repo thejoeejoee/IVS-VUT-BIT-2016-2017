@@ -7,6 +7,7 @@ from PyQt5.QtQml import QQmlEngine, QJSEngine
 ICON_SIZES = (16, 24, 32, 48, 256)
 SUPPORTED_BASES = (10, 2, 8, 16)
 
+
 class BuiltinFunction(object):
     ABS = 'abs'
     FACT = 'fact'
@@ -19,6 +20,8 @@ class BuiltinFunction(object):
 
 
 EXPRESSION_SPLITTERS = {"+", "-", "(", "*", "/"}
+
+
 class Expression(QObject):
     class ExpressionTypes(IntEnum):
         Function = 0
@@ -29,6 +32,7 @@ class Expression(QObject):
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
         return Expression()
+
 
 class Expansion(QObject):
     class ExpansionType(IntEnum):
@@ -57,7 +61,6 @@ HIGHLIGHT_RULES = (
     ((r'\d+',), 'purple'),
     (("(n)(y)(a)(n)",), "#ED1869 #F2BC1F #39BFC1 #672980".split()),
 )
-
 
 EXPRESSION_EXPANSIONS = (
     (BuiltinFunction.ABS, 'abs', Expansion.ExpansionType.BracketsPack),
