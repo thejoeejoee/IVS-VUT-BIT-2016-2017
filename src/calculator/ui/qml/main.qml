@@ -311,7 +311,6 @@ ApplicationWindow {
     }
 
     function showFunctionSignature() {
-        var currentFunction = exa.currentFunction()
         var funcSignature = exa.currentFunctionSignature()
 
         functionSignature.show(funcSignature)
