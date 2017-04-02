@@ -157,6 +157,9 @@ class ExpAnalyzer(QObject):
             borders = self._currentWordBorders()
             content = self._get_content()
 
+            if borders["end"] == -1:
+                return "{}(".format(expansion)
+
             for i in range(borders["end"], len(content)):
                 current_char = content[i]
 
