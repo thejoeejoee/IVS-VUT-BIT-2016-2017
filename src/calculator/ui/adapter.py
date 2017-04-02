@@ -72,6 +72,10 @@ class UIAdapter(QObject):
             self.error.emit(translate("Adapter", "Error in defining variable."))
         except OverflowError:
             self.error.emit(translate("Adapter", "Result is too big."))
+        except TypeError:
+            self.error.emit(translate("Adapter", "Parameters count does not match function."))
+        except NotImplemented:
+            self.error.emit(translate("Adapter", "Function is not defined."))
 
     @pyqtSlot(str, int)
     def setVariableValue(self, variable: str, value: NumericValue):

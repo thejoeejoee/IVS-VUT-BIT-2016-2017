@@ -4,27 +4,37 @@
 <context>
     <name>Adapter</name>
     <message>
-        <location filename="../adapter.py" line="37"/>
+        <location filename="../adapter.py" line="35"/>
         <source>Unsupported base.</source>
         <translation>Nepodporovaná číselná soustava.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="72"/>
+        <location filename="../adapter.py" line="70"/>
         <source>Math error occured.</source>
         <translation>Matematická chyba.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="74"/>
+        <location filename="../adapter.py" line="72"/>
         <source>Error in defining variable.</source>
         <translation>Chyba při definování proměnné.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="76"/>
+        <location filename="../adapter.py" line="74"/>
         <source>Result is too big.</source>
         <translation>Výsledek je příliš velký.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="70"/>
+        <location filename="../adapter.py" line="76"/>
+        <source>Parameters count does not match function.</source>
+        <translation>Počet parametrů neodpovídá funkci.</translation>
+    </message>
+    <message>
+        <location filename="../adapter.py" line="78"/>
+        <source>Function is not defined.</source>
+        <translation>Funkce není definována.</translation>
+    </message>
+    <message>
+        <location filename="../adapter.py" line="68"/>
         <source>Expression contains syntax error.</source>
         <translation>Výraz obsahuje syntaktickou chybu.</translation>
     </message>
@@ -77,17 +87,17 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="27"/>
+        <location filename="../qml/main.qml" line="28"/>
         <source>Barbie Calculator</source>
         <translation>Barbie Calculator</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="194"/>
+        <location filename="../qml/main.qml" line="206"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="208"/>
+        <location filename="../qml/main.qml" line="221"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
