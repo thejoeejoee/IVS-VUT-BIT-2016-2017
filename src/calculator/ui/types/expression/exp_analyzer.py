@@ -2,9 +2,9 @@
 import re
 import inspect
 
-from typing import Optional, Tuple, List
+from typing import Optional, Tuple, List, Dict
 
-from PyQt5.QtCore import QObject, pyqtSignal, pyqtProperty, pyqtSlot
+from PyQt5.QtCore import QObject, pyqtSignal, pyqtProperty, pyqtSlot, QVariant
 from PyQt5.QtQuick import QQuickItem
 
 from calculator.core.solver import Solver
@@ -153,16 +153,34 @@ class ExpAnalyzer(QObject):
         expansion = self.getExpansion(expansion)
 
         if expansion_type == Expansion.ExpansionType.BracketsPack:
-            return "{}({})".format(expansion, selected_text)
+            has_open_bracket = False
+            borders = self._currentWordBorders()
+            content = self._get_content()
+
+            for i in range(borders["end"], len(content)):
+                current_char = content[i]
+
+                if current_char == "(":
+                    has_open_bracket = True
+                if not current_char.isspace():
+                    break
+
+            if selected_text:
+                return "{}({})".format(expansion, selected_text)
+            elif has_open_bracket:
+                return expansion
+            else:
+                return "{}(".format(expansion)
         else:
             return expansion
 
+    @pyqtSlot(result=QVariant)
+    def currentWordBorders(self) -> QVariant:
+        return QVariant(self._currentWordBorders())
 
-    @pyqtSlot(result=str)
-    def currentWord(self) -> str:
+    def _currentWordBorders(self) -> Dict[str, int]:
         """
-        According to cursor in text it determines current word which is edited
-        :return: Current word
+        :return: Current word start and end
         """
 
         content = self._get_content().replace(")", "")
@@ -171,7 +189,7 @@ class ExpAnalyzer(QObject):
         word_end = len(content)
 
         if self._get_cursor() == 0:
-            return ""
+            return {"start": -1, "end": -1}
 
         splitter_positions = list()
         for splitter in EXPRESSION_SPLITTERS:
@@ -185,7 +203,20 @@ class ExpAnalyzer(QObject):
         if right_splitters_pos:
             word_end = min(right_splitters_pos, key=lambda x: abs(x - cursor))
 
-        return re.escape(content[word_start: word_end:].strip())
+        return {"start": word_start, "end": word_end}
+
+    @pyqtSlot(result=str)
+    def currentWord(self) -> str:
+        """
+        According to cursor in text it determines current word which is edited
+        :return: Current word
+        """
+        content = self._get_content().replace(")", "")
+        borders = self._currentWordBorders()
+
+        if borders["start"] != -1 and borders["end"] != -1:
+            return re.escape(content[borders["start"]:borders["end"]:].strip())
+        return ""
 
     @pyqtProperty(QQuickItem)
     def target(self) -> QQuickItem:

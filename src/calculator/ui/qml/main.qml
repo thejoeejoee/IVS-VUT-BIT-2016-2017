@@ -281,10 +281,6 @@ ApplicationWindow {
         y: expInput.cursorRectangle.y + expInput.cursorRectangle.height + expInput.y
 
         onItemChoosed: {
-            var end = expInput.cursorPosition
-            var start = end - currentText.length
-
-            expInput.remove(start, end)
             expandExpression(currentItem["identifier"])
         }
 
@@ -330,8 +326,16 @@ ApplicationWindow {
       @param expressionKey Key of builtin expression or dynamic expression
       */
     function expandExpression(expansionKey) {
-        expInput.remove(expInput.selectionStart, expInput.selectionEnd)
-        expInput.insert(expInput.selectionStart, exa.expandExpression(expansionKey))
+        var expansion = exa.expandExpression(expansionKey)
+
+        if(expInput.selectedText == "") {
+            var borders = exa.currentWordBorders()
+            expInput.remove(borders["start"], borders["end"])
+        }
+        else
+            expInput.remove(expInput.selectionStart, expInput.selectionEnd)
+
+        expInput.insert(expInput.selectionStart, expansion)
     }
 
     /**

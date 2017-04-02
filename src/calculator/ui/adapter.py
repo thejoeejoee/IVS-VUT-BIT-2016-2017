@@ -108,7 +108,6 @@ class UIAdapter(QObject):
 
     @pyqtSlot(str)
     def removeVariable(self, variable_identifier: str) -> None:
-        print(variable_identifier)
         self._calculator.remove_variable(variable_identifier)
         self._variables = self._calculator.variables.copy()
 
