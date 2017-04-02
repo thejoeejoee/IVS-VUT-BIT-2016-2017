@@ -165,7 +165,7 @@ class ExpAnalyzer(QObject):
         :return: Current word
         """
 
-        content = self._get_content()
+        content = self._get_content().replace(")", "")
         cursor = self._get_cursor()
         word_start = 0
         word_end = len(content)
