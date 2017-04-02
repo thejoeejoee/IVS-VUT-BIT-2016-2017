@@ -269,6 +269,7 @@ ApplicationWindow {
         target: expInput
         constantModel: Calculator.identifiersTypes
 
+        opacity: 0.8
         color: StyleSettings.completer.color
         hoverColor: StyleSettings.completer.hoverColor
         textColor: StyleSettings.completer.textColor

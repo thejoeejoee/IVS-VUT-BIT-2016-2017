@@ -123,14 +123,13 @@ QtObject {
     }
 
     property QtObject completer: QtObject {
-        property color color: "#2A2A2A"
+        property color color: "black"
         property color hoverColor: "#ED1946"
         property color textColor: "#C1C0C0"
         property color scrollBarColor: "#9F9F9F"
         property var typeColors: ({})
         property font font: Qt.font({family: "Roboto Light"})
 
-        // TODO allow
         Component.onCompleted: {
             typeColors[Expression.Function] = "#EF4223"
             typeColors[Expression.Variable] = "#C1C0C0"
