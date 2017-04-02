@@ -16,8 +16,14 @@ class Math(object):
     add = operator.add  # type: BinaryNumericFunction
     subtract = operator.sub  # type: BinaryNumericFunction
     multiple = operator.mul  # type: BinaryNumericFunction
-    abs = math.fabs  # type: BinaryNumericFunction
-    pow = math.pow  # type: BinaryNumericFunction
+
+    @staticmethod
+    def abs(x: NumericValue) -> NumericValue:
+        return math.fabs(x)
+
+    @staticmethod
+    def pow(x: NumericValue, y: NumericValue) -> NumericValue:
+        return math.pow(x, y)
 
     @staticmethod
     def divide(a: NumericValue, b: NumericValue) -> NumericValue:
