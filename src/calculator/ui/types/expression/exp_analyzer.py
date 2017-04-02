@@ -183,7 +183,7 @@ class ExpAnalyzer(QObject):
         :return: Current word start and end
         """
 
-        content = self._get_content().replace(")", "")
+        content = self._get_content()
         cursor = self._get_cursor()
         word_start = 0
         word_end = len(content)
@@ -203,6 +203,12 @@ class ExpAnalyzer(QObject):
         if right_splitters_pos:
             word_end = min(right_splitters_pos, key=lambda x: abs(x - cursor))
 
+        word = content[word_start:word_end:].strip()
+
+        if word:
+            if word[-1] == ")" and self._get_cursor() != word_end:
+                word_end -= 1
+
         return {"start": word_start, "end": word_end}
 
     @pyqtSlot(result=str)
@@ -211,11 +217,13 @@ class ExpAnalyzer(QObject):
         According to cursor in text it determines current word which is edited
         :return: Current word
         """
-        content = self._get_content().replace(")", "")
+        content = self._get_content()
         borders = self._currentWordBorders()
 
         if borders["start"] != -1 and borders["end"] != -1:
-            return re.escape(content[borders["start"]:borders["end"]:].strip())
+            word = content[borders["start"]:borders["end"]:].strip()
+
+            return re.escape(word)
         return ""
 
     @pyqtProperty(QQuickItem)
