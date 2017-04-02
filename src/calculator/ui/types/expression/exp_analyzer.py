@@ -157,7 +157,7 @@ class ExpAnalyzer(QObject):
             borders = self._currentWordBorders()
             content = self._get_content()
 
-            if borders["end"] == -1:
+            if borders["end"] == -1 and not selected_text:
                 return "{}(".format(expansion)
 
             for i in range(borders["end"], len(content)):
