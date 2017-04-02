@@ -256,7 +256,7 @@ ApplicationWindow {
         color: StyleSettings.functionSignatureDisplay.color
         textColor: StyleSettings.functionSignatureDisplay.textColor
         font: StyleSettings.functionSignatureDisplay.font
-        opacity: 0.8
+        constantOpacity: 0.8
 
         x: completer.calcTextInfoPos(width)
         y: expInput.cursorRectangle.y - height + expInput.y
@@ -314,7 +314,7 @@ ApplicationWindow {
         var currentFunction = exa.currentFunction()
         var funcSignature = exa.currentFunctionSignature()
 
-        functionSignature.text = funcSignature
+        functionSignature.show(funcSignature)
     }
 
     /**

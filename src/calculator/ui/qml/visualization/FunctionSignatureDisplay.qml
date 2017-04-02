@@ -20,10 +20,27 @@ Rectangle {
     property alias text: text.text
     /// Text color display
     property alias textColor: text.color
+    property real constantOpacity
     /// Used font
     property font font
 
+    opacity: constantOpacity
     width: text.width + height * 0.2
+
+    onShow: {
+        text.text = signature
+
+        if(signature == "")
+            component.hide()
+        else
+            component.opacity = component.constantOpacity
+    }
+
+    onHide: component.opacity = 0
+
+    Behavior on opacity {
+        NumberAnimation { duration: 250 }
+    }
 
     Text {
         id: text
