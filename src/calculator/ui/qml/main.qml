@@ -327,15 +327,28 @@ ApplicationWindow {
       */
     function expandExpression(expansionKey) {
         var expansion = exa.expandExpression(expansionKey)
+        var moveCursorInsideFunction = false
 
         if(expInput.selectedText == "") {
             var borders = exa.currentWordBorders()
             expInput.remove(borders["start"], borders["end"])
+            moveCursorInsideFunction = true
         }
+
         else
             expInput.remove(expInput.selectionStart, expInput.selectionEnd)
 
         expInput.insert(expInput.selectionStart, expansion)
+
+        // if only expand empty function put cursor inside its body
+        // need to move to get know function signature
+        if(moveCursorInsideFunction)
+            expInput.cursorPosition--;
+
+        // but if function does not take any paramaters put cursor on the end
+        // if contains "()" in signature => it's function that does not take any parameter
+        if(exa.currentFunctionSignature().indexOf("()") != -1)
+            expInput.cursorPosition++;
     }
 
     /**

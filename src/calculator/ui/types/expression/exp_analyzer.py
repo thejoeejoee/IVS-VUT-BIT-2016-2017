@@ -159,7 +159,7 @@ class ExpAnalyzer(QObject):
         content = self._get_content()
 
         if borders["end"] == -1 and not selected_text:
-            return "{}(".format(expansion)
+            return "{}()".format(expansion)
 
         for i in range(borders["end"], len(content)):
             current_char = content[i]
@@ -172,7 +172,7 @@ class ExpAnalyzer(QObject):
         if selected_text:
             return "{}({})".format(expansion, selected_text)
         else:
-            return "{}(".format(expansion)
+            return "{}()".format(expansion)
 
     @pyqtSlot(result=QVariant)
     def currentWordBorders(self) -> QVariant:
