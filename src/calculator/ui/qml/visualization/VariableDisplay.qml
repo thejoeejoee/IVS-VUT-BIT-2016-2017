@@ -96,10 +96,19 @@ Rectangle {
             anchors.top: parent.top
 
             MouseArea {
-                anchors.fill: parent
                 hoverEnabled: true
+                width: component.width
 
-                onClicked: component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+
+                onClicked: {
+                    if(component.variableExpression.indexOf("=") != -1)
+                        component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
+                    else
+                        component.overwriteRequest(component.variableExpression)
+                }
                 onContainsMouseChanged: {
                     if(containsMouse)
                         expressionBackground.color = component.expressionHoverColor
