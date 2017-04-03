@@ -65,7 +65,7 @@ def update_qrc():
         return True
 
     print('Change in UI files detected, recompiling resources.py...', file=sys.stderr)
-    if not exists(RESOURCES_FILE) or not access(RESOURCES_FILE, W_OK):
+    if exists(RESOURCES_FILE) and not access(RESOURCES_FILE, W_OK):
         print('Resources file {} not exists or is not writable, please call with write permissions.'.format(
             RESOURCES_FILE
         ), file=sys.stderr)
@@ -75,7 +75,7 @@ def update_qrc():
         print('Resources.py successfully recompiled.', file=sys.stderr)
         return True
 
-    print('Problem with compiling resources.py ({}).'.format(repr(e)), file=sys.stderr)
+    print('Problem with compiling resources.py.', file=sys.stderr)
 
 
 
