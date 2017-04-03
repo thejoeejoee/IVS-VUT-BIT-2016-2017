@@ -3,354 +3,197 @@
 
 ## Table of contents
 
-* [Introduction](#introduction)
-* [Usage](#usage)
-  * [Installation](#installation)
-  * [Uninstallation](#uninstallation)
-* [Input syntax](#input-syntax)
-  * [Number systems](#number-systems)
-  * [Operators](#operators)
-  * [Functions](#functinos)
-* [Getting started](#getting-started)
-  * [Components](#components)
-  * [Step by step](#step-by-step)
+* [Úvod](#uvod)
+* [Instalace](#instalace)
+* [Odinstalace](#odinstalace)
+* [Funkce](#funkce)
+  * [Absolutní hodnota](#abs-hodnota)
+  * [Faktorial](#faktorial)
+  * [Přirozený logaritmus](#n-logaritmus)
+  * [Obecný logaritmus](#logaritmus)
+  * [Mocnina](#mocnina)
+  * [Náhodné číslo](#rand-cislo)
+  * [Obecná odmocnina](#obecna-odmocnina)
+  * [Odmocnina](#odmocnina)
+* [Tutorial](#tutorial)
+  * [Komponenty](#komponenty)
+  * [Přáce s kalkulačkou](#calc-work)
 
 ## Introduction
 
 This application represents classic calculator with special functions. Calculator can work with hugh nun numbers, because his core is written in [Python](https://www.python.org/).
 
-## Usage /todo
+## Instalace
 
-### Installation
+## Odinstalace
 
-### Uninstallation
+## Funkce
 
-## Input syntax
+Ve všech funkcích jdou použít klasické operátory (+, -, *, /) a i jiné funkce.
 
+### Absolutní hodnota
 
-### Number systems ???
+Zápis:
 
-Calculator can compute with classic number systems, such as decimal, hexa-decimal, octal and binary.
+`abs([číslo])`
 
-#### Decimal
+nebo
 
-Decimal mode is set implicitly.
+`|[číslo]|`
 
-Examples of decimal numbers:
+Příklady:
 
-`156`
+`|-6|`
 
-`-56`
+`||-12 + 4| + 5|`
 
-`42.666`
+`abs(-6)`
 
-`-0.135`
+`abs(abs(-12 + 4) + 5)`
 
-#### Hexadecimal
+### Faktorial
 
-Requires calculator to be switched to hexadecimal mode.
+Zápis:
 
-Valid characters: `0-9 A-F` (lower case `a-f` are not valid)
+`fact([číslo])`
 
-Examples:
+nebo
 
-`3A1F`
+`[číslo]!`
 
-`FFFF`
-
-`561`
-
-#### Octal
-
-Requires calculator to be switched to octal mode.
-
-Valid characters: `0-7`
-
-Examples:
-
-`37`
-
-`777`
-
-#### Binary
-
-Requires calculator to be switched to binary mode.
-
-Valid characters: `0-1`
-
-Examples:
-
-`101101`
-
-`1111`
-
-### Operators
-
-#### Add
-
-Syntax:
-
-`[left-operand] + [right-operand]`
-
-Requires two operands.
-
-Examples:
-
-`3 + 6`
-
-`-96 + 42`
-
-#### Substract
-
-Syntax:
-
-`[left-operand] - [right-operand]`
-
-Requires two operands.
-
-Examples:
-
-`3 - 6`
-
-`26489 - (153 - 145)`
-
-#### Multiply
-
-Syntax:
-
-`[left-operand] * [right-operand]`
-
-Requires two operands.
-
-Examples:
-
-`3 * 6`
-
-`-96 * 42`
-
-#### Divide
-
-Syntax:
-
-`[left-operand] / [right-operand]`
-
-Requires two operands.
-
-Examples:
-
-`3 / 6`
-
-`-96 / 42`
-
-#### Power of
-
-Syntax:
-
-`[base] ^ [exponent]`
-
-or
-
-`[base] ** [exponent]`
-
-or
-
-`pow([base], [exponent])`
-
-Requires two operands.
-
-Examples:
-
-`3 ^ 6`
-
-`-96 ** 42`
-
-`pow(2, 10)`
-
-#### Factorial
-
-Factorial works only with integer numbers.
-
-Syntax:
-
-`[number]!`
-
-or
-
-`fact([number])`
-
-Example:
+Příklady:
 
 `6!`
 
-`4!!`
-
-`(21 / 3)!`
+`6!!`
 
 `fact(6)`
 
 `fact(fact(6))`
 
-#### Absolute value
+### Přirozený logaritmus
 
-Syntax:
+Zápis:
 
-`|[number]|`
+`ln([číslo])`
 
-or
-
-`abs([number])`
-
-Examples:
-
-`|-6|`
-
-`||-12 + 4| + 5|`
-
-`abs(-6)`
-
-`abs(abs(-12 + 4) + 5)`
-
-### Functions
-
-#### Abs
-
-Syntax:
-
-`abs([number])`
-
-Examples:
-
-`|-6|`
-
-`||-12 + 4| + 5|`
-
-`abs(-6)`
-
-`abs(abs(-12 + 4) + 5)`
-
-#### Fact
-
-Syntax:
-
-`fact([number])`
-
-Example:
-
-`fact(6)`
-
-`fact(fact(6))`
-
-`fact(27 / 3)`
-
-#### Ln
-
-Ln is native logarithm (with Euler number base)
-
-Syntax:
-
-`ln([number])`
-
-Example:
+Příklady:
 
 `ln(5)`
 
 `ln(5 + 2)`
 
-#### Log
+### Obecný logaritmus
 
-Syntax:
+Zápis:
 
-`log([number], [log-base])`
+`log([číslo], [základ logaritmu])`
 
-Example:
+Příklady:
 
 `log(2, 2)`
 
 `log(54 + 8, 15)`
 
-#### Pow
+### Mocnina
 
-Syntax:
+Zápis:
 
-`pow([number], [nth-power])`
+`pow([mocněnec], [mocnitel])`
 
-Example:
+nebo
+
+`[mocněnec]**[mocnitel]`
+
+Příklady:
+
+`5**2`
 
 `pow(5, 2)`
 
-#### Rand /todo
+### Náhodné číslo
 
-#### Root
+Zápis:
 
-Root is computing real root of number
+`rand()`
 
-Syntax:
+### Obecná odmocnina
 
-`root([number], [nth-root]`
+Zápis:
 
-Examples:
+`root([odmocněnec], [odmocnitel])`
 
-`3 + 6`
+Příklady:
 
-`-96 + 42`
+`root(3, 6)`
 
-#### Square root
+`root(86, 15*2)`
 
-Syntax:
+### Odmocnina
 
-`sqrt([number])`
+Zápis:
 
-Examples:
+`sqrt([odmocněnec])`
+
+Příklady:
 
 `sqrt(8)`
 
 `sqrt(96 + 42)`
 
-## Getting started
+## Tutorial
 
-First of all you will start the Barbie calculator application. After that you will see working field:
+V této kapitole bude popsána práce v Barbie Calculator, jeho funkce a užitečné vlastnosti, a dále také základní panely pro práci.
 
-[No value set calculator](empty.png)
+Zde na obrázku je Barbie Calculator po zapnutí
 
-*This main frame can be resized only with implicit proportions*.
+[Prázdná kalkulačka](empty.png)
 
-### Components
+*Okno programu má pevně nastavený poměr stran*.
 
-In this subsection will be described main parts of calculator.
+### Komponenty
 
-#### Number systems converter
+#### Převod do číselných soustav
 
-If result is _integer type_, this result will be converted and showed in 4 different number systems (decimal, hexa-decimal, octal, binary).
+Pokud je výsledek _celočíselný_, tak bude výsledek převeden a zobrazen ve 4 číselných soustavách (desítkové, šestnáctkové, osmičkové, dvojkové).
 
-[Number systems bar with zero](system1.png) [Number systems bar with numbers](system2.png)
+[Číselné soustavy po otevření](system1.png) [Číselné soustavy s převedeným číslem](system2.png)
 
-#### Functions & expressions
+#### Funkce a zápisové okno
 
-There is a function bar with build-in functions like *rand()* or *pow()* and expression field where you can write expressions to compute.
+Jednou z hlavních částí je panel s funkcemi a k němu navazující okno s výrazem k výpočtu.
 
-[No expression](func1.png) [Functions + numbers](func2.png)
+[Bez výrazu - prázdné](func1.png) [S funkcí a operací](func2.png)
 
-#### Variables
+#### Proměnné
 
-Barbie calculator also knows computing with variables, so you can set your own variables and use them in calculations.
+Barbie Calculator umí také používat proměnné, takže si můžete uložit výpočty do proměnných a dále je používat
 
-Be aware, because variable names are **case sensitive**
+Dávejte si ale pozor na to, že proměnné jsou **case sensitive**.
 
-[Variable bar](variable.png)
+[Panel proměnných](variable.png)
 
-#### Results
+### Práce s kalkulačkou
 
-There are 2 result windows one with actual result and one with whole result ??? /todo
+Na následujícím obrázku je ukázané tzv. dopňování kódu
 
-### Step by step /todo
+[Doplňování kódu](complete.png)
 
+Dále také rozšíření výrazu do funkce.
 
+Pokud výraz označíte a a kliknete na funkci, tak se celý výraz vloží do požadované funkce.
 
+[Výraz před použitím funkce](enfunc1.png)
 
+[Výraz po použití funkce](enfunc2.png)
 
+Jak vidíte už jsou inicializované nějaké proměnné. V jejich nastavení je možný přepis na `1` nebo `0`, a nebo také proměnnou smazat. Pokud bude proměnnýc příliš, můžete se k nim dostat pomocí posuvníku (případně kolečka myši).
 
+[Mnoho proměnných a jejich nastavení](many_vars.png)
 
+Další ukázkou bude kombinace mnoha funkcí s vysokým výsledkem. Při vysokých (nebo nízkých) výsledcích se výsledek vypisuje ve formátu `[cifra].[2 cifry]` se zaokrouhlením na příslušné 2. desetinné místo.
 
+[Posuvník u číselných soustav při vysoké hodnotě](long_result.png)
 
 
 
