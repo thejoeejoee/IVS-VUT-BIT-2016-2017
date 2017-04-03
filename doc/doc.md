@@ -3,21 +3,21 @@
 
 ## Table of contents
 
-* [Úvod](#uvod)
+* [Úvod](#úvod)
 * [Instalace](#instalace)
 * [Odinstalace](#odinstalace)
 * [Funkce](#funkce)
-  * [Absolutní hodnota](#abs-hodnota)
+  * [Absolutní hodnota](#absolutní-hodnota)
   * [Faktorial](#faktorial)
-  * [Přirozený logaritmus](#n-logaritmus)
-  * [Obecný logaritmus](#logaritmus)
+  * [Přirozený logaritmus](#přirozený-logaritmus)
+  * [Obecný logaritmus](#obecný-logaritmus)
   * [Mocnina](#mocnina)
-  * [Náhodné číslo](#rand-cislo)
-  * [Obecná odmocnina](#obecna-odmocnina)
+  * [Náhodné číslo](#nahodné-číslo)
+  * [Obecná odmocnina](#obecná-odmocnina)
   * [Odmocnina](#odmocnina)
 * [Tutorial](#tutorial)
   * [Komponenty](#komponenty)
-  * [Přáce s kalkulačkou](#calc-work)
+  * [Přáce s kalkulačkou](#práce-s-kalkulačkou)
 
 ## Introduction
 
@@ -147,7 +147,7 @@ V této kapitole bude popsána práce v Barbie Calculator, jeho funkce a užite�
 
 Zde na obrázku je Barbie Calculator po zapnutí
 
-[Prázdná kalkulačka](empty.png)
+![Prázdná kalkulačka](empty.png)
 
 *Okno programu má pevně nastavený poměr stran*.
 
@@ -157,13 +157,13 @@ Zde na obrázku je Barbie Calculator po zapnutí
 
 Pokud je výsledek _celočíselný_, tak bude výsledek převeden a zobrazen ve 4 číselných soustavách (desítkové, šestnáctkové, osmičkové, dvojkové).
 
-[Číselné soustavy po otevření](system1.png) [Číselné soustavy s převedeným číslem](system2.png)
+![Číselné soustavy po otevření](system1.png) ![Číselné soustavy s převedeným číslem](system2.png)
 
 #### Funkce a zápisové okno
 
 Jednou z hlavních částí je panel s funkcemi a k němu navazující okno s výrazem k výpočtu.
 
-[Bez výrazu - prázdné](func1.png) [S funkcí a operací](func2.png)
+![Bez výrazu - prázdné](func1.png) ![S funkcí a operací](func2.png)
 
 #### Proměnné
 
@@ -171,29 +171,29 @@ Barbie Calculator umí také používat proměnné, takže si můžete uložit v
 
 Dávejte si ale pozor na to, že proměnné jsou **case sensitive**.
 
-[Panel proměnných](variable.png)
+![Panel proměnných](variable.png)
 
 ### Práce s kalkulačkou
 
 Na následujícím obrázku je ukázané tzv. dopňování kódu
 
-[Doplňování kódu](complete.png)
+![Doplňování kódu](complete.png)
 
 Dále také rozšíření výrazu do funkce.
 
 Pokud výraz označíte a a kliknete na funkci, tak se celý výraz vloží do požadované funkce.
 
-[Výraz před použitím funkce](enfunc1.png)
+![Výraz před použitím funkce](enfunc1.png)
 
-[Výraz po použití funkce](enfunc2.png)
+![Výraz po použití funkce](enfunc2.png)
 
 Jak vidíte už jsou inicializované nějaké proměnné. V jejich nastavení je možný přepis na `1` nebo `0`, a nebo také proměnnou smazat. Pokud bude proměnnýc příliš, můžete se k nim dostat pomocí posuvníku (případně kolečka myši).
 
-[Mnoho proměnných a jejich nastavení](many_vars.png)
+![Mnoho proměnných a jejich nastavení](many_vars.png)
 
 Další ukázkou bude kombinace mnoha funkcí s vysokým výsledkem. Při vysokých (nebo nízkých) výsledcích se výsledek vypisuje ve formátu `[cifra].[2 cifry]` se zaokrouhlením na příslušné 2. desetinné místo.
 
-[Posuvník u číselných soustav při vysoké hodnotě](long_result.png)
+![Posuvník u číselných soustav při vysoké hodnotě](long_result.png)
 
 
 
