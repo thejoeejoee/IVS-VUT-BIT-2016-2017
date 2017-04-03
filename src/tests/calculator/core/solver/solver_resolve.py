@@ -5,6 +5,7 @@ from random import randint
 from unittest import TestCase
 
 from calculator.core.solver import Solver
+from calculator.exceptions import InvalidFunctionCallError
 
 
 class SolverResolveTest(TestCase):
@@ -104,6 +105,54 @@ class SolverResolveTest(TestCase):
             'Args given to mocked function should be same as given to _resolve.'
         )
         self.assertTrue(called, 'Function should to be called.')
+
+    def test_invalid_call_node(self):
+        called = False
+
+        def function(a, b=42):
+            nonlocal called
+            called = True
+            return a
+
+        self.solver.builtin_functions = {
+            function.__name__: function
+        }
+        with self.assertRaises(InvalidFunctionCallError, msg='Call without required parameter.'):
+            self.solver._resolve(
+                Call(
+                    func=Name(
+                        id=function.__name__,
+                    ),
+                    args=tuple()
+                )
+            )
+        self.assertFalse(called, 'Function should not to be called after invalid try.')
+
+        with self.assertRaises(InvalidFunctionCallError, msg='Call with too much params.'):
+            self.solver._resolve(
+                Call(
+                    func=Name(
+                        id=function.__name__,
+                    ),
+                    args=(Num(n=4), Num(n=9), Num(n=5))
+                )
+            )
+        self.assertFalse(called, 'Function should not to be called after invalid try.')
+
+        args_to_call = Num(n=3),
+        self.assertEqual(
+            3,
+            self.solver._resolve(
+                Call(
+                    func=Name(
+                        id=function.__name__,
+                    ),
+                    args=args_to_call
+                )
+            ),
+            'Resolve Call should return same value as mocked function.'
+        )
+        self.assertTrue(called, 'Function should to be called after valid call try.')
 
     def test_resolve_unknown_node(self):
         class Unknown(AST):

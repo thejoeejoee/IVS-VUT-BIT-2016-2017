@@ -6,7 +6,7 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from calculator import Variable, NumericValue
 from calculator.core.calculator import Calculator
-from calculator.exceptions import MathError, VariableError, UnsupportedBaseError
+from calculator.exceptions import MathError, VariableError, UnsupportedBaseError, InvalidFunctionCallError
 from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS, Expression)
 from calculator.utils.formatter import Formatter
 from calculator.utils.translate import translate
@@ -72,7 +72,7 @@ class UIAdapter(QObject):
             self.error.emit(translate("Adapter", "Error in defining variable."))
         except OverflowError:
             self.error.emit(translate("Adapter", "Result is too big."))
-        except TypeError:
+        except InvalidFunctionCallError:
             self.error.emit(translate("Adapter", "Parameters count does not match function."))
         except NotImplementedError:
             self.error.emit(translate("Adapter", "Function is not defined."))
@@ -155,7 +155,7 @@ class UIAdapter(QObject):
     def variables(self) -> QVariant:
         return QVariant(list(self._calculator.variables.keys()))
 
-    #TODO notify
+    # TODO notify
     @pyqtProperty(QVariant, notify=identifiersTypesChanged)
     def identifiersTypes(self):
         return [{"identifier": var_identifier, "type": Expression.ExpressionTypes.Variable}

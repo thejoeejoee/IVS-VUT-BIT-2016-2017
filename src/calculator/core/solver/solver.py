@@ -1,10 +1,12 @@
 # coding=utf-8
 from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name, Pow, FloorDiv, Mod
+from inspect import Signature
 from typing import Dict, Union, Type, Set, Optional
 
 from calculator import BinaryNumericFunction, NumericFunction, NumericValue, Variable
 from calculator.core.math import Math
 from calculator.core.parser import Parser
+from calculator.exceptions import InvalidFunctionCallError
 from calculator.settings import BuiltinFunction
 from calculator.utils import method_single_dispatch
 
@@ -114,7 +116,14 @@ class Solver(object):
         if not callable(function):
             raise NotImplementedError(call.func.id)
 
-        return function(*map(self._resolve, call.args))
+        signature = Signature.from_callable(function)
+        params = tuple(map(self._resolve, call.args))
+        try:
+            signature.bind(*params)
+        except TypeError as e:
+            raise InvalidFunctionCallError('Given parameters does not correspond to function signature.') from e
+
+        return function(*params)
 
     @_resolve.register(Num)
     def _(self, num: Num) -> NumericValue:

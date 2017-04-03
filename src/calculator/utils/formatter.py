@@ -1,7 +1,7 @@
 # coding=utf-8
 import re
 from decimal import Decimal
-from inspect import Signature
+from inspect import Signature, Parameter
 
 from calculator import NumericValue
 from calculator.exceptions import UnsupportedBaseError
@@ -58,26 +58,33 @@ class Formatter(object):
         :param func_signature: Signature object
         :return: formatted string
         """
-        raw_args = [(arg_identifier, func_signature.parameters[arg_identifier].annotation)
-                    for arg_identifier in func_signature.parameters.keys()]
+        raw_args = [
+            (arg_identifier,
+             func_signature.parameters[arg_identifier].default,
+             func_signature.parameters[arg_identifier].annotation,
+             )
+            for arg_identifier in func_signature.parameters.keys()
+            ]
 
-        formatted_args_list = list()
-        for arg_identifier, arg_annotation in raw_args:
-            arg_annotation = repr(arg_annotation)
+        formatted_args = list()
+        for identifier, default, annotation in raw_args:
+            annotation = repr(annotation)
 
-            formatted_args_list.append((
-                arg_identifier,
-                cls.CLASS_TO_TYPE_REGEX.search(arg_annotation).group(0)
-                if "<class" in arg_annotation else
-                arg_annotation.split("typing.")[-1]
+            formatted_args.append((
+                identifier,
+                default,
+                cls.CLASS_TO_TYPE_REGEX.search(annotation).group(0)
+                if "<class" in annotation else
+                annotation.split("typing.")[-1]
             ))
 
         return "{identifier}({params})".format(
             identifier=func_identifier,
             params=", ".join((
-                "{}: {}".format(
-                    arg_identifier,
-                    arg_annotation
-                ) for arg_identifier, arg_annotation in formatted_args_list
+                "{identifier}{default}: {type}".format(
+                    identifier=identifier,
+                    default=' = {}'.format(default) if default != Parameter.empty else '',
+                    type=annotation
+                ) for identifier, default, annotation in formatted_args
             ))
         )
