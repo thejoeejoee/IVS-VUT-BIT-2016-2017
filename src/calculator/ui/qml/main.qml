@@ -106,7 +106,7 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
 
-        onExpandRequest: expandExpression(func)
+        onExpandRequest: expandExpressionAroundWord(func)
     }
 
     FontMetrics {
@@ -322,12 +322,28 @@ ApplicationWindow {
     }
 
     /**
+      Expand expression into current expresion¨around currend word if there isn't and text selected
+      @param expressionKey Key of builtin expression or dynamic expression
+      */
+    function expandExpressionAroundWord(expansion) {
+        expansion = exa.expandExpression(expansion, true)
+        var borders = exa.currentWordBorders()
+
+        if(expInput.selectedText == "")
+            expInput.remove(borders["start"], borders["end"])
+        else
+            expInput.remove(expInput.selectionStart, expInput.selectionEnd)
+
+        expInput.insert(expInput.selectionStart, expansion)
+    }
+
+    /**
       Expand expression into current expresion
       @param expressionKey Key of builtin expression or dynamic expression
       */
-    function expandExpression(expansionKey) {
-        var expansion = exa.expandExpression(expansionKey)
+    function expandExpression(expansion) {
         var moveCursorInsideFunction = false
+        expansion = exa.expandExpression(expansion, false)
 
         if(expInput.selectedText == "") {
             var borders = exa.currentWordBorders()

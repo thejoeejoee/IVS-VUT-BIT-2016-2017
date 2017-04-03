@@ -140,14 +140,18 @@ class ExpAnalyzer(QObject):
                 return func_expansion
         return expansion
 
-    @pyqtSlot(str, result=str)
-    def expandExpression(self, expansion: str) -> str:
+
+    @pyqtSlot(str, bool, result=str)
+    def expandExpression(self, expansion: str, expand_around_current_word: bool) -> str:
         """
         :param expansion: String to expand
+        :param expand_around_current_word: If set to True, then exand around current word
         :return: Expanded expansion
         """
 
         _, _, selected_text = self._get_selection()
+        if not selected_text and expand_around_current_word:
+            selected_text = self.currentWord().replace("\\", "")
 
         expansion_type = self.expansionType(expansion)
         expansion = self.getExpansion(expansion)
