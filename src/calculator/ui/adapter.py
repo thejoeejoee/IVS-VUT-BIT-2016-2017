@@ -27,10 +27,9 @@ class UIAdapter(QObject):
                               for func in BUILTIN_FUNCTIONS]
 
     @pyqtSlot(float, int, result=str)
-    def convertToBase(self, value: NumericValue, base: int) -> str:
+    def convertToBase(self, value: str, base: int) -> str:
         try:
-            v = self._formatter.format_number_in_base(value, base)
-            return v
+            return self._formatter.format_number_in_base(value, base)
         except UnsupportedBaseError as e:
             return translate("Adapter", "Unsupported base.")
         except ValueError as e:
@@ -46,7 +45,7 @@ class UIAdapter(QObject):
             self.identifiersTypesChanged.emit(self.identifiersTypes)
             self.processed.emit(QVariant({
                 "result": None if result is None else self._formatter.format_number(result, 16),
-                "unformattedResult": result,
+                "unformattedResult": str(result),
                 "variables": {
                     key: dict(
                         value=self._formatter.format_number(value),

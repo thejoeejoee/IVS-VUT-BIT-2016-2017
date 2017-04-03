@@ -36,13 +36,15 @@ class Formatter(object):
         )
 
     @classmethod
-    def format_number_in_base(cls, value: int, base: int) -> str:
+    def format_number_in_base(cls, value: str, base: int) -> str:
         """
         Formats the given number to string in given base.
         :param value: value, to be formatted
         :param base: base of formatted value
         :return: formatted value in wanted base
         """
+        value = float(value)
+
         if abs(value - int(value)):
             raise ValueError('Only integer values can be formatted into other bases.')
         if base not in SUPPORTED_BASES:
