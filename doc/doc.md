@@ -17,11 +17,11 @@
   * [Odmocnina](#odmocnina)
 * [Tutorial](#tutorial)
   * [Komponenty](#komponenty)
-  * [Přáce s kalkulačkou](#práce-s-kalkulačkou)
+  * [Práce s kalkulačkou](#práce-s-kalkulačkou)
 
-## Introduction
+## Úvod
 
-This application represents classic calculator with special functions. Calculator can work with hugh nun numbers, because his core is written in [Python](https://www.python.org/).
+Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jádro Barbie Calculatoru je napsáno v [Pythonu](https://www.python.org/).
 
 ## Instalace
 
