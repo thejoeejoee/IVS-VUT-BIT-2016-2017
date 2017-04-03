@@ -87,7 +87,7 @@ ApplicationWindow {
 
         onDeleteVariableRequest: Calculator.removeVariable(identifier)
         onSetVariableRequest: Calculator.setVariableValue(identifier, value)
-        onExpandRequest: expandExpression(data)
+        onExpandRequest: forceExpandExpression(data)
         onOverwriteRequest: overwriteExpression(data)
     }
 
@@ -322,8 +322,16 @@ ApplicationWindow {
     }
 
     /**
-      Expand expression into current expresion¨around currend word if there isn't and text selected
-      @param expressionKey Key of builtin expression or dynamic expression
+      Expand expression into current expresion without any optimatizations
+      @param expression Inserting expansion
+      */
+    function forceExpandExpression(expansion) {
+        expInput.insert(expInput.selectionStart, expansion)
+    }
+
+    /**
+      Expand expression into current expresion around currend word if there isn't and text selected
+      @param expression Key of builtin expression or dynamic expression
       */
     function expandExpressionAroundWord(expansion) {
         expansion = exa.expandExpression(expansion, true)
@@ -339,7 +347,7 @@ ApplicationWindow {
 
     /**
       Expand expression into current expresion
-      @param expressionKey Key of builtin expression or dynamic expression
+      @param expression Key of builtin expression or dynamic expression
       */
     function expandExpression(expansion) {
         var moveCursorInsideFunction = false

@@ -42,7 +42,7 @@ Rectangle {
             if(mouse.button == Qt.LeftButton)
                 component.expandRequest(component.variableIdentifier)
             else
-                component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
+                createExpansionRequest()
         }
     }
 
@@ -94,27 +94,22 @@ Rectangle {
 
             anchors.left: parent.left
             anchors.top: parent.top
+        }
 
-            MouseArea {
-                hoverEnabled: true
-                width: component.width
+        MouseArea {
+            hoverEnabled: true
+            width: component.width
 
-                anchors.left: parent.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
+            anchors.left: expression.left
+            anchors.top: expression.top
+            anchors.bottom: expression.bottom
 
-                onClicked: {
-                    if(component.variableExpression.indexOf("=") != -1)
-                        component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
-                    else
-                        component.overwriteRequest(component.variableExpression)
-                }
-                onContainsMouseChanged: {
-                    if(containsMouse)
-                        expressionBackground.color = component.expressionHoverColor
-                    else
-                        expressionBackground.color = "transparent"
-                }
+            onClicked: createExpansionRequest()
+            onContainsMouseChanged: {
+                if(containsMouse)
+                    expressionBackground.color = component.expressionHoverColor
+                else
+                    expressionBackground.color = "transparent"
             }
         }
     }
@@ -130,5 +125,12 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: internal.sideMargin
         anchors.bottom: leftSide.bottom
+    }
+
+    function createExpansionRequest() {
+        if(component.variableExpression.indexOf("=") != -1)
+            component.overwriteRequest(component.variableIdentifier + ' ' + component.variableExpression)
+        else
+            component.expandRequest(component.variableExpression)
     }
 }
