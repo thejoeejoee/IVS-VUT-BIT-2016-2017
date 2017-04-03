@@ -154,7 +154,6 @@ class UIAdapter(QObject):
     def variables(self) -> QVariant:
         return QVariant(list(self._calculator.variables.keys()))
 
-    # TODO notify
     @pyqtProperty(QVariant, notify=identifiersTypesChanged)
     def identifiersTypes(self):
         return [{"identifier": var_identifier, "type": Expression.ExpressionTypes.Variable}
