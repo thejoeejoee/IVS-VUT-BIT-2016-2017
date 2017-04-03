@@ -19,7 +19,7 @@ class BuiltinFunction(object):
     RAND = 'rand'
 
 
-EXPRESSION_SPLITTERS = {"+", "-", "(", "*", "/"}
+EXPRESSION_SPLITTERS = set("+-(*/,%")
 
 
 class Expression(QObject):

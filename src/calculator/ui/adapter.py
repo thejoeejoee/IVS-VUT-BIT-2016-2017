@@ -170,4 +170,6 @@ class UIAdapter(QObject):
         :param source_expression: source expression for variable
         :return: striped source expression
         """
-        return source_expression.replace(variable, '', 1).lstrip()
+        return source_expression.replace(variable, '', 1).strip() \
+            if '=' in source_expression else \
+            source_expression.strip()
