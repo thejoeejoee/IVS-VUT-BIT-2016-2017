@@ -74,7 +74,7 @@ class UIAdapter(QObject):
             self.error.emit(translate("Adapter", "Result is too big."))
         except TypeError:
             self.error.emit(translate("Adapter", "Parameters count does not match function."))
-        except NotImplemented:
+        except NotImplementedError:
             self.error.emit(translate("Adapter", "Function is not defined."))
 
     @pyqtSlot(str, int)
