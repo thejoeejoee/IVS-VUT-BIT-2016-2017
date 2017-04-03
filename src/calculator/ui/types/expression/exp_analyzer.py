@@ -152,30 +152,27 @@ class ExpAnalyzer(QObject):
         expansion_type = self.expansionType(expansion)
         expansion = self.getExpansion(expansion)
 
-        if expansion_type == Expansion.ExpansionType.BracketsPack:
-            has_open_bracket = False
-            borders = self._currentWordBorders()
-            content = self._get_content()
-
-            if borders["end"] == -1 and not selected_text:
-                return "{}(".format(expansion)
-
-            for i in range(borders["end"], len(content)):
-                current_char = content[i]
-
-                if current_char == "(":
-                    has_open_bracket = True
-                if not current_char.isspace():
-                    break
-
-            if selected_text:
-                return "{}({})".format(expansion, selected_text)
-            elif has_open_bracket:
-                return expansion
-            else:
-                return "{}(".format(expansion)
-        else:
+        if expansion_type != Expansion.ExpansionType.BracketsPack:
             return expansion
+
+        borders = self._currentWordBorders()
+        content = self._get_content()
+
+        if borders["end"] == -1 and not selected_text:
+            return "{}(".format(expansion)
+
+        for i in range(borders["end"], len(content)):
+            current_char = content[i]
+
+            if current_char == "(":
+                return expansion
+            if not current_char.isspace():
+                break
+
+        if selected_text:
+            return "{}({})".format(expansion, selected_text)
+        else:
+            return "{}(".format(expansion)
 
     @pyqtSlot(result=QVariant)
     def currentWordBorders(self) -> QVariant:
