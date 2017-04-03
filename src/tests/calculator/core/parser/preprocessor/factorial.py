@@ -66,6 +66,20 @@ class FactorialPreprocessorTest(TestCase):
             'Test for factorized of result from function call.'
         )
 
+    def test_variable_factorial(self):
+        self.assertEqual(
+            self._format_factorial('foobar'),
+            self.preprocessor('foobar!'),
+            'Test for factorized foo variable call.'
+        )
+
+    def test_advanced_variable_factorial(self):
+        self.assertEqual(
+            self._format_factorial('foobar56 + bar5'),
+            self.preprocessor('(foobar56 + bar5)!'),
+            'Test for factorized foo variable call.'
+        )
+
     @staticmethod
     def _format_factorial(expr: str = '', pre: str = '', post: str = '') -> str:
         return '{}{}({}){}'.format(
