@@ -41,6 +41,8 @@ class UIAdapter(QObject):
             result, variables = self._calculator.process(expression)
 
             created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
+            if Calculator.ANSWER_VARIABLE_NAME in modified_variables:
+                result, *_ = variables.get(Calculator.ANSWER_VARIABLE_NAME)
 
             self.identifiersTypesChanged.emit(self.identifiersTypes)
             self.processed.emit(QVariant({

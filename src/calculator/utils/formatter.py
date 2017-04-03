@@ -70,14 +70,16 @@ class Formatter(object):
 
         formatted_args = list()
         for identifier, default, annotation in raw_args:
-            annotation = repr(annotation)
+            annotation_repr = repr(annotation)
 
             formatted_args.append((
                 identifier,
                 default,
-                cls.CLASS_TO_TYPE_REGEX.search(annotation).group(0)
-                if "<class" in annotation else
-                annotation.split("typing.")[-1]
+                cls.CLASS_TO_TYPE_REGEX.search(annotation_repr).group(0)
+                if "<class" in annotation_repr else
+                annotation_repr.split("typing.")[-1]
+                if 'typing.' in annotation_repr else
+                annotation.__name__
             ))
 
         return "{identifier}({params})".format(
