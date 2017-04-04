@@ -73,28 +73,18 @@ Rectangle {
                     }
                 }
 
-                Flickable {
+                FlickableAnimatedText {
                     id: flick
 
-                    boundsBehavior: Flickable.StopAtBounds
-                    flickableDirection: Flickable.HorizontalFlick
-                    clip: true
+                    text: Calculator.convertToBase(component.value, component.bases[modelData])
+                    color: component.valueTextColor
+                    font: baseText.font
 
                     width: parent.width - anchors.leftMargin
                     height: parent.height
 
-                    contentHeight: valueText.height
-                    contentWidth: valueText.width
-
                     anchors.left: parent.left
                     anchors.leftMargin: component.margin * 3 + fm.advanceWidth("DEC")   // some constant to measure font width
-
-                    AnimatedText {
-                        id: valueText
-                        text: Calculator.convertToBase(component.value, component.bases[modelData])
-                        color: component.valueTextColor
-                        font: baseText.font
-                    }
                 }
             }
         }
