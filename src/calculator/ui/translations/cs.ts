@@ -4,37 +4,50 @@
 <context>
     <name>Adapter</name>
     <message>
-        <location filename="../adapter.py" line="35"/>
+        <location filename="../adapter.py" line="34"/>
         <source>Unsupported base.</source>
         <translation>Nepodporovaná číselná soustava.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="70"/>
         <source>Math error occured.</source>
+        <translation type="vanished">Matematická chyba.</translation>
+    </message>
+    <message>
+        <location filename="../adapter.py" line="71"/>
+        <source>Math error occurred.</source>
         <translation>Matematická chyba.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="72"/>
+        <location filename="../adapter.py" line="73"/>
         <source>Error in defining variable.</source>
         <translation>Chyba při definování proměnné.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="74"/>
+        <location filename="../adapter.py" line="75"/>
         <source>Result is too big.</source>
         <translation>Výsledek je příliš velký.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="76"/>
-        <source>Parameters count does not match function.</source>
-        <translation>Počet parametrů neodpovídá funkci.</translation>
+        <location filename="../adapter.py" line="77"/>
+        <source>Given parameters does not match to function {}.</source>
+        <translation>Předané parametry neodpovídají funkci {}.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="78"/>
+        <location filename="../adapter.py" line="83"/>
+        <source>This construct is not supported.</source>
+        <translation>Tato konstrukce není podporovaná.</translation>
+    </message>
+    <message>
+        <source>Parameters count does not match function.</source>
+        <translation type="vanished">Počet parametrů neodpovídá funkci.</translation>
+    </message>
+    <message>
+        <location filename="../adapter.py" line="81"/>
         <source>Function is not defined.</source>
         <translation>Funkce není definována.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="68"/>
+        <location filename="../adapter.py" line="69"/>
         <source>Expression contains syntax error.</source>
         <translation>Výraz obsahuje syntaktickou chybu.</translation>
     </message>
@@ -92,12 +105,12 @@
         <translation>Barbie Calculator</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="206"/>
+        <location filename="../qml/main.qml" line="208"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="221"/>
+        <location filename="../qml/main.qml" line="223"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
