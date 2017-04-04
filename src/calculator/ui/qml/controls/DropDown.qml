@@ -189,7 +189,7 @@ Item {
                         hoverEnabled: true
                         onClicked: component.chooseCurrent()
                         onContainsMouseChanged: {
-                            if(containsMouse)
+                            if(containsMouse && flick.y == 0)
                                 component.currentItemIndex = index
                         }
                     }
