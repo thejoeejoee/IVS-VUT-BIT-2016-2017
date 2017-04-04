@@ -50,5 +50,6 @@
         <file>qml/visualization/ResultSystemDisplay.qml</file>
         <file>qml/visualization/CountDown.qml</file>
         <file>qml/visualization/FunctionSignatureDisplay.qml</file>
+        <file>qml/visualization/FlickableAnimatedText.qml</file>
     </qresource>
 </RCC>
