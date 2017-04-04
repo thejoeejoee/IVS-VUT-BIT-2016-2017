@@ -210,8 +210,13 @@ class ExpAnalyzer(QObject):
         word = content[word_start:word_end:].strip()
 
         if word:
-            if word[-1] == ")" and self._get_cursor() != word_end:
-                word_end -= 1
+            if self._get_cursor() != word_end:
+                brackets_behind_cursor = re.search(
+                    '\)*',
+                    self._get_content()[self._get_cursor()::]
+                ).group()
+
+                word_end -= len(brackets_behind_cursor)
 
         return {"start": word_start, "end": word_end}
 
