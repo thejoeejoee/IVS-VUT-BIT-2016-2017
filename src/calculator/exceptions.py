@@ -37,7 +37,7 @@ class VariableRemoveRestrictError(VariableError):
     """
 
     def __init__(self, dependencies, *args, **kwargs):
-        self._dependencies = dependencies
+        self.dependencies = dependencies
         super().__init__(*args, **kwargs)
 
 
@@ -45,3 +45,7 @@ class InvalidFunctionCallError(TypeError):
     """
     Raised to signalize of call function with incorrect count of parameters.
     """
+
+    def __init__(self, function_name, *args, **kwargs):
+        self.function_name = function_name
+        super().__init__(*args, **kwargs)

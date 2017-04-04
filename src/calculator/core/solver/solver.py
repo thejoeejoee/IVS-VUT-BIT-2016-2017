@@ -1,6 +1,7 @@
 # coding=utf-8
 from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name, Pow, FloorDiv, Mod
 from inspect import Signature
+from operator import attrgetter
 from typing import Dict, Union, Type, Set, Optional
 
 from calculator import BinaryNumericFunction, NumericFunction, NumericValue, Variable
@@ -111,19 +112,35 @@ class Solver(object):
         :return: result of the called function
         """
         # TODO I am not sure, if call.func is always Name node with .id attribute
-        function = self.builtin_functions.get(call.func.id)
+        function_name = call.func.id
+        function = self.builtin_functions.get(function_name)
 
         if not callable(function):
-            raise NotImplementedError(call.func.id)
+            raise NameError(function_name)
 
         signature = Signature.from_callable(function)
-        params = tuple(map(self._resolve, call.args))
-        try:
-            signature.bind(*params)
-        except TypeError as e:
-            raise InvalidFunctionCallError('Given parameters does not correspond to function signature.') from e
 
-        return function(*params)
+        args = tuple(map(self._resolve, call.args))
+        kwargs = dict(zip(
+            map(attrgetter('arg'), call.keywords),
+            map(
+                self._resolve,
+                map(
+                    attrgetter('value'),
+                    call.keywords
+                )
+            )
+        ))
+
+        try:
+            signature.bind(*args, **kwargs)
+        except TypeError as e:
+            raise InvalidFunctionCallError(
+                function_name,
+                'Given parameters does not correspond to function signature.'
+            ) from e
+
+        return function(*args, **kwargs)
 
     @_resolve.register(Num)
     def _(self, num: Num) -> NumericValue:

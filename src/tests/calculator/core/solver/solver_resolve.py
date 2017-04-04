@@ -1,5 +1,5 @@
 # coding=utf-8
-from ast import Num, BinOp, AST, UnaryOp, USub, UAdd, Name, Call
+from ast import Num, BinOp, AST, UnaryOp, USub, UAdd, Name, Call, keyword
 from operator import attrgetter
 from random import randint
 from unittest import TestCase
@@ -94,7 +94,8 @@ class SolverResolveTest(TestCase):
                     func=Name(
                         id=function.__name__,
                     ),
-                    args=args_to_call
+                    args=args_to_call,
+                    keywords=list()
                 )
             ),
             'Resolve Call should return same value as mocked function.'
@@ -123,7 +124,8 @@ class SolverResolveTest(TestCase):
                     func=Name(
                         id=function.__name__,
                     ),
-                    args=tuple()
+                    args=tuple(),
+                    keywords=list()
                 )
             )
         self.assertFalse(called, 'Function should not to be called after invalid try.')
@@ -134,7 +136,20 @@ class SolverResolveTest(TestCase):
                     func=Name(
                         id=function.__name__,
                     ),
-                    args=(Num(n=4), Num(n=9), Num(n=5))
+                    args=(Num(n=4), Num(n=9), Num(n=5)),
+                    keywords=list()
+                )
+            )
+        self.assertFalse(called, 'Function should not to be called after invalid try.')
+
+        with self.assertRaises(InvalidFunctionCallError, msg='Call with keyword param.'):
+            self.solver._resolve(
+                Call(
+                    func=Name(
+                        id=function.__name__,
+                    ),
+                    args=(Num(n=9),),
+                    keywords=[keyword(arg='e', value=Num(n=9)), ]
                 )
             )
         self.assertFalse(called, 'Function should not to be called after invalid try.')
@@ -147,7 +162,8 @@ class SolverResolveTest(TestCase):
                     func=Name(
                         id=function.__name__,
                     ),
-                    args=args_to_call
+                    args=args_to_call,
+                    keywords=[]
                 )
             ),
             'Resolve Call should return same value as mocked function.'

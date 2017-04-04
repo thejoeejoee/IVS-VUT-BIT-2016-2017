@@ -65,18 +65,22 @@ class UIAdapter(QObject):
                 }
             }))
 
-        except SyntaxError as e:
+        except SyntaxError:
             self.error.emit(translate("Adapter", "Expression contains syntax error."))
-        except MathError as e:
-            self.error.emit(translate("Adapter", "Math error occured."))
-        except VariableError as e:
+        except MathError:
+            self.error.emit(translate("Adapter", "Math error occurred."))
+        except VariableError:
             self.error.emit(translate("Adapter", "Error in defining variable."))
         except OverflowError:
             self.error.emit(translate("Adapter", "Result is too big."))
-        except InvalidFunctionCallError:
-            self.error.emit(translate("Adapter", "Parameters count does not match function."))
-        except NotImplementedError:
+        except InvalidFunctionCallError as e:
+            self.error.emit(translate("Adapter", "Given parameters does not match to function {}.").format(
+                e.function_name
+            ))
+        except NameError:
             self.error.emit(translate("Adapter", "Function is not defined."))
+        except NotImplementedError:
+            self.error.emit(translate("Adapter", "This construct is not supported."))
 
     @pyqtSlot(str, int)
     def setVariableValue(self, variable: str, value: NumericValue):
