@@ -353,6 +353,7 @@ ApplicationWindow {
       */
     function expandExpression(expansion) {
         var moveCursorInsideFunction = false
+        var expansionType = exa.expansionType(expansion)
         expansion = exa.expandExpression(expansion, false)
 
         if(expInput.selectedText == "") {
@@ -368,7 +369,7 @@ ApplicationWindow {
 
         // if only expand empty function put cursor inside its body
         // need to move to get know function signature
-        if(moveCursorInsideFunction)
+        if(moveCursorInsideFunction && expansionType == Expansion.BracketsPack)
             expInput.cursorPosition--;
 
         // but if function does not take any paramaters put cursor on the end
