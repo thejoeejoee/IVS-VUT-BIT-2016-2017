@@ -187,8 +187,11 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
-                        onEntered: component.currentItemIndex = index
                         onClicked: component.chooseCurrent()
+                        onContainsMouseChanged: {
+                            if(containsMouse)
+                                component.currentItemIndex = index
+                        }
                     }
                 }
             }
