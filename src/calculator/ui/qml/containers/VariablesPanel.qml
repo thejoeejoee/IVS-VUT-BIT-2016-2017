@@ -119,6 +119,7 @@ Item {
         variableValue: "0"
 
         height: component.itemHeight
+        z: 2
 
         font.family: component.font.family
 
@@ -155,9 +156,9 @@ Item {
 
         opacity: (flick.visibleArea.heightRatio === 1) ?0 :1
 
-        y: flick.visibleArea.yPosition * component.height
+        y: flick.visibleArea.yPosition * flick.height + flick.y
         width: 3
-        height: component.height * flick.visibleArea.heightRatio
+        height: flick.height * flick.visibleArea.heightRatio
 
         Behavior on opacity {
             NumberAnimation { duration: 400 }
