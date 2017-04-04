@@ -77,10 +77,12 @@ QtObject {
         property color textColor: "white"
         property color identifierColor: "black"
         property color expressionHoverColor: "#AAAAAA"
+        property color scrollbarColor: "black"
         property font font: styles.variablesPanel.font
     }
 
     property QtObject variableItem: QtObject {
+        property color scrollbarColor: "#ED1D3D"
         property QtObject dots: QtObject {
             property color color: "#3D3D3D"
         }

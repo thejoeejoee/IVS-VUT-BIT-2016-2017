@@ -69,12 +69,14 @@ ApplicationWindow {
         ansIdentifierTextColor: StyleSettings.ans.identifierColor
         ansColor: StyleSettings.ans.backgroundColor
         ansExpressionHoverColor: StyleSettings.ans.expressionHoverColor
+        ansScrollbarColor: StyleSettings.ans.scrollbarColor
 
         dotsBackgroundColor: StyleSettings.variableItem.dots.color
         removeButtonColor: StyleSettings.variableItem.removeButton.color
         settersColor: StyleSettings.variableItem.setters.color
         settersHoveredColor: StyleSettings.variableItem.setters.hoverColor
         settersTextColor: StyleSettings.variableItem.setters.textColor
+        itemScrollbarColor: StyleSettings.variableItem.scrollbarColor
 
         font.family: StyleSettings.variablesPanel.font.family
 

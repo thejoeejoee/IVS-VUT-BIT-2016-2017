@@ -47,6 +47,8 @@ Item {
     property alias variableValue: content.variableValue
     /// Used font
     property alias font: content.font
+    /// Color of value scrollbar
+    property alias scrollbarColor: content.scrollbarColor
 
     /// Background color of dots(area to slide variable options)
     property alias dotsBackgroundColor: optionsMenu.dotsBackgroundColor
@@ -58,7 +60,6 @@ Item {
     property alias settersHoveredColor: optionsMenu.settersHoveredColor
     /// Text color of variable setters
     property alias settersTextColor: optionsMenu.settersTextColor
-
 
     clip: true
 

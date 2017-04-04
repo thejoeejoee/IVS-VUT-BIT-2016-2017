@@ -28,6 +28,8 @@ Rectangle {
     property string variableValue: "0"
     /// Used font
     property font font
+    /// Color of value scrollbar
+    property color scrollbarColor
 
     QtObject {
         id: internal
@@ -60,6 +62,19 @@ Rectangle {
         }
     }
 
+    // value display
+    AnimatedText {
+        text: component.variableValue
+        color: component.textColor
+
+        font.family: component.font.family
+        font.pixelSize: parent.height * 0.55
+
+        anchors.right: parent.right
+        anchors.rightMargin: internal.sideMargin
+        anchors.bottom: leftSide.bottom
+    }
+
     // display expression and variable name
     Item {
         id: leftSide
@@ -82,7 +97,23 @@ Rectangle {
             anchors.left: parent.left
         }
 
-        AnimatedText {
+        Rectangle {
+            color: component.scrollbarColor
+            opacity: (expression.visibleArea.widthRatio != 1 && expression.moving)
+
+            x: expression.width * expression.visibleArea.xPosition + expression.x
+            width: expression.width * expression.visibleArea.widthRatio
+            height: 2
+            z: 2
+
+            anchors.top: expression.bottom
+
+            Behavior on opacity {
+                NumberAnimation { duration: 200 }
+            }
+        }
+
+        FlickableAnimatedText {
             id: expression
 
             antialiasing: true
@@ -92,39 +123,30 @@ Rectangle {
             font.family: component.font.family
             font.pixelSize: parent.height * 0.23
 
+            width: component.width - internal.sideMargin * 2
+            height: contentHeight
+
             anchors.left: parent.left
             anchors.top: parent.top
-        }
 
-        MouseArea {
-            hoverEnabled: true
-            width: component.width
+            MouseArea {
+                hoverEnabled: true
 
-            anchors.left: expression.left
-            anchors.top: expression.top
-            anchors.bottom: expression.bottom
+                anchors.fill: parent
 
-            onClicked: createExpansionRequest()
-            onContainsMouseChanged: {
-                if(containsMouse)
-                    expressionBackground.color = component.expressionHoverColor
-                else
-                    expressionBackground.color = "transparent"
+                onClicked: {
+                    createExpansionRequest()
+                    mouse.accepted = false
+                }
+
+                onContainsMouseChanged: {
+                    if(containsMouse)
+                        expressionBackground.color = component.expressionHoverColor
+                    else
+                        expressionBackground.color = "transparent"
+                }
             }
         }
-    }
-
-    // value display
-    AnimatedText {
-        text: component.variableValue
-        color: component.textColor
-
-        font.family: component.font.family
-        font.pixelSize: parent.height * 0.55
-
-        anchors.right: parent.right
-        anchors.rightMargin: internal.sideMargin
-        anchors.bottom: leftSide.bottom
     }
 
     function createExpansionRequest() {

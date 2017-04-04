@@ -53,6 +53,8 @@ Item {
     property alias ansIdentifierTextColor: ansItem.identifierTextColor
     /// Background color of Ans variable expression while hovering
     property alias ansExpressionHoverColor: ansItem.expressionHoverColor
+    /// Color of value scrollbar Ans variable
+    property alias ansScrollbarColor: ansItem.scrollbarColor
 
     /// Background color of dots(area to slide variable options)
     property color dotsBackgroundColor
@@ -64,6 +66,8 @@ Item {
     property color settersHoveredColor
     /// Text color of variable setters
     property color settersTextColor
+    /// Color of value scrollbar
+    property color itemScrollbarColor
 
     /// Font of panel
     property font font
@@ -92,6 +96,7 @@ Item {
             object.settersColor = Qt.binding(function() { return component.settersColor })
             object.settersHoveredColor = Qt.binding(function() { return component.settersHoveredColor })
             object.settersTextColor = Qt.binding(function() { return component.settersTextColor })
+            object.scrollbarColor = Qt.binding(function() { return component.itemScrollbarColor })
 
             object.width = Qt.binding(function() { return component.width })
             object.height = Qt.binding(function() { return component.itemHeight })
