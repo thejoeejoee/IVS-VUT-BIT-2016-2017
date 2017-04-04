@@ -302,6 +302,9 @@ ApplicationWindow {
         var lastChar = expInput.text.slice(-1)
         var currentWord = exa.currentWord()
 
+        if(expInput.cursorPosition)
+            lastChar = expInput.text[expInput.cursorPosition - 1]
+
         if(Calculator.expressionSplitters.indexOf(lastChar) != -1)
             completer.show()
 
