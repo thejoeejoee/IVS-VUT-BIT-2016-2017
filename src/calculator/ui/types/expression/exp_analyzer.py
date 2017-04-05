@@ -84,7 +84,7 @@ class ExpAnalyzer(QObject):
         :return: Start and end index of body of function
         """
         brackets_count = {"(": 1, ")": 0}      # 1 for function
-        match = re.search('{} *\('.format(func), expr)
+        match = re.search('{} *\('.format(re.escape(func)), expr)
 
         for i in range(match.end(), len(expr)):
             current_char = expr[i]

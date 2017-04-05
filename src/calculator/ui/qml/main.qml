@@ -156,6 +156,14 @@ ApplicationWindow {
             completeText()
             showFunctionSignature()
         }
+
+        Keys.onPressed: {
+            if(expInput.selectedText != "" && event.text == "(") {
+                expInput.insert(expInput.selectionEnd, ")")
+                expInput.cursorPosition = expInput.selectionStart
+                expInput.deselect()
+            }
+        }
     }
 
     ResultDisplay {
