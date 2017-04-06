@@ -15,6 +15,7 @@ class Calculator(object):
 
     ANSWER_VARIABLE_NAME = 'Ans'
     DEFAULT_VARIABLE_TYPE = int
+    MAX_VARIABLE_NAME_LEN = 10
 
     def __init__(self):
         super().__init__()
