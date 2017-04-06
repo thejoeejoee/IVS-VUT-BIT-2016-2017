@@ -192,10 +192,15 @@ Item {
                     height: dropMenu.height / component.model.length
 
                     MouseArea {
+                        signal checkMousePos
+
                         anchors.fill: parent
                         hoverEnabled: true
                         onClicked: component.chooseCurrent()
-                        onContainsMouseChanged: {
+                        onMouseXChanged: checkMousePos()
+                        onMouseYChanged: checkMousePos()
+                        onContainsMouseChanged: checkMousePos()
+                        onCheckMousePos: {
                             if(containsMouse && flick.y == 0)
                                 component.currentItemIndex = index
                         }
