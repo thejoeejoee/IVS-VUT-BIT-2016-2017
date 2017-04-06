@@ -90,3 +90,6 @@ ENV/
 
 # Pycharms
 .idea/
+
+# complied resources
+src/calculator/ui/resources.py
