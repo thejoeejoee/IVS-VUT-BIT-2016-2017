@@ -25,6 +25,12 @@ class VariableError(Exception):
     """
 
 
+class VariableNameError(VariableError):
+    """
+    Raised when variable has an invalid name.
+    """
+
+
 class UnsupportedBaseError(Exception):
     """
     Raised when trying convert number into unsupported base
