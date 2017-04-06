@@ -10,6 +10,7 @@ import Expression 1.0
 import StyleSettings 1.0
 
 import "controls" as Control
+import "menu"
 import "../easteregg"
 import "loaders" as Loaders
 
@@ -27,6 +28,38 @@ ApplicationWindow {
 
     title: qsTr("Barbie Calculator")
     visible: true
+
+    Item {
+        id: root
+        anchors.fill: parent
+    }
+
+    AppMenuBar {
+        color: StyleSettings.appMenuBar.color
+        font: StyleSettings.appMenuBar.font
+
+        title: qsTr("Help")
+        titleColor: StyleSettings.appMenuBar.title.color
+        titleActiveColor: StyleSettings.appMenuBar.title.activeColor
+
+        items: [qsTr("Help"), qsTr("About")]
+
+        itemBackgroundColor: StyleSettings.appMenuBar.item.backgroundColor
+        itemBorderColor: StyleSettings.appMenuBar.item.borderColor
+        itemHoverColor: StyleSettings.appMenuBar.item.hoverColor
+        itemTextColor: StyleSettings.appMenuBar.item.textColor
+        itemHoverTextColor: StyleSettings.appMenuBar.item.hoverTextColor
+
+        z: 3
+        width: 200
+        height: 24
+        menuWidth: 100
+        menuItemHeight: 19
+
+        onItemChoosed: {
+            console.log(item)
+        }
+    }
 
     Game {
         id: game

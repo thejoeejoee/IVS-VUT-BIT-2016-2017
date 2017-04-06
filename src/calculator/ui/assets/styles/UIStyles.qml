@@ -156,4 +156,22 @@ QtObject {
         property color textColor: "white"
         property font font: Qt.font({family: "Roboto Light"})
     }
+
+    property QtObject appMenuBar: QtObject {
+        property color color: "#2C2C2C"
+        property font font: Qt.font({family: "Roboto Light"})
+
+        property QtObject title: QtObject {
+            property color color: "white"
+            property color activeColor: "#ED1946"
+        }
+
+        property QtObject item: QtObject {
+            property color backgroundColor: "white"
+            property color borderColor: "lightGray"
+            property color hoverColor: "lightGray"
+            property color textColor: "#3D3D3D"
+            property color hoverTextColor: "white"
+        }
+    }
 }
