@@ -187,7 +187,7 @@ Pokud výraz označíte a a kliknete na funkci, tak se celý výraz vloží do p
 
 ![Výraz po použití funkce](enfunc2.png)
 
-Jak vidíte už jsou inicializované nějaké proměnné. V jejich nastavení je možný přepis na `1` nebo `0`, a nebo také proměnnou smazat. Pokud bude proměnnýc příliš, můžete se k nim dostat pomocí posuvníku (případně kolečka myši).
+Jak vidíte už jsou inicializované nějaké proměnné. V jejich nastavení je možný přepis na `1` nebo `0`, a nebo také proměnnou smazat. Pokud bude proměnných příliš, můžete se k nim dostat pomocí posuvníku (případně kolečka myši).
 
 ![Mnoho proměnných a jejich nastavení](many_vars.png)
 
