@@ -135,6 +135,13 @@ Item {
         ScriptAction { script: { component.visible = false }}
     }
 
+    MouseArea {
+        parent: root
+        enabled: component.visible
+        anchors.fill: parent
+        onClicked: component.hide()
+    }
+
     Rectangle {
         id: scrollbar
 
