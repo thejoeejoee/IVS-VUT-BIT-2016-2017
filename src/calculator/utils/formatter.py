@@ -11,7 +11,7 @@ from calculator.settings import SUPPORTED_BASES
 class Formatter(object):
     DEFAULT_CHARACTERS_LIMIT = 8
 
-    EXP_FORMAT = '{value} <small>&times;</small>10<sup><small>{exp}</small></sup>'
+    EXP_FORMAT = '{value}<small>&times;</small><small>10</small><sup><small>{exp}</small></sup>'
     BASE_CONVERTERS = {
         2: bin,
         8: oct,
