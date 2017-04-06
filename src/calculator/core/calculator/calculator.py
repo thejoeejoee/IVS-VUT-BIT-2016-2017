@@ -3,7 +3,7 @@ from ast import Assign, Name, Pass
 from typing import Dict, Tuple, Set, Optional
 
 from calculator.core.solver.solver import Solver
-from calculator.exceptions import VariableError, VariableRemoveRestrictError
+from calculator.exceptions import VariableError, VariableRemoveRestrictError, VariableNameError
 from calculator import NumericValue, Variable
 from calculator.utils import OrderedDefaultDict
 
@@ -47,11 +47,15 @@ class Calculator(object):
             if len(root_node.targets) != 1 or not isinstance(root_node.targets[0], Name):
                 raise SyntaxError('Assign to multiple variables or to indexed variable is not supported.')
 
+            variable_name = root_node.targets[0].id
+            if len(variable_name) > self.MAX_VARIABLE_NAME_LEN:
+                raise VariableNameError('Variable name "{var}" is too long (max {max} characters.)'
+                                        .format(var=variable_name, max=self.MAX_VARIABLE_NAME_LEN))
+
             value = self._solver.compute(root_node.value, self.variables)
             used_variables = self._solver.get_used_variables()
 
             # test recursive assign
-            variable_name = root_node.targets[0].id
             if self._has_circular_dependence(variable_name, used_variables):
                 raise VariableError(
                     "Assignment to a variable '{variable_name}' would create a circular dependency.".format(
@@ -59,7 +63,9 @@ class Calculator(object):
                     ))
 
             # update by new created variables from Solver
-            self._variables.update(self._solver.variables)
+            variables = self._solver.variables
+            self._check_variable_names(variables)
+            self._variables.update(variables)
             # create new var
             self._variables[variable_name] = value, expression, used_variables
             # and refresh all depending
@@ -70,7 +76,10 @@ class Calculator(object):
             # simple expression
             result = self._solver.compute(expression, self.variables)
             # update new vars used by solver resolved from expression
-            self._variables.update(self._solver.variables)
+            variables = self._solver.variables
+            self._check_variable_names(variables)
+            self._variables.update(variables)
+
             self._variables[self.ANSWER_VARIABLE_NAME] = result, expression, self._solver.get_used_variables()
 
         return result, self._variables.copy()
@@ -151,3 +160,15 @@ class Calculator(object):
         :return: set of depending vars
         """
         return {name for name, definition in self.variables.items() if variable in definition[2]}
+
+    def _check_variable_names(self, variables: Dict[str, Variable]) -> None:
+        """
+        Check if all variable names are valid, if not raise VariableNameError
+
+        :param variables: variables to check
+        :return: None
+        """
+        for var in variables:
+            if len(var) > self.MAX_VARIABLE_NAME_LEN:
+                raise VariableNameError('Variable name "{var}" is too long (max {max} characters.)'
+                                        .format(var=var, max=self.MAX_VARIABLE_NAME_LEN))
