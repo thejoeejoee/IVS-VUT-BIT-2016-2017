@@ -48,6 +48,9 @@ class Math(object):
 
     @staticmethod
     def fact(n: NumericValue) -> NumericValue:
+        if abs(int(n) - n) > 0:
+            raise MathError('Invalid parameter for factorial.')
+
         try:
             return math.gamma(n + 1)
         except ValueError as e:
