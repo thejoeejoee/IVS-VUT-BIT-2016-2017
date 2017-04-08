@@ -52,5 +52,7 @@
         <file>qml/visualization/FunctionSignatureDisplay.qml</file>
         <file>qml/visualization/FlickableAnimatedText.qml</file>
         <file>qml/menu/AppMenuBar.qml</file>
+        <file>qml/windows/About.qml</file>
+        <file>assets/images/logo.svg</file>
     </qresource>
 </RCC>

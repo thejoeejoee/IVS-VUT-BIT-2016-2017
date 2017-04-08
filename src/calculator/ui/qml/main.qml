@@ -13,6 +13,7 @@ import "controls" as Control
 import "menu"
 import "../easteregg"
 import "loaders" as Loaders
+import "windows" as Windows
 
 import "containers"
 import "visualization"
@@ -57,7 +58,9 @@ ApplicationWindow {
         menuItemHeight: 19
 
         onItemChoosed: {
-            console.log(item)
+            if(item == "About") {
+                aboutWindow.show()
+            }
         }
     }
 
@@ -334,6 +337,22 @@ ApplicationWindow {
                 return expInput.x + expInput.width - infoWidth - expInput.textMargin
         }
 
+    }
+
+    Windows.About {
+        id: aboutWindow
+
+        revision: "3eecc99"
+        color: StyleSettings.aboutWindow.color
+        textColor: StyleSettings.aboutWindow.textColor
+        titleColor: StyleSettings.aboutWindow.titleColor
+        font: StyleSettings.aboutWindow.font
+
+        z: 3
+        width: mainWindow.width
+        height: mainWindow.height
+
+        onHidden: expInput.focus = true
     }
 
     /**

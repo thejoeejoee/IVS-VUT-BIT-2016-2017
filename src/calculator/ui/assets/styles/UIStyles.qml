@@ -174,4 +174,11 @@ QtObject {
             property color hoverTextColor: "white"
         }
     }
+
+    property QtObject aboutWindow: QtObject {
+        property color color: "black"
+        property color textColor: "lightGray"
+        property color titleColor: "#ED1946"
+        property font font: Qt.font({family: "AbeeZee"})
+    }
 }
