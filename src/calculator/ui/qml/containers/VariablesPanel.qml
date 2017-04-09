@@ -45,7 +45,7 @@ Item {
     /// Background color of expression while hovering
     property color expressionHoverColor
 
-    /// Bakcground color of Ans variable
+    /// Background color of Ans variable
     property alias ansColor: ansItem.color
     /// Text color of identifier and value of Ans variable
     property alias ansTextColor: ansItem.textColor
