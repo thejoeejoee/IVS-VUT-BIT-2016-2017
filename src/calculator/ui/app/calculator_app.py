@@ -2,11 +2,11 @@
 import platform
 from typing import List
 
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import (QSize, QtFatalMsg, QtCriticalMsg, QtWarningMsg, QtInfoMsg,
+                          qInstallMessageHandler, QtDebugMsg)
 from PyQt5.QtCore import QTranslator
 from PyQt5.QtCore import QUrl, QLocale
 from PyQt5.QtGui import QIcon
-from PyQt5.QtGui import QPixmap
 from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterSingletonType
 from PyQt5.QtWidgets import QApplication
 
@@ -27,6 +27,25 @@ if platform.system() == "Linux":  # Needed for platform.linux_distribution, whic
 # noinspection PyUnresolvedReferences
 import calculator.ui.resources
 
+
+def qt_message_handler(mode, context, message):
+    modes = {
+        QtInfoMsg: "Info",
+        QtWarningMsg: "Warning",
+        QtCriticalMsg: "Critical",
+        QtFatalMsg: "Fatal",
+        QtDebugMsg: "Debug"
+    }
+    mode = modes[mode]
+
+    if context.file is None:
+        print('{mode}: {msg}'.format(mode=mode, msg=message))
+    else:
+        print('{mode}: line: {line}, function: {func}, file: {file}'.format(
+            mode=mode, line=context.line, func=context.function, file=context.file))
+        print('{msg}'.format(msg=message))
+
+qInstallMessageHandler(qt_message_handler)
 
 class CalculatorApp(QApplication):
     def __init__(self, argv: List[str]):
