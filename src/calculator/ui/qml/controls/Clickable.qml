@@ -19,6 +19,14 @@ Item {
       Emits when mouse leaved area of component
       */
     signal exited()
+    /**
+      Emits after mouse is pressed
+      */
+    signal pressed()
+    /**
+      Emits after mouse is released
+      */
+    signal released()
 
     /// If set to true hover is enabled else disable hover
     property alias hoverEnabled: mouseArea.hoverEnabled
@@ -30,6 +38,8 @@ Item {
 
         anchors.fill: parent
 
+        onPressed: component.pressed()
+        onReleased: component.released()
         onClicked: component.clicked(Qt.point(mouse.x, mouse.y))
         onContainsMouseChanged: {
             if(mouseArea.containsMouse)
