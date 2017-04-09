@@ -54,5 +54,6 @@
         <file>qml/menu/AppMenuBar.qml</file>
         <file>qml/windows/About.qml</file>
         <file>assets/images/logo.svg</file>
+        <file>qml/controls/FilledClickable.qml</file>
     </qresource>
 </RCC>
