@@ -18,8 +18,8 @@ Item {
     property color backgroundColor
     /// Text color of labels on buttons
     property color textColor
-    /// Text color of labels on buttons, when hovered
-    property color hoverTextColor
+    /// Background color of mask when button is hovered
+    property color hoverColor
 
     Grid {
         id: grid
@@ -32,7 +32,7 @@ Item {
                 buttonText: modelData
                 textColor: component.textColor
                 color: component.backgroundColor
-                hoverTextColor: component.hoverTextColor
+                hoverColor: component.hoverColor
 
                 width: component.width / grid.columns
                 height: component.height / grid.rows

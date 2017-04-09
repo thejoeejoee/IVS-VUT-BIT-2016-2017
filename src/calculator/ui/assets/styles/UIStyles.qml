@@ -10,7 +10,7 @@ QtObject {
     property QtObject functionPanel: QtObject {
         property color backgroundColor: "#2A2A2A"
         property color textColor: "white"
-        property color hoverTextColor: "#ED1D3D"
+        property color hoverColor: "white"
     }
 
     property QtObject expressionInput: QtObject {
@@ -108,6 +108,7 @@ QtObject {
 
     property QtObject calculateButton: QtObject {
         property color backgroundColor: "#ED1946"
+        property color hoverColor: "black"
     }
 
     property QtObject errorDialog: QtObject {

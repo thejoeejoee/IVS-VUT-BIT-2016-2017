@@ -136,7 +136,7 @@ ApplicationWindow {
         columns: 1
         backgroundColor: StyleSettings.functionPanel.backgroundColor
         textColor: StyleSettings.functionPanel.textColor
-        hoverTextColor: StyleSettings.functionPanel.hoverTextColor
+        hoverColor: StyleSettings.functionPanel.hoverColor
 
         height: parent.height * 0.45
         width: parent.width / 15.7
@@ -238,6 +238,7 @@ ApplicationWindow {
         width: parent.width / 14
 
         color: StyleSettings.calculateButton.backgroundColor
+        hoverColor: StyleSettings.calculateButton.hoverColor
 
         anchors.top: expInput.top
         anchors.bottom: parent.bottom

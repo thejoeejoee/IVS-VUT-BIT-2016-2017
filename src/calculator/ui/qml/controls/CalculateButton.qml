@@ -3,14 +3,11 @@ import QtQuick 2.0
 /**
   Button to confirm calculation
   */
-Clickable {
-    /// Bakcground color of button
-    property alias color: background.color
+FilledClickable {
+    id: component
 
-    Rectangle {
-        id: background
-        anchors.fill: parent
-    }
+    hoverMaskEnabled: true
+    hoverEnabled: true
 
     Image {
         source: "qrc:/assets/images/equal.svg"
