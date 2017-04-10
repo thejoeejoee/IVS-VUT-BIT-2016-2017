@@ -22,6 +22,8 @@ if platform.system() == "Linux":  # Needed for platform.linux_distribution, whic
     # Just in case it also happens on Debian, so it can be added
     if 'Ubuntu' in platform_identifier or 'Debian' in platform_identifier:
         # noinspection PyUnresolvedReferences
+        from OpenGL import GLU
+        # noinspection PyUnresolvedReferences
         from OpenGL import GL
 
 # noinspection PyUnresolvedReferences

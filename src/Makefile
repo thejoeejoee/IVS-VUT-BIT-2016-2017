@@ -29,7 +29,7 @@ run:
 clean:
 	rm -rf ../dist/ ../deb_dist/ ./calculator.egg-info/
 
-pack-deb: clean-pyc compile-resources
+pack-deb: clean clean-pyc compile-resources
 	cd ..; $(PYTHON) setup.py --command-packages=stdeb.command bdist_deb
 
 clean-pyc:

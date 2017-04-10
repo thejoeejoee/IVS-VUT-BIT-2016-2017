@@ -32,7 +32,7 @@ def setup():
         keywords='calculator expression mathematics',
         packages=find_packages('src', exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
         install_requires=[
-            'PyOpenGL #;"Debian" in platform_version or "Ubuntu" in platform_version',
+            'PyOpenGL',
             'PyQt5'
         ],
         requires=[
