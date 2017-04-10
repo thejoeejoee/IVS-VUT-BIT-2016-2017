@@ -106,6 +106,7 @@ ApplicationWindow {
         ansColor: StyleSettings.ans.backgroundColor
         ansExpressionHoverColor: StyleSettings.ans.expressionHoverColor
         ansScrollbarColor: StyleSettings.ans.scrollbarColor
+        ansPrompterTheme: StyleSettings.ans.prompterTheme
 
         dotsBackgroundColor: StyleSettings.variableItem.dots.color
         removeButtonColor: StyleSettings.variableItem.removeButton.color
@@ -113,6 +114,7 @@ ApplicationWindow {
         settersHoveredColor: StyleSettings.variableItem.setters.hoverColor
         settersTextColor: StyleSettings.variableItem.setters.textColor
         itemScrollbarColor: StyleSettings.variableItem.scrollbarColor
+        prompterTheme: StyleSettings.variableItem.prompterTheme
 
         font.family: StyleSettings.variablesPanel.font.family
 
@@ -225,11 +227,13 @@ ApplicationWindow {
         scrollbarColor: StyleSettings.resultSystemDisplay.scrollbarColor
         baseTextColor: StyleSettings.resultSystemDisplay.baseTextColor
         valueTextColor: StyleSettings.resultSystemDisplay.valueTextColor
+        prompterTheme: StyleSettings.resultSystemDisplay.prompterTheme
         font: StyleSettings.resultSystemDisplay.font
 
         anchors.bottom: functionPanel.top
         anchors.left: parent.left
         anchors.right: variablePanel.left
+        anchors.rightMargin: height / 20
     }
 
     Control.CalculateButton {

@@ -55,6 +55,8 @@ Item {
     property alias ansExpressionHoverColor: ansItem.expressionHoverColor
     /// Color of value scrollbar Ans variable
     property alias ansScrollbarColor: ansItem.scrollbarColor
+    /// Prompter of value flickable theme in Ans
+    property alias ansPrompterTheme: ansItem.prompterTheme
 
     /// Background color of dots(area to slide variable options)
     property color dotsBackgroundColor
@@ -68,7 +70,8 @@ Item {
     property color settersTextColor
     /// Color of value scrollbar
     property color itemScrollbarColor
-
+    /// Prompter of value flickable theme of item
+    property string prompterTheme
     /// Font of panel
     property font font
 
@@ -97,6 +100,7 @@ Item {
             object.settersHoveredColor = Qt.binding(function() { return component.settersHoveredColor })
             object.settersTextColor = Qt.binding(function() { return component.settersTextColor })
             object.scrollbarColor = Qt.binding(function() { return component.itemScrollbarColor })
+            object.prompterTheme = Qt.binding(function() { return component.prompterTheme })
 
             object.width = Qt.binding(function() { return component.width })
             object.height = Qt.binding(function() { return component.itemHeight })

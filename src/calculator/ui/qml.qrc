@@ -55,5 +55,7 @@
         <file>qml/windows/About.qml</file>
         <file>assets/images/logo.svg</file>
         <file>qml/controls/FilledClickable.qml</file>
+        <file>assets/images/arrow_left_dark.svg</file>
+        <file>assets/images/arrow_left_light.svg</file>
     </qresource>
 </RCC>

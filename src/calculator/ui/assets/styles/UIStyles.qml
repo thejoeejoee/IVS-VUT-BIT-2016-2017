@@ -67,6 +67,7 @@ QtObject {
         property color identifierColor: "#ED1946"
         property color expressionHoverColor: "#3D3D3D"
         property color scrollBarColor: "#B7B7B7"
+        property string prompterTheme: "light"
         property font font: Qt.font({
             family: "Roboto Light"
         })
@@ -78,11 +79,13 @@ QtObject {
         property color identifierColor: "black"
         property color expressionHoverColor: "#AAAAAA"
         property color scrollbarColor: "black"
+        property string prompterTheme: "dark"
         property font font: styles.variablesPanel.font
     }
 
     property QtObject variableItem: QtObject {
         property color scrollbarColor: "#ED1D3D"
+        property string prompterTheme: "light"
         property QtObject dots: QtObject {
             property color color: "#3D3D3D"
         }
@@ -149,6 +152,7 @@ QtObject {
         property color baseTextColor: "#ED1D3D"
         property color valueTextColor: "#3D3D3D"
         property color scrollbarColor: "#ED1D3D"
+        property string prompterTheme: "dark"
         property font font: Qt.font({family: "Roboto Light"})
     }
 

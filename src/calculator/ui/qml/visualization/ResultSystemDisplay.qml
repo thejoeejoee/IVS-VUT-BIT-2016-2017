@@ -21,6 +21,8 @@ Rectangle {
     property color scrollbarColor
     /// Margin of text
     readonly property int margin: 10
+    /// Prompter of value flickable theme
+    property string prompterTheme
 
     Column {
         id: container
@@ -59,13 +61,13 @@ Rectangle {
 
                 Rectangle {
                     color: component.scrollbarColor
-                    opacity: (flick.visibleArea.widthRatio != 1 && flick.moving)
+                    opacity: (valueText.flick.visibleArea.widthRatio != 1 && valueText.flick.moving)
 
-                    x: flick.width * flick.visibleArea.xPosition + flick.x
-                    width: flick.width * flick.visibleArea.widthRatio
+                    x: valueText.width * valueText.flick.visibleArea.xPosition + valueText.x
+                    width: valueText.width * valueText.flick.visibleArea.widthRatio
                     height: 2
 
-                    anchors.top: flick.bottom
+                    anchors.top: valueText.bottom
                     anchors.topMargin: height
 
                     Behavior on opacity {
@@ -74,11 +76,12 @@ Rectangle {
                 }
 
                 FlickableAnimatedText {
-                    id: flick
+                    id: valueText
 
                     text: Calculator.convertToBase(component.value, component.bases[modelData])
                     color: component.valueTextColor
                     font: baseText.font
+                    theme: component.prompterTheme
 
                     width: parent.width - anchors.leftMargin
                     height: parent.height

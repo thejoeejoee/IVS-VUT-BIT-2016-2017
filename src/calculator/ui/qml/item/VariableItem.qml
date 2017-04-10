@@ -49,6 +49,8 @@ Item {
     property alias font: content.font
     /// Color of value scrollbar
     property alias scrollbarColor: content.scrollbarColor
+    /// Prompter of value flickable theme
+    property alias prompterTheme: content.prompterTheme
 
     /// Background color of dots(area to slide variable options)
     property alias dotsBackgroundColor: optionsMenu.dotsBackgroundColor

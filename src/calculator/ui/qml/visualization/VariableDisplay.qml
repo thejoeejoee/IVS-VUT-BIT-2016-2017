@@ -30,6 +30,8 @@ Rectangle {
     property font font
     /// Color of value scrollbar
     property color scrollbarColor
+    /// Prompter of value flickable theme
+    property string prompterTheme
 
     QtObject {
         id: internal
@@ -99,10 +101,10 @@ Rectangle {
 
         Rectangle {
             color: component.scrollbarColor
-            opacity: (expression.visibleArea.widthRatio != 1 && expression.moving)
+            opacity: (expression.flick.visibleArea.widthRatio != 1 && expression.flick.moving)
 
-            x: expression.width * expression.visibleArea.xPosition + expression.x
-            width: expression.width * expression.visibleArea.widthRatio
+            x: expression.width * expression.flick.visibleArea.xPosition + expression.x
+            width: expression.width * expression.flick.visibleArea.widthRatio
             height: 2
             z: 2
 
@@ -119,17 +121,20 @@ Rectangle {
             antialiasing: true
             text: component.variableExpression
             color: component.textColor
+            theme: component.prompterTheme
 
             font.family: component.font.family
             font.pixelSize: parent.height * 0.23
 
             width: component.width - internal.sideMargin * 2
-            height: contentHeight
+            height: flick.contentHeight
+
 
             anchors.left: parent.left
             anchors.top: parent.top
 
             MouseArea {
+                parent: expression.flick
                 hoverEnabled: true
 
                 anchors.fill: parent
