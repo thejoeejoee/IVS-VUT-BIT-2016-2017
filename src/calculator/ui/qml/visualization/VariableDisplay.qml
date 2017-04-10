@@ -1,6 +1,7 @@
 import QtQuick 2.0
+import "../controls" as Controls
 
-Rectangle {
+Controls.FilledClickable {
     id: component
 
     /**
@@ -33,21 +34,23 @@ Rectangle {
     /// Prompter of value flickable theme
     property string prompterTheme
 
+    hoverEnabled: true
+    hoverMaskEnabled: true
+    manual: true
+
+    mouseArea.onClicked: {
+        if(mouse.button == Qt.LeftButton)
+            component.expandRequest(component.variableIdentifier)
+        else
+            createExpansionRequest()
+    }
+
+    mouseArea.onContainsMouseChanged: component.handleHoverEvent()
+
     QtObject {
         id: internal
 
         property real sideMargin: height / 6.5
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        onClicked: {
-            if(mouse.button == Qt.LeftButton)
-                component.expandRequest(component.variableIdentifier)
-            else
-                createExpansionRequest()
-        }
     }
 
     Rectangle {
@@ -134,8 +137,11 @@ Rectangle {
             anchors.top: parent.top
 
             MouseArea {
+                id: expressionMouseArea
+
                 parent: expression.flick
                 hoverEnabled: true
+                propagateComposedEvents: true
 
                 anchors.fill: parent
 
@@ -145,12 +151,21 @@ Rectangle {
                 }
 
                 onContainsMouseChanged: {
+                    component.handleHoverEvent()
                     if(containsMouse)
                         expressionBackground.color = component.expressionHoverColor
                     else
                         expressionBackground.color = "transparent"
                 }
             }
+        }
+    }
+
+    function handleHoverEvent() {
+        if(component.mouseArea.containsMouse || expressionMouseArea.containsMouse)
+            component.entered()
+        else if((!expressionMouseArea.containsMouse) && (!component.mouseArea.containsMouse)){
+            component.exited()
         }
     }
 

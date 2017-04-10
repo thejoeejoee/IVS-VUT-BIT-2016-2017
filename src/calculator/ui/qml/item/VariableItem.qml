@@ -62,6 +62,8 @@ Item {
     property alias settersHoveredColor: optionsMenu.settersHoveredColor
     /// Text color of variable setters
     property alias settersTextColor: optionsMenu.settersTextColor
+    /// Hover color of item
+    property alias hoverColor: content.hoverColor
 
     clip: true
 

@@ -96,10 +96,7 @@ ApplicationWindow {
         id: variablePanel
 
         backgroundColor: StyleSettings.variablesPanel.backgroundColor
-        textColor: StyleSettings.variablesPanel.textColor
-        identifierTextColor: StyleSettings.variablesPanel.identifierColor
         scrollBarColor: StyleSettings.variablesPanel.scrollBarColor
-        expressionHoverColor: StyleSettings.variablesPanel.expressionHoverColor
 
         ansTextColor: StyleSettings.ans.textColor
         ansIdentifierTextColor: StyleSettings.ans.identifierColor
@@ -107,6 +104,7 @@ ApplicationWindow {
         ansExpressionHoverColor: StyleSettings.ans.expressionHoverColor
         ansScrollbarColor: StyleSettings.ans.scrollbarColor
         ansPrompterTheme: StyleSettings.ans.prompterTheme
+        ansHoverColor: StyleSettings.ans.hoverColor
 
         dotsBackgroundColor: StyleSettings.variableItem.dots.color
         removeButtonColor: StyleSettings.variableItem.removeButton.color
@@ -114,7 +112,11 @@ ApplicationWindow {
         settersHoveredColor: StyleSettings.variableItem.setters.hoverColor
         settersTextColor: StyleSettings.variableItem.setters.textColor
         itemScrollbarColor: StyleSettings.variableItem.scrollbarColor
+        textColor: StyleSettings.variableItem.textColor
+        identifierTextColor: StyleSettings.variableItem.identifierColor
+        expressionHoverColor: StyleSettings.variableItem.expressionHoverColor
         prompterTheme: StyleSettings.variableItem.prompterTheme
+        hoverColor: StyleSettings.variableItem.hoverColor
 
         font.family: StyleSettings.variablesPanel.font.family
 
