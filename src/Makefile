@@ -1,46 +1,40 @@
 REQUIREMENTS=../requirements.txt
 
-ifdef ENVIROMENT
-     ENVIROMENT:=$(shell echo $(ENVIROMENT) | tr a-z A-Z)
-else
-     ENVIROMENT=$(shell if [ "${VIRTUAL_ENV}" != "" ] > /dev/null; then echo LOCAL; else echo GLOBAL; fi)
-endif
-
-GLOBAL_PYTHON=python3
-GLOBAL_PIP=pip3
-GLOBAL_PYRCC5=pyrcc5
-
-VENV_PATH=../.venv
-LOCAL_PYTHON=$(VENV_PATH)/bin/$(GLOBAL_PYTHON)
-LOCAL_PIP=$(VENV_PATH)/bin/$(GLOBAL_PIP)
-LOCAL_PYRCC5=$(VENV_PATH)/bin/$(GLOBAL_PYRCC5)
-
-PYTHON=$(ENVIROMENT)_PYTHON
+PYTHON=python3
+PIP=pip3
+PYRCC5=pyrcc5
+DIR:=$(CURDIR)
 
 all: run
 
-LOCAL:
-	@touch $(VENV_PATH) || pyvenv $(VENV_PATH)
-	$(info ***** Using LOCAL enviroment with python $(abspath $($(PYTHON))). *****)
+.PHONY: all install install-python install-calculator test run clean-pyc compile-resources clean
 
-GLOBAL:
-	$(info ***** Using SYSTEM enviroment with python $(shell which $($(PYTHON))). *****)
-
-# .PHONY: install $(ENVIROMENT) install-python install-calculator test run
-
-install: install-python $(ENVIROMENT) install-calculator
+install: install-python install-calculator
 
 install-python:
 	@if ! dpkg -s python3.5 > /dev/null && dpkg -s python3-pip > /dev/null; then\
-		apt-get update && apt-get -y install python3.5 python3-pip python3-venv;\
+		apt-get update && apt-get -y install python3-all python3.5 python3-pip python3-venv;\
 	fi
 	pip3 install --upgrade pip > /dev/null
 
-install-calculator: $(ENVIROMENT)
-	$($(PYTHON)) ../setup.py install
+install-calculator:
+	cd ..; $(PYTHON) $(DIR)/../setup.py install
 
-test: $(ENVIROMENT)
-	$($(PYTHON)) test.py || true
+test:
+	$(PYTHON) $(DIR)/test.py || true
 
-run: $(ENVIROMENT)
-	$($(PYTHON)) calculator/main.py
+run:
+	$(PYTHON) $(DIR)/calculator/main.py
+
+clean:
+	rm -rf ../dist/ ../deb_dist/ ./calculator.egg-info/
+
+pack-deb: clean-pyc compile-resources
+	cd ..; $(PYTHON) setup.py --command-packages=stdeb.command bdist_deb
+
+clean-pyc:
+	find . -name "*.pyc" -delete
+
+compile-resources:
+	$(PYRCC5) -o calculator/ui/resources.py calculator/ui/qml.qrc
+

@@ -9,17 +9,12 @@ from setuptools import find_packages
 base_path = abspath(dirname(__file__))
 
 
-def install_requires():
-    with open(join(base_path, 'requirements.txt')) as f:
-        return [line.strip().split('#')[0] for line in f.readlines() if line.strip()]
-
-
 def setup():
     core.setup(
         name='calculator',
         version='0.2',
         license='GNU GENERAL PUBLIC LICENSE Version 3',
-        long_description=open(join(base_path, './README.md')).read(),
+        long_description=open(join(base_path, 'README.md')).read(),
         url='https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017',
         classifiers=[
             'Development Status :: 3 - Alpha',
@@ -36,13 +31,18 @@ def setup():
                      'xomach00@stud.fit.vutbr.cz, xnavra61@stud.fit.vutbr.cz',
         keywords='calculator expression mathematics',
         packages=find_packages('src', exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
-        install_requires=install_requires() + [
-            'PyOpenGL #;"Debian" in platform_version or "Ubuntu" in platform_version'
+        install_requires=[
+            'PyOpenGL #;"Debian" in platform_version or "Ubuntu" in platform_version',
+            'PyQt5'
+        ],
+        requires=[
+            'colour_runner',
+            'termcolor',
+            'stdeb',
+            'doxypy',
+            'doxyqml',
         ],
         package_dir={'': 'src/'},
-        # package_data={
-        #    '': ['**/*.{file_type}'.format(file_type=file_type) for file_type in file_types]
-        # },
         entry_points={
             'console_scripts': [
                 'calculator-console=calculator.console:main',
