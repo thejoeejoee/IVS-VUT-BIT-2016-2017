@@ -26,11 +26,6 @@ Item {
         }}
     }
 
-    FontMetrics {
-        id: fontMetrics
-        font: component.font
-    }
-
     Text {
         id: baseText
 
