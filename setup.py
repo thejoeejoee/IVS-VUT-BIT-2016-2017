@@ -33,7 +33,7 @@ def setup():
         packages=find_packages('src', exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
         install_requires=[
             'PyOpenGL',
-            'PyQt5'
+            'PyQt5==5.7.1'
         ],
         requires=[
             'colour_runner',

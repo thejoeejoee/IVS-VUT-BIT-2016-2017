@@ -6,7 +6,7 @@ Build-Depends: python3-setuptools, python3-all, debhelper (>= 7.4.3)
 Standards-Version: 3.9.1
 Package: python3-calculator
 Architecture: all
-Depends: ${misc:Depends}, ${python3:Depends}, python3-pyopengl, python3-pip, python3-doxyqml, python3-doxypypy, python3-colour-runner, python3-opengl
+Depends: ${misc:Depends}, ${python3:Depends}, python3-pip, python3-doxyqml, python3-doxypypy, python3-colour-runner, python3-opengl
 Description:
  IVS-VUT-BIT-2016-2017
  Grafická kalkulačka jako školní projekt do předmětu IVS na fakultě FIT VUT.

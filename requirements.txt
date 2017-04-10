@@ -1,3 +1,10 @@
---index-url https://pypi.python.org/simple/
+# needs to run
+PyOpenGL
+PyQt5==5.7.1
 
--e .
+# dev deps
+colour_runner
+termcolor
+stdeb
+doxypy
+doxyqml

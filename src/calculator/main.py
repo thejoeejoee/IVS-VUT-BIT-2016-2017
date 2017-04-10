@@ -63,7 +63,7 @@ def update_qrc():
     if exists(RESOURCES_FILE) and (last_modification - getmtime(RESOURCES_FILE)) < 2:
         return True
 
-    if exists(RESOURCES_FILE):
+    if exists(RESOURCES_FILE) and not access(RESOURCES_FILE, W_OK):
         print('Resources file {} is outdated.'.format(
             RESOURCES_FILE
         ), file=sys.stderr)
