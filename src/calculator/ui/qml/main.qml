@@ -8,6 +8,7 @@ import Calculator 1.0
 import Expansion 1.0
 import Expression 1.0
 import StyleSettings 1.0
+import AppWindow 1.0
 
 import "controls" as Control
 import "menu"
@@ -18,21 +19,25 @@ import "windows" as Windows
 import "containers"
 import "visualization"
 
-ApplicationWindow {
+AppWindow {
     id: mainWindow
 
-    width: 1101
-    height: width * (522 / 1101)
+    //width: 1101
+    //height: 522//width * (522 / 1101)
 
-    minimumHeight: width * (522 / 1101)
-    maximumHeight: minimumHeight
+    //minimumHeight: width * (522 / 1101)
+    //maximumHeight: minimumHeight
 
-    title: qsTr("Barbie Calculator")
+    //title: qsTr("Barbie Calculator")
     visible: true
 
     Item {
         id: root
         anchors.fill: parent
+        Component.onCompleted: {
+            console.log("width", width)
+            console.log("height", height)
+        }
     }
 
     AppMenuBar {

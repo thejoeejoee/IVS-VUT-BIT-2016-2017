@@ -14,6 +14,7 @@ from calculator.ui.adapter import UIAdapter
 from calculator.ui.types.core import Sides
 from calculator.ui.types.expression import ExpSyntaxHighlighter, ExpAnalyzer
 from calculator.ui.types.qmlwrapper.utils import TypeRegister
+from calculator.ui.types.window import AppWindow
 from calculator.settings import Expansion, ICON_SIZES, Expression
 
 if platform.system() == "Linux":  # Needed for platform.linux_distribution, which is not available on Windows and OSX
@@ -71,6 +72,7 @@ class CalculatorApp(QApplication):
         qmlRegisterSingletonType(Expression, "Expression", 1, 0 ,"Expression", Expression.singletonProvider)
         qmlRegisterSingletonType(UIAdapter, "Calculator", 1, 0, "Calculator", UIAdapter.singletonProvider)
         TypeRegister.register_type(ExpSyntaxHighlighter)
+        TypeRegister.register_type(AppWindow)
         TypeRegister.register_type(ExpAnalyzer)
 
     def run(self) -> int:
