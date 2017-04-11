@@ -89,7 +89,7 @@ Rectangle {
                     height: parent.height
 
                     anchors.left: parent.left
-                    anchors.leftMargin: component.margin * 3 + fm.advanceWidth("DEC")   // some constant to measure font width
+                    anchors.leftMargin: font.pixelSize * 3   // some constant to measure font width
                 }
             }
         }
