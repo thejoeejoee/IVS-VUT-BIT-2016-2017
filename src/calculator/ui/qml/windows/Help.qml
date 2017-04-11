@@ -84,10 +84,16 @@ ApplicationWindow {
     Rectangle {
         id: scrollBar
 
+        opacity: (flick.visibleArea.heightRatio === 1) ?0 :1
+
         y: flick.visibleArea.yPosition * flick.height
         width: 3
         height: flick.visibleArea.heightRatio * flick.height
 
         anchors.right: parent.right
+
+        Behavior on opacity {
+            NumberAnimation { duration: 400 }
+        }
     }
 }
