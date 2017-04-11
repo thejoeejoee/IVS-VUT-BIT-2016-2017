@@ -6,7 +6,8 @@ from PyQt5.QtQml import QJSEngine, QQmlEngine
 
 from calculator import Variable, NumericValue
 from calculator.core.calculator import Calculator
-from calculator.exceptions import MathError, VariableError, UnsupportedBaseError, InvalidFunctionCallError
+from calculator.exceptions import MathError, VariableError, UnsupportedBaseError, InvalidFunctionCallError, \
+    VariableRemoveRestrictError
 from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS, Expression)
 from calculator.utils.formatter import Formatter
 from calculator.utils.translate import translate
@@ -46,11 +47,11 @@ class UIAdapter(QObject):
 
             self.identifiersTypesChanged.emit(self.identifiersTypes)
             self.processed.emit(QVariant({
-                "result": None if result is None else self._formatter.format_number(result, 16),
+                "result": None if result is None else self._formatter.format_number(result, characters_limit=12),
                 "unformattedResult": str(result),
                 "variables": {
                     key: dict(
-                        value=self._formatter.format_number(value),
+                        value=self._formatter.format_number(value, characters_limit=8),
                         expression=self._format_source_expression(
                             variable=key,
                             source_expression=expression
@@ -111,10 +112,17 @@ class UIAdapter(QObject):
             }
         }))
 
-    @pyqtSlot(str)
-    def removeVariable(self, variable_identifier: str) -> None:
-        self._calculator.remove_variable(variable_identifier)
+    @pyqtSlot(str, result=bool)
+    def removeVariable(self, variable_identifier: str) -> bool:
+        try:
+            self._calculator.remove_variable(variable_identifier)
+        except VariableRemoveRestrictError as e:
+            # TODO: deps!
+            self.error.emit(translate("Adapter", "#TODO"))
+            return False
+
         self._variables = self._calculator.variables.copy()
+        return True
 
     @pyqtProperty(QVariant)
     def highlightRules(self) -> QVariant:

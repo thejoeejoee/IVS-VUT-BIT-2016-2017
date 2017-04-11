@@ -9,8 +9,6 @@ from calculator.settings import SUPPORTED_BASES
 
 
 class Formatter(object):
-    DEFAULT_CHARACTERS_LIMIT = 8
-
     EXP_FORMAT = '{value}<small>&times;</small><small>10</small><sup><small>{exp}</small></sup>'
     BASE_CONVERTERS = {
         2: bin,
@@ -23,13 +21,15 @@ class Formatter(object):
     _EXP_DIVIDER = 'e'
 
     @classmethod
-    def format_number(cls, value: NumericValue, characters_limit: int = DEFAULT_CHARACTERS_LIMIT) -> str:
+    def format_number(cls, value: NumericValue, characters_limit: int) -> str:
         stringed = str(value)
 
-        if cls._EXP_DIVIDER not in stringed and not (len(stringed) > characters_limit):
+        if not (cls._EXP_DIVIDER in stringed or len(stringed) > characters_limit):
             return stringed[:characters_limit]
 
-        value, exp = '{:.2e}'.format(Decimal.from_float(value)).split(cls._EXP_DIVIDER)
+        value, exp = ('{:.%de}' % (max((characters_limit - 4, 2)))).format(
+            Decimal.from_float(value),
+        ).split(cls._EXP_DIVIDER)  # type: str, str
         return cls.EXP_FORMAT.format(
             value=value,
             exp=exp.lstrip('+')
