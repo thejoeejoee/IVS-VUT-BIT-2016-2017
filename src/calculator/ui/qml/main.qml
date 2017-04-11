@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
-// TODO allow
+
 import ExpSyntaxHighlighter 1.0
 import ExpAnalyzer 1.0
 import Sides 1.0

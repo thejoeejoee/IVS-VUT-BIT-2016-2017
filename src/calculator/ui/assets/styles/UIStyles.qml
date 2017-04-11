@@ -1,7 +1,7 @@
 pragma Singleton
 import QtQuick 2.0
 import QtQuick.Controls.Styles 1.4
-// TODO allow
+
 import Expression 1.0
 
 QtObject {
