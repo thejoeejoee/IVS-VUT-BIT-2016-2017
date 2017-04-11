@@ -2,8 +2,25 @@ import QtQuick 2.5
 import QtQuick.Controls 2.0
 import "../../assets/contents/help.js" as HelpContent
 
+/**
+  Component to display help content.
+  */
 ApplicationWindow {
-    visible: true
+    id: window
+
+    /// Color of content text
+    property alias textColor: text.color
+    /// Text color of title
+    property color titleColor
+    /// Text color of subtitle
+    property color subtitleColor
+    /// Used font
+    property font textFont
+    /// Color of scrollbar
+    property alias scrollBarColor: scrollBar.color
+
+    title: qsTr("Help")
+    visible: false
 
     Flickable {
         id: flick
@@ -33,17 +50,18 @@ ApplicationWindow {
                         font-size: %5px;
                     }
             </style>'
-            .arg("red")
-            .arg("blue")
-            .arg(15)
-            .arg(10)
-            .arg(25)
-            .arg(35)
+            .arg(titleColor)
+            .arg(subtitleColor)
+            .arg(15)    // body margin
+            .arg(10)    // text margins
+            .arg(15)    // text font size
+            .arg(20)    // title font size
 
             width: parent.width - 7
             textFormat: Text.RichText
             wrapMode: TextEdit.WordWrap
             text: ''
+            font.family: window.font.family
 
             Component.onCompleted: {
                 var content = ""
@@ -63,13 +81,12 @@ ApplicationWindow {
         }
     }
 
-    Rectangle { //scrollbar
-        y: flick.visibleArea.yPosition * flick.height
-        // TODO
-        width: 4
-        height: flick.visibleArea.heightRatio * flick.height
+    Rectangle {
+        id: scrollBar
 
-        color: "red"
+        y: flick.visibleArea.yPosition * flick.height
+        width: 3
+        height: flick.visibleArea.heightRatio * flick.height
 
         anchors.right: parent.right
     }

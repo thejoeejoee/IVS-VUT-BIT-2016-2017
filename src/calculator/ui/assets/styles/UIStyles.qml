@@ -187,4 +187,12 @@ QtObject {
         property color titleColor: "#ED1946"
         property font font: Qt.font({family: "AbeeZee"})
     }
+
+    property QtObject helpWindow: QtObject {
+        property color textColor: "gray"
+        property color titleColor: "#ED1946"
+        property color subtitleColor: "#2C2C2C"
+        property color scrollBarColor: "#2C2C2C"
+        property font font: Qt.font({family: "AbeeZee"})
+    }
 }

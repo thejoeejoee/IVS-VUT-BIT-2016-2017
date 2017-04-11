@@ -58,9 +58,10 @@ ApplicationWindow {
         menuItemHeight: 19
 
         onItemChoosed: {
-            if(item == "About") {
+            if(item == "About")
                 aboutWindow.show()
-            }
+            if(item == "Help")
+                helpWindow.show()
         }
     }
 
@@ -363,7 +364,15 @@ ApplicationWindow {
     }
 
     Windows.Help {
-        width: 300
+        id: helpWindow
+
+        textColor: StyleSettings.helpWindow.textColor
+        titleColor: StyleSettings.helpWindow.titleColor
+        subtitleColor: StyleSettings.helpWindow.subtitleColor
+        scrollBarColor: StyleSettings.helpWindow.scrollBarColor
+        textFont.family: StyleSettings.helpWindow.font.family
+
+        width: 500
         height: 600
     }
 
