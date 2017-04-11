@@ -75,6 +75,19 @@ QtObject {
     }
 
     /**
+      Unregister variable item from manager
+      @param variableIdentifier Identifier of variable
+      */
+    function _unregisterVariable(variableIdentifier) {
+        for(var key in manager._variableItems) {
+
+            if(manager._variableItems[key].variableIdentifier == variableIdentifier){
+                manager._variableItems.splice(key, 1);
+            }
+        }
+    }
+
+    /**
       Finds variable item in system
       @param variableIdentifier Identifier of variable
       @return Item if is found else return null
@@ -97,10 +110,19 @@ QtObject {
       Delete variable item
       @param variableIdentifier Identifier of variable
       */
+    function deleteVariable(variableIdentifier) {
+        var object = findVariable(variableIdentifier)
+        _unregisterVariable(variableIdentifier)
+        object.deleteItem()
+    }
+
+    /**
+      Request deletion of variable item
+      @param variableIdentifier Identifier of variable
+      */
     function handleDeleteRequest(variableIndetifier) {
         var object = manager.findVariable(variableIndetifier)
 
-        object.destroy()
         manager.deleteItem(variableIndetifier)
     }
 

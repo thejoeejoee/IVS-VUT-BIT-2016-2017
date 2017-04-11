@@ -220,4 +220,12 @@ Item {
     function modifyVariable(identifier, expression, value) {
         manager.setVariable(identifier, expression, value)
     }
+
+    /**
+      Delete variable item
+      @param variableIdentifier Identifier of variable
+      */
+    function deleteVariable(variableIdentifier) {
+        manager.deleteVariable(variableIdentifier)
+    }
 }

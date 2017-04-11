@@ -30,6 +30,10 @@ Item {
       @param data String requested to be expanded
       */
     signal overwriteRequest(string data)
+    /**
+      Used as function to delete item
+      */
+    signal deleteItem()
 
     /// Background color
     property alias color: content.color
@@ -90,9 +94,11 @@ Item {
         anchors.leftMargin: -optionsMenu.menuWidth
 
         onValueSetRequest: component.valueSetRequest(component.variableIdentifier, value)
-        onDeleteRequest: SequentialAnimation {
-            NumberAnimation { target: component; property: "opacity"; from: 1; to: 0; duration: 200 }
-            ScriptAction { script: component.deleteRequest(component.variableIdentifier) }
-        }
+        onDeleteRequest: component.deleteRequest(component.variableIdentifier)
+    }
+
+    onDeleteItem: SequentialAnimation {
+        NumberAnimation { target: component; property: "opacity"; from: 1; to: 0; duration: 200 }
+        ScriptAction { script: component.destroy() }
     }
 }

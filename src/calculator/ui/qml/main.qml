@@ -128,7 +128,10 @@ ApplicationWindow {
         anchors.top: parent.top
         anchors.right: parent.right
 
-        onDeleteVariableRequest: Calculator.removeVariable(identifier)
+        onDeleteVariableRequest: {
+            if(Calculator.removeVariable(identifier))
+               variablePanel.deleteVariable(identifier)
+        }
         onSetVariableRequest: Calculator.setVariableValue(identifier, value)
         onExpandRequest: forceExpandExpression(data)
         onOverwriteRequest: overwriteExpression(data)
