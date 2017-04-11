@@ -63,9 +63,9 @@ AppWindow {
         menuItemHeight: 19
 
         onItemChoosed: {
-            if(item == "About")
+            if(item == qsTr("About"))
                 aboutWindow.show()
-            if(item == "Help")
+            if(item == qsTr("Help"))
                 helpWindow.show()
         }
     }
