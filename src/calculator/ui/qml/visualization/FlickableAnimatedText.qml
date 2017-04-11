@@ -39,16 +39,16 @@ Item {
         id: prompter
 
         color: (component.theme == "dark") ?"black" :"white"
-        opacity: (prompter.width > 0 && flick.visibleArea.widthRatio != 1) ?0.8 :0
+        opacity: (!flick.contentX && flick.visibleArea.widthRatio != 1) ?0.8 :0
         visible: opacity
+        clip: true
 
-        width: height * 3 - flick.contentX
+        width: height * 2.5
         height: fontMetrics.height * 0.8
         radius: 3       
 
         anchors.verticalCenter: flick.verticalCenter
         anchors.right: flick.right
-        anchors.rightMargin: flick.contentX
 
         Behavior on opacity {
             NumberAnimation { duration: 200 }
@@ -59,41 +59,24 @@ Item {
             font: component.font
         }
 
-        Item {
+        Row {
             height: parent.height
-            width: arrow.paintedWidth + slideText.anchors.leftMargin + fontMetrics.advanceWidth(slideText.text)
+            width: height * 0.6 * 4 * (2/5.)
             anchors.centerIn: parent
 
-            Image {
-                id: arrow
+            Repeater {
+                model: 3
 
-                source: (component.theme == "dark") ?"qrc:/assets/images/arrow_left_light.svg"
-                                                    :"qrc:/assets/images/arrow_left_dark.svg"
-                fillMode: Image.PreserveAspectFit
+                Image {
+                    source: (component.theme == "dark") ?"qrc:/assets/images/arrow_left_light.svg"
+                                                        :"qrc:/assets/images/arrow_left_dark.svg"
+                    fillMode: Image.PreserveAspectFit
 
-                //width: height
-                height: parent.height * 0.6
+                    height: parent.height * 0.6
+                    sourceSize.height: height
 
-                //sourceSize.width: width
-                sourceSize.height: height
-
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-            }
-
-            Text {
-                id: slideText
-
-                text: qsTr("Slide")
-                color: (component.theme == "dark") ?"white"
-                                                   :"black"
-
-                font.family: "Roboto Light"
-                font.pixelSize: parent.height * 0.9
-
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: arrow.right
-                anchors.leftMargin: height / 10
+                    anchors.verticalCenter: parent.verticalCenter
+                }
             }
         }
     }
