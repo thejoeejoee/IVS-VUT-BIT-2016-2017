@@ -12,7 +12,7 @@ base_path = abspath(dirname(__file__))
 def setup():
     core.setup(
         name='calculator',
-        version='0.2',
+        version='0.3',
         license='GNU GENERAL PUBLIC LICENSE Version 3',
         long_description=open(join(base_path, 'README.md')).read(),
         url='https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017',
