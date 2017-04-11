@@ -55,7 +55,7 @@ class CalculatorApp(QApplication):
         super().__init__(argv)
 
         self._translator = QTranslator()
-        self._translator.load("".join((":/translations/", QLocale().system().name(), ".qsm")))
+        self._translator.load("".join((":/translations/", QLocale().system().name(), ".qm")))
         self.installTranslator(self._translator)
         icon = QIcon()
 
