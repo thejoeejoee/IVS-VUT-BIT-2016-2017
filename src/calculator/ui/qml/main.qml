@@ -22,22 +22,16 @@ import "visualization"
 AppWindow {
     id: mainWindow
 
-    //width: 1101
-    //height: 522//width * (522 / 1101)
+    width: 1101
+    ratio: 522/1101.
+    height: 522
 
-    //minimumHeight: width * (522 / 1101)
-    //maximumHeight: minimumHeight
-
-    //title: qsTr("Barbie Calculator")
+    title: qsTr("Barbie calculator")
     visible: true
 
     Item {
         id: root
         anchors.fill: parent
-        Component.onCompleted: {
-            console.log("width", width)
-            console.log("height", height)
-        }
     }
 
     AppMenuBar {

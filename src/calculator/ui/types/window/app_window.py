@@ -1,5 +1,6 @@
 # coding=utf-8
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import QSize, QCoreApplication
+from PyQt5.QtCore import pyqtProperty
 from PyQt5.QtCore import qDebug
 from PyQt5.QtGui import QResizeEvent
 from PyQt5.QtGui import QWindow
@@ -10,17 +11,29 @@ class AppWindow(QQuickWindow):
     def __init__(self, parent: QWindow = None) -> None:
         super().__init__(parent)
 
-        self.setTitle("Barbie Calculator")
-        self.setWidth(1101)
-        self.setHeight(522)
-
+        self.__ratio = 1
 
     def resizeEvent(self, e: QResizeEvent) -> None:
-        ee = QResizeEvent(QSize(e.size().width(), 522), e.oldSize())
         new_width = e.size().width()
-        new_height = (new_width / 1101) * 522
+        new_height = new_width * self.__ratio
 
         self.setMinimumHeight(new_height)
         self.setMaximumHeight(new_height)
         self.contentItem().setProperty("width", new_width)
         self.contentItem().setProperty("height", new_height)
+
+    @pyqtProperty(str)
+    def title(self) -> str:
+        return self.title()
+
+    @title.setter
+    def title(self, v: str) -> None:
+        self.setTitle(v)
+
+    @pyqtProperty(float)
+    def ratio(self) -> float:
+        return self.__ratio
+
+    @ratio.setter
+    def ratio(self, v: float) -> None:
+        self.__ratio = v
