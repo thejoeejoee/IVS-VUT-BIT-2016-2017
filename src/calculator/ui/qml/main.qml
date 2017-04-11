@@ -375,7 +375,7 @@ AppWindow {
         scrollBarColor: StyleSettings.helpWindow.scrollBarColor
         textFont.family: StyleSettings.helpWindow.font.family
 
-        width: 500
+        width: 400
         height: 600
     }
 
