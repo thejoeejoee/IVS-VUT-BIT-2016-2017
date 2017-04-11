@@ -233,6 +233,7 @@ AppWindow {
         id: resultSystemDisplay
 
         value: 0
+        basesList: ["BIN", "OCT", "DEC", "HEX"]
         bases: { "DEC": 10, "BIN": 2, "HEX": 16, "OCT": 8 }
         height: parent.height / 5.1
         scrollbarColor: StyleSettings.resultSystemDisplay.scrollbarColor

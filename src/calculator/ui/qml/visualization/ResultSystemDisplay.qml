@@ -7,7 +7,9 @@ import Calculator 1.0
 Rectangle {
     id: component
 
-    /// List of bases to be displayed
+    /// Ordered list of bases to be displayed
+    property var basesList
+    /// Dict of bases with number base to be displayed
     property var bases
     /// Value which will be converted to different bases
     property real value: 0
@@ -36,10 +38,10 @@ Rectangle {
         anchors.leftMargin: component.margin * 2
 
         Repeater {
-            model: Object.keys(component.bases)
+            model: component.basesList
             Item {
                 width: container.width
-                height: container.height / Object.keys(component.bases).length
+                height: container.height / component.basesList.length
 
                 Text {
                     id: baseText
