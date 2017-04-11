@@ -362,6 +362,11 @@ ApplicationWindow {
         onHidden: expInput.focus = true
     }
 
+    Windows.Help {
+        width: 300
+        height: 600
+    }
+
     /**
       Show suggestion box with filtered suggestions
       */
