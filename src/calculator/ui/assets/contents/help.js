@@ -1,11 +1,11 @@
 var content = [
     {
-        "title": qsTr("Barbie Calculator"),
+        "title": qsTr("Barbie calculator"),
         "content": qsTr("Manual on how to use Barbie Calculator.")
     },
     {
         "subtitle": qsTr("Getting started"),
-        "content": qsTr("First we need to enter expression, which we want to calculate into text input. Then we press the button with equal sign or press Enter/Return key. Congratulations you have done your very first calculation using Barbie Calculator.")
+        "content": qsTr("First we need to enter expression, which we want to calculate into text input. Then we press the button with equal sign or press Enter/Return key. Congratulations you have done your very first calculation using Barbie calculator.")
     },
     {
         "title": qsTr("Advance")
@@ -16,7 +16,7 @@ var content = [
     },
     {
         "subtitle": qsTr("Variables intro"),
-        "content": qsTr("Barbie Calculator also provide support of custom variables. To create variable 'a' simply enter assignment of 'a' as 'a=' and then you add expression. If variable depends on another variable then it's value will be updated every time any of the dependent variables change.")
+        "content": qsTr("Barbie calculator also provide support of custom variables. To create variable 'a' simply enter assignment of 'a' as 'a=' and then you add expression. If variable depends on another variable then it's value will be updated every time any of the dependent variables change.")
     },
     {
         "subtitle": qsTr("Variables manipulation"),
