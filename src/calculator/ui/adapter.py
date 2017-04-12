@@ -97,7 +97,7 @@ class UIAdapter(QObject):
             "result": None,
             "variables": {
                 key: dict(
-                    value=self._formatter.format_number(value),
+                    value=self._formatter.format_number(value, characters_limit=8),
                     expression=self._format_source_expression(
                         variable=key,
                         source_expression=expression
