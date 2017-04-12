@@ -29,18 +29,8 @@ DropDown {
             component.hide()
     }
 
-    onCurrentTextChanged: {
-        var newModel = []
-
-        for(var key in component.constantModel) {
-            var value = component.constantModel[key]
-
-            if(value["identifier"].search("^" + currentText) !== -1)
-                newModel.push(value)
-        }
-
-        component.model = newModel
-    }
+    onConstantModelChanged: updateModel()
+    onCurrentTextChanged: updateModel()
 
     dropDownMenuBackground: Rectangle {
         color: component.color
@@ -81,6 +71,23 @@ DropDown {
         component.target.Keys.pressed.connect(component.handleOtherKeys)
         component.target.Keys.upPressed.connect(component.moveUp)
         component.target.Keys.downPressed.connect(component.moveDown)
+    }
+
+    /**
+      Update completer model according to constantModel
+      */
+    function updateModel()
+    {
+        var newModel = []
+
+        for(var key in component.constantModel) {
+            var value = component.constantModel[key]
+
+            if(value["identifier"].search("^" + currentText) !== -1)
+                newModel.push(value)
+        }
+
+        component.model = newModel
     }
 
     /**
