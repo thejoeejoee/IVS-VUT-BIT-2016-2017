@@ -145,11 +145,7 @@ Controls.FilledClickable {
 
                 anchors.fill: parent
 
-                onClicked: {
-                    createExpansionRequest()
-                    mouse.accepted = false
-                }
-
+                onClicked: createExpansionRequest()
                 onContainsMouseChanged: {
                     component.handleHoverEvent()
                     if(containsMouse)
