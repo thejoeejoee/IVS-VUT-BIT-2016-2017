@@ -1,22 +1,19 @@
 import QtQuick 2.0
 import "../controls" as Controls
 
-Controls.Clickable {
+/**
+  Button with label and simple animation
+  */
+FilledClickable {
     id: component
 
+    /// Label of button
     property alias buttonText: innerText.text;
-    property color color: "black"
-    property color textColor: "black"
-    property color hoverTextColor: "white"
+    /// Text color
+    property color textColor
 
+    hoverMaskEnabled: true
     hoverEnabled: true
-    onEntered: innerText.color = hoverTextColor
-    onExited: innerText.color = textColor
-
-    Rectangle {
-        color: component.color
-        anchors.fill: parent
-    }
 
     Text {
         id: innerText
@@ -27,10 +24,5 @@ Controls.Clickable {
         font.pixelSize: component.height * 0.55
 
         anchors.centerIn: parent
-
-        Behavior on color {
-            ColorAnimation { duration: 300 }
-        }
     }
-
 }

@@ -3,29 +3,66 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
+/**
+  Base dropdown menu, to select one item
+  */
 Item {
     id: component
 
+    /**
+      Used as function to hide dropdown
+      */
     signal hide()
+    /**
+      Used as function to show dropdown
+      */
     signal show()
+    /**
+      Used as function to move upward item selection of item
+      */
     signal moveUp()
+    /**
+      Used as function to move downward item selection of item
+      */
     signal moveDown()
+    /**
+      Used as function to choose selected item
+      */
     signal chooseCurrent()
+    /**
+      Emit when item was chosen
+      */
     signal itemChoosed()
+    /**
+      Signal to start show animation
+      */
     signal showAnimation()
+    /**
+      Signal to start hide animation
+      */
     signal hideAnimation()
 
+    /// Holds chosen item
     property var currentItem: model[0]
+    /// Holds seleted item index
     property int currentItemIndex: 0
+    /// Number of visible items without scroll
     property int visibleItemCount: 4
+    /// Color of scrollbar
     property alias scrollBarColor: scrollbar.color
+    /// Width of scrollbar
     property alias scrollbarWidth: scrollbar.width
 
+    /// Holds whether component is shown
     readonly property bool dropMenuVisible: dropMenu.visible
+    /// Height of single selection item
     property int itemHeight
+    /// List of labels to be generation into items in dropdown
     property var model
 
+    /// Component which will be loaded to represent background
     property Component dropDownMenuBackground
+    /// Component which will be loaded to represent single dropdown item
     property Component menuItem
 
     clip: true
@@ -98,6 +135,13 @@ Item {
         ScriptAction { script: { component.visible = false }}
     }
 
+    MouseArea {
+        parent: root
+        enabled: component.visible
+        anchors.fill: parent
+        onClicked: component.hide()
+    }
+
     Rectangle {
         id: scrollbar
 
@@ -148,12 +192,17 @@ Item {
                     height: dropMenu.height / component.model.length
 
                     MouseArea {
+                        signal checkMousePos
+
                         anchors.fill: parent
                         hoverEnabled: true
-                        onEntered: component.currentItemIndex = index
-                        onClicked: {
-                            component.hide()
-                            component.currentItem = modelData
+                        onClicked: component.chooseCurrent()
+                        onMouseXChanged: checkMousePos()
+                        onMouseYChanged: checkMousePos()
+                        onContainsMouseChanged: checkMousePos()
+                        onCheckMousePos: {
+                            if(containsMouse && flick.y == 0)
+                                component.currentItemIndex = index
                         }
                     }
                 }

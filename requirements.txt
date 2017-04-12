@@ -1,7 +1,10 @@
-colour-runner
-doxypypy
+# needs to run
+PyOpenGL
 PyQt5==5.7.1
-termcolor
-doxyqml
 
-# on Debian + Nvidia you need to install also package PyOpenGL
+# dev deps
+colour_runner
+termcolor
+stdeb
+doxypy
+doxyqml

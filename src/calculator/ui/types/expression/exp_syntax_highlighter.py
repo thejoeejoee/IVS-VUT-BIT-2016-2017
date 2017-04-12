@@ -7,7 +7,7 @@ from PyQt5.QtGui import QTextCharFormat
 from PyQt5.QtQml import QJSValue
 from PyQt5.QtQuick import QQuickItem
 
-from calculator.ui.types.syntaxhighlight import SyntaxHighlighter, HighlightRule
+from calculator.ui.types.expression import SyntaxHighlighter, HighlightRule
 
 
 class ExpSyntaxHighlighter(QObject):

@@ -2,13 +2,23 @@ import QtQuick 2.0
 import Sides 1.0
 import "../logic/collision"
 
+/**
+  System of walls to border all playground edges
+  */
 Item {
     id: component
 
+    /**
+      Emits collision with some wall in system
+      @param side Side of collision related to wall
+      */
     signal voidCollided(int side)
 
+    /// Reference to global CollisionSystem to determinate collision
     property CollisionSystem collisionSystem
+    /// Width of walls in pixels
     property real wallWidth: 10
+    /// Color of walls
     property color wallColor
 
     Wall {

@@ -1,18 +1,16 @@
 # coding=utf-8
-import re
-
 from typing import Dict, Tuple, Set
 
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, pyqtProperty, QVariant
 from PyQt5.QtQml import QJSEngine, QQmlEngine
 
+from calculator import Variable, NumericValue
 from calculator.core.calculator import Calculator
-from calculator.exceptions import MathError, VariableError
-from calculator.typing import Variable, NumericValue
-from calculator.utils.number_formatter import NumberFormatter
+from calculator.exceptions import MathError, VariableError, UnsupportedBaseError, InvalidFunctionCallError, \
+    VariableRemoveRestrictError
+from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS, Expression)
+from calculator.utils.formatter import Formatter
 from calculator.utils.translate import translate
-from calculator.settings import (BUILTIN_FUNCTIONS, EXPRESSION_EXPANSIONS, HIGHLIGHT_RULES, EXPRESSION_SPLITTERS,
-                                 Expression)
 
 
 class UIAdapter(QObject):
@@ -23,10 +21,20 @@ class UIAdapter(QObject):
     identifiersTypesChanged = pyqtSignal(QVariant)
     processed = pyqtSignal(QVariant)
     error = pyqtSignal(str)
+
     _variables = dict()  # type: Dict[str, Variable]
-    _formatter = NumberFormatter
+    _formatter = Formatter
     func_identifiers_types = [{"identifier": func, "type": Expression.ExpressionTypes.Function}
                               for func in BUILTIN_FUNCTIONS]
+
+    @pyqtSlot(float, int, result=str)
+    def convertToBase(self, value: str, base: int) -> str:
+        try:
+            return self._formatter.format_number_in_base(value, base)
+        except UnsupportedBaseError as e:
+            return translate("Adapter", "Unsupported base.")
+        except ValueError as e:
+            return "-"
 
     @pyqtSlot(str)
     def process(self, expression: str) -> None:
@@ -34,13 +42,16 @@ class UIAdapter(QObject):
             result, variables = self._calculator.process(expression)
 
             created_variables, modified_variables = self._commit_new_variables_state(variables=variables)
+            if Calculator.ANSWER_VARIABLE_NAME in modified_variables:
+                result, *_ = variables.get(Calculator.ANSWER_VARIABLE_NAME)
 
             self.identifiersTypesChanged.emit(self.identifiersTypes)
             self.processed.emit(QVariant({
-                "result": None if result is None else self._formatter.format(result, 16),
+                "result": None if result is None else self._formatter.format_number(result, characters_limit=12),
+                "unformattedResult": str(result),
                 "variables": {
                     key: dict(
-                        value=self._formatter.format(value),
+                        value=self._formatter.format_number(value, characters_limit=8),
                         expression=self._format_source_expression(
                             variable=key,
                             source_expression=expression
@@ -55,14 +66,22 @@ class UIAdapter(QObject):
                 }
             }))
 
-        except SyntaxError as e:
+        except SyntaxError:
             self.error.emit(translate("Adapter", "Expression contains syntax error."))
-        except MathError as e:
-            self.error.emit(translate("Adapter", "Math error occured."))
-        except VariableError as e:
+        except MathError:
+            self.error.emit(translate("Adapter", "Math error occurred."))
+        except VariableError:
             self.error.emit(translate("Adapter", "Error in defining variable."))
         except OverflowError:
             self.error.emit(translate("Adapter", "Result is too big."))
+        except InvalidFunctionCallError as e:
+            self.error.emit(translate("Adapter", "Given parameters does not match to function {}.").format(
+                e.function_name
+            ))
+        except NameError:
+            self.error.emit(translate("Adapter", "Function is not defined."))
+        except NotImplementedError:
+            self.error.emit(translate("Adapter", "This construct is not supported."))
 
     @pyqtSlot(str, int)
     def setVariableValue(self, variable: str, value: NumericValue):
@@ -78,7 +97,7 @@ class UIAdapter(QObject):
             "result": None,
             "variables": {
                 key: dict(
-                    value=self._formatter.format(value),
+                    value=self._formatter.format_number(value),
                     expression=self._format_source_expression(
                         variable=key,
                         source_expression=expression
@@ -93,11 +112,17 @@ class UIAdapter(QObject):
             }
         }))
 
-    @pyqtSlot(str)
-    def removeVariable(self, variable_identifier: str) -> None:
-        print(variable_identifier)
-        self._calculator.remove_variable(variable_identifier)
+    @pyqtSlot(str, result=bool)
+    def removeVariable(self, variable_identifier: str) -> bool:
+        try:
+            self._calculator.remove_variable(variable_identifier)
+        except VariableRemoveRestrictError as e:
+            # TODO: deps!
+            self.error.emit(translate("Adapter", "#TODO"))
+            return False
+
         self._variables = self._calculator.variables.copy()
+        return True
 
     @pyqtProperty(QVariant)
     def highlightRules(self) -> QVariant:
@@ -108,11 +133,6 @@ class UIAdapter(QObject):
     @pyqtProperty(QVariant)
     def builtinFunctions(self) -> QVariant:
         return QVariant(list(BUILTIN_FUNCTIONS))
-
-    @pyqtProperty(QVariant)
-    def expressionsExpansion(self) -> QVariant:
-        return QVariant({expression: dict(expansion=expansion, expansionType=expansion_type)
-                         for expression, expansion, expansion_type in EXPRESSION_EXPANSIONS})
 
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
@@ -144,16 +164,10 @@ class UIAdapter(QObject):
     def expressionSplitters(self) -> QVariant:
         return QVariant(list(EXPRESSION_SPLITTERS))
 
-    @pyqtProperty(str)
-    def expressionSplittersRegExp(self) -> str:
-        result = re.escape("".join(EXPRESSION_SPLITTERS))
-        return "".join(("[", result ,"]"))
-
     @pyqtProperty(QVariant, notify=identifiersTypesChanged)
     def variables(self) -> QVariant:
         return QVariant(list(self._calculator.variables.keys()))
 
-    #TODO notify
     @pyqtProperty(QVariant, notify=identifiersTypesChanged)
     def identifiersTypes(self):
         return [{"identifier": var_identifier, "type": Expression.ExpressionTypes.Variable}
@@ -168,4 +182,6 @@ class UIAdapter(QObject):
         :param source_expression: source expression for variable
         :return: striped source expression
         """
-        return source_expression.lstrip(variable).lstrip()
+        return source_expression.replace(variable, '', 1).strip() \
+            if '=' in source_expression else \
+            source_expression.strip()

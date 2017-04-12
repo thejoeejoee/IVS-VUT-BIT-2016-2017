@@ -1,19 +1,45 @@
 import QtQuick 2.0
 import "../controls" as Controls
 
+/**
+  Base for modal PopUp dialogs
+  */
 Item {
     id: component
 
+    /**
+      Used as function to hide component
+      */
     signal hide()
+    /**
+      Emits after component is hidden
+      */
     signal hidden()
-    signal show(string error)
-    signal hideAnimation()
+    /**
+      Used as function to show component
+      @param msg Message to be displayed
+      */
+    signal show(string msg)
+    /**
+      Signal to start show animation
+      */
     signal showAnimation()
+    /**
+      Signal to start hide animation
+      */
+    signal hideAnimation()
 
+    /// Background color of modal
     property alias maskColor: mask.color
+    /// Background color of dialog
     property alias dialogColor: dialog.color
-    property alias textColor: errorText.color
-    property alias errorMessage: errorMsg.text
+    /// Text color
+    property alias textColor: title.color
+    /// Text to be displayed in dialog
+    property alias message: message.text
+    /// Title of dialog
+    property alias title: title.text
+    /// Used font
     property font font
 
     visible: false
@@ -22,7 +48,7 @@ Item {
     Keys.onPressed: component.hide()
 
     onShow: {
-        component.errorMessage = error
+        component.message = msg
         component.showAnimation()
     }
 
@@ -58,9 +84,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
 
         Text {
-            id: errorText
-
-            text: qsTr("Error")
+            id: title
 
             font.pixelSize: parent.height / 3
             font.family: component.font.family
@@ -72,21 +96,21 @@ Item {
         }
 
         Text {
-            id: errorMsg
+            id: message
 
-            color: errorText.color
+            color: title.color
 
             font.pixelSize: parent.height / 7
             font.family: component.font.family
 
-            anchors.left: errorText.left
-            anchors.top: errorText.bottom
+            anchors.left: title.left
+            anchors.top: title.bottom
             anchors.topMargin: parent.height / 25
         }
 
         Controls.DefaultButton {
             text: qsTr("Ok")
-            color: errorText.color
+            color: title.color
             backgroundColor: component.dialogColor
             font.family: component.font.family
 

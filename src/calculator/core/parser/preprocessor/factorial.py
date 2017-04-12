@@ -18,11 +18,11 @@ class FactorialPreprocessor(object):
     # position is reverted, because factorial is matched from !, which is at the end of wanted expression
     _MATH_EXPRESSION_REGEX = re.compile(
         r'''
-            [\dA-F.]+ # number or variable name
+            [\wA-F.]+ # number or variable name
             |
-            \)[\d\w+-/* ]+\(\w* # or function call with any arguments
+            \)[\w+-/* ]+\(\w* # or function call with any arguments
             |
-            \)[()\d\w+-/* ]+\( # or any expression
+            \)[()\w+-/* ]+\( # or any expression
         ''',
         re.VERBOSE
     )

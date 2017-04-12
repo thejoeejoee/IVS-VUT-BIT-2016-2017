@@ -87,8 +87,19 @@ class MathTest(TestCase):
             6,
             'Factorial of 3'
         )
+        self.assertEqual(
+            self.math.fact(170),
+            7.257415615307998e+306,
+            'Maximum defined factorial'
+        )
         with self.assertRaises(MathError, msg='Invalid factorial of -5.'):
             self.math.fact(-5)
+
+        with self.assertRaises(MathError, msg='Invalid factorial of 0.25.'):
+            self.math.fact(0.25)
+
+        with self.assertRaises(MathError, msg='Invalid factorial of 5.25.'):
+            self.math.fact(5.25)
 
     def test_root(self):
         self.assertEqual(

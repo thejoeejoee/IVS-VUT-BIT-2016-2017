@@ -25,11 +25,33 @@ class VariableError(Exception):
     """
 
 
+class VariableNameError(VariableError):
+    """
+    Raised when variable has an invalid name.
+    """
+
+
+class UnsupportedBaseError(Exception):
+    """
+    Raised when trying convert number into unsupported base
+    """
+
+
 class VariableRemoveRestrictError(VariableError):
     """
     Raised from Calculator, if there are any depending variables to variable to remove.
     """
 
     def __init__(self, dependencies, *args, **kwargs):
-        self._dependencies = dependencies
+        self.dependencies = dependencies
+        super().__init__(*args, **kwargs)
+
+
+class InvalidFunctionCallError(TypeError):
+    """
+    Raised to signalize of call function with incorrect count of parameters.
+    """
+
+    def __init__(self, function_name, *args, **kwargs):
+        self.function_name = function_name
         super().__init__(*args, **kwargs)

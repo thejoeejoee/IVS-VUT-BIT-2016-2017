@@ -1,6 +1,7 @@
 pragma Singleton
 import QtQuick 2.0
 import QtQuick.Controls.Styles 1.4
+
 import Expression 1.0
 
 QtObject {
@@ -9,7 +10,7 @@ QtObject {
     property QtObject functionPanel: QtObject {
         property color backgroundColor: "#2A2A2A"
         property color textColor: "white"
-        property color hoverTextColor: "#ED1D3D"
+        property color hoverColor: "white"
     }
 
     property QtObject expressionInput: QtObject {
@@ -62,9 +63,6 @@ QtObject {
 
     property QtObject variablesPanel: QtObject {
         property color backgroundColor: "#2A2A2A"
-        property color textColor: "white"
-        property color identifierColor: "#ED1946"
-        property color expressionHoverColor: "#3D3D3D"
         property color scrollBarColor: "#B7B7B7"
         property font font: Qt.font({
             family: "Roboto Light"
@@ -75,11 +73,20 @@ QtObject {
         property color backgroundColor: "#C1C0C0"
         property color textColor: "white"
         property color identifierColor: "black"
-        property color expressionHoverColor: "#AAAAAA"
+        property color expressionHoverColor: "gray"
+        property color scrollbarColor: "black"
+        property string prompterTheme: "dark"
+        property color hoverColor: "black"
         property font font: styles.variablesPanel.font
     }
 
     property QtObject variableItem: QtObject {
+        property color scrollbarColor: "#ED1D3D"
+        property string prompterTheme: "light"
+        property color hoverColor: "gray"
+        property color textColor: "white"
+        property color identifierColor: "#ED1946"
+        property color expressionHoverColor: "#3D3D3D"
         property QtObject dots: QtObject {
             property color color: "#3D3D3D"
         }
@@ -105,6 +112,7 @@ QtObject {
 
     property QtObject calculateButton: QtObject {
         property color backgroundColor: "#ED1946"
+        property color hoverColor: "black"
     }
 
     property QtObject errorDialog: QtObject {
@@ -114,8 +122,15 @@ QtObject {
         property font font: Qt.font({family: "Roboto Light"})
     }
 
+    property QtObject infoDialog: QtObject {
+        property color maskColor: "black"
+        property color color: "#FFCE00"
+        property color textColor: "white"
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
     property QtObject completer: QtObject {
-        property color color: "#2A2A2A"
+        property color color: "black"
         property color hoverColor: "#ED1946"
         property color textColor: "#C1C0C0"
         property color scrollBarColor: "#9F9F9F"
@@ -126,5 +141,58 @@ QtObject {
             typeColors[Expression.Function] = "#EF4223"
             typeColors[Expression.Variable] = "#C1C0C0"
         }
+    }
+
+    property QtObject countDown: QtObject {
+        property var textColors: {0: "#ED1869", 1: "#F2BC1F", 2: "#39BFC1", 3: "#672980"}
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
+    property QtObject resultSystemDisplay: QtObject {
+        property color color: "#F2F2F2"
+        property color baseTextColor: "#ED1D3D"
+        property color valueTextColor: "#3D3D3D"
+        property color scrollbarColor: "#ED1D3D"
+        property string prompterTheme: "dark"
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
+    property QtObject functionSignatureDisplay: QtObject {
+        property color color: "black"
+        property color textColor: "white"
+        property font font: Qt.font({family: "Roboto Light"})
+    }
+
+    property QtObject appMenuBar: QtObject {
+        property color color: "#2C2C2C"
+        property font font: Qt.font({family: "Roboto Light"})
+
+        property QtObject title: QtObject {
+            property color color: "white"
+            property color activeColor: "#ED1946"
+        }
+
+        property QtObject item: QtObject {
+            property color backgroundColor: "white"
+            property color borderColor: "lightGray"
+            property color hoverColor: "lightGray"
+            property color textColor: "#3D3D3D"
+            property color hoverTextColor: "white"
+        }
+    }
+
+    property QtObject aboutWindow: QtObject {
+        property color color: "black"
+        property color textColor: "lightGray"
+        property color titleColor: "#ED1946"
+        property font font: Qt.font({family: "AbeeZee"})
+    }
+
+    property QtObject helpWindow: QtObject {
+        property color textColor: "gray"
+        property color titleColor: "#ED1946"
+        property color subtitleColor: "#2C2C2C"
+        property color scrollBarColor: "#2C2C2C"
+        property font font: Qt.font({family: "AbeeZee"})
     }
 }

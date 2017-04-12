@@ -1,14 +1,14 @@
 # coding=utf-8
 from ast import BinOp, Add, Num, Sub, Div, Mult, Call, AST, UnaryOp, USub, Name, Pow, FloorDiv, Mod
+from inspect import Signature
+from operator import attrgetter
 from typing import Dict, Union, Type, Set, Optional
 
+from calculator import BinaryNumericFunction, NumericFunction, NumericValue, Variable
 from calculator.core.math import Math
 from calculator.core.parser import Parser
+from calculator.exceptions import InvalidFunctionCallError
 from calculator.settings import BuiltinFunction
-from calculator.typing import BinaryNumericFunction
-from calculator.typing import NumericFunction
-from calculator.typing import NumericValue
-from calculator.typing import Variable
 from calculator.utils import method_single_dispatch
 
 
@@ -112,12 +112,35 @@ class Solver(object):
         :return: result of the called function
         """
         # TODO I am not sure, if call.func is always Name node with .id attribute
-        function = self.builtin_functions.get(call.func.id)
+        function_name = call.func.id
+        function = self.builtin_functions.get(function_name)
 
         if not callable(function):
-            raise NotImplementedError(call.func.id)
+            raise NameError(function_name)
 
-        return function(*map(self._resolve, call.args))
+        signature = Signature.from_callable(function)
+
+        args = tuple(map(self._resolve, call.args))
+        kwargs = dict(zip(
+            map(attrgetter('arg'), call.keywords),
+            map(
+                self._resolve,
+                map(
+                    attrgetter('value'),
+                    call.keywords
+                )
+            )
+        ))
+
+        try:
+            signature.bind(*args, **kwargs)
+        except TypeError as e:
+            raise InvalidFunctionCallError(
+                function_name,
+                'Given parameters does not correspond to function signature.'
+            ) from e
+
+        return function(*args, **kwargs)
 
     @_resolve.register(Num)
     def _(self, num: Num) -> NumericValue:

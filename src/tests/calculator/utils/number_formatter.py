@@ -1,12 +1,12 @@
 # coding=utf-8
 from unittest.case import TestCase
 
-from calculator.utils.number_formatter import NumberFormatter
+from calculator.utils.formatter import Formatter
 
 
 class TestNumberFormatter(TestCase):
     def setUp(self):
-        self.formatter = NumberFormatter()
+        self.formatter = Formatter()
 
     def test_simple(self):
         self.skipTest('Formatted number in HTML cannot be actually tested.')
@@ -20,7 +20,7 @@ class TestNumberFormatter(TestCase):
         )
         for value, formatted in cases:
             self.assertEqual(
-                self.formatter.format(value=value),
+                self.formatter.format_number(value=value),
                 formatted,
                 'Formatted value.'
             )

@@ -2,7 +2,7 @@
 from unittest.case import TestCase
 
 from calculator.core.calculator import Calculator
-from calculator.exceptions import VariableError, VariableRemoveRestrictError
+from calculator.exceptions import VariableError, VariableRemoveRestrictError, VariableNameError
 
 
 class CalculatorTest(TestCase):
@@ -206,4 +206,74 @@ class CalculatorTest(TestCase):
             },
             variables,
             'Variables after variable process.'
+        )
+
+    def test_too_long_variable_name(self):
+        var_name = 'a' * (self.calculator.MAX_VARIABLE_NAME_LEN + 1)
+        msg = 'Error when creating variable with name longer than {}'.format(self.calculator.MAX_VARIABLE_NAME_LEN)
+        with self.assertRaises(VariableNameError, msg=msg):
+            self.calculator.process("{} = 42".format(var_name))
+
+        self.assertDictEqual(
+            self.calculator.variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition
+            },
+            'No new variables should be created.'
+        )
+
+    def test_too_long_variable_name_in_expr(self):
+        var_name = 'a' * (self.calculator.MAX_VARIABLE_NAME_LEN + 1)
+        msg = 'Error when creating variable with name longer ' \
+              'than {} in expression with default value.'.format(self.calculator.MAX_VARIABLE_NAME_LEN)
+        with self.assertRaises(VariableNameError, msg=msg):
+            self.calculator.process("5 + {}".format(var_name))
+
+        self.assertDictEqual(
+            self.calculator.variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition
+            },
+            'No new variables should be created.'
+        )
+
+    def test_assign_with_long_var_in_expr(self):
+        var_name = 'a' * (self.calculator.MAX_VARIABLE_NAME_LEN + 1)
+        msg = 'Error when creating variable with name longer ' \
+              'than {} in assign expression.'.format(self.calculator.MAX_VARIABLE_NAME_LEN)
+        with self.assertRaises(VariableNameError, msg=msg):
+            self.calculator.process("a = 5 + {}".format(var_name))
+
+        self.assertDictEqual(
+            self.calculator.variables,
+            {
+                Calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition
+            },
+            'No new variables should be created.'
+        )
+
+    def test_variable_with_max_name_len(self):
+        var_name = 'a' * self.calculator.MAX_VARIABLE_NAME_LEN
+        result, variables = self.calculator.process("{} = 42".format(var_name))
+
+        self.assertIsNone(result, 'None is result of assign.')
+        self.assertDictEqual(
+            variables,
+            {
+                self.calculator.ANSWER_VARIABLE_NAME: self._default_variable_definition,
+                var_name: (42, "{} = 42".format(var_name), set())
+            },
+            'New variable {} should be created.'.format(var_name)
+        )
+    def test_variable_with_max_name_in_expr(self):
+        var_name = 'a' * self.calculator.MAX_VARIABLE_NAME_LEN
+        result, variables = self.calculator.process("5 + {}".format(var_name))
+
+        self.assertEqual(result, 5, 'Result should be calculated.')
+        self.assertDictEqual(
+            variables,
+            {
+                self.calculator.ANSWER_VARIABLE_NAME: (5, '5 + {}'.format(var_name), {var_name}),
+                var_name: (0, '0', set())
+            }
         )

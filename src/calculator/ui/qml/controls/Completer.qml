@@ -2,14 +2,23 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 import StyleSettings 1.0
 
+/**
+  Component which offer suggestion to text inputs
+  */
 DropDown {
     id: component
 
+    /// Background color of completer
     property color color
+    /// List of suggestions
     property var constantModel
+    /// Reference to targeted text input
     property var target
+    /// Holds current word, so only matching words could be suggested
     property string currentText
+    /// Background color of suggestion item when hovered
     property color hoverColor
+    /// Text color of suggestions
     property color textColor
 
     scrollbarWidth: 3
@@ -23,20 +32,10 @@ DropDown {
     onCurrentTextChanged: {
         var newModel = []
 
-        if(currentText.search(/^[ ]*$/) != -1) {
-            component.model = constantModel
-            return
-        }
-
         for(var key in component.constantModel) {
             var value = component.constantModel[key]
-            var currentTextWithoutSpace = currentText.replace(new RegExp("[ ]*(?=\\S+)", 'g'), "")
 
-            // contains ")" which need to be escaped
-            if(currentTextWithoutSpace.search(/\)/) !== -1)
-                currentTextWithoutSpace = currentText.replace(/\)/g, "\\)")
-
-            if(value["identifier"].search("^" + currentTextWithoutSpace) !== -1)
+            if(value["identifier"].search("^" + currentText) !== -1)
                 newModel.push(value)
         }
 
@@ -84,6 +83,10 @@ DropDown {
         component.target.Keys.downPressed.connect(component.moveDown)
     }
 
+    /**
+      Manage completer actions based on key pressed. Cannot steal key event from text input, so connect it to target event
+      @param event Passed key event
+      */
     function handleOtherKeys(event) {
         if(event.key == Qt.Key_Space && (event.modifiers & Qt.ControlModifier)) {
             component.show()

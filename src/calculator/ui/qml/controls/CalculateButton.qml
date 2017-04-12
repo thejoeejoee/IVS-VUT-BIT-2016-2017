@@ -1,12 +1,13 @@
 import QtQuick 2.0
 
-Clickable {
-    property alias color: background.color
+/**
+  Button to confirm calculation
+  */
+FilledClickable {
+    id: component
 
-    Rectangle {
-        id: background
-        anchors.fill: parent
-    }
+    hoverMaskEnabled: true
+    hoverEnabled: true
 
     Image {
         source: "qrc:/assets/images/equal.svg"

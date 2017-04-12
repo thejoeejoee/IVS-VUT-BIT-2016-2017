@@ -7,16 +7,29 @@ import "entities" as Entities
 import "visualization" as Visualization
 import "logic/collision" as Collision
 
+/**
+  Standalone window with game(pong)
+  */
 ApplicationWindow {
     id: gameWindow
 
+    /**
+      Used as function to start game
+      */
     signal run()
+    /**
+      Emits when some of players loose
+      @param msg Message to player
+      */
     signal gameOver(string msg)
 
-    property bool running: false
+    /// Score of player
     property int playerScore: 0
+    /// Score of other player
     property int enemyScore: 0
-    property int maxScore: 3
+    /// Max score which player need to archieve to win
+    readonly property int maxScore: 3
+    /// Size of player rebound area
     property size playerSize: Qt.size(10, 100)
 
     width: 1500
@@ -120,8 +133,12 @@ ApplicationWindow {
         Component.onCompleted: collisionSystem.registerPair(nyan, ai)
     }
 
+    /**
+      Resets component to begin game
+      */
     function startGame() {
         nyan.vector = Qt.point(Math.cos(Math.PI / 3), -Math.sin(Math.PI / 3))
+        nyan.rotateNyanCat()
         nyan.x = gameWindow.width / 2 - nyan.width / 2
         nyan.y = gameWindow.height / 2 - nyan.height / 2
         gameWindow.playerScore = 0
@@ -130,11 +147,19 @@ ApplicationWindow {
         frameTimer.running = true
     }
 
+    /**
+      Sets component to end game
+      */
     function endGame() {
         frameTimer.running = false
         gameWindow.visible = false
     }
 
+    /**
+      React to collision of ball to increment score
+      @param obj Ball reference
+      @param side Side of collision to determinate who has point
+      */
     function handleCollisionWithWall(obj, side) {
         if(!obj.isVoid)
             return
@@ -145,8 +170,8 @@ ApplicationWindow {
             gameWindow.enemyScore += 1
 
         if(gameWindow.enemyScore == gameWindow.maxScore)
-            gameWindow.gameOver("YouAreLooser")
+            gameWindow.gameOver(qsTr("You are looser."))
         if(gameWindow.playerScore == gameWindow.maxScore)
-            gameWindow.gameOver("AIIsNoob")
+            gameWindow.gameOver(qsTr("AI is noob."))
     }
 }

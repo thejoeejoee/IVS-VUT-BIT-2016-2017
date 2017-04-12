@@ -3,9 +3,9 @@ import math
 import operator
 import random
 
+from calculator._typing import BinaryNumericFunction
+from calculator._typing import NumericValue
 from calculator.exceptions import MathError
-from calculator.typing import BinaryNumericFunction
-from calculator.typing import NumericValue
 
 
 class Math(object):
@@ -16,8 +16,14 @@ class Math(object):
     add = operator.add  # type: BinaryNumericFunction
     subtract = operator.sub  # type: BinaryNumericFunction
     multiple = operator.mul  # type: BinaryNumericFunction
-    abs = math.fabs  # type: BinaryNumericFunction
-    pow = math.pow  # type: BinaryNumericFunction
+
+    @staticmethod
+    def abs(x: NumericValue) -> NumericValue:
+        return math.fabs(x)
+
+    @staticmethod
+    def pow(x: NumericValue, y: NumericValue) -> NumericValue:
+        return math.pow(x, y)
 
     @staticmethod
     def divide(a: NumericValue, b: NumericValue) -> NumericValue:
@@ -41,15 +47,21 @@ class Math(object):
             raise MathError from e
 
     @staticmethod
-    def fact(n: int) -> int:
+    def fact(n: NumericValue) -> NumericValue:
+        if abs(int(n) - n) > 0:
+            raise MathError('Invalid parameter for factorial.')
+
         try:
-            return math.factorial(n)
+            return math.gamma(n + 1)
         except ValueError as e:
             raise MathError from e
 
-    @classmethod
-    def log(cls, x: NumericValue, base: NumericValue = 10) -> NumericValue:
-        return cls.ln(x, base)
+    @staticmethod
+    def log(x: NumericValue, base: NumericValue = 10) -> NumericValue:
+        try:
+            return math.log(x, base)
+        except ValueError as e:
+            raise MathError from e
 
     @staticmethod
     def root(x: NumericValue, y: NumericValue = 2) -> NumericValue:
@@ -69,10 +81,6 @@ class Math(object):
         """
         return random.random()
 
-    @staticmethod
-    def ln(x: NumericValue, base: NumericValue = math.e) -> NumericValue:
-        # TODO choosing more accurate functions
-        try:
-            return math.log(x, base)
-        except ValueError as e:
-            raise MathError from e
+    @classmethod
+    def ln(cls, x: NumericValue) -> NumericValue:
+        return cls.log(x, math.e)

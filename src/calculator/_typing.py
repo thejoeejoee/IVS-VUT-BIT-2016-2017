@@ -1,7 +1,7 @@
 # coding=utf-8
-from typing import Union, Tuple, Callable, Set
+from typing import Union, Tuple, Callable, Set, NewType
 
-NumericValue = Union[int, float]  # possible types of result of mathematical expression
+NumericValue = NewType('NumericValue', Union[int, float])  # possible types of result of mathematical expression
 
 Variable = Tuple[
     NumericValue,  # actual value

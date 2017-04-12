@@ -4,8 +4,8 @@ from fileinput import FileInput, input
 from typing import List
 from typing import Sequence
 
+from calculator import NumericValue
 from calculator.core.math import Math
-from calculator.typing import NumericValue
 
 
 def mean(values: Sequence[NumericValue]) -> float:

@@ -1,184 +1,203 @@
+
 # IVS-VUT-BIT-2016-2017 Documentation
 
 ## Table of contents
 
-* [Input syntax](#input-syntax)
-  * [Numbers](#numbers)
-  * [Operators](#operators)
-  * [Functions](#functinos)
+* [Úvod](#úvod)
+* [Instalace](#instalace)
+* [Odinstalace](#odinstalace)
+* [Funkce](#funkce)
+  * [Absolutní hodnota](#absolutní-hodnota)
+  * [Faktorial](#faktorial)
+  * [Přirozený logaritmus](#přirozený-logaritmus)
+  * [Obecný logaritmus](#obecný-logaritmus)
+  * [Mocnina](#mocnina)
+  * [Náhodné číslo](#nahodné-číslo)
+  * [Obecná odmocnina](#obecná-odmocnina)
+  * [Odmocnina](#odmocnina)
+* [Tutorial](#tutorial)
+  * [Komponenty](#komponenty)
+  * [Práce s kalkulačkou](#práce-s-kalkulačkou)
 
-## Input syntax
+## Úvod
 
-### Numbers
+Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jádro Barbie Calculatoru je napsáno v [Pythonu](https://www.python.org/).
 
-#### Decimal
+## Instalace
 
-Examples:
+## Odinstalace
 
-`156`
+## Funkce
 
-`-56`
+Ve všech funkcích jdou použít klasické operátory (+, -, *, /) a i jiné funkce.
 
-`42.666`
+### Absolutní hodnota
 
-`-0.135`
+Zápis:
 
-#### Hexadecimal
+`abs([číslo])`
 
-Requires calculator to be switched to hexadecimal mode.
+nebo
 
-Valid characters: `0-9 A-F`
+`|[číslo]|`
 
-Examples:
+Příklady:
 
-`3A1F`
+`|-6|`
 
-`FFFF`
+`||-12 + 4| + 5|`
 
-`561`
+`abs(-6)`
 
-#### Octal
+`abs(abs(-12 + 4) + 5)`
 
-Requires calculator to be switched to octal mode.
+### Faktorial
 
-Valid characters: `0-7`
+Zápis:
 
-Examples:
+`fact([číslo])`
 
-`37`
+nebo
 
-`777`
+`[číslo]!`
 
-#### Binary
-
-Requires calculator to be switched to binary mode.
-
-Valid characters: `0-1`
-
-Examples:
-
-`101101`
-
-`1111`
-
-### Operators
-
-#### Add
-
-Syntax:
-
-`[left-operand] + [right-operand]`
-
-Requires two operands.
-
-Examples:
-
-`3 + 6`
-
-`-96 + 42`
-
-#### Substract
-
-Syntax:
-
-`[left-operand] - [right-operand]`
-
-Requires two operands.
-
-Examples:
-
-`3 - 6`
-
-`26489 - (153 - 145)`
-
-#### Multiply
-
-Syntax:
-
-`[left-operand] * [right-operand]`
-
-Requires two operands.
-
-Examples:
-
-`3 * 6`
-
-`-96 * 42`
-
-#### Divide
-
-Syntax:
-
-`[left-operand] / [right-operand]`
-
-Requires two operands.
-
-Examples:
-
-`3 / 6`
-
-`-96 / 42`
-
-#### Power of
-
-Syntax:
-
-`[base] ^ [exponent]`
-
-or
-
-`[base] ** [exponent]`
-
-or 
-
-`pow([base], [exponent])`
-
-Requires two operands.
-
-Examples:
-
-`3 ^ 6`
-
-`-96 ** 42`
-
-`pow(2, 10)`
-
-#### Factorial
-
-Syntax: 
-
-`[number]!`
-
-Example:
+Příklady:
 
 `6!`
 
-`4!!`
+`6!!`
 
-`(21 / 3)!`
+`fact(6)`
 
-### Functions
+`fact(fact(6))`
 
-#### Square root
+### Přirozený logaritmus
 
-Syntax:
+Zápis:
 
-`sqrt([number])`
+`ln([číslo])`
 
-Examples:
+Příklady:
+
+`ln(5)`
+
+`ln(5 + 2)`
+
+### Obecný logaritmus
+
+Zápis:
+
+`log([číslo], [základ logaritmu])`
+
+Příklady:
+
+`log(2, 2)`
+
+`log(54 + 8, 15)`
+
+### Mocnina
+
+Zápis:
+
+`pow([mocněnec], [mocnitel])`
+
+nebo
+
+`[mocněnec]**[mocnitel]`
+
+Příklady:
+
+`5**2`
+
+`pow(5, 2)`
+
+### Náhodné číslo
+
+Zápis:
+
+`rand()`
+
+### Obecná odmocnina
+
+Zápis:
+
+`root([odmocněnec], [odmocnitel])`
+
+Příklady:
+
+`root(3, 6)`
+
+`root(86, 15*2)`
+
+### Odmocnina
+
+Zápis:
+
+`sqrt([odmocněnec])`
+
+Příklady:
 
 `sqrt(8)`
 
 `sqrt(96 + 42)`
 
-#### Root
+## Tutorial
 
-Syntax:
+V této kapitole bude popsána práce v Barbie Calculator, jeho funkce a užitečné vlastnosti, a dále také základní panely pro práci.
 
-`root([number], [nth-root]`
+Zde na obrázku je Barbie Calculator po zapnutí
 
-Examples:
+![Prázdná kalkulačka](empty.png)
 
-`3 + 6`
+*Okno programu má pevně nastavený poměr stran*.
 
-`-96 + 42`
+### Komponenty
+
+#### Převod do číselných soustav
+
+Pokud je výsledek _celočíselný_, tak bude výsledek převeden a zobrazen ve 4 číselných soustavách (desítkové, šestnáctkové, osmičkové, dvojkové).
+
+![Číselné soustavy po otevření](system1.png) ![Číselné soustavy s převedeným číslem](system2.png)
+
+#### Funkce a zápisové okno
+
+Jednou z hlavních částí je panel s funkcemi a k němu navazující okno s výrazem k výpočtu.
+
+![Bez výrazu - prázdné](func1.png) ![S funkcí a operací](func2.png)
+
+#### Proměnné
+
+Barbie Calculator umí také používat proměnné, takže si můžete uložit výpočty do proměnných a dále je používat
+
+Dávejte si ale pozor na to, že proměnné jsou **case sensitive**.
+
+![Panel proměnných](variable.png)
+
+### Práce s kalkulačkou
+
+Na následujícím obrázku je ukázané tzv. dopňování kódu
+
+![Doplňování kódu](complete.png)
+
+Dále také rozšíření výrazu do funkce.
+
+Pokud výraz označíte a a kliknete na funkci, tak se celý výraz vloží do požadované funkce.
+
+![Výraz před použitím funkce](enfunc1.png)
+
+![Výraz po použití funkce](enfunc2.png)
+
+Jak vidíte už jsou inicializované nějaké proměnné. V jejich nastavení je možný přepis na `1` nebo `0`, a nebo také proměnnou smazat. Pokud bude proměnných příliš, můžete se k nim dostat pomocí posuvníku (případně kolečka myši).
+
+![Mnoho proměnných a jejich nastavení](many_vars.png)
+
+Další ukázkou bude kombinace mnoha funkcí s vysokým výsledkem. Při vysokých (nebo nízkých) výsledcích se výsledek vypisuje ve formátu `[cifra].[2 cifry]` se zaokrouhlením na příslušné 2. desetinné místo.
+
+![Posuvník u číselných soustav při vysoké hodnotě](long_result.png)
+
+
+
+
+
+
+

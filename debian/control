@@ -1,0 +1,24 @@
+Source: calculator
+Maintainer: Josef Kolar, Son Hai Nguyen, Martin Omacht, Robert Navratil <xkolar71@stud.fit.vutbr.cz, xnguye16@stud.fit.vutbr.cz, xomach00@stud.fit.vutbr.cz, xnavra61@stud.fit.vutbr.cz>
+Section: python
+Priority: optional
+Build-Depends: python3-setuptools, python3-all, debhelper (>= 7.4.3)
+Standards-Version: 3.9.1
+Package: python3-calculator
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, python3-pip, python3-doxyqml, python3-doxypypy, python3-colour-runner, python3-opengl
+Description:
+ IVS-VUT-BIT-2016-2017
+ Grafická kalkulačka jako školní projekt do předmětu IVS na fakultě FIT VUT.
+
+ Platforms
+ ---------
+ .
+ Ubuntu 64bit
+ .
+ Authors
+ ------
+ .
+ /dej/uran/dom
+ - xkolar71 Josef Kolář
+

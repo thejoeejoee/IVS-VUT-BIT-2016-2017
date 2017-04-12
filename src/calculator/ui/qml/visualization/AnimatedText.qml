@@ -1,10 +1,16 @@
 import QtQuick 2.7
 
+/**
+  Animate change of text
+  */
 Item {
     id: component
 
+    /// Text to be displayed
     property string text: ""
+    /// Font of text
     property font font: Qt.font()
+    /// Text color
     property color color: "black"
 
     width: baseText.width
@@ -18,11 +24,6 @@ Item {
             baseText.opacity = 1
             maskedText.opacity = 0
         }}
-    }
-
-    FontMetrics {
-        id: fontMetrics
-        font: component.font
     }
 
     Text {

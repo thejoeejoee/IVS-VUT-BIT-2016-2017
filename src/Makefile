@@ -1,26 +1,40 @@
-
-VENV=../.venv
 REQUIREMENTS=../requirements.txt
-VENV_ACTIVATE=$(VENV)/bin/activate
-PYTHON="$(VENV)/bin/python"
-PIP="$(VENV)/bin/pip"
-PYRCC5="$(VENV)/bin/pyrcc5"
 
-install: install-python venv
+PYTHON=python3
+PIP=pip3
+PYRCC5=pyrcc5
+DIR:=$(CURDIR)
+
+all: run
+
+.PHONY: all install install-python install-calculator test run clean-pyc compile-resources clean
+
+install: install-python install-calculator
 
 install-python:
-	apt-get install python3.5 python3.5-venv python3-pip
+	@if ! dpkg -s python3.5 > /dev/null && dpkg -s python3-pip > /dev/null; then\
+		apt-get update && apt-get -y install python3-all python3.5 python3-pip python3-venv;\
+	fi
+	pip3 install --upgrade pip > /dev/null
 
-compile-qt-rcc: venv
+install-calculator:
+	cd ..; $(PYTHON) $(DIR)/../setup.py install
+
+test:
+	$(PYTHON) $(DIR)/test.py || true
+
+run:
+	$(PYTHON) $(DIR)/calculator/main.py
+
+clean:
+	rm -rf ../dist/ ../deb_dist/ ./calculator.egg-info/
+
+pack-deb: clean clean-pyc compile-resources
+	cd ..; $(PYTHON) setup.py --command-packages=stdeb.command bdist_deb
+
+clean-pyc:
+	find . -name "*.pyc" -delete
+
+compile-resources:
 	$(PYRCC5) -o calculator/ui/resources.py calculator/ui/qml.qrc
 
-test: venv
-	$(PYTHON) test.py || true
-
-run: venv compile-qt-rcc
-	$(PYTHON) main.py
-
-venv: $(REQUIREMENTS)
-	test -d $(VENV) || pyvenv $(VENV)
-	$(PIP) install -Ur ../requirements.txt
-	touch $(VENV_ACTIVATE)
