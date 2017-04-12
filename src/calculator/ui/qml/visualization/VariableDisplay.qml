@@ -42,7 +42,7 @@ Controls.FilledClickable {
         if(mouse.button == Qt.LeftButton)
             component.expandRequest(component.variableIdentifier)
         else
-            createExpansionRequest()
+            component.expandRequest(component.variableValue)
     }
 
     mouseArea.onContainsMouseChanged: component.handleHoverEvent()
