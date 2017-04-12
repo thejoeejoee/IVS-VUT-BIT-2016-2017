@@ -122,6 +122,7 @@ class UIAdapter(QObject):
             return False
 
         self._variables = self._calculator.variables.copy()
+        self.identifiersTypesChanged.emit(self.identifiersTypes)
         return True
 
     @pyqtProperty(QVariant)
