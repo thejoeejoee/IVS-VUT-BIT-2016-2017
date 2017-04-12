@@ -182,7 +182,7 @@
     <message>
         <location filename="../assets/contents/help.js" line="19"/>
         <source>Barbie calculator also provide support of custom variables. To create variable &apos;a&apos; simply enter assignment of &apos;a&apos; as &apos;a=&apos; and then you add expression. If variable depends on another variable then it&apos;s value will be updated every time any of the dependent variables change.</source>
-        <translation>Barbie calculator také podporuje tvorbu vlastních proměnných. Abychom vytvořili proměnnou &apos;a&apos;, jednoduše zadáme přiřazení &apos;a&apos; tedy &apos;a=&apos; a poté doplníme výraz. Pokud proměnná závisí na jiných proměnných, pak bude její hodnota přepočítá, ppokaždé když hodnota proměnných, na kterých je závislá, změní. </translation>
+        <translation>Barbie calculator také podporuje tvorbu vlastních proměnných. Abychom vytvořili proměnnou &apos;a&apos;, jednoduše zadáme přiřazení &apos;a&apos; tedy &apos;a=&apos; a poté doplníme výraz. Pokud proměnná závisí na jiných proměnných, pak bude její hodnota přepočítána, pokaždé když se změní hodnota proměnných, na kterých je závislá.</translation>
     </message>
     <message>
         <location filename="../assets/contents/help.js" line="22"/>
