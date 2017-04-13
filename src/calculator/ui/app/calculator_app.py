@@ -17,7 +17,7 @@ from calculator.ui.types.core import Sides
 from calculator.ui.types.expression import ExpSyntaxHighlighter, ExpAnalyzer
 from calculator.ui.types.qmlwrapper.utils import TypeRegister
 from calculator.ui.types.window import AppWindow
-from calculator.settings import Expansion, ICON_SIZES, Expression
+from calculator.settings import Expansion, ICON_SIZES, Expression, SUPPORTED_LANGUAGES
 
 if platform.system() == "Linux":  # Needed for platform.linux_distribution, which is not available on Windows and OSX
     # For Ubuntu: https://bugs.launchpad.net/ubuntu/+source/python-qt4/+bug/941826
@@ -65,7 +65,13 @@ class CalculatorApp(QApplication):
         super().__init__(argv)
 
         self._translator = QTranslator()
-        self._translator.load("".join((":/translations/", QLocale().system().name(), ".qm")))
+
+        language_name =  QLocale().system().bcp47Name()
+        translation_file_path = ":/translations/en.qm"
+
+        if language_name in SUPPORTED_LANGUAGES:
+            translation_file_path = "".join((":/translations/", language_name, ".qm"))
+        self._translator.load(translation_file_path)
         self.installTranslator(self._translator)
         icon = QIcon()
 
