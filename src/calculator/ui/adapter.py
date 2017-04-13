@@ -117,8 +117,10 @@ class UIAdapter(QObject):
         try:
             self._calculator.remove_variable(variable_identifier)
         except VariableRemoveRestrictError as e:
-            # TODO: deps!
-            self.error.emit(translate("Adapter", "#TODO"))
+            n = len(e.dependencies)
+            self.error.emit(translate("Adapter", "Cannot delete variable {identifier}. "
+                                                 "Variable(s) {deps} depend(s) on it.", None, n)
+                            .format(identifier=variable_identifier, deps=e.dependencies))
             return False
 
         self._variables = self._calculator.variables.copy()

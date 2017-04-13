@@ -59,5 +59,6 @@
         <file>assets/images/arrow_left_light.svg</file>
         <file>qml/windows/Help.qml</file>
         <file>assets/contents/help.js</file>
+        <file>translations/en.qm</file>
     </qresource>
 </RCC>
