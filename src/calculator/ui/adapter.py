@@ -120,7 +120,7 @@ class UIAdapter(QObject):
             n = len(e.dependencies)
             self.error.emit(translate("Adapter", "Cannot delete variable {identifier}. "
                                                  "Variable(s) {deps} depend(s) on it.", None, n)
-                            .format(identifier=variable_identifier, deps=e.dependencies))
+                            .format(identifier=variable_identifier, deps=", ".join(e.dependencies)))
             return False
 
         self._variables = self._calculator.variables.copy()
