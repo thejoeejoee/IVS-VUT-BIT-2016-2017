@@ -38,3 +38,8 @@ clean-pyc:
 compile-resources:
 	$(PYRCC5) -o calculator/ui/resources.py calculator/ui/qml.qrc
 
+doc:
+	doxygen
+
+run: $(ENVIROMENT)
+	$($(PYTHON)) calculator/main.py
