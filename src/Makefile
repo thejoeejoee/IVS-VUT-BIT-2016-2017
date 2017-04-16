@@ -20,6 +20,9 @@ install-python:
 install-calculator:
 	cd ..; $(PYTHON) $(DIR)/../setup.py install
 
+install-requirements: install-python
+	$(PIP) install -r $(REQUIREMENTS)
+
 test:
 	$(PYTHON) $(DIR)/test.py || true
 
