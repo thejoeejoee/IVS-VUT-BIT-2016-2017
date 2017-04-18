@@ -20,7 +20,7 @@ Controls.FilledClickable {
     /// Text color of identifier
     property color identifierTextColor
     /// Background color of expression when hovered
-    property color expressionHoverColor
+    property alias expressionHoverColor: expressionBackground.color
     /// Variable identifier
     property string variableIdentifier: ""
     /// Variable expression
@@ -56,14 +56,14 @@ Controls.FilledClickable {
     Rectangle {
         id: expressionBackground
 
-        color: "transparent"
+        opacity: 0
 
         width: component.width
         height: expression.y + expression.height + leftSide.y
         anchors.top: parent.top
 
-        Behavior on color {
-            ColorAnimation { duration: 300 }
+        Behavior on opacity {
+            NumberAnimation { duration: 200 }
         }
     }
 
@@ -149,9 +149,9 @@ Controls.FilledClickable {
                 onContainsMouseChanged: {
                     component.handleHoverEvent()
                     if(containsMouse)
-                        expressionBackground.color = component.expressionHoverColor
+                        expressionBackground.opacity = 1
                     else
-                        expressionBackground.color = "transparent"
+                        expressionBackground.opacity = 0
                 }
             }
         }
