@@ -7,7 +7,7 @@ DIR:=$(CURDIR)
 
 all: run
 
-.PHONY: all install install-python install-calculator test run clean-pyc compile-resources clean
+.PHONY: install install-python install-calculator install-requirements test run clean doc compile-resources run pack-deb clean-pyc
 
 install: install-python install-calculator
 

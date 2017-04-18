@@ -49,6 +49,10 @@ def setup():
                 'calculator-app=calculator.main:main',
             ]
         },
+        data_files=[
+            ('share/icons/hicolor/scalable/apps', ['data/calculator.svg']),
+            ('share/applications', ['data/calculator.desktop'])
+        ],
         include_package_data=True,
         test_suite='tests',
     )
