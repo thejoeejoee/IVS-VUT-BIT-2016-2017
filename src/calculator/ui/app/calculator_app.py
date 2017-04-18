@@ -2,7 +2,11 @@
 import platform
 from typing import List
 
-from termcolor import colored
+try:
+    from termcolor import colored
+except ImportError:
+    def colored(mode, *args, **kwargs):
+        return mode
 
 from PyQt5.QtCore import (QSize, QtFatalMsg, QtCriticalMsg, QtWarningMsg, QtInfoMsg,
                           qInstallMessageHandler, QtDebugMsg)
