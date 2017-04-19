@@ -24,6 +24,17 @@ $ python3 setup.py install
 ```
 V obou případech je do systému nainstalována grafický spouštěč, hledejte v menu vašeho systému. Také jsou nainstalovány spustitelné programy `calculator-app`, `calculator-console`, z niž první spouští grafické rozhraní aplikace, druhý pouze konzolovou verzi kalkulačky. 
 
+Odinstalace
+---------
+Zde záleží, kterým způsobem byla kalkulačka nainstalována - jestliže jako balíček operačního systému Debian, pak pomocí standardního balíčkovacího systému `apt`:
+```
+# apt remove python3-calculator
+```
+V případě instalace jako Python balíček (požadována Python utilita `pip3` pro správu balíčků):
+```
+# pip3 uninstall calculator
+```
+
 Prostředí
 ---------
 Ubuntu 64bit
