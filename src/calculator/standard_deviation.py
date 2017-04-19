@@ -42,7 +42,7 @@ def standard_deviation(values):
     )
 
 
-def main(file_input) -> None:
+def main(file_input):
     """
     Process FileInput instance, computes standard deviation of loaded numbers and print on stdout the value of SD.
     :param file_input: FileInput instance to process

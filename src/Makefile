@@ -46,7 +46,7 @@ doc:
 	doxygen
 
 build-profiling-report: ../profiling/report.tex
-	pdflatex -interaction nonstopmode -output-directory ../profiling ../profiling/report.tex
+	cd ../profiling/; pdflatex -interaction nonstopmode report.tex
 
 run: $(ENVIROMENT)
 	$($(PYTHON)) calculator/main.py
