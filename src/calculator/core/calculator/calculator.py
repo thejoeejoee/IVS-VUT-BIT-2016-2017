@@ -2,7 +2,7 @@
 from ast import Assign, Name, Pass
 from typing import Dict, Tuple, Set, Optional
 
-from calculator.core.solver.solver import Solver
+from calculator.core.solver import Solver
 from calculator.exceptions import VariableError, VariableRemoveRestrictError, VariableNameError
 from calculator import NumericValue, Variable
 from calculator.utils import OrderedDefaultDict
