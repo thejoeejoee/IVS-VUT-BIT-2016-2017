@@ -8,7 +8,7 @@ from calculator.exceptions import VariableError, VariableRemoveRestrictError, Va
 class CalculatorTest(TestCase):
     _default_variable_definition = (
         Calculator.DEFAULT_VARIABLE_TYPE(),
-        str(Calculator.DEFAULT_VARIABLE_TYPE()),
+        '= {}'.format(str(Calculator.DEFAULT_VARIABLE_TYPE())),
         set()
     )
 
@@ -265,6 +265,7 @@ class CalculatorTest(TestCase):
             },
             'New variable {} should be created.'.format(var_name)
         )
+
     def test_variable_with_max_name_in_expr(self):
         var_name = 'a' * self.calculator.MAX_VARIABLE_NAME_LEN
         result, variables = self.calculator.process("5 + {}".format(var_name))
@@ -274,6 +275,6 @@ class CalculatorTest(TestCase):
             variables,
             {
                 self.calculator.ANSWER_VARIABLE_NAME: (5, '5 + {}'.format(var_name), {var_name}),
-                var_name: (0, '0', set())
+                var_name: self._default_variable_definition
             }
         )

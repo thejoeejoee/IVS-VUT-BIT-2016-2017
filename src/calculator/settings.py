@@ -6,6 +6,7 @@ from PyQt5.QtQml import QQmlEngine, QJSEngine
 
 ICON_SIZES = (16, 24, 32, 48, 256)
 SUPPORTED_BASES = (10, 2, 8, 16)
+SUPPORTED_LANGUAGES = {"en", "cs"}
 
 
 class BuiltinFunction(object):

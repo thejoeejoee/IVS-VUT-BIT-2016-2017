@@ -1,14 +1,11 @@
 # coding=utf-8
 import sys
-from fileinput import FileInput, input
-from typing import List
-from typing import Sequence
+from fileinput import input
 
-from calculator import NumericValue
 from calculator.core.math import Math
 
 
-def mean(values: Sequence[NumericValue]) -> float:
+def mean(values):
     """
     Computes mean of given collection.
     :param values: collection of numeric values
@@ -21,7 +18,7 @@ def mean(values: Sequence[NumericValue]) -> float:
     )
 
 
-def standard_deviation(values: Sequence[NumericValue]) -> float:
+def standard_deviation(values):
     """
     Computes corrected sample standard deviation by
     https://wikimedia.org/api/rest_v1/media/math/render/svg/1bffdcb1ecd0b326bb7ad67397b073af9c15fa6e
@@ -45,8 +42,13 @@ def standard_deviation(values: Sequence[NumericValue]) -> float:
     )
 
 
-def main(file_input: FileInput) -> None:
-    values = list()  # type: List[NumericValue]
+def main(file_input):
+    """
+    Process FileInput instance, computes standard deviation of loaded numbers and print on stdout the value of SD.
+    :param file_input: FileInput instance to process
+    :return: None
+    """
+    values = list()
     for line in file_input:
         if not line:
             continue

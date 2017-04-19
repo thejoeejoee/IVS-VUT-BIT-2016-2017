@@ -12,7 +12,7 @@ base_path = abspath(dirname(__file__))
 def setup():
     core.setup(
         name='calculator',
-        version='0.3',
+        version='1.0rc1',
         license='GNU GENERAL PUBLIC LICENSE Version 3',
         long_description=open(join(base_path, 'README.md')).read(),
         url='https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017',
@@ -33,13 +33,13 @@ def setup():
         packages=find_packages('src', exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
         install_requires=[
             'PyOpenGL',
-            'PyQt5==5.7.1'
+            'PyQt5==5.7.1',
         ],
         requires=[
             'colour_runner',
             'termcolor',
             'stdeb',
-            'doxypy',
+            'doxypypy',
             'doxyqml',
         ],
         package_dir={'': 'src/'},
@@ -49,6 +49,10 @@ def setup():
                 'calculator-app=calculator.main:main',
             ]
         },
+        data_files=[
+            ('share/icons/hicolor/scalable/apps', ['data/calculator.svg']),
+            ('share/applications', ['data/calculator.desktop'])
+        ],
         include_package_data=True,
         test_suite='tests',
     )

@@ -7,7 +7,8 @@ DIR:=$(CURDIR)
 
 all: run
 
-.PHONY: all install install-python install-calculator test run clean-pyc compile-resources clean
+.PHONY: install install-python install-calculator install-requirements test run clean doc\
+		compile-resources run pack-deb clean-pyc build-profiling-report
 
 install: install-python install-calculator
 
@@ -19,6 +20,9 @@ install-python:
 
 install-calculator:
 	cd ..; $(PYTHON) $(DIR)/../setup.py install
+
+install-requirements: install-python
+	$(PIP) install -r $(REQUIREMENTS)
 
 test:
 	$(PYTHON) $(DIR)/test.py || true
@@ -38,3 +42,11 @@ clean-pyc:
 compile-resources:
 	$(PYRCC5) -o calculator/ui/resources.py calculator/ui/qml.qrc
 
+doc:
+	doxygen
+
+build-profiling-report: ../profiling/report.tex
+	cd ../profiling/; pdflatex -interaction nonstopmode report.tex
+
+run: $(ENVIROMENT)
+	$($(PYTHON)) calculator/main.py

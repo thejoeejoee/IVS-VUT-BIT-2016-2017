@@ -9,17 +9,17 @@
         <translation>Barbie calculator</translation>
     </message>
     <message>
-        <location filename="../qml/windows/About.qml" line="104"/>
+        <location filename="../qml/windows/About.qml" line="105"/>
         <source>From revision</source>
         <translation>Z revize</translation>
     </message>
     <message>
-        <location filename="../qml/windows/About.qml" line="105"/>
+        <location filename="../qml/windows/About.qml" line="106"/>
         <source>Created by:</source>
         <translation>Vytvořeno:</translation>
     </message>
     <message>
-        <location filename="../qml/windows/About.qml" line="111"/>
+        <location filename="../qml/windows/About.qml" line="112"/>
         <source>All rights reserved.</source>
         <translation>Všechna práva vyhrazena.</translation>
     </message>
@@ -61,11 +61,6 @@
         <translation>Tato konstrukce není podporovaná.</translation>
     </message>
     <message>
-        <location filename="../adapter.py" line="121"/>
-        <source>#TODO</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Parameters count does not match function.</source>
         <translation type="vanished">Počet parametrů neodpovídá funkci.</translation>
     </message>
@@ -78,6 +73,15 @@
         <location filename="../adapter.py" line="70"/>
         <source>Expression contains syntax error.</source>
         <translation>Výraz obsahuje syntaktickou chybu.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../adapter.py" line="121"/>
+        <source>Cannot delete variable {identifier}. Variable(s) {deps} depend(s) on it.</source>
+        <translation>
+            <numerusform>Nelze smazat proměnnou {identifier}. Proměnná {deps} na ní závisí.</numerusform>
+            <numerusform>Nelze smazat proměnnou {identifier}. Proměnné {deps} na ní závisí.</numerusform>
+            <numerusform>Nelze smazat proměnnou {identifier}. Proměnné {deps} na ní závisí.</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -140,59 +144,48 @@
         <translation type="obsolete">Barbie Calculator</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="4"/>
         <source>Manual on how to use Barbie Calculator.</source>
-        <translation>Manuál jak používat Barbie Calculator.</translation>
+        <translation type="vanished">Manuál jak používat Barbie Calculator.</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="7"/>
         <source>Getting started</source>
-        <translation>Začínáme</translation>
+        <translation type="vanished">Začínáme</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="3"/>
         <source>Barbie calculator</source>
-        <translation>Barbie calculator</translation>
+        <translation type="vanished">Barbie calculator</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="8"/>
         <source>First we need to enter expression, which we want to calculate into text input. Then we press the button with equal sign or press Enter/Return key. Congratulations you have done your very first calculation using Barbie calculator.</source>
-        <translation>Nejdříve musíme zadat výraz, který chceme vypočítat, do textového vstupu. Následně stiskneme tlačítko se symbolem rovnítka nebo zmáčkneme klávesu Enter. Gratulujeme provedli jste svůj první výpočet pomocí Barbie calculatoru.</translation>
+        <translation type="vanished">Nejdříve musíme zadat výraz, který chceme vypočítat, do textového vstupu. Následně stiskneme tlačítko se symbolem rovnítka nebo zmáčkneme klávesu Enter. Gratulujeme provedli jste svůj první výpočet pomocí Barbie calculatoru.</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="11"/>
         <source>Advance</source>
-        <translation>Pokročilé</translation>
+        <translation type="vanished">Pokročilé</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="14"/>
         <source>Using completer</source>
-        <translation>Použití našeptávače</translation>
+        <translation type="vanished">Použití našeptávače</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="15"/>
         <source>To show completer press Ctrl+Space. Completer will be shown automatically every time after entering operator. To choose item you want to complete click on the item or use arrows to navigate to item and then pres key Enter/Return.</source>
-        <translation>K zobrazení našeptávače stiskněte Ctrl+Mezerník. Našeptávač se zobrazí automaticky pokaždém zadání operátoru. Můžeme vybrat položku kliknutím nebo posunout se pomocí šipek a poté stisknout klávesu Enter.</translation>
+        <translation type="vanished">K zobrazení našeptávače stiskněte Ctrl+Mezerník. Našeptávač se zobrazí automaticky pokaždém zadání operátoru. Můžeme vybrat položku kliknutím nebo posunout se pomocí šipek a poté stisknout klávesu Enter.</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="18"/>
         <source>Variables intro</source>
-        <translation>Začínáme s proměnnými</translation>
+        <translation type="vanished">Začínáme s proměnnými</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="19"/>
         <source>Barbie calculator also provide support of custom variables. To create variable &apos;a&apos; simply enter assignment of &apos;a&apos; as &apos;a=&apos; and then you add expression. If variable depends on another variable then it&apos;s value will be updated every time any of the dependent variables change.</source>
-        <translation>Barbie calculator také podporuje tvorbu vlastních proměnných. Abychom vytvořili proměnnou &apos;a&apos;, jednoduše zadáme přiřazení &apos;a&apos; tedy &apos;a=&apos; a poté doplníme výraz. Pokud proměnná závisí na jiných proměnných, pak bude její hodnota přepočítá, ppokaždé když hodnota proměnných, na kterých je závislá, změní. </translation>
+        <translation type="vanished">Barbie calculator také podporuje tvorbu vlastních proměnných. Abychom vytvořili proměnnou &apos;a&apos;, jednoduše zadáme přiřazení &apos;a&apos; tedy &apos;a=&apos; a poté doplníme výraz. Pokud proměnná závisí na jiných proměnných, pak bude její hodnota přepočítána, pokaždé když se změní hodnota proměnných, na kterých je závislá.</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="22"/>
         <source>Variables manipulation</source>
-        <translation>Manipulace s proměnnými</translation>
+        <translation type="vanished">Manipulace s proměnnými</translation>
     </message>
     <message>
-        <location filename="../assets/contents/help.js" line="23"/>
         <source>To enter into input expression from which variable was calculated click on the expression of variable in variable panel. If you click on variable in panel it will enter it&apos;s identifier and after right-click it&apos;s value. To delete or set value hover menu header(three dots) to show menu where you can choose desired action.</source>
-        <translation>K vložení výrazu, ze kterého byla proměnná spočítána, musíme kliknout na výraz proměnné v panelu proměnných. Pokud klikneme na proměnnou v panelu, tak vložíme její identifikátor a pravým kliknutím její hodnotu. Abychom nastavili nebo vymazali proměnnou, najedeme na hlavičku menu(tři tečky), tím zobrazíme menu, kde vybereme danou akci. </translation>
+        <translation type="vanished">K vložení výrazu, ze kterého byla proměnná spočítána, musíme kliknout na výraz proměnné v panelu proměnných. Pokud klikneme na proměnnou v panelu, tak vložíme její identifikátor a pravým kliknutím její hodnotu. Abychom nastavili nebo vymazali proměnnou, najedeme na hlavičku menu(tři tečky), tím zobrazíme menu, kde vybereme danou akci. </translation>
     </message>
 </context>
 <context>
@@ -202,25 +195,30 @@
         <translation type="vanished">Barbie Calculator</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="47"/>
-        <location filename="../qml/main.qml" line="51"/>
-        <location filename="../qml/main.qml" line="68"/>
+        <location filename="../qml/main.qml" line="29"/>
+        <source>Barbie calculator</source>
+        <translation type="unfinished">Barbie calculator</translation>
+    </message>
+    <message>
+        <location filename="../qml/main.qml" line="41"/>
+        <location filename="../qml/main.qml" line="45"/>
+        <location filename="../qml/main.qml" line="62"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="51"/>
-        <location filename="../qml/main.qml" line="66"/>
+        <location filename="../qml/main.qml" line="45"/>
+        <location filename="../qml/main.qml" line="60"/>
         <source>About</source>
         <translation>O programu</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="269"/>
+        <location filename="../qml/main.qml" line="263"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../qml/main.qml" line="284"/>
+        <location filename="../qml/main.qml" line="278"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>

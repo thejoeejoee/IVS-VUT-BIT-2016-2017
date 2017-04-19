@@ -1,199 +1,132 @@
 
-# IVS-VUT-BIT-2016-2017 Documentation
+# IVS-VUT-BIT-2016-2017 
+# **Barbie calculator - Uživatelská dokumentace**
 
-## Table of contents
+## **Obsah**
 
 * [Úvod](#úvod)
-* [Instalace](#instalace)
+* [Instalace](#instalace) 
 * [Odinstalace](#odinstalace)
-* [Funkce](#funkce)
-  * [Absolutní hodnota](#absolutní-hodnota)
-  * [Faktorial](#faktorial)
-  * [Přirozený logaritmus](#přirozený-logaritmus)
-  * [Obecný logaritmus](#obecný-logaritmus)
-  * [Mocnina](#mocnina)
-  * [Náhodné číslo](#nahodné-číslo)
-  * [Obecná odmocnina](#obecná-odmocnina)
-  * [Odmocnina](#odmocnina)
+* [Matematické funkce](#matematické-funkce)
 * [Tutorial](#tutorial)
   * [Komponenty](#komponenty)
   * [Práce s kalkulačkou](#práce-s-kalkulačkou)
 
-## Úvod
+## **Úvod**
 
-Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jádro Barbie Calculatoru je napsáno v [Pythonu](https://www.python.org/).
+Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jádro Barbie calculatoru je napsáno v [Pythonu](https://www.python.org/).  
 
-## Instalace
+## **Instalace**
 
-## Odinstalace
+## **Odinstalace**
 
-## Funkce
+## **Matematické funkce**
 
 Ve všech funkcích jdou použít klasické operátory (+, -, *, /) a i jiné funkce.
+<br>
+<table style="width: 100%;">
+	<tr>
+		<th style="background-color: lightgrey;">Zápis</th>
+		<th style="background-color: lightgrey;">Význam</th>
+		<th style="background-color: lightgrey;">Poznámka</th> 
+	</tr>
+	<tr>
+		<td style="background-color: white;">abs(x)</td>
+		<td rowspan="2" style="background-color: white;">Funkce pro výpočet absolutní hodno- ty zadaného čísla</td>
+		<td rowspan="2" style="background-color: white;"></td>
+	</tr>
+	<tr>
+		<td>|x|</td>
+	</tr>
+	<tr>
+		<td style="background-color: white;">fact(x)</td>
+		<td rowspan="2" style="background-color: white;">Výpočet faktorialu zadaného čísla</td>
+		<td rowspan="2" style="background-color: white;"> Hodnota faktorialu je kvůli prudkému nárustu omezena.</td>
+	</tr>
+	<tr>
+		<td>x!</td>
+	</tr>
+	<tr>
+		<td>ln(x)</td>
+		<td>Funkce počítá přirozený logaritmus čísla 'x'</td>
+		<td>Přirozený logaritmus má základ 'e' (Eulerovo číslo)</td>
+	</tr>
+	<tr>
+		<td>log(x,y)</td>
+		<td>Výpočet obecného logaritmu se zada- ným základem</td>
+		<td>x = logaritmované číslo<br>y = základ logaritmu
+	</tr>
+	<tr>
+		<td>pow(x,y)</td>
+		<td rowspan="2">Funkce pro výpočet mocniny</td>
+		<td rowspan="2">x = mocněné číslo (mocněnec)<br>y = mocnitel</td>
+	</tr>
+	<tr>
+		<td>x**y</td>
+	</tr>
+	<tr>
+		<td>rand()</td>
+		<td>Funkce, která vygeneruje náhodné reálné číslo</td>
+		<td>Funkce nemá žádný parametr</td>
+	</tr>
+	<tr>
+		<td>root(x,y)</td>
+		<td>Funkce pro výpočet obecné odmocni- ny</td>
+		<td>x = odmocňované číslo<br>y = y-tá odmocnina</td>
+	</tr>
+	<tr>
+		<td>sqrt(x)</td>
+		<td>Funkce pro výpočet 2. odmocniny</td>
+		<td></td>
+	</tr>
+</table>
 
-### Absolutní hodnota
+## **Tutorial**
 
-Zápis:
-
-`abs([číslo])`
-
-nebo
-
-`|[číslo]|`
-
-Příklady:
-
-`|-6|`
-
-`||-12 + 4| + 5|`
-
-`abs(-6)`
-
-`abs(abs(-12 + 4) + 5)`
-
-### Faktorial
-
-Zápis:
-
-`fact([číslo])`
-
-nebo
-
-`[číslo]!`
-
-Příklady:
-
-`6!`
-
-`6!!`
-
-`fact(6)`
-
-`fact(fact(6))`
-
-### Přirozený logaritmus
-
-Zápis:
-
-`ln([číslo])`
-
-Příklady:
-
-`ln(5)`
-
-`ln(5 + 2)`
-
-### Obecný logaritmus
-
-Zápis:
-
-`log([číslo], [základ logaritmu])`
-
-Příklady:
-
-`log(2, 2)`
-
-`log(54 + 8, 15)`
-
-### Mocnina
-
-Zápis:
-
-`pow([mocněnec], [mocnitel])`
-
-nebo
-
-`[mocněnec]**[mocnitel]`
-
-Příklady:
-
-`5**2`
-
-`pow(5, 2)`
-
-### Náhodné číslo
-
-Zápis:
-
-`rand()`
-
-### Obecná odmocnina
-
-Zápis:
-
-`root([odmocněnec], [odmocnitel])`
-
-Příklady:
-
-`root(3, 6)`
-
-`root(86, 15*2)`
-
-### Odmocnina
-
-Zápis:
-
-`sqrt([odmocněnec])`
-
-Příklady:
-
-`sqrt(8)`
-
-`sqrt(96 + 42)`
-
-## Tutorial
-
-V této kapitole bude popsána práce v Barbie Calculator, jeho funkce a užitečné vlastnosti, a dále také základní panely pro práci.
-
-Zde na obrázku je Barbie Calculator po zapnutí
-
-![Prázdná kalkulačka](empty.png)
+V této kapitole bude popsána práce v Barbie calculator, jeho funkce a užitečné vlastnosti, a dále také základní panely pro práci.
 
 *Okno programu má pevně nastavený poměr stran*.
 
 ### Komponenty
 
-#### Převod do číselných soustav
+#### Číselné soustavy
 
-Pokud je výsledek _celočíselný_, tak bude výsledek převeden a zobrazen ve 4 číselných soustavách (desítkové, šestnáctkové, osmičkové, dvojkové).
+Pokud je výsledek _celočíselný_, tak bude výsledek převeden a zobrazen ve 4 číselných soustavách (dvojkové, osmičkové, desítkové, šestnáctkové). Velký výsledek, který se nevyobrazí celý v okně je možné zobrazit pomocí posuvníku.
 
-![Číselné soustavy po otevření](system1.png) ![Číselné soustavy s převedeným číslem](system2.png)
+![Číselné soustavy s převedeným číslem](system2.png)
 
 #### Funkce a zápisové okno
 
 Jednou z hlavních částí je panel s funkcemi a k němu navazující okno s výrazem k výpočtu.
 
-![Bez výrazu - prázdné](func1.png) ![S funkcí a operací](func2.png)
+![S funkcí a operací](func2.png)
 
 #### Proměnné
 
-Barbie Calculator umí také používat proměnné, takže si můžete uložit výpočty do proměnných a dále je používat
+Barbie calculator umí také používat proměnné, takže si můžete uložit výpočty do proměnných a dále je používat. Panel proměnných obsahuje také posuvník, pokud je proměnných příliš mnoho.
 
 Dávejte si ale pozor na to, že proměnné jsou **case sensitive**.
 
 ![Panel proměnných](variable.png)
 
+Pro identifikátor můžete použít jakýkoliv UNICODE znak, který neodporuje běžným matematickým konstrukcím a znakům jako uvozovky apod.
+
 ### Práce s kalkulačkou
 
-Na následujícím obrázku je ukázané tzv. dopňování kódu
+**Barbie calculator** obsahuje funkce, které Vám mohou zrychlit práci. Jednou z těchto funkcí je doplňování kódu klávesovou zkratkou `ctrl+space`. Toto menu obsahuje všechny proměnné i funkce.
 
 ![Doplňování kódu](complete.png)
 
-Dále také rozšíření výrazu do funkce.
-
-Pokud výraz označíte a a kliknete na funkci, tak se celý výraz vloží do požadované funkce.
+Dále také rozšíření závorek a výrazů do funkcí. Výraz, který chcete vložit do funkce nebo závorek označíte a kliknete na funkci nebo napíšete levou závorku `(`.
 
 ![Výraz před použitím funkce](enfunc1.png)
 
 ![Výraz po použití funkce](enfunc2.png)
 
-Jak vidíte už jsou inicializované nějaké proměnné. V jejich nastavení je možný přepis na `1` nebo `0`, a nebo také proměnnou smazat. Pokud bude proměnných příliš, můžete se k nim dostat pomocí posuvníku (případně kolečka myši).
+Poslední věc, kterou je potřeba zmínit je práce s proměnnými. Proměnné lze mazat v menu (tři tečky) pomocí ikony koše, a také nastavit na `1` nebo `0`. Pravým kliknutím myši se Vám do výrazového okna zkopíruje hodnota proměnné a levým kliknutím myši její identifikátor.
 
 ![Mnoho proměnných a jejich nastavení](many_vars.png)
 
-Další ukázkou bude kombinace mnoha funkcí s vysokým výsledkem. Při vysokých (nebo nízkých) výsledcích se výsledek vypisuje ve formátu `[cifra].[2 cifry]` se zaokrouhlením na příslušné 2. desetinné místo.
-
-![Posuvník u číselných soustav při vysoké hodnotě](long_result.png)
 
 
 

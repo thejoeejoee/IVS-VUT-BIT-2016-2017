@@ -408,6 +408,7 @@ AppWindow {
       */
     function overwriteExpression(newExpression) {
         expInput.text = newExpression
+        expInput.cursorPosition = expInput.text.length
     }
 
     /**

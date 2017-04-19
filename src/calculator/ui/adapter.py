@@ -97,7 +97,7 @@ class UIAdapter(QObject):
             "result": None,
             "variables": {
                 key: dict(
-                    value=self._formatter.format_number(value),
+                    value=self._formatter.format_number(value, characters_limit=8),
                     expression=self._format_source_expression(
                         variable=key,
                         source_expression=expression
@@ -117,11 +117,14 @@ class UIAdapter(QObject):
         try:
             self._calculator.remove_variable(variable_identifier)
         except VariableRemoveRestrictError as e:
-            # TODO: deps!
-            self.error.emit(translate("Adapter", "#TODO"))
+            n = len(e.dependencies)
+            self.error.emit(translate("Adapter", "Cannot delete variable {identifier}. "
+                                                 "Variable(s) {deps} depend(s) on it.", None, n)
+                            .format(identifier=variable_identifier, deps=", ".join(e.dependencies)))
             return False
 
         self._variables = self._calculator.variables.copy()
+        self.identifiersTypesChanged.emit(self.identifiersTypes)
         return True
 
     @pyqtProperty(QVariant)

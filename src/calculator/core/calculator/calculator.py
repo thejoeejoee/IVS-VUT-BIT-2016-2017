@@ -15,7 +15,7 @@ class Calculator(object):
 
     ANSWER_VARIABLE_NAME = 'Ans'
     DEFAULT_VARIABLE_TYPE = int
-    MAX_VARIABLE_NAME_LEN = 10
+    MAX_VARIABLE_NAME_LEN = 4
 
     def __init__(self):
         super().__init__()
@@ -24,7 +24,7 @@ class Calculator(object):
         self._variables = OrderedDefaultDict(
             default_factory=lambda: (
                 self.DEFAULT_VARIABLE_TYPE(),
-                str(self.DEFAULT_VARIABLE_TYPE()),
+                '= {}'.format(str(self.DEFAULT_VARIABLE_TYPE())),
                 set(),
             ),
         )  # type: Dict[str, Variable]
