@@ -9,7 +9,7 @@ Grafická kalkulačka jako školní projekt do předmětu IVS na FIT VUT v letn�
 
 Instalace
 ---------
-Aplikaci je možnost nainstalovat buď jako instalační balíček operačního systému Debian stáhnutelný z [posledního vydání](https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest) aplikace: Instalace pak probíhá následovně:
+Aplikaci je možnost nainstalovat buď jako instalační balíček operačního systému Debian stáhnutelný z [posledního vydání](https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest) aplikace - instalace pak probíhá následovně:
 ```
 // instalace balíku
 # dpkg -i python3-calculator_XXX.deb
