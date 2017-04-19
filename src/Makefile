@@ -7,7 +7,8 @@ DIR:=$(CURDIR)
 
 all: run
 
-.PHONY: install install-python install-calculator install-requirements test run clean doc compile-resources run pack-deb clean-pyc
+.PHONY: install install-python install-calculator install-requirements test run clean doc\
+		compile-resources run pack-deb clean-pyc build-profiling-report
 
 install: install-python install-calculator
 
@@ -43,6 +44,9 @@ compile-resources:
 
 doc:
 	doxygen
+
+build-profiling-report: ../profiling/report.tex
+	pdflatex -interaction nonstopmode -output-directory ../profiling ../profiling/report.tex
 
 run: $(ENVIROMENT)
 	$($(PYTHON)) calculator/main.py

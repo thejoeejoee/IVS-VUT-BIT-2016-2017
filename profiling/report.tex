@@ -1,0 +1,40 @@
+% \input utf8-t1
+\documentclass[11pt,a4paper,titlepage]{extarticle}
+
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage[obeyspaces]{url}
+\usepackage[paper=a4paper,top=2cm,left=2cm,right=2cm,bottom=2cm,includefoot]{geometry}
+\usepackage{listings}
+\setcounter{secnumdepth}{0}
+
+\lhead{VUT FIT IVS 2016/2017}
+\chead{/dej/uran/dom}
+\rhead{Zpráva o profilování}
+\lfoot{}
+\cfoot{}
+
+\begin{document}
+\pagestyle{fancy}
+\section{Zpráva o provedeném profilování}
+Dle zadání bylo nad matematickou knihovnou aplikace provedeno profilování.
+Zdrojový kód programu počítající směrodatnou odchylku je uložen v souboru \path{src/calculator/standard_deviation.py}
+vzhledem k kořenovému adresáři projektu. Tento program je rozdělen do tří funkcí a to:
+\begin{description}
+\item[main] Funkce pro zkonvertování vstupního toku dat na příslušné datové typy a následné volání směrodatné odchylky.
+\item[mean] Funkce, která za použití matematické knihovny spočítá aritmetický průměr hodnot předaných parametrem.
+\item[standard\_deviation] Funkce pro samotný výpočet směrodatné odchylky - v parametru dostane kontejner vstupních hodnot
+    a za pomocí \textbf{mean} vypočítá odchylku.
+\end{description}
+
+Za pomocí utility \path{cProfile} vestavěné ve standardní instalaci jazyka Python jsme provedli měření dle zadání - a to
+ 10, 100 a 1000 vstupních hodnot. Jedná se o modul generující jak uživatelsky čitelná data, tak data o profilování zpracovatelná
+ programově - my použijeme rovnou uživatelsky čitelná data (ta strojově zpracovatelná budou uložena ve adresáři \path{/profiling/}):
+\begin{lstlisting}[language=bash]
+$ (for i in {1..10}; do echo $RANDOM; done) |
+    python3 -m cProfile -s cumtime standard_deviation.py
+
+\end{lstlisting}
+
+\end{document}

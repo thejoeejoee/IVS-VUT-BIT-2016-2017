@@ -46,6 +46,11 @@ def standard_deviation(values: Sequence[NumericValue]) -> float:
 
 
 def main(file_input: FileInput) -> None:
+    """
+    Process FileInput instance, computes standard deviation of loaded numbers and print on stdout the value of SD.
+    :param file_input: FileInput instance to process
+    :return: None
+    """
     values = list()  # type: List[NumericValue]
     for line in file_input:
         if not line:
