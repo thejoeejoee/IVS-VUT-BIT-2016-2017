@@ -5,8 +5,8 @@
     <name>About</name>
     <message>
         <location filename="../qml/windows/About.qml" line="86"/>
-        <source>Barbie calculator</source>
-        <translation>Barbie calculator</translation>
+        <source>Calculator</source>
+        <translation>Calculator</translation>
     </message>
     <message>
         <location filename="../qml/windows/About.qml" line="105"/>
@@ -140,64 +140,64 @@
 <context>
     <name>help</name>
     <message>
-        <source>Barbie Calculator</source>
-        <translation type="obsolete">Barbie Calculator</translation>
+        <source>Calculator</source>
+        <translation>Calculator</translation>
     </message>
     <message>
-        <source>Manual on how to use Barbie Calculator.</source>
-        <translation type="vanished">Manuál jak používat Barbie Calculator.</translation>
+        <source>Manual on how to use Calculator.</source>
+        <translation>Manuál jak používat Calculator.</translation>
     </message>
     <message>
         <source>Getting started</source>
-        <translation type="vanished">Začínáme</translation>
+        <translation>Začínáme</translation>
     </message>
     <message>
-        <source>Barbie calculator</source>
-        <translation type="vanished">Barbie calculator</translation>
+        <source>Calculator</source>
+        <translation>Calculator</translation>
     </message>
     <message>
-        <source>First we need to enter expression, which we want to calculate into text input. Then we press the button with equal sign or press Enter/Return key. Congratulations you have done your very first calculation using Barbie calculator.</source>
-        <translation type="vanished">Nejdříve musíme zadat výraz, který chceme vypočítat, do textového vstupu. Následně stiskneme tlačítko se symbolem rovnítka nebo zmáčkneme klávesu Enter. Gratulujeme provedli jste svůj první výpočet pomocí Barbie calculatoru.</translation>
+        <source>First we need to enter expression, which we want to calculate into text input. Then we press the button with equal sign or press Enter/Return key. Congratulations you have done your very first calculation using Calculator.</source>
+        <translation>Nejdříve musíme zadat výraz, který chceme vypočítat, do textového vstupu. Následně stiskneme tlačítko se symbolem rovnítka nebo zmáčkneme klávesu Enter. Gratulujeme provedli jste svůj první výpočet pomocí Calculatoru.</translation>
     </message>
     <message>
         <source>Advance</source>
-        <translation type="vanished">Pokročilé</translation>
+        <translation>Pokročilé</translation>
     </message>
     <message>
         <source>Using completer</source>
-        <translation type="vanished">Použití našeptávače</translation>
+        <translation>Použití našeptávače</translation>
     </message>
     <message>
         <source>To show completer press Ctrl+Space. Completer will be shown automatically every time after entering operator. To choose item you want to complete click on the item or use arrows to navigate to item and then pres key Enter/Return.</source>
-        <translation type="vanished">K zobrazení našeptávače stiskněte Ctrl+Mezerník. Našeptávač se zobrazí automaticky pokaždém zadání operátoru. Můžeme vybrat položku kliknutím nebo posunout se pomocí šipek a poté stisknout klávesu Enter.</translation>
+        <translation>K zobrazení našeptávače stiskněte Ctrl+Mezerník. Našeptávač se zobrazí automaticky pokaždém zadání operátoru. Můžeme vybrat položku kliknutím nebo posunout se pomocí šipek a poté stisknout klávesu Enter.</translation>
     </message>
     <message>
         <source>Variables intro</source>
-        <translation type="vanished">Začínáme s proměnnými</translation>
+        <translation>Začínáme s proměnnými</translation>
     </message>
     <message>
-        <source>Barbie calculator also provide support of custom variables. To create variable &apos;a&apos; simply enter assignment of &apos;a&apos; as &apos;a=&apos; and then you add expression. If variable depends on another variable then it&apos;s value will be updated every time any of the dependent variables change.</source>
-        <translation type="vanished">Barbie calculator také podporuje tvorbu vlastních proměnných. Abychom vytvořili proměnnou &apos;a&apos;, jednoduše zadáme přiřazení &apos;a&apos; tedy &apos;a=&apos; a poté doplníme výraz. Pokud proměnná závisí na jiných proměnných, pak bude její hodnota přepočítána, pokaždé když se změní hodnota proměnných, na kterých je závislá.</translation>
+        <source>Calculator also provide support of custom variables. To create variable &apos;a&apos; simply enter assignment of &apos;a&apos; as &apos;a=&apos; and then you add expression. If variable depends on another variable then it&apos;s value will be updated every time any of the dependent variables change.</source>
+        <translation>Calculator také podporuje tvorbu vlastních proměnných. Abychom vytvořili proměnnou &apos;a&apos;, jednoduše zadáme přiřazení &apos;a&apos; tedy &apos;a=&apos; a poté doplníme výraz. Pokud proměnná závisí na jiných proměnných, pak bude její hodnota přepočítána, pokaždé když se změní hodnota proměnných, na kterých je závislá.</translation>
     </message>
     <message>
         <source>Variables manipulation</source>
-        <translation type="vanished">Manipulace s proměnnými</translation>
+        <translation>Manipulace s proměnnými</translation>
     </message>
     <message>
         <source>To enter into input expression from which variable was calculated click on the expression of variable in variable panel. If you click on variable in panel it will enter it&apos;s identifier and after right-click it&apos;s value. To delete or set value hover menu header(three dots) to show menu where you can choose desired action.</source>
-        <translation type="vanished">K vložení výrazu, ze kterého byla proměnná spočítána, musíme kliknout na výraz proměnné v panelu proměnných. Pokud klikneme na proměnnou v panelu, tak vložíme její identifikátor a pravým kliknutím její hodnotu. Abychom nastavili nebo vymazali proměnnou, najedeme na hlavičku menu(tři tečky), tím zobrazíme menu, kde vybereme danou akci. </translation>
+        <translation>K vložení výrazu, ze kterého byla proměnná spočítána, musíme kliknout na výraz proměnné v panelu proměnných. Pokud klikneme na proměnnou v panelu, tak vložíme její identifikátor a pravým kliknutím její hodnotu. Abychom nastavili nebo vymazali proměnnou, najedeme na hlavičku menu(tři tečky), tím zobrazíme menu, kde vybereme danou akci. </translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
-        <source>Barbie Calculator</source>
-        <translation type="vanished">Barbie Calculator</translation>
+        <source>Calculator</source>
+        <translation>Calculator</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="29"/>
-        <source>Barbie calculator</source>
-        <translation type="unfinished">Barbie calculator</translation>
+        <source>Calculator</source>
+        <translation>Calculator</translation>
     </message>
     <message>
         <location filename="../qml/main.qml" line="41"/>

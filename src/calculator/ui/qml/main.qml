@@ -26,7 +26,7 @@ AppWindow {
     ratio: 522/1101.
     height: 522
 
-    title: qsTr("Barbie calculator")
+    title: qsTr("Calculator")
     visible: true
 
     Item {
