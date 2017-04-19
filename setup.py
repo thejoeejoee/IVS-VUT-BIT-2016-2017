@@ -46,7 +46,7 @@ def setup():
         entry_points={
             'console_scripts': [
                 'calculator-console=calculator.console:main',
-                'calculator-app=calculator.main:main',
+                'calculator=calculator.main:main',
             ]
         },
         data_files=[

@@ -22,7 +22,7 @@ $ git clone https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017.git calculator
 $ cd calculator
 $ python3 setup.py install
 ```
-V obou případech je do systému nainstalována grafický spouštěč, hledejte v menu vašeho systému. Také jsou nainstalovány spustitelné programy `calculator-app`, `calculator-console`, z niž první spouští grafické rozhraní aplikace, druhý pouze konzolovou verzi kalkulačky. 
+V obou případech je do systému nainstalována grafický spouštěč, hledejte v menu vašeho systému. Také jsou nainstalovány spustitelné programy `calculator`, `calculator-console`, z niž první spouští grafické rozhraní aplikace, druhý pouze konzolovou verzi kalkulačky. 
 
 Odinstalace
 ---------
