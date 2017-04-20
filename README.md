@@ -7,34 +7,6 @@
 
 Grafická kalkulačka jako školní projekt do předmětu IVS na FIT VUT v letním semestru školního roku 2016/2017. Kalkulačka nabízí plnohodnotné matematické funkce, systém proměnných (včetně jejich zavislostí) i skrytý easter egg.
 
-Instalace
----------
-Aplikaci je možnost nainstalovat buď jako instalační balíček operačního systému Debian stáhnutelný z [posledního vydání](https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest) aplikace - instalace pak probíhá následovně:
-```
-// instalace balíku
-# dpkg -i python3-calculator_XXX.deb
-// doinstalace jeho závislostí
-# apt install -f
-```
-Alternativní cestou instalace je instalace jako standardní balíček jazyka Python pomocí skriptu `setup.py` v kořenu repozitáře aplikace:
-```
-$ git clone https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017.git calculator
-$ cd calculator
-$ python3 setup.py install
-```
-V obou případech je do systému nainstalována grafický spouštěč, hledejte v menu vašeho systému. Také jsou nainstalovány spustitelné programy `calculator`, `calculator-console`, z niž první spouští grafické rozhraní aplikace, druhý pouze konzolovou verzi kalkulačky. 
-
-Odinstalace
----------
-Zde záleží, kterým způsobem byla kalkulačka nainstalována - jestliže jako balíček operačního systému Debian, pak pomocí standardního balíčkovacího systému `apt`:
-```
-# apt remove python3-calculator
-```
-V případě instalace jako Python balíček (požadována Python utilita `pip3` pro správu balíčků):
-```
-# pip3 uninstall calculator
-```
-
 Uživatelskou dokumentaci naleznete [zde](./doc/doc.md).
 
 Prostředí
