@@ -1,9 +1,11 @@
 REQUIREMENTS=../requirements.txt
-
+PACK_NAME=xkolar71_xnguye16_xomach00_xnavra61
 PYTHON=python3
 PIP=pip3
 PYRCC5=pyrcc5
 DIR:=$(CURDIR)
+
+TMP_DIR := $(shell mktemp -d)
 
 all: run
 
@@ -30,8 +32,23 @@ test:
 run:
 	$(PYTHON) $(DIR)/calculator/main.py
 
+.ONESHELL:
+pack: build-profiling-report clean
+	mkdir -p $(TMP_DIR)/$(PACK_NAME)/doc $(TMP_DIR)/$(PACK_NAME)/install $(TMP_DIR)/$(PACK_NAME)/repo;
+	cp -R ./../ $(TMP_DIR)/$(PACK_NAME)/repo/
+	rm -rf $(TMP_DIR)/$(PACK_NAME)/repo/.venv $(TMP_DIR)/$(PACK_NAME)/repo/.idea;
+	make doc
+	cp -r ../doc/html/* $(TMP_DIR)/$(PACK_NAME)/doc/;
+	make pack-deb
+	cp ../deb_dist/*.deb $(TMP_DIR)/$(PACK_NAME)/install/;
+	cd $(TMP_DIR);
+	zip -r $(PACK_NAME).zip $(PACK_NAME);
+	cd -;
+	cp $(TMP_DIR)/$(PACK_NAME).zip ..;
+
 clean:
-	rm -rf ../dist/ ../deb_dist/ ./calculator.egg-info/
+	rm -rf ../dist/ ../deb_dist/ ./calculator.egg-info/ ../$(PACK_NAME).zip ../build ../calculator.egg-info/
+	find ../profiling/ -maxdepth 1 -type f ! -name "*.pdf" ! -name "*.tex" -delete
 
 pack-deb: clean clean-pyc compile-resources
 	cd ..; $(PYTHON) setup.py --command-packages=stdeb.command bdist_deb
@@ -45,8 +62,8 @@ compile-resources:
 doc:
 	doxygen
 
+doc-user:
+	cd ../doc; pandoc -f markdown_github --template=pandoc_template.tex  -V geometry:margin=2cm -t latex -o ../documentation.pdf doc.md
+
 build-profiling-report: ../profiling/report.tex
 	cd ../profiling/; pdflatex -interaction nonstopmode report.tex
-
-run: $(ENVIROMENT)
-	$($(PYTHON)) calculator/main.py

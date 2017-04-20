@@ -14,7 +14,7 @@
 
 ## **Úvod**
 
-Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jádro Barbie calculatoru je napsáno v [Pythonu](https://www.python.org/).  
+Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jádro aplikace Calculator je napsáno v jazyce [Python](https://www.python.org/), nad kterým je postaveno grafické uživatelské rozhraní v Qt5.
 
 ## **Instalace**
 
@@ -23,7 +23,9 @@ Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jád
 ## **Matematické funkce**
 
 Ve všech funkcích jdou použít klasické operátory (+, -, *, /) a i jiné funkce.
+
 <br>
+
 <table style="width: 100%;">
 	<tr>
 		<th style="background-color: lightgrey;">Zápis</th>

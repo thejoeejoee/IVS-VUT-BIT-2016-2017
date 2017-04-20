@@ -1,4 +1,4 @@
-xkolar71 100
-xnguye16 100
-xomach00 100
-xnavra61 100
+xkolar71 100 (jádro kalkulačky, testy mat. knihovny, instalátor)
+xnguye16 100 (grafické rozhraní kalkulačky, programová dokumentace)
+xomach00 100 (systém proměnných, matematická knihovna, dokumentace)
+xnavra61 100 (uživatelské testování a dokumentace)
