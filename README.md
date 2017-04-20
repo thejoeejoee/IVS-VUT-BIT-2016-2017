@@ -35,6 +35,8 @@ V případě instalace jako Python balíček (požadována Python utilita `pip3`
 # pip3 uninstall calculator
 ```
 
+Uživatelskou dokumentaci naleznete [zde](./doc/doc.md).
+
 Prostředí
 ---------
 Ubuntu 64bit

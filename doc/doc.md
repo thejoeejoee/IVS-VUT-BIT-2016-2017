@@ -1,6 +1,6 @@
 
 # IVS-VUT-BIT-2016-2017 
-# **Barbie calculator - Uživatelská dokumentace**
+# **Calculator - Uživatelská dokumentace**
 
 ## **Obsah**
 
@@ -14,80 +14,56 @@
 
 ## **Úvod**
 
-Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jádro aplikace Calculator je napsáno v jazyce [Python](https://www.python.org/), nad kterým je postaveno grafické uživatelské rozhraní v Qt5.
+Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi. Jádro Calculatoru je napsáno v [Pythonu](https://www.python.org/).  
 
 ## **Instalace**
 
+Aplikaci je možnost nainstalovat buď jako instalační balíček operačního systému Debian stáhnutelný z [posledního vydání](https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest) aplikace - instalace pak probíhá následovně:
+```
+// instalace balíku
+# dpkg -i python3-calculator_XXX.deb
+// doinstalace jeho závislostí
+# apt install -f
+```
+Alternativní cestou instalace je instalace jako standardní balíček jazyka Python pomocí skriptu `setup.py` v kořenu repozitáře aplikace:
+```
+$ git clone https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017.git calculator
+$ cd calculator
+$ python3 setup.py install
+```
+V obou případech je do systému nainstalována grafický spouštěč, hledejte v menu vašeho systému. Také jsou nainstalovány spustitelné programy `calculator`, `calculator-console`, z niž první spouští grafické rozhraní aplikace, druhý pouze konzolovou verzi kalkulačky. 
+
 ## **Odinstalace**
+
+Zde záleží, kterým způsobem byla kalkulačka nainstalována - jestliže jako balíček operačního systému Debian, pak pomocí standardního balíčkovacího systému `apt`:
+```
+# apt remove python3-calculator
+```
+V případě instalace jako Python balíček (požadována Python utilita `pip3` pro správu balíčků):
+```
+# pip3 uninstall calculator
+```
 
 ## **Matematické funkce**
 
 Ve všech funkcích jdou použít klasické operátory (+, -, *, /) a i jiné funkce.
 
 <br>
-
-<table style="width: 100%;">
-	<tr>
-		<th style="background-color: lightgrey;">Zápis</th>
-		<th style="background-color: lightgrey;">Význam</th>
-		<th style="background-color: lightgrey;">Poznámka</th> 
-	</tr>
-	<tr>
-		<td style="background-color: white;">abs(x)</td>
-		<td rowspan="2" style="background-color: white;">Funkce pro výpočet absolutní hodno- ty zadaného čísla</td>
-		<td rowspan="2" style="background-color: white;"></td>
-	</tr>
-	<tr>
-		<td>|x|</td>
-	</tr>
-	<tr>
-		<td style="background-color: white;">fact(x)</td>
-		<td rowspan="2" style="background-color: white;">Výpočet faktorialu zadaného čísla</td>
-		<td rowspan="2" style="background-color: white;"> Hodnota faktorialu je kvůli prudkému nárustu omezena.</td>
-	</tr>
-	<tr>
-		<td>x!</td>
-	</tr>
-	<tr>
-		<td>ln(x)</td>
-		<td>Funkce počítá přirozený logaritmus čísla 'x'</td>
-		<td>Přirozený logaritmus má základ 'e' (Eulerovo číslo)</td>
-	</tr>
-	<tr>
-		<td>log(x,y)</td>
-		<td>Výpočet obecného logaritmu se zada- ným základem</td>
-		<td>x = logaritmované číslo<br>y = základ logaritmu
-	</tr>
-	<tr>
-		<td>pow(x,y)</td>
-		<td rowspan="2">Funkce pro výpočet mocniny</td>
-		<td rowspan="2">x = mocněné číslo (mocněnec)<br>y = mocnitel</td>
-	</tr>
-	<tr>
-		<td>x**y</td>
-	</tr>
-	<tr>
-		<td>rand()</td>
-		<td>Funkce, která vygeneruje náhodné reálné číslo</td>
-		<td>Funkce nemá žádný parametr</td>
-	</tr>
-	<tr>
-		<td>root(x,y)</td>
-		<td>Funkce pro výpočet obecné odmocni- ny</td>
-		<td>x = odmocňované číslo<br>y = y-tá odmocnina</td>
-	</tr>
-	<tr>
-		<td>sqrt(x)</td>
-		<td>Funkce pro výpočet 2. odmocniny</td>
-		<td></td>
-	</tr>
-</table>
+|Zápis|Význam|Poznámka|
+|-----|------|--------|
+|abs(x)<br>\|x\| |Funkce pro výpočet absolutní hodnoty zadaného čísla.| |
+|fact(x)<br>x! |Výpočet faktorialu zadaného čísla.|Hodnota faktorialu je kvůli prudkému nárustu omezena.|
+|ln(x) |Funkce počítá přirozený logaritmus čísla 'x'.|Přirozený logaritmus má základ 'e' (Eulerovo číslo).|
+|log(x,y) |Výpočet obecného logaritmu se zadaným základem.|x = logaritmované číslo<br>y = základ logaritmu|
+|pow(x,y)<br>x**y |Funkce pro výpočet mocniny.|x = mocněné číslo (mocněnec)<br>y = mocnitel|
+|rand() |Funkce, která vygeneruje náhodné reálné číslo.|Funkce nemá žádný parametr.|
+|root(x,y) |Funkce pro výpočet obecné odmocniny.|x = odmocňované číslo<br>y = y-tá odmocnina|
+|sqrt(x) |Funkce pro výpočet 2. odmocniny.| |
+<br>
 
 ## **Tutorial**
 
-V této kapitole bude popsána práce v Barbie calculator, jeho funkce a užitečné vlastnosti, a dále také základní panely pro práci.
-
-*Okno programu má pevně nastavený poměr stran*.
+V této kapitole bude popsána práce v Calculator, jeho funkce a užitečné vlastnosti, a dále také základní panely pro práci.
 
 ### Komponenty
 
@@ -105,7 +81,7 @@ Jednou z hlavních částí je panel s funkcemi a k němu navazující okno s v�
 
 #### Proměnné
 
-Barbie calculator umí také používat proměnné, takže si můžete uložit výpočty do proměnných a dále je používat. Panel proměnných obsahuje také posuvník, pokud je proměnných příliš mnoho.
+Calculator umí také používat proměnné, takže si můžete uložit výpočty do proměnných a dále je používat. Panel proměnných obsahuje také posuvník, pokud je proměnných příliš mnoho.
 
 Dávejte si ale pozor na to, že proměnné jsou **case sensitive**.
 
@@ -115,7 +91,7 @@ Pro identifikátor můžete použít jakýkoliv UNICODE znak, který neodporuje 
 
 ### Práce s kalkulačkou
 
-**Barbie calculator** obsahuje funkce, které Vám mohou zrychlit práci. Jednou z těchto funkcí je doplňování kódu klávesovou zkratkou `ctrl+space`. Toto menu obsahuje všechny proměnné i funkce.
+**Calculator** obsahuje funkce, které Vám mohou zrychlit práci. Jednou z těchto funkcí je doplňování kódu klávesovou zkratkou `ctrl+space`. Toto menu obsahuje všechny proměnné i funkce.
 
 ![Doplňování kódu](complete.png)
 
@@ -125,9 +101,20 @@ Dále také rozšíření závorek a výrazů do funkcí. Výraz, který chcete 
 
 ![Výraz po použití funkce](enfunc2.png)
 
-Poslední věc, kterou je potřeba zmínit je práce s proměnnými. Proměnné lze mazat v menu (tři tečky) pomocí ikony koše, a také nastavit na `1` nebo `0`. Pravým kliknutím myši se Vám do výrazového okna zkopíruje hodnota proměnné a levým kliknutím myši její identifikátor.
+Také je třeba zmínit práci s proměnnými. Proměnné lze mazat v menu (tři tečky) pomocí ikony koše, a také nastavit na `1` nebo `0`. Pravým kliknutím myši se Vám do výrazového okna zkopíruje hodnota proměnné a levým kliknutím myši její identifikátor.
 
 ![Mnoho proměnných a jejich nastavení](many_vars.png)
+
+Calculator má také vestavěnou nápovědu funkcí.
+
+PICTURE
+
+Poslední věcí je zápis v různých soustavách, který se provádí pomocí prefixů:
+* `0b[číslo]` pro dvojkovou soustavu
+* `0o[number]` pro osmičkovou soustavu
+* `0x[number]` pro šestnáctkovou soustavu
+
+![Zápis v dvojkové soustavě](binary_value.png)
 
 
 
