@@ -6,6 +6,7 @@ from inspect import Signature, Parameter
 from calculator import NumericValue
 from calculator.exceptions import UnsupportedBaseError
 from calculator.settings import SUPPORTED_BASES
+from calculator.utils.translate import translate
 
 __author__ = "Josef Kolář, Son Hai Nguyen"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
@@ -84,7 +85,7 @@ class Formatter(object):
                 if "<class" in annotation_repr else
                 annotation_repr.split("typing.")[-1]
                 if 'typing.' in annotation_repr else
-                annotation.__name__
+                translate("Formatter", annotation.__name__)
             ))
 
         return "{identifier}({params})".format(
