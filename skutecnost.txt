@@ -1,0 +1,23 @@
+Stanovené termíny
+Termíny jsme většinou dodrželi. Zpoždění bylo nanejvýš den. Časový plán se
+snadno dodržoval, jelikož jsme si dobře rozdělili a rozvhrhli projekt.
+Samozřejmě také pomohlo, že na každý úkol jsme si dali dostatek času.
+
+Rozdělení práce
+Zůstalo stejné, protože každý řekl, jaké má znalosti a zkušeností, tudíž podle
+toho dostával úkoly.
+
+Komunikace
+Prvně jsme se rozhodli používat Trello pro rozdělování a přidělování úkolů,
+avšak den poté jsme zvolili užívání GH Issues, kvůli přehlednosti a integrací s
+GitHubem.
+Komunikovali jsme spolu pomocí Facebooku, většinou co 4 dny, jelikož všichni
+jsme měli zadané úkoly a byli jsme samostatní. Konaly se dva meetingy, první byl
+ohledně specifikace a analýzy požadavků a druhý na návrh kostry dokumentace.
+
+Produkt
+V kalkulačce jsme naimplementovali všechny požadavky i featury. Pouze nás
+zaskočilo množství bugů po end-user testování. Implementovali jsme i věci nad
+rámec zadání např. jednoduchý intellisense, zvýraznění syntaxe, systém
+proměnných, easter egg, inteligentní doplňování výrazu, překlady aplikace do
+více jazyků, systém proměnných a přepočítávání proměnných podle závislostí.
