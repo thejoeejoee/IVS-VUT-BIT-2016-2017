@@ -20,12 +20,12 @@ echo "$files" | while read line; do
 	authors=`printf "$authors" | sed 's/EnkeyMC/Martin Omacht/g' | sed 's/Sony/Son Hai Nguyen/g' | sed 's/Meigurad/Robert Navrátil/g' | sort | uniq`
 	authors=`printf "$authors" | tr '\n' ',' | sed 's/,/, /g'`
 
-	linenum=`cat "$line" | nl -b a | grep -E ".*import.*$" | tail -n 1 | awk '{print $1}'`
+	linenum=`cat "$line" | nl -b a | grep -E ".* import .*$" | tail -n 1 | awk '{print $1}'`
 
 	if [ -z "$linenum" ]; then
 		linenum='1'
 	fi
-	
+
 	content=`sed "$linenum a$license" "$line" | sed "$linenum a$credits" | sed "$linenum a$copyright" | sed "$linenum a$authors_prefix\"$authors\"" | sed "$linenum a\ "`
 	if $writefiles; then
 		printf "%s" "$content" > "$line"
