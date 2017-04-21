@@ -25,13 +25,13 @@ echo "$files" | while read line; do
 	if [ -z "$linenum" ]; then
 		content=`sed "1 a$license" "$line" | sed "1 a$credits" | sed "1 a$copyright" | sed "1 a$authors_prefix$authors" | sed "1 a\ "`
 		if $writefiles; then
-			printf "$content" > "$line"
+			printf "%s" "$content" > "$line"
 		fi
 		echo "In file '$line' inserted on line: 1"
 	else
 		content=`sed "$linenum a$license" "$line" | sed "$linenum a$credits" | sed "$linenum a$copyright" | sed "$linenum a$authors_prefix$authors" | sed "$linenum a\ "`
 		if $writefiles; then
-			printf "$content" > "$line"
+			printf "%s" "$content" > "$line"
 		fi
 		echo "In file '$line' inserted on line: $linenum"
 	fi
