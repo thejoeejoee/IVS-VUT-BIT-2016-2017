@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="cs_CZ" sourcelanguage="en_GB">
 <context>
+    <name>Formatter</name>
+    <message>
+        <location filename="../../utils/formatter.py" line="88"/>
+        <source>NumericValue</source>
+        <translation>Číslo</translation>
+    </message>
+</context>
+<context>
     <name>About</name>
     <message>
         <location filename="../qml/windows/About.qml" line="86"/>

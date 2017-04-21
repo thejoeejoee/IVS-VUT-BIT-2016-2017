@@ -3,7 +3,7 @@ from enum import IntEnum
 
 from PyQt5.QtCore import QObject, Q_ENUMS
 from PyQt5.QtQml import QQmlEngine, QJSEngine
- 
+
 __author__ = "Josef Kolář, Son Hai Nguyen"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
 __credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
@@ -50,6 +50,7 @@ class Expansion(QObject):
     @staticmethod
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
         return Expansion()
+
 
 BUILTIN_FUNCTIONS = (
     BuiltinFunction.ABS,

@@ -82,7 +82,7 @@ def update_qrc():
         return False
 
     from PyQt5.pyrcc_main import processResourceFile
- 
+
     if processResourceFile([QRC_FILE], RESOURCES_FILE, False):
         print('Resources.py successfully recompiled.', file=sys.stderr)
         return True

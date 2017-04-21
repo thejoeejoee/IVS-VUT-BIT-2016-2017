@@ -1,6 +1,6 @@
 # coding=utf-8
 from typing import Union, Tuple, Callable, Set, NewType
- 
+
 __author__ = "Josef Kolář, Martin Omacht"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
 __credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]

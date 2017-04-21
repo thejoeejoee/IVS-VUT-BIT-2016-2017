@@ -10,7 +10,7 @@ from PyQt5.QtQuick import QQuickItem
 from calculator.core.solver import Solver
 from calculator.settings import EXPRESSION_SPLITTERS, EXPRESSION_EXPANSIONS, Expansion, BUILTIN_FUNCTIONS
 from calculator.utils.formatter import Formatter
- 
+
 __author__ = "Son Hai Nguyen"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
 __credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
@@ -69,10 +69,10 @@ class ExpAnalyzer(QObject):
             start, end = self._function_body_borders(func, "".join(mutable_content))
             functions.append((func, start, end))
 
-            for i in range(start - len(func) -1, start):
+            for i in range(start - len(func) - 1, start):
                 mutable_content[i] = "_"
 
-        current_functions = []      # functions can be nested, so then display the most nested function
+        current_functions = []  # functions can be nested, so then display the most nested function
 
         for func, start, end in functions:
             if start <= cursor <= end + 1:
@@ -88,7 +88,7 @@ class ExpAnalyzer(QObject):
         :param expr: Expression where it will be finding
         :return: Start and end index of body of function
         """
-        brackets_count = {"(": 1, ")": 0}      # 1 for function
+        brackets_count = {"(": 1, ")": 0}  # 1 for function
         match = re.search('{} *\('.format(re.escape(func)), expr)
 
         for i in range(match.end(), len(expr)):
@@ -111,7 +111,7 @@ class ExpAnalyzer(QObject):
 
         for splitter in EXPRESSION_SPLITTERS - {"("}:
             expr = expr.replace(splitter, ".")
-        splitted_expressions = [ s.strip() for s in expr.split(".")]
+        splitted_expressions = [s.strip() for s in expr.split(".")]
 
         for e in splitted_expressions:
             result.extend([match.group() for match in re.finditer('(?!(\(|\)| |\.)).+?(?=\()', e)])
@@ -128,7 +128,7 @@ class ExpAnalyzer(QObject):
 
         try:
             return {func: expansion_type
-                              for func, _, expansion_type in EXPRESSION_EXPANSIONS}[expansion]
+                    for func, _, expansion_type in EXPRESSION_EXPANSIONS}[expansion]
         except KeyError:
             return Expansion.ExpansionType.Normal
 
@@ -144,7 +144,6 @@ class ExpAnalyzer(QObject):
             if func == expansion:
                 return func_expansion
         return expansion
-
 
     @pyqtSlot(str, bool, result=str)
     def expandExpression(self, expansion: str, expand_around_current_word: bool) -> str:

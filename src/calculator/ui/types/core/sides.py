@@ -4,7 +4,7 @@ from typing import Optional
 
 from PyQt5.QtCore import QObject, Q_ENUMS, pyqtSlot
 from PyQt5.QtQml import QQmlEngine, QJSEngine
- 
+
 __author__ = "Son Hai Nguyen"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
 __credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]

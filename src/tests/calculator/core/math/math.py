@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 from calculator.core.math.math import Math
 from calculator.exceptions import MathError
- 
+
 __author__ = "Josef Kolář"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
 __credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]

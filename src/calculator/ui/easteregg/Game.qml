@@ -28,7 +28,7 @@ ApplicationWindow {
     /// Score of other player
     property int enemyScore: 0
     /// Max score which player need to archieve to win
-    readonly property int maxScore: 3
+    readonly property int maxScore: 2
     /// Size of player rebound area
     property size playerSize: Qt.size(10, 100)
 

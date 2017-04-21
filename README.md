@@ -13,6 +13,16 @@ Rozhraní kalkulačky
 -------------------
 ![Screenshot](./screenshot.png)
 
+Vývoj
+-----
+Testovací skripty spustíme příkazem
+```
+make test
+```
+
+Po každém commitu se aplikace sestaví a otestuje pomocí systémů [Travis-CI](https://travis-ci.com/) a [Codeship](https://codeship.com/).
+Pomocí příkazu `make` lze také zkompilovat QML a přiložené zdroje, či nainstalovat závislosti aplikace viz. Makefile.
+
 Prostředí
 ---------
 Ubuntu 64bit
