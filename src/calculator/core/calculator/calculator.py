@@ -6,6 +6,11 @@ from calculator.core.solver import Solver
 from calculator.exceptions import VariableError, VariableRemoveRestrictError, VariableNameError
 from calculator import NumericValue, Variable
 from calculator.utils import OrderedDefaultDict
+ 
+__author__ = "Josef Kolář, Martin Omacht"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 
 class Calculator(object):

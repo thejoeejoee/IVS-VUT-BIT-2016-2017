@@ -8,6 +8,11 @@ from itertools import chain
 from os import W_OK, access
 from os.path import exists, getmtime, abspath, dirname, join
 
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
+
 # definitive solution for calculator imports - due running from non standard working directories
 base_path = abspath(dirname(__file__))
 sys.path.insert(0, join(base_path, '..'))
@@ -77,6 +82,7 @@ def update_qrc():
         return False
 
     from PyQt5.pyrcc_main import processResourceFile
+ 
     if processResourceFile([QRC_FILE], RESOURCES_FILE, False):
         print('Resources.py successfully recompiled.', file=sys.stderr)
         return True

@@ -10,6 +10,11 @@ from PyQt5.QtQuick import QQuickItem
 from calculator.core.solver import Solver
 from calculator.settings import EXPRESSION_SPLITTERS, EXPRESSION_EXPANSIONS, Expansion, BUILTIN_FUNCTIONS
 from calculator.utils.formatter import Formatter
+ 
+__author__ = "Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 
 class ExpAnalyzer(QObject):

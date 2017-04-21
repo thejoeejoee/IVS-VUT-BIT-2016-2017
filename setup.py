@@ -5,6 +5,11 @@ from distutils import core
 from os.path import abspath, dirname, join
 
 from setuptools import find_packages
+ 
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 base_path = abspath(dirname(__file__))
 

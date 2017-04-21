@@ -2,6 +2,11 @@
 from unittest.case import TestCase
 
 from calculator.utils.formatter import Formatter
+ 
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 
 class TestNumberFormatter(TestCase):

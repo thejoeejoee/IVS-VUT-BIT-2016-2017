@@ -5,6 +5,11 @@ from PyQt5.QtCore import qDebug
 from PyQt5.QtGui import QResizeEvent
 from PyQt5.QtGui import QWindow
 from PyQt5.QtQuick import QQuickWindow
+ 
+__author__ = "Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 
 class AppWindow(QQuickWindow):

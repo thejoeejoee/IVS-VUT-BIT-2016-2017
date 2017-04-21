@@ -35,6 +35,11 @@ if platform.system() == "Linux":  # Needed for platform.linux_distribution, whic
 
 # noinspection PyUnresolvedReferences
 import calculator.ui.resources
+ 
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 
 def qt_message_handler(mode, context, message):
