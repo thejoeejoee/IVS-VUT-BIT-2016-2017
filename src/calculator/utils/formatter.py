@@ -6,7 +6,7 @@ from inspect import Signature, Parameter
 from calculator import NumericValue
 from calculator.exceptions import UnsupportedBaseError
 from calculator.settings import SUPPORTED_BASES
- 
+
 __author__ = "Josef Kolář, Son Hai Nguyen"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
 __credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]

@@ -35,7 +35,7 @@ if platform.system() == "Linux":  # Needed for platform.linux_distribution, whic
 
 # noinspection PyUnresolvedReferences
 import calculator.ui.resources
- 
+
 __author__ = "Josef Kolář, Son Hai Nguyen"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
 __credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
@@ -67,7 +67,9 @@ def qt_message_handler(mode, context, message):
         print('{mode}: {msg}\t\t\t\tline: {line}, function: {func}, file: {file}'.format(
             mode=mode, line=context.line, func=context.function, file=context.file, msg=message))
 
+
 qInstallMessageHandler(qt_message_handler)
+
 
 class CalculatorApp(QApplication):
     def __init__(self, argv: List[str]):
@@ -75,7 +77,7 @@ class CalculatorApp(QApplication):
 
         self._translator = QTranslator()
 
-        language_name =  QLocale().system().bcp47Name()
+        language_name = QLocale().system().bcp47Name()
         translation_file_path = ":/translations/en.qm"
 
         if language_name in SUPPORTED_LANGUAGES:
@@ -94,7 +96,7 @@ class CalculatorApp(QApplication):
         qmlRegisterSingletonType(QUrl("qrc:/assets/styles/UIStyles.qml"), "StyleSettings", 1, 0, "StyleSettings")
         qmlRegisterSingletonType(Sides, "Sides", 1, 0, "Sides", Sides.singletonProvider)
         qmlRegisterSingletonType(Expansion, "Expansion", 1, 0, "Expansion", Expansion.singletonProvider)
-        qmlRegisterSingletonType(Expression, "Expression", 1, 0 ,"Expression", Expression.singletonProvider)
+        qmlRegisterSingletonType(Expression, "Expression", 1, 0, "Expression", Expression.singletonProvider)
         qmlRegisterSingletonType(UIAdapter, "Calculator", 1, 0, "Calculator", UIAdapter.singletonProvider)
         TypeRegister.register_type(ExpSyntaxHighlighter)
         TypeRegister.register_type(AppWindow)

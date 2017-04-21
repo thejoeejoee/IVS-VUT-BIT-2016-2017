@@ -6,7 +6,7 @@ import random
 from calculator._typing import BinaryNumericFunction
 from calculator._typing import NumericValue
 from calculator.exceptions import MathError
- 
+
 __author__ = "Josef Kolář, Martin Omacht, Son Hai Nguyen"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
 __credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
@@ -74,7 +74,7 @@ class Math(object):
             if y == 2:
                 return math.sqrt(x)
             else:
-                return math.pow(x, 1/y)
+                return math.pow(x, 1 / y)
         except ValueError as e:
             raise MathError from e
 
