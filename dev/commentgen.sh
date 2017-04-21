@@ -13,7 +13,7 @@ else
 	echo "Test run, rerun with -w argument to write comments to files."
 fi
 
-files=`find .. -type f -name '*.py'
+files=`find .. -type f -name '*.py'`
 
 echo "$files" | while read line; do
 	authors=`git blame $line | sed -r 's/^[^\(]+ \(//g' | sed -r 's/ [0-9]{4}.*$//g' | sed -r 's/ +$//g' | sort | uniq`
