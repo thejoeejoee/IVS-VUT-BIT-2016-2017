@@ -10,7 +10,7 @@ TMP_DIR := $(shell mktemp -d)
 all: run
 
 .PHONY: install install-python install-calculator install-requirements test run clean doc\
-		compile-resources run pack-deb clean-pyc build-profiling-report
+		compile-resources run pack-deb clean-pyc build-profiling-report build-user-documentation
 
 install: install-python install-calculator
 
@@ -33,22 +33,34 @@ run:
 	$(PYTHON) $(DIR)/calculator/main.py
 
 .ONESHELL:
-pack: build-profiling-report clean
-	mkdir -p $(TMP_DIR)/$(PACK_NAME)/doc $(TMP_DIR)/$(PACK_NAME)/install $(TMP_DIR)/$(PACK_NAME)/repo;
+pack: build-profiling-report build-user-documentation clean
+	mkdir -p $(TMP_DIR)/$(PACK_NAME)/doc $(TMP_DIR)/$(PACK_NAME)/install $(TMP_DIR)/$(PACK_NAME)/repo
 	cp -R ./../ $(TMP_DIR)/$(PACK_NAME)/repo/
-	rm -rf $(TMP_DIR)/$(PACK_NAME)/repo/.venv $(TMP_DIR)/$(PACK_NAME)/repo/.idea;
+	cp $(TMP_DIR)/$(PACK_NAME)/repo/doc/documentation.pdf $(TMP_DIR)/$(PACK_NAME)/repo/documentation.pdf
+	rm -rf $(TMP_DIR)/$(PACK_NAME)/repo/.venv $(TMP_DIR)/$(PACK_NAME)/repo/.idea
 	make doc
-	cp -r ../doc/html/* $(TMP_DIR)/$(PACK_NAME)/doc/;
+	cp -r ../doc/html/* $(TMP_DIR)/$(PACK_NAME)/doc/
 	make pack-deb
-	cp ../deb_dist/*.deb $(TMP_DIR)/$(PACK_NAME)/install/;
-	cd $(TMP_DIR);
-	zip -r $(PACK_NAME).zip $(PACK_NAME);
-	cd -;
-	cp $(TMP_DIR)/$(PACK_NAME).zip ..;
+	cp ../deb_dist/*.deb $(TMP_DIR)/$(PACK_NAME)/install/
+	cd $(TMP_DIR)
+	zip -r $(PACK_NAME).zip $(PACK_NAME)
+	cd -
+	cp $(TMP_DIR)/$(PACK_NAME).zip ..
+
+.ONESHELL:
+pack-wis: build-user-documentation clean
+	cd ..
+	mkdir -p $(TMP_DIR)/$(PACK_NAME)
+	cp -R hodnoceni.txt src/calculator doc/documentation.pdf odevzdani.txt $(TMP_DIR)/$(PACK_NAME)
+	cd $(TMP_DIR)
+	zip -r IS-FIT_$(PACK_NAME).zip $(PACK_NAME)
+	cd -
+	cp $(TMP_DIR)/IS-FIT_$(PACK_NAME).zip .
 
 clean:
-	rm -rf ../dist/ ../deb_dist/ ./calculator.egg-info/ ../$(PACK_NAME).zip ../build ../calculator.egg-info/
+	rm -rf ../dist/ ../deb_dist/ ./calculator.egg-info/ ../$(PACK_NAME).zip ../build ../calculator.egg-info/ ../doc/html ../doc/latex
 	find ../profiling/ -maxdepth 1 -type f ! -name "*.pdf" ! -name "*.tex" -delete
+	find ../doc/ -maxdepth 1 -type f ! -name "*.png" ! -name "*.tex" ! -name "*.pdf" -delete
 
 pack-deb: clean clean-pyc compile-resources
 	cd ..; $(PYTHON) setup.py --command-packages=stdeb.command bdist_deb
@@ -66,4 +78,4 @@ build-user-documentation:
 	cd ../doc && pdflatex documentation.tex && pdflatex documentation.tex pdflatex
 	
 build-profiling-report: ../profiling/report.tex
-	cd ../profiling/; pdflatex -interaction nonstopmode report.tex
+	cd ../profiling/ && pdflatex -interaction nonstopmode report.tex

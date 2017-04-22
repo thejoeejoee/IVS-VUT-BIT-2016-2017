@@ -70,12 +70,12 @@ Jádro aplikace je napsáno v programovacím jazyce \\v~\href{https://www.python
 \section{Instalace}
 Aplikaci je možné nainstalovat jako: \\
 \begin{enumerate}
-    \item instalační balíček operačního systému Debian stáhnutelný z~\href{https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest}{posledního vydání} aplikace - instalace pak probíhá následovně: \\
+    \item instalační balíček operačního systému Debian, který je dostupný na adrese z~\href{https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest}{posledního vydání} aplikace nebo v \textbf{odevzdaném distribučním balíku ve složce \texttt{install/}}- instalace pak probíhá následovně: \\
     \begin{lstlisting}
     // instalace závislostí
     # apt install python3-all python3-pip python3-opengl
     // instalace balíku
-    # dpkg -i python3-calculator_XXX.deb
+    # dpkg -i python3-calculator_XXXX.deb
     \end{lstlisting}
     \item instalace jako standardní balíček jazyka Python pomocí skriptu \texttt{setup.py} v kořenu repozitáře aplikace:
     \begin{lstlisting}[breaklines]
@@ -170,11 +170,7 @@ výrazem k výpočtu.
 
 \textbf{Calculator} umí také používat proměnné, takže si můžete uložit výpočty do
 proměnných a dále je používat. Panel proměnných obsahuje také posuvník,
-pokud je proměnných příliš mnoho.
-\vspace{0.5cm}
-
-\noindent
-Dávejte si ale pozor na to, že proměnné jsou \textbf{case sensitive}.
+pokud je proměnných příliš mnoho. Je vhodné poznamenat, že u názvů proměnných je nutno respektovat velikost písmen. 
 
 \begin{figure}[H]
     \centering
@@ -182,8 +178,8 @@ Dávejte si ale pozor na to, že proměnné jsou \textbf{case sensitive}.
     \caption{Panel proměnných}
 \end{figure}
 
-Pro identifikátor můžete použít jakýkoliv UNICODE znak, který neodporuje
-běžným matematickým konstrukcím a znakům jako uvozovky apod.
+Pro identifikátor můžete použít jakýkoliv Unicode znak, který neodporuje
+běžným matematickým konstrukcím a znakům jako například uvozovky, operátory apod.
 
 \subsection{Práce s kalkulačkou}
 
@@ -191,7 +187,7 @@ běžným matematickým konstrukcím a znakům jako uvozovky apod.
 
 \textbf{Calculator} obsahuje funkce, které Vám mohou zrychlit práci.
 Jednou z těchto funkcí je doplňování kódu klávesovou zkratkou
-\texttt{ ctrl+space }. Toto menu obsahuje všechny proměnné i funkce.
+\texttt{ ctrl+space }. Toto menu obsahuje vytvořené proměnné i vestavěné funkce.
 
 \begin{figure}[H]
     \centering
@@ -236,7 +232,7 @@ proměnné a levým kliknutím myši její identifikátor.
 \end{figure}
 
 \noindent
-Poslední věcí je zápis v různých soustavách, který se provádí pomocí
+Poslední vlastností je zápis v různých soustavách, který se provádí pomocí
 prefixů:
 \begin{itemize}
     \item \texttt{0b{[}číslo{]}} pro dvojkovou soustavu 
