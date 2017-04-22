@@ -19,12 +19,12 @@ except ImportError as e:
 def main():
     try:
         while True:
-            user_inputs = input('>>> ').strip().split(";")
+            user_inputs = input('>>> ').split(";")
             if not user_inputs:
                 continue
             try:
                 for user_input in user_inputs:
-                    result, variables = calculator.process(user_input)
+                    result, variables = calculator.process(user_input.strip())
                     print(" === {}\n === {}\n".format(result, pformat(dict(variables))))
             except Exception as e:
                 print(e, repr(e))
