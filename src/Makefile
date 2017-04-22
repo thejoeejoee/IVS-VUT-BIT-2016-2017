@@ -63,7 +63,7 @@ doc:
 	doxygen
 
 build-user-documentation:
-	cd ../doc && pdflatex documentation.tex pdflatex documentation.tex;
+	cd ../doc && pdflatex documentation.tex && pdflatex documentation.tex pdflatex
 	
 build-profiling-report: ../profiling/report.tex
 	cd ../profiling/; pdflatex -interaction nonstopmode report.tex
