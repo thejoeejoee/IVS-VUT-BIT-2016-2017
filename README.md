@@ -7,8 +7,6 @@
 
 Grafická kalkulačka jako školní projekt do předmětu IVS na FIT VUT v letním semestru školního roku 2016/2017. Kalkulačka nabízí plnohodnotné matematické funkce, systém proměnných (včetně jejich zavislostí) i skrytý easter egg.
 
-Tutoriálem k aplikaci a postupy pro **instalaci** naleznete v [uživatelské dokumentaci](./doc/doc.md).
-
 Rozhraní kalkulačky
 -------------------
 ![Screenshot](./screenshot.png)
