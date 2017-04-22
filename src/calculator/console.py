@@ -19,15 +19,16 @@ except ImportError as e:
 def main():
     try:
         while True:
-            user_input = input('>>> ').strip()
-            if not user_input:
+            user_inputs = input('>>> ').strip().split(";")
+            if not user_inputs:
                 continue
             try:
-                result, variables = calculator.process(user_input)
-                print(" === {}\n === {}\n".format(result, pformat(dict(variables))))
+                for user_input in user_inputs:
+                    result, variables = calculator.process(user_input)
+                    print(" === {}\n === {}\n".format(result, pformat(dict(variables))))
             except Exception as e:
                 print(e, repr(e))
-    except (SystemExit, KeyboardInterrupt) as e:
+    except (SystemExit, KeyboardInterrupt, EOFError) as e:
         pass
 
 
