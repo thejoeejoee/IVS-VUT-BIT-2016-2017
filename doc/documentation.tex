@@ -1,7 +1,7 @@
 \documentclass[a4paper, 11pt]{article}
+
 \usepackage[utf8]{inputenc}
 \usepackage[left=2cm,text={17cm, 24cm},top=3cm]{geometry}
-\usepackage{times}
 \usepackage[unicode, colorlinks]{hyperref}
 \usepackage{natbib}
 \usepackage[czech]{babel}
@@ -65,9 +65,7 @@
 \section{Úvod}\label{uvod}
 
 Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi.
-Jádro Calculatoru je napsáno \\v~\href{https://www.python.org/}{Pythonu}.
-
-\vspace{1cm}
+Jádro aplikace je napsáno v programovacím jazyce \\v~\href{https://www.python.org/}{Python}.
 
 \section{Instalace}
 Aplikaci je možné nainstalovat jako: \\
@@ -75,15 +73,15 @@ Aplikaci je možné nainstalovat jako: \\
     \item instalační balíček operačního systému Debian stáhnutelný z~\href{https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest}{posledního vydání} aplikace -- instalace pak probíhá následovně: \\
     \begin{lstlisting}
     // instalace balíku
-     dpkg -i python3-calculator_XXX.deb
+    # dpkg -i python3-calculator_XXX.deb
     // doinstalace jeho závislostí
-     apt install -f
+    # apt install -f
     \end{lstlisting}
     \item instalace jako standardní balíček jazyka Python pomocí skriptu \texttt{setup.py} v kořenu repozitáře aplikace:
     \begin{lstlisting}[breaklines]
-    git clone https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017.git calculator
-    cd calculator
-    python3 setup.py install
+    $ git clone https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017.git calculator
+    $ cd calculator
+    # python3 setup.py install
     \end{lstlisting}
 \end{enumerate}
 
@@ -91,8 +89,6 @@ V obou případech je do systému nainstalován grafický spouštěč. Ten hlede
 v menu vašeho systému. Také jsou nainstalovány spustitelné programy
 \texttt{ calculator }, \texttt{ calculator-console }, z nichž první spouští
 grafické rozhraní aplikace, druhý pouze konzolovou verzi kalkulačky.
-
-\vspace{1cm}
 
 \section{Odinstalace}
 
@@ -107,8 +103,6 @@ Zde záleží, kterým způsobem byla kalkulačka nainstalována.
     # pip3 uninstall calculator
     \end{lstlisting}
 \end{enumerate}
-
-\newpage
 
 \section{Matematické funkce}
 
@@ -138,7 +132,7 @@ funkce.
 \end{table}
 
 
-\section{Tutorial}
+\section{Návod}
 
 V této kapitole bude popsána práce v \textbf{Calculator}u, jeho funkce a užitečné
 vlastnosti, a dále také základní panely pro práci.
@@ -160,7 +154,6 @@ zobrazit posunutím výsledku v příslušné číselné soustavě (stačí podr
     \caption{Číselné soustavy s převedeným číslem}
 \end{figure}
 
-\newpage
 
 \subsubsection{Funkce a zápisové okno}
 
@@ -190,8 +183,6 @@ Dávejte si ale pozor na to, že proměnné jsou \textbf{case sensitive}.
 
 Pro identifikátor můžete použít jakýkoliv UNICODE znak, který neodporuje
 běžným matematickým konstrukcím a znakům jako uvozovky apod.
-
-\newpage
 
 \subsection{Práce s kalkulačkou}
 
@@ -232,8 +223,6 @@ proměnné a levým kliknutím myši její identifikátor.
     \caption{Mnoho proměnných a jejich nastavení}
 \end{figure}
 
-\newpage
-
 \noindent
 \textbf{Calculator} má také vestavěnou nápovědu funkcí.
 
@@ -251,7 +240,6 @@ prefixů:
     \item \texttt{0o{[}number{]}} pro osmičkovou soustavu 
     \item \texttt{0x{[}number{]}} pro šestnáctkovou soustavu
 \end{itemize}
-
 
 \begin{figure}[H]
     \centering
