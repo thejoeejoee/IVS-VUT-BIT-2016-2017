@@ -63,7 +63,9 @@ doc:
 	doxygen
 
 doc-user:
-	cd ../doc; pandoc -f markdown_github --template=pandoc_template.tex  -V geometry:margin=2cm -t latex -o ../documentation.pdf doc.md
-
+	cd ../doc;
+	pdflatex dokumentace.tex
+	pdflatex dokumentace.tex
+	
 build-profiling-report: ../profiling/report.tex
 	cd ../profiling/; pdflatex -interaction nonstopmode report.tex
