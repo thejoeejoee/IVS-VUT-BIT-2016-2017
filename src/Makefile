@@ -62,10 +62,8 @@ compile-resources:
 doc:
 	doxygen
 
-doc-user:
-	cd ../doc;
-	pdflatex dokumentace.tex
-	pdflatex dokumentace.tex
+build-user-documentation:
+	cd ../doc && pdflatex documentation.tex pdflatex documentation.tex;
 	
 build-profiling-report: ../profiling/report.tex
 	cd ../profiling/; pdflatex -interaction nonstopmode report.tex
