@@ -6,19 +6,24 @@ Build-Depends: python3-setuptools, python3-all, debhelper (>= 7.4.3)
 Standards-Version: 3.9.1
 Package: python3-calculator
 Architecture: all
-Depends: ${misc:Depends}, ${python3:Depends}, python3-pip, python3-doxyqml, python3-doxypypy, python3-colour-runner, python3-opengl
+Depends: ${misc:Depends}, ${python3:Depends}, python3-all, python3-pip
 Description:
  IVS-VUT-BIT-2016-2017
- Grafická kalkulačka jako školní projekt do předmětu IVS na fakultě FIT VUT.
+ Grafická kalkulačka jako školní projekt do předmětu IVS na FIT VUT v letním semestru školního roku 2016/2017. Kalkulačka nabízí plnohodnotné matematické funkce, systém proměnných (včetně jejich zavislostí) i skrytý easter egg.
 
- Platforms
+ Platformy
  ---------
-
  Ubuntu 64bit
 
- Authors
+ Autoři
  ------
-
  /dej/uran/dom
  - xkolar71 Josef Kolář
+ - xnguye16 Son Hai Nguyen
+ - xomach00 Martin Omacht
+ - xnavra61 Robert Navrátil
+
+ Licence
+ -------
+ Tento program je licenován pod licencí GNU GPL Version 3.
 

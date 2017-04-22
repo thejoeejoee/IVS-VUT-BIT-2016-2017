@@ -70,12 +70,12 @@ Jádro aplikace je napsáno v programovacím jazyce \\v~\href{https://www.python
 \section{Instalace}
 Aplikaci je možné nainstalovat jako: \\
 \begin{enumerate}
-    \item instalační balíček operačního systému Debian stáhnutelný z~\href{https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest}{posledního vydání} aplikace -- instalace pak probíhá následovně: \\
+    \item instalační balíček operačního systému Debian stáhnutelný z~\href{https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest}{posledního vydání} aplikace - instalace pak probíhá následovně: \\
     \begin{lstlisting}
+    // instalace závislostí
+    # apt install python3-all python3-pip python3-opengl
     // instalace balíku
     # dpkg -i python3-calculator_XXX.deb
-    // doinstalace jeho závislostí
-    # apt install -f
     \end{lstlisting}
     \item instalace jako standardní balíček jazyka Python pomocí skriptu \texttt{setup.py} v kořenu repozitáře aplikace:
     \begin{lstlisting}[breaklines]

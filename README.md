@@ -13,13 +13,13 @@ Rozhraní kalkulačky
 
 Vývoj
 -----
-Testovací skripty spustíme příkazem
+Na jádro kalkulačky je napsána sada jednotkových testů. Na tyto testy existuje spouštěcí skript `src/test.py` nebo je lze spustit ze složky `src/` pomocí utility `make`: 
 ```
 make test
 ```
 
-Po každém commitu se aplikace sestaví a otestuje pomocí systémů [Travis-CI](https://travis-ci.com/) a [Codeship](https://codeship.com/).
-Pomocí příkazu `make` lze také zkompilovat QML a přiložené zdroje, či nainstalovat závislosti aplikace viz. Makefile.
+Po každé aplikované změně v repozitáži se aplikace sestaví a otestuje pomocí systémů [Travis-CI](https://travis-ci.com/thejoeejoee/IVS-VUT-BIT-2016-2017) a [Codeship](https://app.codeship.com/projects/211472).
+Pomocí příkazu `make` lze také zkompilovat QML a přiložené zdroje, či nainstalovat závislosti aplikace viz. `src/Makefile`.
 
 Prostředí
 ---------
