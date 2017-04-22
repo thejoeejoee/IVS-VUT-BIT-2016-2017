@@ -13,7 +13,7 @@
 \usepackage[mathcal]{euscript}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{mathtools, systeme}
+\usepackage{mathtools}
 \usepackage[table]{xcolor}
 \usepackage{fancyhdr}
 \usepackage{listings}
@@ -172,6 +172,7 @@ výrazem k výpočtu.
 proměnných a dále je používat. Panel proměnných obsahuje také posuvník,
 pokud je proměnných příliš mnoho.
 \vspace{0.5cm}
+
 \noindent
 Dávejte si ale pozor na to, že proměnné jsou \textbf{case sensitive}.
 
@@ -185,6 +186,8 @@ Pro identifikátor můžete použít jakýkoliv UNICODE znak, který neodporuje
 běžným matematickým konstrukcím a znakům jako uvozovky apod.
 
 \subsection{Práce s kalkulačkou}
+
+\subsubsection {Prace přes gracfické uživatelské rozhraní}
 
 \textbf{Calculator} obsahuje funkce, které Vám mohou zrychlit práci.
 Jednou z těchto funkcí je doplňování kódu klávesovou zkratkou
@@ -246,5 +249,30 @@ prefixů:
     \frame{\includegraphics[scale=0.6]{binary_value.png}}
     \caption{Zápis ve dvojkové soustavě}
 \end{figure}
+
+\subsubsection{Práce přes rozhraní příkazové řádky}
+\texttt{Calculator} poskytuje také rozhraní příkazové řádky, které se spouští příkazem\texttt{ calculator-console}.
+V tomto rozhraní můžete zadávat stejné matematické výrazy jako v grafickém rozhraní kalkulačky. Výrazy se dají oddělit středníkem (\texttt{;}), v takovém případě se výrazy vyhodnotí postupně za sebou. Po zadání výrazu kalkulačka vypíše výsledek (v případě přiřazování do proměnné je výsledek\texttt{ None}) a aktuální seznam proměnných.
+\vspace{0.5cm}
+
+\noindent
+Příklady použití:
+
+\noindent\texttt{\$ calculator-console} \\
+\texttt{>>> y = pow(x,2)} \\
+\texttt{\-\ === None} \\
+\texttt{\-\ === \{'Ans': (0, '= 0', set()),} \\
+\texttt{\-\ 'x': (0, '= 0', set()),} \\
+\texttt{\-\ 'y': (0.0, 'y = pow(x,2)', \{'x'\})\}} \\[0.5cm]
+\texttt{>>> x = 5; y} \\
+\texttt{\-\ === None} \\
+\texttt{\-\ === \{'Ans': (0, '= 0', set()),} \\
+\texttt{\-\ 'x': (4, 'x = 4', set()),} \\
+\texttt{\-\ 'y': (16.0, 'y = pow(x,2)', \{'x'\})\}} \\[0.5cm]
+\texttt{\-\ === 16.0} \\
+\texttt{\-\ === \{'Ans': (16.0, 'y', \{'y'\}),} \\
+\texttt{\-\ 'x': (4, 'x = 4', set()),} \\
+\texttt{\-\ 'y': (16.0, 'y = pow(x,2)', \{'x'\})\}}
+
 
 \end{document}
