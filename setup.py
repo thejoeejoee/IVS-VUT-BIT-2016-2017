@@ -2,9 +2,11 @@
 
 
 from distutils import core
+from distutils.command.bdist import bdist
 from os.path import abspath, dirname, join
 
 from setuptools import find_packages
+from setuptools.command.install import install
 from setuptools.command.sdist import sdist
 
 __author__ = "Josef Kolář, Son Hai Nguyen"
@@ -15,16 +17,18 @@ __license__ = "GNU GPL Version 3"
 base_path = abspath(dirname(__file__))
 
 
-class SDistCommand(sdist):
-    def run(self):
-        try:
-            from calculator.main import update_qrc
-        except ImportError:
-            def update_qrc():
-                pass
+def command_with_qrc_update(command):
+    class CommandWithQrcUpdate(command):
+        def run(self):
+            try:
+                from calculator.main import update_qrc
+            except ImportError:
+                def update_qrc():
+                    pass
 
-        update_qrc()
-        return super().run()
+            update_qrc()
+            return super().run()
+    return CommandWithQrcUpdate
 
 
 def setup():
@@ -73,8 +77,11 @@ def setup():
         ],
         include_package_data=True,
         test_suite='tests',
+        zip_safe=False,
         cmdclass={
-            'sdist': SDistCommand,
+            'sdist': command_with_qrc_update(sdist),
+            'bdist': command_with_qrc_update(bdist),
+            'install': command_with_qrc_update(install),
         },
     )
 

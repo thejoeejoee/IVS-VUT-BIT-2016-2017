@@ -1,4 +1,5 @@
 graft src/calculator/ui
+include src/calculator/ui/resources.py
 include src/Makefile
 include README.md
 graft debian
