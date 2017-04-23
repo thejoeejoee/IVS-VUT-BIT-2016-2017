@@ -66,7 +66,7 @@ BUILTIN_FUNCTIONS = (
 HIGHLIGHT_RULES = (
     (BUILTIN_FUNCTIONS, "red"),
     ((r'\d+',), 'purple'),
-    (("(n)(y)(a)(n)",), "#ED1869 #F2BC1F #39BFC1 #672980".split()),
+    (("([nN])([yY])([aA])([nN])",), "#ED1869 #F2BC1F #39BFC1 #672980".split()),
 )
 
 EXPRESSION_EXPANSIONS = (
