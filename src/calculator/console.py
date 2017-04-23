@@ -58,7 +58,7 @@ def main():
                 for user_input in user_inputs:
                     process_user_input(user_input)
             except Exception as e:
-                print("Error: {}".format(e))
+                print("Error: {}".format(repr(e)))
     except (SystemExit, KeyboardInterrupt, EOFError) as e:
         print("")
 

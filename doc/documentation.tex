@@ -254,27 +254,24 @@ prefixů:
 
 \subsubsection{Práce přes rozhraní příkazové řádky}
 \texttt{Calculator} poskytuje také rozhraní příkazové řádky, které se spouští příkazem\texttt{ calculator-console}.
-V tomto rozhraní můžete zadávat stejné matematické výrazy jako v grafickém rozhraní kalkulačky. Výrazy se dají oddělit středníkem (\texttt{;}), v takovém případě se výrazy vyhodnotí postupně za sebou. Po zadání výrazu kalkulačka vypíše výsledek (v případě přiřazování do proměnné je výsledek\texttt{ None}) a aktuální seznam proměnných.
+V tomto rozhraní můžete zadávat stejné matematické výrazy jako v grafickém rozhraní kalkulačky. Výrazy se dají oddělit středníkem (\texttt{;}), v takovém případě se výrazy vyhodnotí postupně za sebou. Po zadání výrazu kalkulačka vypíše výsledek (v případě přiřazování do prměnné nevypíše nic). 
+
+Pro výpis proměnných je k dispozici příkaz\texttt{ \%print [<var>]}, který akceptuje jako volitelný parametr jméno proměnné. Pokud je parametr specifikován, vypíše se pouze daná proměnná. Při zavolání bez perametru se vypíší všechny proměnné.
 \vspace{0.5cm}
 
 \noindent
 Příklady použití:
 
 \noindent\texttt{\$ calculator-console} \\
-\texttt{>>> y = pow(x,2)} \\
-\texttt{\-\ === None} \\
-\texttt{\-\ === \{'Ans': (0, '= 0', set()),} \\
-\texttt{\-\ 'x': (0, '= 0', set()),} \\
-\texttt{\-\ 'y': (0.0, 'y = pow(x,2)', \{'x'\})\}} \\[0.5cm]
-\texttt{>>> x = 5; y} \\
-\texttt{\-\ === None} \\
-\texttt{\-\ === \{'Ans': (0, '= 0', set()),} \\
-\texttt{\-\ 'x': (4, 'x = 4', set()),} \\
-\texttt{\-\ 'y': (16.0, 'y = pow(x,2)', \{'x'\})\}} \\[0.5cm]
-\texttt{\-\ === 16.0} \\
-\texttt{\-\ === \{'Ans': (16.0, 'y', \{'y'\}),} \\
-\texttt{\-\ 'x': (4, 'x = 4', set()),} \\
-\texttt{\-\ 'y': (16.0, 'y = pow(x,2)', \{'x'\})\}}
+\texttt{>>> x = -4} \\
+\texttt{>>> x**3 - sqrt(|x|) + 12} \\
+\texttt{=== -54.0} \\[0.5cm]
+\texttt{>>> x = 8} \\
+\texttt{>>> \%print} \\
+\texttt{\-\ \ Ans === 521.1715728752538 \ (x**3 - sqrt(|x|) + 12)} \\
+\texttt{\-\ \ \ \ x === 8 \ (x = 8)} \\[0.5cm]
+\texttt{>>> \%print x} \\
+\texttt{\-\ \ \ \ x === 8 \ (x = 8)} \\[0.5cm]
 
 \subsection{Easter egg}
 
