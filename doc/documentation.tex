@@ -77,10 +77,8 @@
 
 Grafická kalkulačka jako školní projekt do předmětu IVS na FIT VUT v letním semestru školního roku 2016/2017. Kalkulačka nabízí plnohodnotné matematické funkce, systém proměnných (včetně jejich zavislostí) i skrytý easter egg. Jádro aplikace, které je naimplementováno v programovacím jazyce \\v~\href{https://www.python.org/}{Python}, je kompletně pokryto jednotkovými testy. Nad tímto jádrem je postavena grafická vrstva pomocí frameworku \href{https://www.qt.io/}{Qt}.
 
-
-
 \section{Instalace}
-Aplikaci je možné nainstalovat jako: \\
+Aplikaci je možné nainstalovat jako:
 \begin{enumerate}
     \item instalační balíček operačního systému Debian, který je dostupný na adrese z~\href{https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017/releases/latest}{posledního vydání} aplikace nebo v \textbf{odevzdaném distribučním balíku ve složce \texttt{install/}}- instalace pak probíhá následovně: \\
     \begin{lstlisting}
@@ -106,11 +104,11 @@ grafické rozhraní aplikace, druhý pouze konzolovou verzi kalkulačky.
 
 Zde záleží, kterým způsobem byla kalkulačka nainstalována.
 \begin{enumerate}
-    \item balíček operačního systému Debian, pak pomocí standardního balíčkovacího systému \texttt{ apt }:
+    \item balíček operačního systému Debian, pak pomocí standardního balíčkovacího systému \texttt{apt}:
     \begin{lstlisting}
     # apt remove python3-calculator
     \end{lstlisting}
-    \item Python balíček (požadována Python utilita \texttt{ pip3 } pro správu balíčků):
+    \item Python balíček (požadována Python utilita \texttt{pip3} pro správu balíčků):
     \begin{lstlisting}
     # pip3 uninstall calculator
     \end{lstlisting}
@@ -278,5 +276,15 @@ Příklady použití:
 \texttt{\-\ 'x': (4, 'x = 4', set()),} \\
 \texttt{\-\ 'y': (16.0, 'y = pow(x,2)', \{'x'\})\}}
 
+\subsection{Easter egg}
+
+{
+\LARGE Zkuste založit proměnnou s názvem \textbf{%
+    {\color[HTML]{ff7d7d}n}%
+    {\color[HTML]{fff979}y}%
+    {\color[HTML]{6fff6a}a}%
+    {\color[HTML]{ff91fa}n}%
+}, uvidíte, co se stane.
+}
 
 \end{document}
