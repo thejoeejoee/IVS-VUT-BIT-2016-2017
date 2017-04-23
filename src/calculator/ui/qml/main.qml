@@ -198,7 +198,7 @@ AppWindow {
                 Calculator.process(expInput.text)
         }
         onTextChanged: {
-            if(text.search("nyan") != -1)
+            if(text.match(/nyan/i))
                 countDown.start(3)
 
             completeText()
