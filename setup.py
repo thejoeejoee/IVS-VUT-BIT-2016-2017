@@ -1,6 +1,7 @@
 # coding=utf-8
 
 
+import sys
 from distutils import core
 from distutils.command.bdist import bdist
 from os.path import abspath, dirname, join
@@ -20,6 +21,7 @@ base_path = abspath(dirname(__file__))
 def command_with_qrc_update(command):
     class CommandWithQrcUpdate(command):
         def run(self):
+            sys.path.insert(0, join(base_path, 'calculator'))
             try:
                 from calculator.main import update_qrc
             except ImportError:

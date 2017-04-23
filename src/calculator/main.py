@@ -75,8 +75,10 @@ def update_qrc():
         return True
 
     print('Change in UI files detected, recompiling resources.py...', file=sys.stderr)
-    if not access(RESOURCES_FILE, W_OK):
-        print('Resources file {} is not exist and is not writable, please call with write permissions.'.format(
+    try:
+        open(RESOURCES_FILE, 'w')
+    except PermissionError:
+        print('Resources file {} not exists and is not writable, please call with write permissions.'.format(
             RESOURCES_FILE
         ), file=sys.stderr)
         return False
