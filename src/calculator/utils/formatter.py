@@ -15,7 +15,9 @@ __license__ = "GNU GPL Version 3"
 
 
 class Formatter(object):
-    EXP_FORMAT = '{value}<small>&times;</small><small>10</small><sup><small>{exp}</small></sup>'
+    VALUE_FORMAT = '{value}'
+    EXP_FORMAT = '<small>&times;</small><small>10</small><sup><small>{exp}</small></sup>'
+
     BASE_CONVERTERS = {
         2: bin,
         8: oct,
@@ -36,10 +38,14 @@ class Formatter(object):
         value, exp = ('{:.%de}' % (max((characters_limit - 4, 2)))).format(
             Decimal.from_float(value),
         ).split(cls._EXP_DIVIDER)  # type: str, str
-        return cls.EXP_FORMAT.format(
-            value=value,
-            exp=exp.lstrip('+')
-        )
+        return ''.join((
+            cls.VALUE_FORMAT.format(
+                value=value
+            ),
+            cls.EXP_FORMAT.format(
+                exp=exp.lstrip('+')
+            ) if exp.lstrip('+') != '0' else ''
+        ))
 
     @classmethod
     def format_number_in_base(cls, value: str, base: int) -> str:
