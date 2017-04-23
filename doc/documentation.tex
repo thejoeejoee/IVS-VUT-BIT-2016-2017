@@ -64,8 +64,9 @@
 
 \section{Úvod}\label{uvod}
 
-Tato aplikace představuje klasickou kalkulačku se speciálními funkcemi.
-Jádro aplikace je napsáno v programovacím jazyce \\v~\href{https://www.python.org/}{Python}.
+Grafická kalkulačka jako školní projekt do předmětu IVS na FIT VUT v letním semestru školního roku 2016/2017. Kalkulačka nabízí plnohodnotné matematické funkce, systém proměnných (včetně jejich zavislostí) i skrytý easter egg. Jádro aplikace, které je naimplementováno v programovacím jazyce \\v~\href{https://www.python.org/}{Python}, je kompletně pokryto jednotkovými testy. Nad tímto jádrem je postavena grafická vrstva pomocí frameworku \href{https://www.qt.io/}{Qt}.
+
+
 
 \section{Instalace}
 Aplikaci je možné nainstalovat jako: \\
@@ -86,8 +87,8 @@ Aplikaci je možné nainstalovat jako: \\
 \end{enumerate}
 
 V obou případech je do systému nainstalován grafický spouštěč. Ten hledejte
-v menu vašeho systému. Také jsou nainstalovány spustitelné programy
-\texttt{ calculator }, \texttt{ calculator-console }, z nichž první spouští
+v menu vašeho systému. Také jsou nainstalovány spustitelné skripty
+\texttt{calculator}     a \texttt{calculator-console}, z nichž první spouští
 grafické rozhraní aplikace, druhý pouze konzolovou verzi kalkulačky.
 
 \section{Odinstalace}
@@ -123,7 +124,7 @@ funkce.
             &   & y = základ logaritmu \\ \cline{1-3}
         $\text{pow}(x,y)$   & \multirow{2}{*}{Funkce pro výpočet mocniny.}  & x = mocněné číslo (mocněnec) \\ \cline{1-1}
         $x**y$  &   & y = mocnitel \\ \cline{1-3}
-        $\text{rand}()$  & Funkce, která vygeneruje náhodné reálné číslo. & Funkce nemá žádný parametr. \\ \cline{1-3}
+        $\text{rand}()$  & Funkce, která vygeneruje náhodné reálné číslo v rozsahu $\langle 0, 1 \rangle$. & Funkce nemá žádný parametr. \\ \cline{1-3}
         \multirow{2}{*}{$\text{root}(x, y)$} & \multirow{2}{*}{Funkce pro výpočet obecné odmocniny.}  & x = odmocňované číslo \\
             &   & y = y-tá odmocnina \\ \cline{1-3}
         $\text{sqrt}(x)$    & Funkce pro výpočet 2. odmocniny. & \\ \cline{1-3}
@@ -137,9 +138,7 @@ funkce.
 V této kapitole bude popsána práce v \textbf{Calculator}u, jeho funkce a užitečné
 vlastnosti, a dále také základní panely pro práci.
 
-\subsection{Komponenty}
-
-Mezi komponentami jsou popsána jednotlivá okna \textbf{Calculator}u
+\subsection{Komponenty grafického rozhraní}
 
 \subsubsection{Číselné soustavy}
 

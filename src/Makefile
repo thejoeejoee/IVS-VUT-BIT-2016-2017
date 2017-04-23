@@ -4,8 +4,8 @@ PYTHON=python3
 PIP=pip3
 PYRCC5=pyrcc5
 DIR:=$(CURDIR)
-
 TMP_DIR := $(shell mktemp -d)
+IS_FIT_PACK_NAME=IS-FIT_$(PACK_NAME)
 
 all: run
 
@@ -34,6 +34,7 @@ run:
 
 .ONESHELL:
 pack: build-profiling-report build-user-documentation clean
+	rm -rf $(TMP_DIR)/$(PACK_NAME)/*
 	mkdir -p $(TMP_DIR)/$(PACK_NAME)/doc $(TMP_DIR)/$(PACK_NAME)/install $(TMP_DIR)/$(PACK_NAME)/repo
 	cp -R ./../ $(TMP_DIR)/$(PACK_NAME)/repo/
 	cp $(TMP_DIR)/$(PACK_NAME)/repo/doc/documentation.pdf $(TMP_DIR)/$(PACK_NAME)/repo/documentation.pdf
@@ -50,6 +51,7 @@ pack: build-profiling-report build-user-documentation clean
 .ONESHELL:
 pack-wis: build-user-documentation clean
 	cd ..
+	rm -rf $(TMP_DIR)/$(PACK_NAME)/*
 	mkdir -p $(TMP_DIR)/$(PACK_NAME)
 	cp -R hodnoceni.txt src/calculator doc/documentation.pdf odevzdani.txt $(TMP_DIR)/$(PACK_NAME)
 	cd $(TMP_DIR)
@@ -61,6 +63,7 @@ clean:
 	rm -rf ../dist/ ../deb_dist/ ./calculator.egg-info/ ../$(PACK_NAME).zip ../build ../calculator.egg-info/ ../doc/html ../doc/latex
 	find ../profiling/ -maxdepth 1 -type f ! -name "*.pdf" ! -name "*.tex" -delete
 	find ../doc/ -maxdepth 1 -type f ! -name "*.png" ! -name "*.tex" ! -name "*.pdf" -delete
+	rm -rf ../$(IS_FIT_PACK_NAME).zip ../$(PACK_NAME).zip ../*.tar.gz
 
 pack-deb: clean clean-pyc compile-resources
 	cd ..; $(PYTHON) setup.py --command-packages=stdeb.command bdist_deb
