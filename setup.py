@@ -5,7 +5,7 @@ from distutils import core
 from os.path import abspath, dirname, join
 
 from setuptools import find_packages
-from stdeb.command.sdist_dsc import sdist_dsc
+from setuptools.command.sdist import sdist
 
 __author__ = "Josef Kolář, Son Hai Nguyen"
 __copyright__ = "Copyright 2017, /dej/uran/dom team"
@@ -15,7 +15,7 @@ __license__ = "GNU GPL Version 3"
 base_path = abspath(dirname(__file__))
 
 
-class SDistDscCommand(sdist_dsc):
+class SDistCommand(sdist):
     def run(self):
         try:
             from calculator.main import update_qrc
@@ -74,7 +74,7 @@ def setup():
         include_package_data=True,
         test_suite='tests',
         cmdclass={
-            'sdist_dsc': SDistDscCommand,
+            'sdist': SDistCommand,
         },
     )
 
