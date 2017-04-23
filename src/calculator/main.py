@@ -29,7 +29,7 @@ def main():
             input(files=sys.argv[2] if len(sys.argv) > 2 else '-')
         ))
 
-    if not update_qrc():
+    if not update_qrc() and not exists(RESOURCES_FILE):
         print('Application cannot be started due problems with resources file.')
         sys.exit(1)
 
