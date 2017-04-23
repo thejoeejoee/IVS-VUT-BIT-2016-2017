@@ -86,9 +86,10 @@ Item {
                 component.triggered()
             }
 
-            else
+            else {
                 text.text = timer.count.toString()
-            timer.count--
+                timer.count--
+            }
         }
     }
 }

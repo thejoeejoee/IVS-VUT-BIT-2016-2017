@@ -311,8 +311,7 @@ AppWindow {
 
         anchors.fill: parent
         font.family: StyleSettings.countDown.font
-        color: StyleSettings.countDown.textColors[count + 1]
-
+        color: StyleSettings.countDown.textColors[count]
 
         onTriggered: {
             expInput.focus = true
