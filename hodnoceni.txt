@@ -1,4 +1,4 @@
 xkolar71 100 (jádro kalkulačky, testy mat. knihovny, instalátor, profiling)
 xnguye16 100 (design, grafické rozhraní kalkulačky, mockupy)
 xomach00 100 (systém proměnných, matematická knihovna, dokumentace)
-xnavra61 100 (uživatelské testování, uživatelská dokumentace)
+xnavra61 100 (uživatelská dokumentace, uživatelské testování)
