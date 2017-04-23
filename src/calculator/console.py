@@ -16,6 +16,38 @@ except ImportError as e:
     pass
 
 
+def process_user_input(user_input):
+    user_input = user_input.strip()
+    if user_input.startswith("%"):
+        user_input = user_input.split()
+        process_command(user_input[0], user_input[1:])
+    else:
+        result, _ = calculator.process(user_input)
+        if result is not None:
+            print("=== {}\n".format(result))
+
+
+def process_command(cmd, args):
+    if cmd == "%print":
+        _, variables = calculator.process(" ")
+        if len(args) == 1:
+            # print specific variable
+            if args[0] in variables:
+                value, src_expr, _ = variables[args[0]]
+                print(" {:>4} === {}  ({})\n".format(args[0], value, src_expr))
+            else:
+                raise Exception("Variable '{}' does not exist.\n".format(args[0]))
+        elif len(args) == 0:
+            # print all variables
+            for key, value in variables.items():
+                print(" {:>4} === {}  ({})".format(key, value[0], value[1]))
+            print("")
+        else:
+            raise Exception("Unexpected number of parameters {}, expected 0 or 1.\n".format(len(user_input) - 1))
+    else:
+        raise Exception("Unknown command.");
+
+
 def main():
     try:
         while True:
@@ -24,31 +56,9 @@ def main():
                 continue
             try:
                 for user_input in user_inputs:
-                    user_input = user_input.strip()
-
-                    if user_input.startswith("%print"):
-                        _, variables = calculator.process(" ")
-                        user_input = user_input.split();
-                        if len(user_input) == 2:
-                            # print specific variable
-                            if user_input[1] in variables:
-                                value, src_expr, _ = variables[user_input[1]]
-                                print(" {:>4} === {}  ({})\n".format(user_input[1], value, src_expr))
-                            else:
-                                print("Variable '{}' does not exist.\n".format(user_input[1]))
-                        elif len(user_input) == 1:
-                            # print all variables
-                            for key, value in variables.items():
-                                print(" {:>4} === {}  ({})".format(key, value[0], value[1]))
-                            print("")
-                        else:
-                            print("Error: Unexpected number of parameters {}, expected 0 or 1.\n".format(len(user_input) - 1))
-                    else:
-                        result, _ = calculator.process(user_input)
-                        if result is not None:
-                            print("=== {}\n".format(result))
+                    process_user_input(user_input)
             except Exception as e:
-                print(e)
+                print("Error: {}".format(e))
     except (SystemExit, KeyboardInterrupt, EOFError) as e:
         print("")
 
