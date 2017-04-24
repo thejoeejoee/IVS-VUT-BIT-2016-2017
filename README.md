@@ -21,7 +21,7 @@ make test
 ```
 
 Po každé aplikované změně v repozitáži se aplikace sestaví a otestuje pomocí systémů [Travis-CI](https://travis-ci.com/thejoeejoee/IVS-VUT-BIT-2016-2017) a [Codeship](https://app.codeship.com/projects/211472).
-Pomocí příkazu `make` lze také zkompilovat QML a přiložené zdroje, či nainstalovat závislosti aplikace viz. `src/Makefile`.
+Pomocí příkazu `make` lze také zkompilovat QML a přiložené zdroje, či nainstalovat závislosti aplikace viz. **cíl `help`**.
 
 Prostředí
 ---------
