@@ -24,6 +24,7 @@ def command_with_qrc_update(command):
             sys.path.insert(0, join(base_path, 'calculator'))
             try:
                 from calculator.main import update_qrc
+                sys.path.pop(0)
             except ImportError:
                 def update_qrc():
                     pass
@@ -41,16 +42,21 @@ def setup():
         long_description=open(join(base_path, 'README.md')).read(),
         url='https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017',
         classifiers=[
-            'Development Status :: 3 - Alpha',
+            'Development Status :: 5 - Production/Stable',
             'Environment :: X11 Applications :: Qt',
+
             'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+
+            'Programming Language :: Python',
             'Programming Language :: Python :: 3.5',
             'Programming Language :: Python :: 3.6',
             'Programming Language :: Python :: 3 :: Only',
+
+            'Topic :: Scientific/Engineering',
             'Topic :: Scientific/Engineering :: Mathematics',
             'Topic :: Utilities'
         ],
-        author='Josef Kolar, Son Hai Nguyen, Martin Omacht, Robert Navratil',
+        author='Josef Kolář, Son Hai Nguyen, Martin Omacht, Robert Navrátil',
         author_email='xkolar71@stud.fit.vutbr.cz, xnguye16@stud.fit.vutbr.cz,'
                      'xomach00@stud.fit.vutbr.cz, xnavra61@stud.fit.vutbr.cz',
         keywords='calculator expression mathematics',
