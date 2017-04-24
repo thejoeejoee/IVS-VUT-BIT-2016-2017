@@ -1,4 +1,4 @@
-Archiv se složkami repo/, install/ a doc/ odevzdán večer 24. dubna 2017 na serveru ivs.
+Archiv se složkami repo/, install/ a doc/ odevzdán večer 24. dubna 2017 na serveru ivs do složky /ivs-proj2/odevzdane/xkolar71/.
 Instalátor jako Debian package ve složce install/, alternativně jako Python balíček, obě možnosti včetně instalace závislostí, popsány v uživatelské dokumentaci.
 
 Repozitář obsahuje kromě standardních náležitostí také:
