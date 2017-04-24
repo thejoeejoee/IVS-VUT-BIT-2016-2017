@@ -6,6 +6,7 @@ Repozitář obsahuje kromě standardních náležitostí také:
 	.coveragerc - konfigurace nástroje nahrávající pokrytí do služby codecov.io
 	data - externí data instalovaná společně s kalkulačkou
 	debian - adresář s definicemi Debian balíčku
+	debugging.png - screenshot ze zepnutého debuggování v nástroji PyCharm
 	dev - adresář pro vývojové věci (generátor autorských komentářů, Cpp interpret ke snažšímu debuggování QML)
 	MANIFEST.in - definice souborů, které jsou baleny s balíčkem kalkulačky vyjma zdrojových kódů
 	requirements.txt - definice Python závislostí jakožto standardizovaný soubor v ekosystému jazyka Python
@@ -13,3 +14,4 @@ Repozitář obsahuje kromě standardních náležitostí také:
 	setup.py - Python skript definující standardní Python balíček
 	stdeb.cfg - configurace utility stdeb, pomocí kterého se sestavuje Debian balíček z Python balíčku
 	.travis.yml - konfigurace služby Travis CI pro `continuous integration` kalkulačky
+
