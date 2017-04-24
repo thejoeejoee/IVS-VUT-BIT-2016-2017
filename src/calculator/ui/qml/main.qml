@@ -41,6 +41,7 @@ import "visualization"
 AppWindow {
     id: mainWindow
 
+    minimumWidth: 550
     width: 1101
     ratio: 522/1101.
     height: 522
