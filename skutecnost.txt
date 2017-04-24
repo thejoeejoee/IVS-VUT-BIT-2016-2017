@@ -1,23 +1,24 @@
 Stanovené termíny
-Termíny jsme většinou dodrželi. Zpoždění bylo nanejvýš den. Časový plán se
-snadno dodržoval, jelikož jsme si dobře rozdělili a rozvhrhli projekt.
-Samozřejmě také pomohlo, že na každý úkol jsme si dali dostatek času.
+Ve výsledku nyblo potřeba zpětné vyhodnocení plánu, protože na jeho základě bylo
+načasování termínů vhodné a zdařilo se nám vše splnit bez zaznamenatelných zpoždění.
+Podařené plnění plánu usuzujeme správně provedené analýze projektu, ať už cose týče 
+schopností jednotlivých členů, tak náročnosti jednotlivých částí projektu.
 
 Rozdělení práce
-Zůstalo stejné, protože každý řekl, jaké má znalosti a zkušeností, tudíž podle
-toho dostával úkoly.
+Nedošlo k výraznému přerozdělování prací díky jasnému rozdělení zodpovědností již v rámci analýzy.
 
 Komunikace
-Prvně jsme se rozhodli používat Trello pro rozdělování a přidělování úkolů,
-avšak den poté jsme zvolili užívání GH Issues, kvůli přehlednosti a integrací s
-GitHubem.
-Komunikovali jsme spolu pomocí Facebooku, většinou co 4 dny, jelikož všichni
-jsme měli zadané úkoly a byli jsme samostatní. Konaly se dva meetingy, první byl
-ohledně specifikace a analýzy požadavků a druhý na návrh kostry dokumentace.
+Prvně jsme byli rozhodnuti používat službu Trello pro správu úkolů,
+avšak brzy poté jsme zvolili issues na službě GitHub a to především díky
+vyšší integraci se samotným Git repozitářem.
+Při samotné práci na projektu nebylo nutné nějak výrazně komunikovat - většinou 
+komunikovaly dvojice zodpovědné za části projektu spolu přímo spolupracující. 
+Konaly se také tři schůzky, první k analýze, druhá k problematice proměnných a
+poslední k závěrečnému end-user testování.
 
 Produkt
-V kalkulačce jsme naimplementovali všechny požadavky i featury. Pouze nás
-zaskočilo množství bugů po end-user testování. Implementovali jsme i věci nad
-rámec zadání např. jednoduchý intellisense, zvýraznění syntaxe, systém
-proměnných, easter egg, inteligentní doplňování výrazu, překlady aplikace do
-více jazyků, systém proměnných a přepočítávání proměnných podle závislostí.
+V kalkulačce jsme úspěšně naimplementovali všechny nutné požadavky i věci navíc.
+Tým zodpovědný za GUI ke konci zaskočilo množství bugů po end-user testování.
+Implementovali jsme i věci nad rámec zadání např. systém závislých proměnných,
+napovídání a doplňování vstupního výrazu, zvýraznění syntaxe, easter egg,
+překlady aplikace do více jazyků či integrace s Travis CI. 
