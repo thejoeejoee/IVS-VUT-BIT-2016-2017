@@ -7,6 +7,11 @@ from calculator.core.parser.preprocessor import FactorialPreprocessor
 from calculator.core.parser.transform import ComplexRestrictTransform, AugAssignRestrictTransform
 from calculator.exceptions import ParserSyntaxError, SyntaxRestrictError
 
+__author__ = "Josef Kolář, Martin Omacht"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
+
 
 class Parser(object):
     """

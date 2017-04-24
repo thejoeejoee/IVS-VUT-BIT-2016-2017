@@ -12,6 +12,11 @@ from calculator.settings import (BUILTIN_FUNCTIONS, HIGHLIGHT_RULES, EXPRESSION_
 from calculator.utils.formatter import Formatter
 from calculator.utils.translate import translate
 
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
+
 
 class UIAdapter(QObject):
     """

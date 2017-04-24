@@ -1,0 +1,34 @@
+Stanovené termíny
+Ve výsledku nebylo potřeba zpětné vyhodnocení plánu, protože na jeho základě bylo
+načasování termínů vhodné a zdařilo se nám vše splnit bez zaznamenatelných zpoždění.
+Podařené plnění plánu usuzujeme správně provedené analýze projektu, ať už co se týče
+schopností jednotlivých členů, tak náročnosti jednotlivých částí projektu.
+
+Rozdělení práce
+Nedošlo k výraznému přerozdělování prací díky jasnému rozdělení zodpovědností již v rámci analýzy.
+
+Komunikace
+Prvně jsme byli rozhodnuti používat službu Trello pro správu úkolů,
+avšak brzy poté jsme zvolili issues na službě GitHub a to především díky
+vyšší integraci se samotným Git repozitářem.
+Při samotné práci na projektu nebylo nutné nějak výrazně komunikovat - většinou
+spolu komunikovali přímo studenti, kteří spolupracovali na stejné části projektu.
+Konaly se také tři schůzky, první k analýze, druhá k problematice proměnných
+a poslední k závěrečnému end-user testování.
+
+Produkt
+V kalkulačce jsme úspěšně naimplementovali všechny nutné požadavky i věci navíc.
+Zejména tým odpovědný za GUI ke konci zaskočilo množství bugů po end-user testování.
+Implementovali jsme i věci nad rámec zadání např. systém závislých proměnných,
+napovídání a doplňování vstupního výrazu, zvýraznění syntaxe, easter egg,
+překlady aplikace do více jazyků či integrace s Travis CI.
+
+Jediný nám známým negativem na projektu, který se projevil na výsledném produktu,
+je absence dokumentačních komentářů u zdrojových kódů jazyka Python. Zvolili jsme
+jejich standardní zápis v syntaxi reStructuredText, který je v ekosystému jazyka
+Python standardní cestou, avšak není nástrojem Doxygen podporována.
+Tento problém jsme se snažili řešit pomocí knihovny doxypypy, která je deklarována
+jako konvertor reST -> javadoc, ovšem ani to nefungovalo, selhaly poté i pokusy
+o specifické úpravy dokumentačních komentářů pomocí sady regulárních výrazů či
+úpravy doxypypy, které by již přesahovaly rámce projektu do IVS, takže jsme
+snažení ukončili.

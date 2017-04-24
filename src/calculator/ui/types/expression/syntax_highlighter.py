@@ -6,6 +6,11 @@ from collections import Iterable
 from PyQt5.QtCore import pyqtSignal, QObject, pyqtProperty, QRegularExpression, pyqtSlot
 from PyQt5.QtGui import QSyntaxHighlighter, QTextCharFormat
 from PyQt5.QtQuick import QQuickItem, QQuickTextDocument
+ 
+__author__ = "Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 
 class HighlightRule(QObject):

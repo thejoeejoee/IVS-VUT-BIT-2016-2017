@@ -5,7 +5,7 @@
     <name>About</name>
     <message>
         <location filename="../qml/windows/About.qml" line="86"/>
-        <source>Barbie calculator</source>
+        <source>Calculator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -121,7 +121,7 @@
     <name>main</name>
     <message>
         <location filename="../qml/main.qml" line="29"/>
-        <source>Barbie calculator</source>
+        <source>Calculator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -6,10 +6,18 @@ from inspect import Signature, Parameter
 from calculator import NumericValue
 from calculator.exceptions import UnsupportedBaseError
 from calculator.settings import SUPPORTED_BASES
+from calculator.utils.translate import translate
+
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 
 class Formatter(object):
-    EXP_FORMAT = '{value}<small>&times;</small><small>10</small><sup><small>{exp}</small></sup>'
+    VALUE_FORMAT = '{value}'
+    EXP_FORMAT = '<small>&times;</small><small>10</small><sup><small>{exp}</small></sup>'
+
     BASE_CONVERTERS = {
         2: bin,
         8: oct,
@@ -27,13 +35,17 @@ class Formatter(object):
         if not (cls._EXP_DIVIDER in stringed or len(stringed) > characters_limit):
             return stringed[:characters_limit]
 
-        value, exp = ('{:.%de}' % (max((characters_limit - 4, 2)))).format(
+        value, exp = ('{:.%de}' % (max((characters_limit - 5, 2)))).format(
             Decimal.from_float(value),
         ).split(cls._EXP_DIVIDER)  # type: str, str
-        return cls.EXP_FORMAT.format(
-            value=value,
-            exp=exp.lstrip('+')
-        )
+        return ''.join((
+            cls.VALUE_FORMAT.format(
+                value=value
+            ),
+            cls.EXP_FORMAT.format(
+                exp=exp.lstrip('+')
+            ) if exp.lstrip('+') != '0' else ''
+        ))
 
     @classmethod
     def format_number_in_base(cls, value: str, base: int) -> str:
@@ -79,7 +91,7 @@ class Formatter(object):
                 if "<class" in annotation_repr else
                 annotation_repr.split("typing.")[-1]
                 if 'typing.' in annotation_repr else
-                annotation.__name__
+                translate("Formatter", annotation.__name__)
             ))
 
         return "{identifier}({params})".format(

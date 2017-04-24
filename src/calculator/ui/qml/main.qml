@@ -1,3 +1,22 @@
+/**************************************************************************
+**   Calculator
+**   Copyright (C) 2017 /dej/uran/dom team
+**   Authors: Son Hai Nguyen
+**   Credits: Josef Kolář, Son Hai Nguyen, Martin Omacht, Robert Navrátil
+**
+**   This program is free software: you can redistribute it and/or modify
+**   it under the terms of the GNU General Public License as published by
+**   the Free Software Foundation, either version 3 of the License, or
+**   (at your option) any later version.
+**
+**   This program is distributed in the hope that it will be useful,
+**   but WITHOUT ANY WARRANTY; without even the implied warranty of
+**   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**   GNU General Public License for more details.
+**
+**   You should have received a copy of the GNU General Public License
+**   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+**************************************************************************/
 import QtQuick 2.7
 import QtQuick.Controls 1.4
 
@@ -22,11 +41,12 @@ import "visualization"
 AppWindow {
     id: mainWindow
 
+    minimumWidth: 550
     width: 1101
     ratio: 522/1101.
     height: 522
 
-    title: qsTr("Barbie calculator")
+    title: qsTr("Calculator")
     visible: true
 
     Item {
@@ -179,7 +199,7 @@ AppWindow {
                 Calculator.process(expInput.text)
         }
         onTextChanged: {
-            if(text.search("nyan") != -1)
+            if(text.match(/nyan/i))
                 countDown.start(3)
 
             completeText()
@@ -292,8 +312,7 @@ AppWindow {
 
         anchors.fill: parent
         font.family: StyleSettings.countDown.font
-        color: StyleSettings.countDown.textColors[count + 1]
-
+        color: StyleSettings.countDown.textColors[count]
 
         onTriggered: {
             expInput.focus = true
@@ -353,7 +372,7 @@ AppWindow {
     Windows.About {
         id: aboutWindow
 
-        revision: "3eecc99"
+        revision: "ea84da83a"
         color: StyleSettings.aboutWindow.color
         textColor: StyleSettings.aboutWindow.textColor
         titleColor: StyleSettings.aboutWindow.titleColor

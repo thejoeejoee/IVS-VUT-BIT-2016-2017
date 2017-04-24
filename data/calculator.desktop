@@ -1,8 +1,8 @@
 [Desktop Entry]
 Version=1.0
-Name=/dej/uran/dom calculator
+Name=Calculator
 Comment=GUI calculator with variables support.
-Exec=calculator-app
+Exec=calculator
 Icon=calculator.svg
 Terminal=false
 StartupNotify=true

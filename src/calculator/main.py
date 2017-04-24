@@ -8,6 +8,11 @@ from itertools import chain
 from os import W_OK, access
 from os.path import exists, getmtime, abspath, dirname, join
 
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
+
 # definitive solution for calculator imports - due running from non standard working directories
 base_path = abspath(dirname(__file__))
 sys.path.insert(0, join(base_path, '..'))
@@ -24,7 +29,7 @@ def main():
             input(files=sys.argv[2] if len(sys.argv) > 2 else '-')
         ))
 
-    if not update_qrc():
+    if not update_qrc() and not exists(RESOURCES_FILE):
         print('Application cannot be started due problems with resources file.')
         sys.exit(1)
 
@@ -70,13 +75,16 @@ def update_qrc():
         return True
 
     print('Change in UI files detected, recompiling resources.py...', file=sys.stderr)
-    if not access(RESOURCES_FILE, W_OK):
-        print('Resources file {} is not exist and is not writable, please call with write permissions.'.format(
+    try:
+        open(RESOURCES_FILE, 'w')
+    except PermissionError:
+        print('Resources file {} not exists and is not writable, please call with write permissions.'.format(
             RESOURCES_FILE
         ), file=sys.stderr)
         return False
 
     from PyQt5.pyrcc_main import processResourceFile
+
     if processResourceFile([QRC_FILE], RESOURCES_FILE, False):
         print('Resources.py successfully recompiled.', file=sys.stderr)
         return True

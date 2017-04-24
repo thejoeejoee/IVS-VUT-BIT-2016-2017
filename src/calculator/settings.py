@@ -4,6 +4,11 @@ from enum import IntEnum
 from PyQt5.QtCore import QObject, Q_ENUMS
 from PyQt5.QtQml import QQmlEngine, QJSEngine
 
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
+
 ICON_SIZES = (16, 24, 32, 48, 256)
 SUPPORTED_BASES = (10, 2, 8, 16)
 SUPPORTED_LANGUAGES = {"en", "cs"}
@@ -46,6 +51,7 @@ class Expansion(QObject):
     def singletonProvider(engine: QQmlEngine, script_engine: QJSEngine) -> QObject:
         return Expansion()
 
+
 BUILTIN_FUNCTIONS = (
     BuiltinFunction.ABS,
     BuiltinFunction.FACT,
@@ -60,7 +66,7 @@ BUILTIN_FUNCTIONS = (
 HIGHLIGHT_RULES = (
     (BUILTIN_FUNCTIONS, "red"),
     ((r'\d+',), 'purple'),
-    (("(n)(y)(a)(n)",), "#ED1869 #F2BC1F #39BFC1 #672980".split()),
+    (("([nN])([yY])([aA])([nN])",), "#ED1869 #F2BC1F #39BFC1 #672980".split()),
 )
 
 EXPRESSION_EXPANSIONS = (

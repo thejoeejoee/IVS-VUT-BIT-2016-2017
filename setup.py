@@ -1,32 +1,62 @@
 # coding=utf-8
 
 
+import sys
 from distutils import core
+from distutils.command.bdist import bdist
 from os.path import abspath, dirname, join
 
 from setuptools import find_packages
+from setuptools.command.install import install
+from setuptools.command.sdist import sdist
+
+__author__ = "Josef Kolář, Son Hai Nguyen"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
 
 base_path = abspath(dirname(__file__))
+
+
+def command_with_qrc_update(command):
+    class CommandWithQrcUpdate(command):
+        def run(self):
+            sys.path.insert(0, join(base_path, 'calculator'))
+            try:
+                from calculator.main import update_qrc
+                sys.path.pop(0)
+            except ImportError:
+                def update_qrc():
+                    pass
+
+            update_qrc()
+            return super().run()
+    return CommandWithQrcUpdate
 
 
 def setup():
     core.setup(
         name='calculator',
-        version='1.0rc1',
+        version='1.0',
         license='GNU GENERAL PUBLIC LICENSE Version 3',
         long_description=open(join(base_path, 'README.md')).read(),
         url='https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017',
         classifiers=[
-            'Development Status :: 3 - Alpha',
+            'Development Status :: 5 - Production/Stable',
             'Environment :: X11 Applications :: Qt',
+
             'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
+
+            'Programming Language :: Python',
             'Programming Language :: Python :: 3.5',
             'Programming Language :: Python :: 3.6',
             'Programming Language :: Python :: 3 :: Only',
+
+            'Topic :: Scientific/Engineering',
             'Topic :: Scientific/Engineering :: Mathematics',
             'Topic :: Utilities'
         ],
-        author='Josef Kolar, Son Hai Nguyen, Martin Omacht, Robert Navratil',
+        author='Josef Kolář, Son Hai Nguyen, Martin Omacht, Robert Navrátil',
         author_email='xkolar71@stud.fit.vutbr.cz, xnguye16@stud.fit.vutbr.cz,'
                      'xomach00@stud.fit.vutbr.cz, xnavra61@stud.fit.vutbr.cz',
         keywords='calculator expression mathematics',
@@ -46,7 +76,7 @@ def setup():
         entry_points={
             'console_scripts': [
                 'calculator-console=calculator.console:main',
-                'calculator-app=calculator.main:main',
+                'calculator=calculator.main:main',
             ]
         },
         data_files=[
@@ -55,6 +85,12 @@ def setup():
         ],
         include_package_data=True,
         test_suite='tests',
+        zip_safe=False,
+        cmdclass={
+            'sdist': command_with_qrc_update(sdist),
+            'bdist': command_with_qrc_update(bdist),
+            'install': command_with_qrc_update(install),
+        },
     )
 
 

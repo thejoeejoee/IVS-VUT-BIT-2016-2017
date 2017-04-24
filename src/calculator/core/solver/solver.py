@@ -11,6 +11,11 @@ from calculator.exceptions import InvalidFunctionCallError
 from calculator.settings import BuiltinFunction
 from calculator.utils import method_single_dispatch
 
+__author__ = "Josef Kolář, Martin Omacht"
+__copyright__ = "Copyright 2017, /dej/uran/dom team"
+__credits__ = ["Josef Kolář", "Son Hai Nguyen", "Martin Omacht", "Robert Navrátil"]
+__license__ = "GNU GPL Version 3"
+
 
 class Solver(object):
     """
