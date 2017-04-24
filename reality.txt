@@ -18,7 +18,7 @@ poslední k závěrečnému end-user testování.
 
 Produkt
 V kalkulačce jsme úspěšně naimplementovali všechny nutné požadavky i věci navíc.
-Tým zodpovědný za GUI ke konci zaskočilo množství bugů po end-user testování.
+Zejména tým odpovědný za GUI ke konci zaskočilo množství bugů po end-user testování.
 Implementovali jsme i věci nad rámec zadání např. systém závislých proměnných,
 napovídání a doplňování vstupního výrazu, zvýraznění syntaxe, easter egg,
 překlady aplikace do více jazyků či integrace s Travis CI. 
