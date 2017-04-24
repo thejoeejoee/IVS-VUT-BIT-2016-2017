@@ -102,7 +102,7 @@ Item {
         Text {
             id: title
 
-            text: qsTr("Calculator") + " " + "1.0rc1-1"
+            text: qsTr("Calculator") + " " + "1.0"
 
             font.pixelSize: 25
             font.family: component.font.family

@@ -37,7 +37,7 @@ def command_with_qrc_update(command):
 def setup():
     core.setup(
         name='calculator',
-        version='1.0rc1',
+        version='1.0',
         license='GNU GENERAL PUBLIC LICENSE Version 3',
         long_description=open(join(base_path, 'README.md')).read(),
         url='https://github.com/thejoeejoee/IVS-VUT-BIT-2016-2017',

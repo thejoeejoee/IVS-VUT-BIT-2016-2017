@@ -372,7 +372,7 @@ AppWindow {
     Windows.About {
         id: aboutWindow
 
-        revision: "3eecc99"
+        revision: "ea84da83a"
         color: StyleSettings.aboutWindow.color
         textColor: StyleSettings.aboutWindow.textColor
         titleColor: StyleSettings.aboutWindow.titleColor
