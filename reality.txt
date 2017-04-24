@@ -12,9 +12,9 @@ Prvně jsme byli rozhodnuti používat službu Trello pro správu úkolů,
 avšak brzy poté jsme zvolili issues na službě GitHub a to především díky
 vyšší integraci se samotným Git repozitářem.
 Při samotné práci na projektu nebylo nutné nějak výrazně komunikovat - většinou 
-komunikovaly dvojice zodpovědné za části projektu spolu přímo spolupracující. 
-Konaly se také tři schůzky, první k analýze, druhá k problematice proměnných a
-poslední k závěrečnému end-user testování.
+spolu komunikovaly přímo studenti, kteří byli zodpovědni za jednotlivé části projektu,
+které jsou spolu přímo propojeny. Konaly se také tři schůzky, první k analýze,
+druhá k problematice proměnných a poslední k závěrečnému end-user testování.
 
 Produkt
 V kalkulačce jsme úspěšně naimplementovali všechny nutné požadavky i věci navíc.
