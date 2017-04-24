@@ -35,7 +35,7 @@ class Formatter(object):
         if not (cls._EXP_DIVIDER in stringed or len(stringed) > characters_limit):
             return stringed[:characters_limit]
 
-        value, exp = ('{:.%de}' % (max((characters_limit - 4, 2)))).format(
+        value, exp = ('{:.%de}' % (max((characters_limit - 5, 2)))).format(
             Decimal.from_float(value),
         ).split(cls._EXP_DIVIDER)  # type: str, str
         return ''.join((
