@@ -203,8 +203,8 @@ class ExpAnalyzer(QObject):
         for splitter in EXPRESSION_SPLITTERS:
             splitter_positions.extend([i for i, letter in enumerate(content) if letter == splitter])
 
-        left_splitters_pos = list(filter(lambda x: x <= cursor, splitter_positions))
-        right_splitters_pos = list(filter(lambda x: x > cursor, splitter_positions))
+        left_splitters_pos = list(filter(lambda x: x < cursor, splitter_positions))
+        right_splitters_pos = list(filter(lambda x: x >= cursor, splitter_positions))
 
         if left_splitters_pos:
             word_start = min(left_splitters_pos, key=lambda x: abs(x - cursor)) + 1
