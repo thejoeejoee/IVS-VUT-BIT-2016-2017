@@ -3,7 +3,7 @@ PACK_NAME=xkolar71_xnguye16_xomach00_xnavra61
 PYTHON=python3
 PIP=pip3
 PYRCC5=pyrcc5
-LATEX=pdflatex -interaction nonstopmode 
+LATEX=pdflatex -interaction nonstopmode
 DIR:=$(CURDIR)
 TMP_DIR := $(shell mktemp -d)
 IS_FIT_PACK_NAME=IS-FIT_$(PACK_NAME)
@@ -25,7 +25,7 @@ install-python: ## Install python dependencies for calculator.
 install-calculator:  ## Install calculator as Python package.
 	@cd .. && $(PYTHON) $(DIR)/../setup.py install
 
-install-requirements: ## Manualy install calculator Python dependencies. 
+install-requirements: ## Manualy install calculator Python dependencies.
 	@$(PIP) install -r $(REQUIREMENTS)
 
 test: ## Run unit tests.
@@ -87,9 +87,13 @@ doc: ## Generate program documentation into /doc folder.
 
 build-user-documentation: ../doc/documentation.tex ## Compile user documentation into /doc/documentation.pdf.
 	cd ../doc && $(LATEX) documentation.tex && $(LATEX) documentation.tex && $(LATEX) documentation.tex
-	
+
 build-profiling-report: ../profiling/report.tex ## Compile profiling report into /profiling/report.pdf.
 	cd ../profiling/ && $(LATEX) report.tex && $(LATEX) report.tex && $(LATEX) report.tex
+
+build-presentation: ../presentation/slide*.pdf ## Merge slides into project 	presentation.
+	pdftk ../presentation/slide*.pdf cat output ../presentation/xkolar71.pdf
+	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=../presentation/xkolar71_presentation.pdf ../presentation/xkolar71.pdf
 
 help: ## Prints help.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort |
