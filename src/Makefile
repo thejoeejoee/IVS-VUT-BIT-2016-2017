@@ -92,7 +92,7 @@ build-profiling-report: ../profiling/report.tex ## Compile profiling report into
 	cd ../profiling/ && $(LATEX) report.tex && $(LATEX) report.tex && $(LATEX) report.tex
 
 build-presentation: ../presentation/slide*.pdf ## Merge slides into project 	presentation.
-	pdftk ../presentation/slide*.pdf cat output ../presentation/xkolar71.pdf
+	cd ../presentation && pdftk slide1.pdf slide2.pdf slide2-1.pdf slide3.pdf slide4.pdf slide5.pdf slide6.pdf slide7.pdf cat output xkolar71.pdf
 	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=../presentation/xkolar71_presentation.pdf ../presentation/xkolar71.pdf
 
 help: ## Prints help.
